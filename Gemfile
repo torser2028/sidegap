@@ -30,6 +30,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'faker'
+  gem 'pry-rails'
 end
 
 gem 'rails_12factor', group: :production
