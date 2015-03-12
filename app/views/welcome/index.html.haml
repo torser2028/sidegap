@@ -1,2 +1,17 @@
-%h1 Welcome#index
-%p Find me in app/views/welcome/index.html.haml
+%h1 Noticias
+%table
+  %thead
+    %tr
+      %th Fecha
+      %th Titulo
+      %th Origen
+      %th Noticia
+      %th
+  %tbody
+    - @stories.each do |story|
+      %tr
+        %td= story.created_at.to_s(:db)
+        %td= story.title
+        %td= story.source
+        %td= story.body
+        %td= link_to "Ver", story_path(story.id)
