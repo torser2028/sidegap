@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   scope '(:locale)', locale: /es|en/ do
     # You can have the root of your site routed with "root"
     root 'welcome#index'
