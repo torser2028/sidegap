@@ -1,8 +1,67 @@
-%ul.dropdown-menu{:role => "menu"}
-  %li
-    %a{:href => "javascript:void(0);"} #{current_user.email}
-  %li
-    = link_to 'Edit profile', edit_user_registration_path
-  %li
-    = link_to "Logout", destroy_user_session_path, method: :delete
-/ /.nav-collapse
+%nav.top-bar
+  %section.top-bar-section
+    .top-container
+
+      //Left Nav Section
+      %ul.left
+        %li
+          %a.nav-toggle{:href => "#"}
+            = fa_stacked_icon "bars", base: "square-o"
+            Menu
+        %li.has-dropdown.not-click
+          %a{:href => "#"}
+            Sectores
+          %ul.dropdown{:role => "menu"}
+            %li
+              %a{:href => "#"}
+                %span.ico
+                  = fa_icon "legal"
+                Rama Legislativa
+            %li
+              %a{:href => "#"}
+                %span.ico
+                  = fa_icon "sitemap"
+                Rama Ejecutiva
+            %li
+              %a{:href => "#"}
+                %span.ico
+                  = fa_icon "university"
+                Rama Judicial
+            %li
+              %a{:href => "#"}
+                %span.ico
+                  = fa_icon "eye"
+                Organismos de control y ministerio público
+            %li
+              %a{:href => "#"}
+                %span.ico
+                  = fa_icon "hand-o-down"
+                Organización Electoral
+            %li
+              %a{:href => "#"}
+                %span.ico
+                  = fa_icon "users"
+                Normas en proceso de consulta ciudadana
+            %li
+              %a{:href => "#"}
+                %span.ico
+                  = fa_icon "comments"
+                Concejos Municipales
+            %li
+              %a{:href => "#"}
+                %span.ico
+                  = fa_icon "building-o"
+                Distrito capital de Bogotá
+      %ul.right
+        %li.has-dropdown.not-click
+          %a{:href => "#"}
+            User Name
+            //#{current_user.name}
+          %ul.dropdown{:role => "menu"}
+            %li
+              %a{:href => "javascript:void(0);"} #{current_user.email}
+            %li
+              = link_to 'Edit profile', edit_user_registration_path
+            %li
+              = link_to "Logout", destroy_user_session_path, method: :delete
+            / /.nav-collapse

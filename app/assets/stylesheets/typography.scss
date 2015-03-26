@@ -1,0 +1,57 @@
+
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(http://fonts.googleapis.com/css?family=Hind);
+@import "variables";
+
+body{
+  main{
+    h1{
+      font-family: 'Hind', sans-serif;
+    }
+  }
+  .entrada{
+    ul{
+      li{
+        a{
+          .icon{
+            font-size: $D-icoBig;
+          }
+          span{
+            font-family: 'Lato', sans-serif;
+            font-weight: 700;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+  .news{
+  h2{
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      font-size: $D-hdrFnt;
+    }
+  }
+  .dates{
+    font-size: $D-bseFnt;
+  }
+  .tags{
+    font-size: $D-smlFnt;
+    font-weight: 700;
+  }
+  p{
+    font-size: $D-bseFnt;
+    font-family: 'Hind', sans-serif;
+  }
+  .more{
+    a {
+      font-size: $D-smlFnt;
+    }
+  }
+  footer{
+    p{
+      font-family: 'Lato', sans-serif;
+      font-size: $D-smlFnt;
+    }
+  }
+}

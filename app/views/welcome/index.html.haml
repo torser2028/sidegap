@@ -1,17 +1,60 @@
+.entrada
+  %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4
+    %li.lgsltv
+      %a{href: "#"}
+        .icon
+          = fa_icon "legal"
+        %span Rama Legislativa
+    %li.ejctv
+      %a{href: "#"}
+        .icon
+          = fa_icon "sitemap"
+        %span Rama Ejecutiva
+    %li.jdcl
+      %a{href: "#"}
+        .icon
+          = fa_icon "university"
+        %span Rama Judicial
+    %li.cntrl
+      %a{href: "#"}
+        .icon
+          = fa_icon "eye"
+        %span Organismos de control y ministerio público
+    %li.elctrl
+      %a{href: "#"}
+        .icon
+          = fa_icon "hand-o-down"
+        %span Organización Electoral
+    %li.nms
+      %a{href: "#"}
+        .icon
+          = fa_icon "users"
+        %span Normas en proceso de consulta ciudadana
+    %li.cncjs
+      %a{href: "#"}
+        .icon
+          = fa_icon "comments"
+        %span Concejos Municipales
+    %li.bogta
+      %a{href: "#"}
+        .icon
+          = fa_icon "building-o"
+        %span Distrito capital de Bogotá
+
+.confignews
+  .row
+    .large-4.large-offset-8.columns
+      %a{role: "button", href: "#"}
+        Notificaciones
+        %span.glyph
+          = fa_icon "gear"
 %h1 Noticias
-%table
-  %thead
-    %tr
-      %th Fecha
-      %th Titulo
-      %th Origen
-      %th Noticia
-      %th
-  %tbody
-    - @stories.each do |story|
-      %tr
-        %td= l(story.created_at, format: :db)
-        %td= story.title
-        %td= story.source
-        %td= story.body
-        %td= link_to "Ver", story_path(story.id)
+%ul.news.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+  - @stories.each do |story|
+    %li.new
+      %h2= story.title
+      %span.dates= l(story.created_at, format: :db)
+      %span.tags= story.source
+      %p= story.body
+      .more{role: "button"}
+        = link_to "Ver", story_path(story.id)

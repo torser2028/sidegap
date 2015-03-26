@@ -2,14 +2,22 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title Sidegap
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'vendor/modernizr'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    .container
-      %p.notice= notice
-      %p.alert= alert
-      - if user_signed_in?
-        = render 'layouts/nav.html.haml'
-      = yield
+    - if user_signed_in?
+      = render 'layouts/nav.html.haml'
+    = render 'layouts/header.html.haml'
+    %main
+      .row
+        .large-12.columns
+          - flash.each do |name, msg|
+            .alert-box.radius{ 'data-alert': '', class: name }
+              = msg
+              %a.close{href: "#"} &times;
+          = yield
+    = render 'layouts/footer.html.haml'
