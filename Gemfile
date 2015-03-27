@@ -32,6 +32,7 @@ group :development, :test do
   gem 'spring'
   gem 'faker'
   gem 'pry-rails'
+  gem 'letter_opener'
 end
 
 gem 'rails_12factor', group: :production
