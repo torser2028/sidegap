@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :company
+  belongs_to :area
 
   has_many :assignments
   has_many :roles, through: :assignments
@@ -12,8 +13,6 @@ class User < ActiveRecord::Base
   validates :name, :email, :company, :area, :job, presence: true
 
   after_create :send_welcome_email
-
-  AREAS = %w(gerencia legal juridica administración asuntos)
 
   def has_role?(role_sym)
     roles.any? { |role| role.name.underscore.to_sym == role_sym }

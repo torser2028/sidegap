@@ -4,9 +4,10 @@ ActiveAdmin.register User do
   filter :name
   filter :email
   filter :company
+  filter :area
   filter :roles
 
-  permit_params :name, :email, :company_id, :area, :job, :role_ids, :password,:password_confirmation
+  permit_params :name, :email, :company_id, :area_id, :job, :role_ids, :password,:password_confirmation
 
   before_save do |user|
     user.roles.destroy_all
@@ -19,9 +20,7 @@ ActiveAdmin.register User do
     column :name
     column :email
     column :company
-    column :area do |user|
-      user.area.humanize
-    end
+    column :area
     column :job
     column :roles do |user|
       user.roles.pluck(:name).join(', ')
@@ -35,9 +34,7 @@ ActiveAdmin.register User do
       row :name
       row :email
       row :company
-      row :area do |user|
-        user.area.humanize
-      end
+      row :area
       row :job
       row :roles do |user|
         user.roles.pluck(:name).join(', ')
