@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150407220512) do
+ActiveRecord::Schema.define(version: 20150409152214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,35 @@ ActiveRecord::Schema.define(version: 20150407220512) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "legislative_attachments", force: :cascade do |t|
+    t.string   "attachment"
+    t.integer  "legislative_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "legislative_attachments", ["legislative_id"], name: "index_legislative_attachments_on_legislative_id", using: :btree
+
+  create_table "legislatives", force: :cascade do |t|
+    t.string   "title"
+    t.string   "source"
+    t.string   "chamber_number"
+    t.string   "senate_number"
+    t.string   "commission"
+    t.string   "status"
+    t.string   "final_status"
+    t.string   "topic"
+    t.string   "law"
+    t.string   "probability"
+    t.date     "senate_commission_at"
+    t.date     "senate_plenary_at"
+    t.date     "chamber_commission_at"
+    t.date     "chamber_plenary_at"
+    t.date     "filing_at"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "political_parties", force: :cascade do |t|
@@ -153,6 +182,7 @@ ActiveRecord::Schema.define(version: 20150407220512) do
 
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
+  add_foreign_key "legislative_attachments", "legislatives"
   add_foreign_key "users", "areas"
   add_foreign_key "users", "companies"
 end
