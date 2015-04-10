@@ -1,2 +1,302 @@
-%h1 Legislatives#index
-%p Find me in app/views/legislatives/index.html.haml
+.legislatives.panels-view
+  %h1
+    = fa_icon "legal"
+    Rama Legislativa
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "inbox"
+        Bandeja de Proyectos
+      .tray.projects
+        .row.filter
+          .large-1.medium-2.small-4.columns
+            %label
+              Buscar:
+          .large-3.medium-3.small-8.columns
+            %input{:size => "16", :type => "text", :placeholder => "Escriba aquí para filtrar resultados"}/            
+          .large-4.medium-offset-0.medium-5.small-offset-4.small-8.columns
+            %button.success#srch{href: "#"}
+              = fa_icon "search"
+              Buscar
+            %button#avncd{href: "#"}
+              = fa_icon "filter"
+              Filtrar
+          .large-offset-4.medium-offset-2.small-12.colums
+        .row.avanced
+          .large-2.columns
+            %label
+              Comisión:
+            %select
+              %option{value: 0}
+                Ninguno
+              %option{value: "I"}
+                I
+              %option{value: "II"}
+                II
+              %option{value: "III"}
+                III
+              %option{value: "IV"}
+                IV
+              %option{value: "V"}
+                V
+              %option{value: "VI"}
+                VI
+              %option{value: "VII"}
+                VII
+          .large-3.columns
+            %label
+              Cámara de Entrada:
+            %select
+              %option{value: 0}
+                Ninguno
+              %option{value: "Camara"}
+                Cámara
+              %option{value: "Senado"}
+                Senado
+            %label
+              Fecha de Radicación
+            %select
+              %option{value: "Ninguno"}
+                Ninguno
+              %option{value: "Ninguno"}
+                Hoy
+              %option{value: "Ninguno"}
+                Una Semana
+              %option{value: "Ninguno"}
+                Quince Días
+              %option{value: "Ninguno"}
+                Veinte Días
+              %option{value: "Ninguno"}
+                Un Mes
+          .large-3.columns
+            %label
+              Tema de Interés:
+            %select
+              %option{value: "Ninguno"}
+                Ninguno
+              %option{value: "Salud"}
+                Salud
+              %option{value: "Medio Ambiente"}
+                Medio Ambiente
+              %option{value: "Laboral y Pensional"}
+                Laboral y Pensional
+              %option{value: "Administración Pública y Estructura Del Estado"}
+                Administración Pública y Estructura Del Estado
+              %option{value: "Infraestructura, Transporte y Movilidad"}
+                Infraestructura, Transporte y Movilidad
+              %option{value: "Justicia, Política Criminal y Penitenciaria"}
+                Justicia, Política Criminal y Penitenciaria
+              %option{value: "Honores, Conmemoraciones y Asuntos Culturales"}
+                Honores, Conmemoraciones y Asuntos Culturales
+              %option{value: "Actividad Financiera"}
+                Actividad Financiera
+              %option{value: "Estampillas"}
+                Estampillas
+              %option{value: "Educación y Deporte"}
+                Educación y Deporte
+              %option{value: "Seguridad y Defensa"}
+                Seguridad y Defensa
+              %option{value: "Agropecuario"}
+                Agropecuario
+              %option{value: "Familia y Genero"}
+                Familia y Genero
+              %option{value: "Servicios Públicos"}
+                Servicios Públicos
+              %option{value: "Impuestos y Condiciones de Inversión"}
+                Impuestos y Condiciones de Inversión
+              %option{value: "Tecnologías de la Información y Comunicación"}
+                Tecnologías de la Información y Comunicación
+              %option{value: "Vivienda"}
+                Vivienda
+              %option{value: "Relaciones Internacionales"}
+                Relaciones Internacionales
+              %option{value: "Hidrocarburos, Minería y Energía"}
+                Hidrocarburos, Minería y Energía
+              %option{value: "Derechos Fundamentales y Derechos Humanos"}
+                Derechos Fundamentales y Derechos Humanos
+            %label
+              Título:
+            %input{type: "text"}
+          .large-2.columns
+            %label
+              No. Cámara:
+            %input{type: "text"}
+            %label
+              No. Senado:
+            %input{type: "text"}
+          .large-2.columns
+            %label
+              %span.ghost
+                \_
+            %button.success{href: "#"}
+              = fa_icon "search"
+              Buscar
+            %label
+              %span.ghost
+                \_
+            %button.secondary#Quit{href: "#"}
+              / = fa_icon "remove"
+              \× Ocultar Filtro
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Num Cámara
+              %th
+                Num Senado
+              %th
+                Título
+              %th
+                Fecha de Radicación
+              %th
+                Opciones
+          %tbody
+            - @legislatives.each do |legislative|
+              %tr
+                %td.num
+                  = legislative.chamber_number
+                %td.num
+                  = legislative.senate_number
+                %td.desc
+                  %p
+                    = legislative.title
+                %td.num
+                  = legislative.filing_at
+                %td.actions
+                  %a.more{href: legislative_path(legislative.id)}
+                    = fa_icon "arrow-circle-right"
+                    %span
+                      Ver
+                  %a.follow{href: "#"}
+                    = fa_icon "eye"
+                    %span
+                      Seguir 
+                  %a.archive{href: "#"}
+                    = fa_icon "trash"
+                    %span
+                      Papelera
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "user"
+        Perfil Congresista
+      .pryctDtl
+        %button
+          = fa_icon "arrow-left"
+          Consultar Congresistas
+        .row.cntnr
+          .large-12.columns
+            .row
+              .large-3.columns
+                %figure
+                  = image_tag("avatar_default.png")
+                  %figcaption
+                    Alirio Uribe Muñoz
+              .large-3.columns.prflActns
+                %button.success
+                  = fa_icon "file"
+                  Ver Autor
+                %button.success
+                  = fa_icon "file"
+                  Ver Ponentes
+              .large-5.columns
+            .row
+              .large-2.columns.labels
+                %label
+                  Nombre
+              .large-10.columns
+                %span
+                  Alirio Uribe Muñoz
+            .row
+              .large-2.columns.labels
+                %label
+                  Corporación Institucional
+              .large-4.columns
+                %span
+                  Congreso de la República
+              .large-2.columns.labels
+                %label
+                  Cargo
+              .large-4.columns
+                %span
+                  Representante a la Cámara 
+            .row
+              .large-2.columns.labels
+                %label
+                  Partido
+              .large-4.columns
+                %span
+                  POLO
+              .large-2.columns.labels
+                %label
+                  Comisión
+              .large-4.columns
+                %span
+                  II
+            .row
+              .large-2.columns.labels
+                %label
+                  Dirección
+              .large-4.columns
+                %span
+                  Carrera 7 N° 8-68
+              .large-2.columns.labels
+                %label
+                  Región
+              .large-4.columns
+                %span
+                  Bogotá
+            .row
+              .large-2.columns.labels
+                %label
+                  Teléfono del Trabajo
+              .large-4.columns
+                %span
+                  (571) 3824483-4484-4485
+              .large-2.columns.labels
+                %label
+                  Oficina
+              .large-4.columns
+                %span
+                  506B
+            .row
+              .large-2.columns.labels
+                %label
+                  E-mail
+              .large-4.columns
+                %span
+                  alirio.uribe.representante@gmail.com
+              .large-2.columns.labels
+                %label
+                  Fuente de Información
+              .large-4.columns
+                %span
+                  http://aliriouribe.com/perfil-2/
+            .row
+              .large-2.columns.labels
+                %label
+                  Perfil
+              .large-10.columns
+                %span
+                  %p
+                    Abogado de la universidad católica, con especializaciones en derecho laboral y relaciones industriales de la universidad externado de colombia y en derechos humanos de la escuela superior de administración pública – esap. 
+                  %p
+                    Fue integrante de la organización no gubernamental colectivo de abogados “josé alvear restrepo”, vicepresidente de la federación internacional de derechos humanos – fidh – durante los períodos 1998-2000, 2000-2003 y 2003 – 2006, en los que fue encargado de misiones internacionales en países de américa latina, ex presidente de la asociación de especialistas de derechos humanos de la esap, miembro y ex presidente de la asociación colombiana de abogados laboralistas de los trabajadores.
+                  %p
+                    Recibió  el premio para defensores de derechos humanos martín ennals, otorgado a instituciones y personas por las redes mundiales más importantes,  este premio fue entregado por su lucha constante contra la corrupción y la impunidad en colombia. Obtuvo el  premio de derechos humanos de la república francesa, en 1996,  fue juez del tribunal permanente de los pueblos en juicios éticos contra empresas multinacionales,  presentó asimismo varias acciones ante instancias de supervisión internacionales ante la oea (comisión interamericana de derechos humanos) y onu por violaciones de derechos humanos, de tal manera, fue representante de víctimas en reconocidos casos,  igualmente contribuyó al impulso de múltiples demandas públicas ante la corte constitucional y ante el consejo de estado.
+                  %p
+                    Se ha desempeñado como profesor universitario con experiencia en pregrado, en especializaciones y diplomados en el área de derechos humanos,  ha sido conferencista en múltiples eventos internacionales e igualmente ha contribuido a la discusión y análisis con artículos para revistas y otros medios de comunicación. 
+                  %p
+                    Actual vicepresidente  de comisión segunda de cámara de representantes.
+        .row.cntnr.viewActns
+          .large-2.columns
+          .large-10.columns
+            %button.success
+              = fa_icon "file-pdf-o"
+              Exportar a PDF

@@ -1,6 +1,8 @@
 
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
 @import url(http://fonts.googleapis.com/css?family=Hind);
+@import url(http://fonts.googleapis.com/css?family=Economica:400,700);
+@import url(http://fonts.googleapis.com/css?family=Noto+Serif:400italic);
 @import "variables";
 
 body{
@@ -9,7 +11,27 @@ body{
       font-family: 'Hind', sans-serif;
     }
   }
-  .entrada{
+  .sidr{
+    &.sidebar{
+      ul{
+        li{
+          a{
+            font-family: 'Economica', sans-serif;
+            font-size: $D-bigFnt;
+            text-transform: uppercase;
+            span{
+              &.ico{
+              }
+            }
+            strong{
+              font-weight: 700;
+            }
+          }
+        }
+      }
+    }
+  }
+  .dashboard{
     ul{
       li{
         a{
@@ -20,6 +42,21 @@ body{
             font-family: 'Lato', sans-serif;
             font-weight: 700;
             text-align: center;
+            font-size: $D-hdrFnt;
+            line-height: 140%;
+            text-transform: uppercase;
+            &.minus{
+              font-size: $D-lrgFnt;
+              line-height: 140%;
+            }
+          }
+          .overlay{
+            strong{
+              font-family: 'Hind';
+              font-size: $D-bseFnt;
+              line-height: 150%;
+              font-weight: normal;
+            }
           }
         }
       }
@@ -52,6 +89,88 @@ body{
     p{
       font-family: 'Lato', sans-serif;
       font-size: $D-smlFnt;
+    }
+  }
+}
+.panels-view{
+  h2{
+    font-size: $D-bigFnt +3;
+    font-family: 'Economica';
+  }
+  h3{
+    font-size: $D-bigFnt +3;
+    font-family: 'Economica';
+    i{
+      text-align: center;
+      font-size: $D-bseFnt;
+    }
+  }
+  .tray{
+    .filter{
+      label{
+        font-weight: bold;
+      }
+    }
+    table{
+      font-family: 'Lato', sans-serif;
+      thead{
+        text-transform: uppercase;
+        th{
+          white-space: nowrap;
+          font-size: $D-smlFnt;
+        }
+      }
+      tbody{
+        td{
+          font-size: $D-bseFnt;
+          p{
+            font-size: $D-bseFnt;
+          }
+          dl{
+            font-size: $D-bseFnt;
+            dt{
+              font-size: $D-smlFnt;
+              text-transform: uppercase;
+            }
+            dd{
+            }
+          }
+          &.num{
+            text-align: right;
+          }
+          &.desc{
+          }
+          &.actions{
+            span{
+              font-size: $D-smlFnt;
+            }
+          }
+        }
+      }
+    }
+  }
+  .pryctDtl{
+    button{
+      font-size: $D-bseFnt;
+    }
+    figure{
+      img{
+
+      }
+      figcaption{
+        text-align: center;
+        font-family: 'Noto Serif', serif;
+        font-style: italic;
+        font-size: $D-smlFnt;
+      }
+    }
+    .row{
+      .columns{
+        &.actions{
+          text-align: right;
+          font-family: 'Hind', sans-serif;
+        }
+      }
     }
   }
 }

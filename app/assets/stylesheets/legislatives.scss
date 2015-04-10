@@ -1,3 +1,73 @@
 // Place all the styles related to the legislatives controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "variables";
+//Rama Legislativa
+.legislatives{
+  h1{
+    border-bottom: $D-padGlb/4 solid $C-matiz1;
+    i{
+      background: $C-matiz1;
+    }
+  }
+  h2{
+    i{
+      color: $C-matiz1;
+    }
+  }
+  h3{
+    i{
+      background: $C-matiz1;
+    }
+  }
+  .tray{
+    table{
+      tbody{
+        tr{
+          td{
+            &.actions{
+              a{
+                // border-left: 2px solid $C-matiz1;
+                &:hover{
+                  // border-left: 2px solid $C-enfasis;
+                  i{
+                    color: $C-matiz1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .pryctDtl{
+    .row{
+      .columns{
+        &.actions{
+          a{
+            // border-left: 2px solid $C-matiz1;
+            &:hover{
+              //border: 2px solid $C-matiz1;
+              i{
+                color: $C-matiz1;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .detail{
+    .row{
+      .columns{
+        label{
+          &.title{
+            background: $C-matiz1;
+            border-bottom: $C-matiz1;
+          }
+        }
+      }
+    }
+  }
+}

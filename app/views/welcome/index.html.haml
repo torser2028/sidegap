@@ -1,46 +1,63 @@
-.entrada
-  %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4
+.dashboard
+  %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4.da-thumbs{id: "da-thumbs"}
     %li.lgsltv
-      %a{href: "#"}
-        .icon
+      %a.single{href: "legislatives/"}
+        .overlay
+          %strong Información sobre el Trámite de Proyectos de Ley y Reformas Constitucionales
+        %i.icon
           = fa_icon "legal"
         %span Rama Legislativa
     %li.ejctv
-      %a{href: "#"}
-        .icon
+      %a.single{href: "#"}
+        .overlay
+          %strong Información sobre Decretos, Circulares y Resoluciones de las entidades que componen la Rama Ejecutiva del Poder Público desde 1 de enero de 2014
+        %i.icon
           = fa_icon "sitemap"
         %span Rama Ejecutiva
     %li.jdcl
-      %a{href: "#"}
-        .icon
-          = fa_icon "university"
+      %a.single{href: "#"}
+        .overlay
+          %strong Información sobre las Sentencias de la Corte Constitucional, Consejo de Estado, Corte Suprema de Justicia y Consejo Superior de la Judicatura
+        %i.icon
+          = image_tag("balanza.svg")
+          //= fa_icon "university"
         %span Rama Judicial
     %li.cntrl
-      %a{href: "#"}
-        .icon
+      %a.triple{href: "#"}
+        .overlay
+          %strong Información sobre las decisiones de la Contraloría, Procuraduría y Defensoría del Pueblo
+        %i.icon
           = fa_icon "eye"
-        %span Organismos de control y ministerio público
+        %span.minus Organismos de control y ministerio público
     %li.elctrl
-      %a{href: "#"}
-        .icon
+      %a.double{href: "#"}
+        .overlay
+          %strong Información sobre las decisiones de la Registraduría Nacional del Estado Civil y del Consejo Nacional Electoral
+        %i.icon
           = fa_icon "hand-o-down"
         %span Organización Electoral
     %li.nms
-      %a{href: "#"}
-        .icon
+      %a.quad{href: "#"}
+        .overlay
+          %strong Información sobre circulares, resoluciones y decretos que se ponen  a consideración ciudadana para comentarios
+        %i.icon
           = fa_icon "users"
-        %span Normas en proceso de consulta ciudadana
+        %span.minus Normas en proceso de consulta ciudadana de la Rama Ejecutiva del Poder Público
     %li.cncjs
-      %a{href: "#"}
-        .icon
+      %a.double{href: "#"}
+        .overlay
+          %strong Información sobre Proyectos de Acuerdo en trámite en los Concejos municipales o Distritales de Bogotá, Medellín, Cali, Bucaramanga y Barranquilla
+        %i.icon
           = fa_icon "comments"
         %span Concejos Municipales
     %li.bogta
-      %a{href: "#"}
-        .icon
-          = fa_icon "building-o"
+      %a.double{href: "#"}
+        .overlay
+          %strong Información sobre las normas expedidas en el Distrito Capital de Bogotá por parte de todas las entidades que lo componen
+        %i.icon
+          = image_tag("bogota.svg")
+          //= fa_icon "building-o"
         %span Distrito capital de Bogotá
-
 .confignews
   .row
     .large-4.large-offset-8.columns
@@ -52,9 +69,13 @@
 %ul.news.small-block-grid-1.medium-block-grid-2.large-block-grid-3
   - @stories.each do |story|
     %li.new
-      %h2= story.title
-      %span.dates= l(story.created_at, format: :db)
-      %span.tags= story.source
+      %h2
+        = story.title
+      .info
+        %span.dates= l(story.created_at, format: :db)
+        %span.tags= story.source
+      .newspaper
+        = fa_icon "newspaper-o "
       %p= story.body
       .more{role: "button"}
         = link_to "Ver", story_path(story.id)

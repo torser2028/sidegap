@@ -11,9 +11,16 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
-//= require turbolinks
+//= require jquery.sidr.min
+//= require jquery.hoverdir
 //= require_tree .
+//= require turbolinks
 
-$(function(){ $(document).foundation(); });
+$(function(){
+  $(document).foundation();
+  $('#simple-menu').sidr();
+  $(' #da-thumbs > li ').hoverdir();
+});
