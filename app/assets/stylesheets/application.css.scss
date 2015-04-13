@@ -1,7 +1,10 @@
 // If you want to include any stylesheet file, then you need import it. See example below.
+@import "layout";
 @import "typography";
+@import "device";
 @import "welcome";
 @import "legislatives";
+//extensions
 @import "font-awesome";
 @import "foundation_and_overrides";
 @import "style";

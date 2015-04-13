@@ -7,4 +7,8 @@ class LegislativesController < ApplicationController
   def show
     @legislative = Legislative.find(params[:id])
   end
+
+  def events
+
+  end
 end

@@ -3,8 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "variables";
 //Rama Legislativa
-.main{
-  .legislatives{
+.legislatives{
+  .main{
     h1{
       border-bottom: $D-padGlb/4 solid $C-matiz1;
       i{
@@ -28,9 +28,7 @@
             td{
               &.actions{
                 a{
-                  // border-left: 2px solid $C-matiz1;
                   &:hover{
-                    // border-left: 2px solid $C-enfasis;
                     i{
                       color: $C-matiz1;
                     }
@@ -47,9 +45,7 @@
         .columns{
           &.actions{
             a{
-              // border-left: 2px solid $C-matiz1;
               &:hover{
-                //border: 2px solid $C-matiz1;
                 i{
                   color: $C-matiz1;
                 }
@@ -59,17 +55,5 @@
         }
       }
     }
-    // .detail{
-    //   .row{
-    //     .columns{
-    //       label{
-    //         &.title{
-    //           background: $C-matiz1;
-    //           border-bottom: $C-matiz1;
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
   }
 }

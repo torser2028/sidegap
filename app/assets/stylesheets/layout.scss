@@ -1,0 +1,584 @@
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "variables";
+body{
+  /*background: darken($C-luz, 4%) !important;*/
+  header{
+    .logo{
+      padding-top: $D-padGlb;
+    }
+  }
+  aside{
+    &.left-off-canvas-menu{
+      ul{
+          &.off-canvas-list{
+            li{
+
+            }
+            a{
+
+            }
+            span{
+
+            }
+            strong{
+
+            }
+          }
+        }
+    }
+  }
+  nav{
+    &.top-bar{
+      position: fixed;
+      width: 100%;
+      z-index: 1;
+      background: darken($C-enfasis, 10%);
+      .top-bar-section{
+        li{
+          a{
+            transition: background 0.25s ease-in-out;
+            background: darken($C-enfasis, 10%) !important;
+            span{
+              &.ico{
+                transition: color 0.25s ease-in-out;
+                display: inline-block;
+                margin-right: $D-padGlb/2;
+                color: transparentize($C-luz, 0.5);
+              }
+            }
+            &:hover{
+              background: $C-enfasis !important;
+              span{
+                &.ico{
+                  color: $C-luz;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  header{
+    padding-top: 2.8125rem;
+  }
+  .row{
+    background: $C-luz;
+  }
+  .top-container{
+      max-width: 62.5rem;
+      margin: 0 auto;
+  }
+  .main{
+    h1{
+      color: transparentize($C-enfasis, 0.2);
+      border-bottom: 1px solid transparentize($C-base, 0.8);
+    }
+    .confignews{
+      margin-top: $D-padGlb;
+      text-align: right;
+      a{
+        color: transparentize($C-base, 0.4);
+        padding-left: $D-padGlb;
+        span{
+          color: $C-base;
+        }
+        &:hover{
+          color: $C-enfasis;
+          span{
+            color: darken($C-base, 20%);
+          }
+        }
+      }
+    }
+    .news{
+      .new{
+        h2{
+          margin-bottom: -$D-padGlb/3;
+        }
+        .dates{
+          display: inline-block;
+          padding-bottom: $D-padGlb/2;
+          color: transparentize($C-base, 0.2);
+        }
+        .tags{
+          display: inline-block;
+          padding-bottom: $D-padGlb/2;
+          padding-left: $D-padGlb/2;
+          color: transparentize($C-base, 0.5);
+        }
+        .newspaper{
+          float: left;
+          padding: $D-padGlb/2;
+          margin-right: $D-padGlb/2;
+          background: $C-luz;
+          border-left: 3px solid $C-enfasis;
+          i{
+            color: $C-enfasis;
+          }
+        }
+        p{
+          text-align: justify;
+          color: $C-base;
+          margin-bottom: $D-padGlb/4;
+        }
+        .more{
+          opacity: 0;
+          transition: opacity 0.25s ease-in;
+          float: right;
+          margin-right: $D-padGlb/2;
+          background: $C-luz;
+          border: 1px solid transparentize($C-enfasis, 0.5);
+          border-radius: $D-padGlb;
+          &:hover{
+            background: $C-enfasis;
+            a{
+              color: $C-luz;
+            }
+          }
+          a{
+            padding: $D-padGlb/3;
+            display: block;
+            color: $C-enfasis;
+          }
+        }
+        &:hover{
+          .more{
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+  footer{
+    background: darken($C-luz, 10%);
+    .row{
+      background: darken($C-luz, 10%);
+      p{
+        margin: $D-padGlb/5 0;
+        text-align: center;
+        color: $C-base;
+      }
+    }
+  }
+  // Insite
+  .panels-view{
+    h1{
+      color: $C-base;
+      i{
+        display: inline-block;
+        padding: $D-padGlb/2;
+        color: $C-luz;
+      }
+    }
+    h2{
+      padding-top: $D-padGlb *2;
+      border-bottom: 1px solid darken($C-luz, 10%);
+      i{
+      }
+    }
+    h3{
+      padding-top: $D-padGlb/4;
+      border-bottom: 1px solid darken($C-luz, 10%);
+      i{
+        display: block;
+        float: left;
+        margin-top: $D-padGlb/4;
+        margin-right: $D-padGlb/2;
+        color: $C-luz;
+        width: $D-padGlb *1.5;
+        height: $D-padGlb *1.5;
+        border-radius: 50%;
+        padding: $D-padGlb/4;
+      }
+    }
+    .tray{
+      padding-top: $D-padGlb;
+      span{
+        &.ghost{
+          color: transparent;
+        }
+      }
+      table{
+        thead{
+          th{
+            color: $C-luz;
+            padding: $D-padGlb/3 $D-padGlb;
+            background: $C-enfasis;
+          }
+        }
+        tbody{
+          tr{
+            td{
+              color: $C-base;
+              padding: $D-padGlb/4 $D-padGlb/2;
+              p{
+                margin: $D-padGlb/2 0 0 0;
+              }
+              dl{
+                dt{
+                  margin: $D-padGlb/2 0 0 0;
+
+                }
+                dd{
+                  margin: $D-padGlb/4 0 0 0;
+                  padding-left: $D-padGlb/4;
+                }
+              }
+              &.desc{
+              }
+              &.actions{
+                a{
+                  transition: all 200ms ease-in;
+                  background: transparent;
+                  border: 2px solid transparent;
+                  border-radius: $D-padGlb/4;
+                  display: block;
+                  margin-top: $D-padGlb/2;
+                  i{
+                    transition: transform 400ms ease-in, color 200ms ease-out;
+                    margin-left: $D-padGlb/2;
+                    width: $D-padGlb;
+                  }
+                  span{
+                    transition: all 200ms ease-in;
+                    color: $C-base;
+                  }
+                  &:hover{
+                    background: $C-luz;
+                    border: 2px solid transparentize($C-base, 0.8);
+                    // border-left: 2px solid $C-enfasis;
+                    i{
+                      transform: rotateY(360deg);
+                    }
+                    span{
+                      color: $C-enfasis;
+                    }
+                  }
+                }
+              }
+              &:hover{
+                color: darken($C-base, 10%);
+                p{
+                  color: darken($C-base, 50%);
+                }
+              }
+            }
+            &:nth-child(even){
+              background: lighten($C-enfasis, 55%);
+            }
+          }
+        }
+      }
+      .filter{
+        transition: height 500ms ease-out;
+        overflow: hidden;
+        label{
+          text-align: right;
+          padding-top: $D-padGlb/2;
+        }
+        &.hide{
+          height: 0px;
+        }
+        &.show{
+          height: auto;
+        }
+      }
+      .avanced{
+        transition: height 500ms ease-out;
+        overflow: hidden;
+        &.hide{
+          height: 0px;
+        }
+        &.show{
+          height: auto;
+        }
+      }
+      &.calendar{
+        table{
+          width: 100%;
+          thead{
+            width: 100%;
+          }
+          tbody{
+            // display: block;
+            overflow-y: scroll;
+            width: 100%;
+            max-height: 7em;
+            td{
+              &.desc{
+              }
+            }
+          }
+        }
+      }
+      &.events{
+        table{
+          width: 100%;
+        }
+      }
+      &.projects{
+        table{
+          width: 100%;
+        }
+      }
+      &.autors{
+        padding-top: 0;
+        table{
+          width: 100%;
+          col{
+            &.date{
+              text-align: center;
+            }
+          }
+          tbody{
+            td{
+              a{
+                &.down{
+                  i{
+                    color: $success-color;
+                  }
+                  &:hover{
+                    border-bottom: 1px solid $success-color;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .pryctDtl{
+      button{
+        a{
+          color: $C-luz;
+        }
+      }
+    .row{
+      border-bottom: 1px solid darken($C-luz, 5%);
+      .columns{
+        padding-top: $D-padGlb/2;
+        padding-bottom: $D-padGlb/2;
+        label{
+        }
+        span{
+          &.ghost{
+            color: transparent;
+          }
+        }
+        figure{
+          img{
+
+          }
+          figcaption{
+            color: $C-base;
+          }
+        }
+        .row{
+          .columns{
+            border-left: 1px solid darken($C-luz, 5%);
+          }
+          transition: background 100ms ease-in;
+          &:nth-child(odd){
+            background: lighten($C-enfasis, 56%);
+          }
+          &:nth-child(even){
+            background: lighten($C-enfasis, 54%);
+          }
+          &:hover{
+            background: $C-luz;
+            label{
+              color: darken($C-base, 15%);
+            }
+          }
+          &.white{
+            background: $C-luz;
+            label{
+              text-align: right;
+              padding-right: $D-padGlb;
+            }
+            .columns{
+              &:first-child{
+                border-left: none;
+              }
+            }
+          }
+        }
+        .profileHdr{
+          .columns{
+            border-left: 1px solid transparent;
+          }
+          .prflActns{
+          }
+        }
+        &.labels{
+          padding-left: $D-padGlb/4;
+          padding-right: $D-padGlb/4;
+        }
+        &.actions{
+          a{
+            padding: $D-padGlb/8 $D-padGlb/4;
+            transition: all 200ms ease-in;
+            background: transparent;
+            border: 2px solid transparent;
+            border-radius: $D-padGlb/4;
+            display: inline-block;
+            margin-top: $D-padGlb/2;
+            i{
+              transition: transform 400ms ease-in, color 200ms ease-out;
+              margin-left: $D-padGlb/2;
+              width: $D-padGlb;
+            }
+            span{
+              transition: all 200ms ease-in;
+              color: $C-base;
+            }
+            &:hover{
+              background: $C-luz;
+              border: 2px solid transparentize($C-base, 0.8);
+              // border-left: 2px solid $C-enfasis;
+              i{
+                transform: rotateY(360deg);
+              }
+              span{
+                color: $C-enfasis;
+              }
+            }
+          }
+        }
+      }
+      &.cntnr{
+        margin-right: 0;
+        margin-left: 0;
+      }
+    }
+    .filesPnl{
+      transition: height 500ms ease-out;
+      overflow: hidden;
+    }
+  }
+}
+// FIXED STYLES FOUNDATION
+body{
+  .alert-box{
+    padding: $D-padGlb/4 $D-padGlb/2;
+    &.info{
+      background: lighten($C-enfasis, 50%);
+      border-color: lighten($C-enfasis, 33%);
+    }
+  }
+  .reveal-modal-bg{
+    position: fixed;
+  }
+  .button{
+    padding: $D-padGlb/2 $D-padGlb;
+  }
+  button{
+    padding: $D-padGlb/2 $D-padGlb;
+  }
+}
+// FIXED JQUERY UI STYLES
+body{
+  .ui-datepicker{
+    font-family: 'Hind', sans-serif;
+    .ui-datepicker-header{
+      background: $C-luz;
+      .ui-datepicker-prev{
+        display: block;
+        border-radius: $D-padGlb/2;
+        padding: $D-padGlb/2 $D-padGlb/2 0;
+        margin: $D-padGlb/4;
+        float: left;
+        background: darken($C-base, 10%);
+        color: $C-luz;
+        font-size: $D-smlFnt;
+        text-transform: uppercase;
+        &:before{
+         content: "< ";
+         font-weight: bold;
+        }
+        &:hover{
+          background: lighten($C-base, 15%);
+        }
+      }
+      .ui-datepicker-next{
+        display: block;
+        border-radius: $D-padGlb/2;
+        padding: $D-padGlb/2 $D-padGlb/2 0;
+        margin: $D-padGlb/4;
+        float: right;
+        background: darken($C-base, 10%);
+        color: $C-luz;
+        font-size: $D-smlFnt;
+        text-transform: uppercase;
+        &:after{
+          content: " >";
+          font-weight: bold;
+        }
+        &:hover{
+          background: lighten($C-base, 15%);
+        }
+      }
+      .ui-datepicker-title{
+        text-align: center;
+        padding: $D-padGlb/4 $D-padGlb/2 0;
+        background: $C-enfasis;
+        color: $C-luz;
+      }
+    }
+    .ui-datepicker-calendar{
+      thead{
+        th{
+          padding: $D-padGlb/4;
+        }
+      }
+    }
+  }
+}
+// RESPONSIVE ADDONS
+@media screen and (min-width: 1024px){
+  body{
+    .row{
+      max-width: 90%;
+    }
+    nav{
+      .top-container{
+        max-width: 90%;
+      }
+    }
+  }
+}
+@media screen and (max-width: 640px){
+  body{
+    .tray{
+      table{
+        thead{
+          background: $C-enfasis;
+          th{
+            display: inline-block;
+          }
+        }
+        tbody{
+          tr{
+            border: 1px solid $C-base;
+            td{
+              display: block;
+              &.num{
+                display: inline-block;
+              }
+              &.actions{
+                a{
+                  display: inline-block !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

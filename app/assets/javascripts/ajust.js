@@ -55,20 +55,7 @@ $(function(){
       $(".filter").css("height", FltrHght);
     },100);
   });
-  // Show Hide File Downloads
-  // var dwnldToggle = 0;
-  // var dwnldHght = $(".filesPnl").outerHeight();
-  // $(".filesPnl").css("height", "0px");
-  // $("#downloads").click(function(){
-  //   if (dwnldToggle == 0){
-  //     $(".filesPnl").css("height", dwnldHght);
-  //     dwnldToggle = 1;
-  //   }
-  //   else if (dwnldToggle == 1){
-  //     $(".filesPnl").css("height", "0px");
-  //     dwnldToggle = 0;
-  //   }
-  // });
+
   if( $(".profileHdr").length > 0){
     var btnsHght = $(".prflActns").outerHeight();
     $(".profileHdr figure img").load(function(){
@@ -76,19 +63,8 @@ $(function(){
       $(".profileHdr .fixHght").css("height", colHghst);
       $(".prflActns").css("padding-top", colHghst-btnsHght);
     });
+  }
 
-    // colHghst = new Array;
-    // $(".profileHdr>.columns").each(function(){
-    //   colHghst.push($(this).outerHeight());
-    // });
-    // colHghst.sort();
-    // colHghst.reverse()
-    //$(".profileHdr>.columns").css("height", colHghst[0]);
-  }
-  //  Waiting for a custom body class views
-  if ($(".user-view").length > 0){
-    $("body").addClass("user-form")
-  }
 
 
 });

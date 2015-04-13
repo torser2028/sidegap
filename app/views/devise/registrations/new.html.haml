@@ -1,5 +1,7 @@
-.user-view.signUp
-  %h2 Sign up
+.signUp
+  %h2
+    = fa_icon "edit"
+    Registrarse
   = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
     = devise_error_messages!
     .field
@@ -7,14 +9,14 @@
       %br/
       = f.email_field :email, autofocus: true
     .field
-      = f.label :password
+      = f.label "Contraseña"
       - if @validatable
         %em
           (#{@minimum_password_length} characters minimum)
       %br/
       = f.password_field :password, autocomplete: "off"
     .field
-      = f.label :password_confirmation
+      = f.label "Confirmación de contraseña"
       %br/
       = f.password_field :password_confirmation, autocomplete: "off"
     .actions

@@ -1,0 +1,57 @@
+body{
+  &.sessions{
+    background: darken($C-luz, 5%);
+    padding-top: $D-padGlb;
+    header{
+      padding-top: $D-padGlb;
+      max-width: 35em;
+      margin: 0 auto;
+      background: $C-luz;
+    }
+    footer{
+      display: none;
+      max-width: 35em;
+      margin: 0 auto;
+      background: $C-luz;
+    }
+    h2{
+      // border-bottom: 1px solid darken($C-luz, 10%);
+      border-bottom: 1px solid $C-enfasis;
+      i{
+        color: $C-enfasis;
+      }
+    }
+    .main{
+      max-width: 35em;
+      margin: 0 auto;
+      background: $C-luz;
+      padding-top: $D-padGlb;
+      padding-bottom: $D-padGlb;
+    }
+    .row{
+      background: transparent;
+      .columns{
+        input{
+          &[type="checkbox"]{
+            margin-top: $D-padGlb/2;
+          }
+        }
+        &.labels{
+          padding: $D-padGlb/2;
+          text-align: right;
+        }
+        &.actions{
+
+        }
+      }
+      .logo{
+        text-align: center;
+      }
+    }
+    &.login{
+    }
+  }
+  &.registrations{
+    @extend .sessions;
+  }
+}
