@@ -105,6 +105,8 @@ ActiveAdmin.register Legislative do
     end
     f.inputs "Archivos Adjuntos" do
       f.has_many :legislative_attachments, heading: "", allow_destroy: true, new_record: "Añadir Archivos" do |la|
+        la.input :title, label: "Titulo"
+        la.input :published_at, as: :datepicker, label: "Fecha"
         la.input :attachment, label: "", as: f.object.new_record? ? :file : :string
       end
     end

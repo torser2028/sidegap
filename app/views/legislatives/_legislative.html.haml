@@ -1,0 +1,23 @@
+%tr
+  %td.num
+    = legislative.chamber_number
+  %td.num
+    = legislative.senate_number
+  %td.desc
+    %p
+      = legislative.title
+  %td.num
+    = legislative.filing_at
+  %td.actions
+    %a.more{href: legislative_path(legislative.id)}
+      = fa_icon "arrow-circle-right"
+      %span
+        Ver
+    %a.follow{href: "#"}
+      = fa_icon "eye"
+      %span
+        Seguir 
+    %a.archive{href: "#"}
+      = fa_icon "trash"
+      %span
+        Papelera

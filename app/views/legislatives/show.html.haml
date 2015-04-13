@@ -237,12 +237,16 @@
                   Título
                 %th
                   Fecha de Publicación
+                %th
+                  
             %tbody
               - @legislative.legislative_attachments.each do |la|
                 %tr
                   %td
+                    = la.title
+                  %td
+                    = la.published_at
+                  %td
                     %a.down{href: la.attachment.url, target: "_blank"}
                       = fa_icon "download"
-                      = la.attachment.file.filename
-                  %td
-                    = l(la.created_at, format: :db)
+                      Descargar
