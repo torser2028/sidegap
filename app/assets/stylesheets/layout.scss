@@ -64,6 +64,16 @@ body{
   }
   header{
     padding-top: 2.8125rem;
+    h1{
+      margin-top: -$D-padGlb*2;
+      text-align: right;
+      color: $C-base;
+      i{
+        display: inline-block;
+        padding: $D-padGlb/2;
+        color: $C-luz;
+      }
+    }
   }
   .row{
     background: $C-luz;
@@ -166,14 +176,6 @@ body{
   }
   // Insite
   .panels-view{
-    h1{
-      color: $C-base;
-      i{
-        display: inline-block;
-        padding: $D-padGlb/2;
-        color: $C-luz;
-      }
-    }
     h2{
       padding-top: $D-padGlb *2;
       border-bottom: 1px solid darken($C-luz, 10%);

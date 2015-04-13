@@ -18,4 +18,5 @@
         %a.left-off-canvas-toggle
           = fa_stacked_icon "bars", base: "square-o"
           Menu
+      = render 'menu' unless %w(welcome sessions registrations).include? controller.controller_name
     %a.right-off-canvas-toggle.menu-icon

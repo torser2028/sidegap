@@ -4,13 +4,15 @@
 @import "variables";
 //Rama Legislativa
 .legislatives{
-  .main{
+  header{
     h1{
       border-bottom: $D-padGlb/4 solid $C-matiz1;
       i{
         background: $C-matiz1;
       }
     }
+  }
+  .main{
     h2{
       i{
         color: $C-matiz1;
