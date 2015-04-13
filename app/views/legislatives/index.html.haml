@@ -92,23 +92,30 @@
       .pryctDtl
         %button
           = fa_icon "arrow-left"
-          Consultar Congresistas
+          %a{href: legislatives_path}
+            Consultar Congresistas
         .row.cntnr
           .large-12.columns
-            .row
-              .large-3.columns
+            .row.white.profileHdr
+              .large-3.columns.fixHght
                 %figure
                   = image_tag("avatar_default.png")
                   %figcaption
                     Alirio Uribe Muñoz
-              .large-3.columns.prflActns
-                %button.success
+              .large-4.columns.fixHght.ghost
+              .large-5.columns.fixHght.ghost.prflActns.actions
+                %a
                   = fa_icon "file"
-                  Ver Autor
-                %button.success
+                  %span
+                    Ver Autor
+                %a
                   = fa_icon "file"
-                  Ver Ponentes
-              .large-5.columns
+                  %span
+                    Ver Ponentes
+                %a
+                  = fa_icon "file-pdf-o"
+                  %span
+                    Exportar a PDF
             .row
               .large-2.columns.labels
                 %label
@@ -197,9 +204,179 @@
                     Se ha desempeñado como profesor universitario con experiencia en pregrado, en especializaciones y diplomados en el área de derechos humanos,  ha sido conferencista en múltiples eventos internacionales e igualmente ha contribuido a la discusión y análisis con artículos para revistas y otros medios de comunicación. 
                   %p
                     Actual vicepresidente  de comisión segunda de cámara de representantes.
-        .row.cntnr.viewActns
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "trash"
+        Papelera de reciclaje
+      .tray.trash
+        .row.filter
+          .large-1.medium-2.small-4.columns
+            %label
+              Buscar:
+          .large-3.medium-3.small-8.columns
+            %input{:size => "16", :type => "text", :placeholder => "Escriba aquí para filtrar resultados"}/
+          .large-4.medium-offset-0.medium-5.small-offset-4.small-8.columns
+            %button.success#srch{href: "#"}
+              = fa_icon "search"
+              Buscar
+            %button#avncd{href: "#"}
+              = fa_icon "filter"
+              Filtrar
+          .large-offset-4.medium-offset-2.small-12.colums
+        .row.avanced
           .large-2.columns
-          .large-10.columns
-            %button.success
-              = fa_icon "file-pdf-o"
-              Exportar a PDF
+            %label
+              Comisión:
+            %select
+              %option{value: 0}
+                Ninguno
+              %option{value: "I"}
+                I
+              %option{value: "II"}
+                II
+              %option{value: "III"}
+                III
+              %option{value: "IV"}
+                IV
+              %option{value: "V"}
+                V
+              %option{value: "VI"}
+                VI
+              %option{value: "VII"}
+                VII
+          .large-3.columns
+            %label
+              Cámara de Entrada:
+            %select
+              %option{value: 0}
+                Ninguno
+              %option{value: "Camara"}
+                Cámara
+              %option{value: "Senado"}
+                Senado
+            %label
+              Fecha de Radicación
+            %select
+              %option{value: "Ninguno"}
+                Ninguno
+              %option{value: "Ninguno"}
+                Hoy
+              %option{value: "Ninguno"}
+                Una Semana
+              %option{value: "Ninguno"}
+                Quince Días
+              %option{value: "Ninguno"}
+                Veinte Días
+              %option{value: "Ninguno"}
+                Un Mes
+          .large-3.columns
+            %label
+              Tema de Interés:
+            %select
+              %option{value: "Ninguno"}
+                Ninguno
+              %option{value: "Salud"}
+                Salud
+              %option{value: "Medio Ambiente"}
+                Medio Ambiente
+              %option{value: "Laboral y Pensional"}
+                Laboral y Pensional
+              %option{value: "Administración Pública y Estructura Del Estado"}
+                Administración Pública y Estructura Del Estado
+              %option{value: "Infraestructura, Transporte y Movilidad"}
+                Infraestructura, Transporte y Movilidad
+              %option{value: "Justicia, Política Criminal y Penitenciaria"}
+                Justicia, Política Criminal y Penitenciaria
+              %option{value: "Honores, Conmemoraciones y Asuntos Culturales"}
+                Honores, Conmemoraciones y Asuntos Culturales
+              %option{value: "Actividad Financiera"}
+                Actividad Financiera
+              %option{value: "Estampillas"}
+                Estampillas
+              %option{value: "Educación y Deporte"}
+                Educación y Deporte
+              %option{value: "Seguridad y Defensa"}
+                Seguridad y Defensa
+              %option{value: "Agropecuario"}
+                Agropecuario
+              %option{value: "Familia y Genero"}
+                Familia y Genero
+              %option{value: "Servicios Públicos"}
+                Servicios Públicos
+              %option{value: "Impuestos y Condiciones de Inversión"}
+                Impuestos y Condiciones de Inversión
+              %option{value: "Tecnologías de la Información y Comunicación"}
+                Tecnologías de la Información y Comunicación
+              %option{value: "Vivienda"}
+                Vivienda
+              %option{value: "Relaciones Internacionales"}
+                Relaciones Internacionales
+              %option{value: "Hidrocarburos, Minería y Energía"}
+                Hidrocarburos, Minería y Energía
+              %option{value: "Derechos Fundamentales y Derechos Humanos"}
+                Derechos Fundamentales y Derechos Humanos
+            %label
+              Título:
+            %input{type: "text"}
+          .large-2.columns
+            %label
+              No. Cámara:
+            %input{type: "text"}
+            %label
+              No. Senado:
+            %input{type: "text"}
+          .large-2.columns
+            %label
+              %span.ghost
+                \_
+            %button.success{href: "#"}
+              = fa_icon "search"
+              Buscar
+            %label
+              %span.ghost
+                \_
+            %button.secondary#Quit{href: "#"}
+              / = fa_icon "remove"
+              \× Ocultar Filtro
+
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col
+            %col
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Tema
+              %th
+                Num Cámara
+              %th
+                Num Senado
+              %th
+                Título
+              %th
+                Fecha de Radicación
+              %th
+                Opciones
+          %tbody
+            - @legislatives.each do |legislative|
+              %tr
+                %td.desc
+                %td.num
+                  = legislative.chamber_number
+                %td.num
+                  = legislative.senate_number
+                %td.desc
+                  %p
+                    = legislative.title
+                %td.num
+                  = legislative.filing_at
+                %td.actions
+                  %a.return{href: "#"}
+                    = fa_icon "reply"
+                    %span
+                      Reestablecer

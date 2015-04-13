@@ -1,64 +1,37 @@
-/ Sidebar
-#sidr.sidebar
-  %ul
-    %li
-      %a{:href => "legislatives/"}
-        %span.ico
-          = fa_icon "university"
-        %strong Rama Legislativa
-    %li
-      %a{:href => "#"}
-        %span.ico
-          = fa_icon "sitemap"
-        %strong Rama Ejecutiva
-    %li
-      %a{:href => "#"}
-        %span.ico
-          = fa_icon "legal"
-        %strong Rama Judicial
-    %li
-      %a{:href => "#"}
-        %span.ico
-          = fa_icon "eye"
-        %strong Organismos de control y ministerio público
-    %li
-      %a{:href => "#"}
-        %span.ico
-          = fa_icon "hand-o-down"
-        %strong Organización Electoral
-    %li
-      %a{:href => "#"}
-        %span.ico
-          = fa_icon "users"
-        %strong Normas en proceso de consulta ciudadana 
-    %li
-      %a{:href => "#"}
-        %span.ico
-          = fa_icon "comments"
-        %strong Concejos Municipales
-    %li
-      %a{:href => "#"}
-        %span.ico
-          = fa_icon "building-o"
-        %strong Distrito capital de Bogotá
-%nav.top-bar
+%nav.tab-bar.top-bar{"data-topbar" => "", :role => "navigation"}
+  / %section.top-bar-section
+  / %section.left-small
+  / %a.left-off-canvas-toggle.menu-icon
+  /   %span
+  / %section.middle.tab-bar-section
+  /   %h1.title Sidegap
+  / %section.right-small
   %section.top-bar-section
-    .top-container
-      //Left Nav Section
-      %ul.left
-        %li
-          %a#simple-menu{:href => "#sidr"}
-            = fa_stacked_icon "bars", base: "square-o"
-            Menu
-      %ul.right
-        %li.has-dropdown.not-click
-          %a{:href => "#"}
-            = current_user.name
-          %ul.dropdown{:role => "menu"}
-            %li
-              %a{:href => "javascript:void(0);"}= current_user.email
-            %li
-              = link_to 'Edit profile', edit_user_registration_path
-            %li
-              = link_to "Logout", destroy_user_session_path, method: :delete
-            / /.nav-collapse
+    %ul.right
+      %li.has-dropdown.not-click
+        %a{:href => "#"}
+          = current_user.name
+        %ul.dropdown{:role => "menu"}
+          %li
+            %a{:href => "javascript:void(0);"}= current_user.email
+          %li
+            = link_to 'Edit profile', edit_user_registration_path
+          %li
+            = link_to "Logout", destroy_user_session_path, method: :delete
+    %ul.left
+      %li
+        %a.left-off-canvas-toggle.menu-icon{:href => "#"}
+      %li
+        %a.left-off-canvas-toggle
+          = fa_stacked_icon "bars", base: "square-o"
+          Menu
+    %a.right-off-canvas-toggle.menu-icon
+      / %span
+/ %nav.top-bar
+/   %section.top-bar-section
+/     .top-container
+/       //Left Nav Section
+/       %ul.left
+/         %li
+/           %a#simple-menu{:href => "#sidr"}
+/             Menu

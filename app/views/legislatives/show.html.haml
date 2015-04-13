@@ -14,7 +14,8 @@
           .large-4.columns
             %button
               = fa_icon "arrow-left"
-              Consultar Proyectos
+              %a{href: legislatives_path}
+                Consultar Proyectos
             %button.secondary
               = fa_icon "eye-slash"
               No seguir
@@ -125,11 +126,6 @@
               .large-8.columns
                 %span
             .row.white
-              .large-12.columns
-                %span.ghost
-                  \-
-
-            .row.white
               .large-2.columns.labels
                 %label
                   Impacto
@@ -214,6 +210,7 @@
                   %tr
                     %td
                       Ángel Custodio Cabrera Baez
+
 - content_for :modal do
   .reveal-modal.filesPnl.legislatives#filesPnl{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
 

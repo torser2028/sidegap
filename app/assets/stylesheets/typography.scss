@@ -6,29 +6,31 @@
 @import "variables";
 
 body{
-  main{
+  .main{
     h1{
       font-family: 'Hind', sans-serif;
     }
   }
-  .sidr{
-    &.sidebar{
+    aside{
+    &.left-off-canvas-menu{
       ul{
-        li{
-          a{
-            font-family: 'Economica', sans-serif;
-            font-size: $D-bigFnt;
-            text-transform: uppercase;
+          &.off-canvas-list{
+            li{
+
+            }
+            a{
+              font-family: 'Economica', sans-serif;
+              font-size: $D-bigFnt;
+              text-transform: uppercase;
+            }
             span{
-              &.ico{
-              }
+
             }
             strong{
               font-weight: 700;
             }
           }
         }
-      }
     }
   }
   .dashboard{
@@ -90,6 +92,12 @@ body{
       font-family: 'Lato', sans-serif;
       font-size: $D-smlFnt;
     }
+  }
+}
+.user-view{
+  h2{
+    font-size: $D-bigFnt +3;
+    font-family: 'Economica';
   }
 }
 .panels-view{
@@ -154,6 +162,7 @@ body{
       font-size: $D-bseFnt;
     }
     figure{
+      text-align: center;
       img{
 
       }

@@ -35,8 +35,6 @@ $(function(){
       var strngHght = $(".thumb .overlay strong").height();
       var difHghts = eval(ovlyHght - strngHght);
       $(".thumb .overlay strong").css("margin-top", difHghts/2);
-      console.log("strngHght: "+strngHght);
-      console.log("ovlyHght: "+ovlyHght);
       $(this).removeClass("thumb");
     });
   }
@@ -71,4 +69,26 @@ $(function(){
   //     dwnldToggle = 0;
   //   }
   // });
+  if( $(".profileHdr").length > 0){
+    var btnsHght = $(".prflActns").outerHeight();
+    $(".profileHdr figure img").load(function(){
+      var colHghst = $(".profileHdr .fixHght:first-child").outerHeight();
+      $(".profileHdr .fixHght").css("height", colHghst);
+      $(".prflActns").css("padding-top", colHghst-btnsHght);
+    });
+
+    // colHghst = new Array;
+    // $(".profileHdr>.columns").each(function(){
+    //   colHghst.push($(this).outerHeight());
+    // });
+    // colHghst.sort();
+    // colHghst.reverse()
+    //$(".profileHdr>.columns").css("height", colHghst[0]);
+  }
+  //  Waiting for a custom body class views
+  if ($(".user-view").length > 0){
+    $("body").addClass("user-form")
+  }
+
+
 });

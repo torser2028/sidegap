@@ -19,26 +19,24 @@ body{
       max-width: 62.5rem;
       margin: 0 auto;
   }
-  .sidr{
-    &.sidebar{
-      width: 320px;
+  aside{
+    &.left-off-canvas-menu{
       ul{
-        li{
-          a{
-            padding: 0 $D-padGlb/2;
+          &.off-canvas-list{
+            li{
+
+            }
+            a{
+
+            }
             span{
-              &.ico{
-                float: left;
-                display: inline-block;
-                padding: 0 $D-padGlb/2 0 0;
-              }
+
             }
             strong{
-              display: block;
+
             }
           }
         }
-      }
     }
   }
   nav{
@@ -76,7 +74,7 @@ body{
   header{
     padding-top: 2.8125rem;
   }
-  main{
+  .main{
     h1{
       color: transparentize($C-enfasis, 0.2);
       border-bottom: 1px solid transparentize($C-base, 0.8);
@@ -395,30 +393,6 @@ body{
     }
     .tray{
       padding-top: $D-padGlb;
-      .filter{
-        transition: height 500ms ease-out;
-        overflow: hidden;
-        label{
-          text-align: right;
-          padding-top: $D-padGlb/2;
-        }
-        &.hide{
-          height: 0px;
-        }
-        &.show{
-          height: auto;
-        }
-      }
-      .avanced{
-        transition: height 500ms ease-out;
-        overflow: hidden;
-        &.hide{
-          height: 0px;
-        }
-        &.show{
-          height: auto;
-        }
-      }
       span{
         &.ghost{
           color: transparent;
@@ -495,6 +469,30 @@ body{
           }
         }
       }
+      .filter{
+        transition: height 500ms ease-out;
+        overflow: hidden;
+        label{
+          text-align: right;
+          padding-top: $D-padGlb/2;
+        }
+        &.hide{
+          height: 0px;
+        }
+        &.show{
+          height: auto;
+        }
+      }
+      .avanced{
+        transition: height 500ms ease-out;
+        overflow: hidden;
+        &.hide{
+          height: 0px;
+        }
+        &.show{
+          height: auto;
+        }
+      }
       &.calendar{
         table{
           width: 100%;
@@ -551,8 +549,11 @@ body{
     }
   }
   .pryctDtl{
-    button{
-    }
+      button{
+        a{
+          color: $C-luz;
+        }
+      }
     .row{
       border-bottom: 1px solid darken($C-luz, 5%);
       .columns{
@@ -576,8 +577,6 @@ body{
         .row{
           .columns{
             border-left: 1px solid darken($C-luz, 5%);
-            &.prflActns{
-            }
           }
           transition: background 100ms ease-in;
           &:nth-child(odd){
@@ -603,6 +602,13 @@ body{
                 border-left: none;
               }
             }
+          }
+        }
+        .profileHdr{
+          .columns{
+            border-left: 1px solid transparent;
+          }
+          .prflActns{
           }
         }
         &.labels{
@@ -645,13 +651,37 @@ body{
         margin-right: 0;
         margin-left: 0;
       }
-      &.viewActns{
-        border-bottom: none;
-      }
     }
     .filesPnl{
       transition: height 500ms ease-out;
       overflow: hidden;
+    }
+  }
+  .user-view{
+    h2{
+      // border-bottom: 1px solid darken($C-luz, 10%);
+      border-bottom: 1px solid $C-enfasis;
+      i{
+        color: $C-enfasis;
+      }
+    }
+    .row{
+      .columns{
+        input{
+          &[type="checkbox"]{
+            margin-top: $D-padGlb/2;
+          }
+        }
+        &.labels{
+          padding: $D-padGlb/2;
+          text-align: right;
+        }
+        &.actions{
+
+        }
+      }
+    }
+    &.login{
     }
   }
 }
@@ -673,6 +703,39 @@ body{
   button{
     padding: $D-padGlb/2 $D-padGlb;
   }
+}
+// FIXED JQUERY CUSTOM BODY CLASSES
+body{
+  &.user-form{
+    background: darken($C-luz, 5%);
+    padding-top: $D-padGlb;
+    header{
+      padding-top: $D-padGlb;
+      max-width: 35em;
+      margin: 0 auto;
+      background: $C-luz;
+    }
+    .main{
+      max-width: 35em;
+      margin: 0 auto;
+      background: $C-luz;
+      padding-top: $D-padGlb;
+      padding-bottom: $D-padGlb;
+    }
+    footer{
+      display: none;
+      max-width: 35em;
+      margin: 0 auto;
+      background: $C-luz;
+    }
+    .row{
+      background: transparent;
+      .logo{
+        text-align: center;
+      }
+    }
+  }
+
 }
 // FIXED JQUERY STYLES
 body{

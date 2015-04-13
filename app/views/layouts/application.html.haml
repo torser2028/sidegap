@@ -9,16 +9,19 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    - if user_signed_in?
-      = render 'layouts/nav.html.haml'
-    = render 'layouts/header.html.haml'
-    %main
-      .row
-        .large-12.columns
-          - flash.each do |name, msg|
-            .alert-box.radius{ 'data-alert': '', class: name }
-              = msg
-              %a.close{href: "#"} &times;
-          = yield
-    = render 'layouts/footer.html.haml'
-    = yield :modal
+    .off-canvas-wrap{"data-offcanvas" => ""}
+      .inner-wrap
+        - if user_signed_in?
+          = render 'layouts/nav.html.haml'
+          = render 'layouts/sidebar.html.haml'
+        = render 'layouts/header.html.haml'
+        %section.main.main-section
+          .row
+            .large-12.columns
+              - flash.each do |name, msg|
+                .alert-box.radius{ 'data-alert': '', class: name }
+                  = msg
+                  %a.close{href: "#"} &times;
+              = yield
+      = render 'layouts/footer.html.haml'
+  = yield :modal
