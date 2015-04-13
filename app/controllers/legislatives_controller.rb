@@ -1,6 +1,7 @@
 class LegislativesController < ApplicationController
   def index
-    @legislatives = Legislative.all
+    @q = Legislative.ransack(params[:q])
+    @legislatives = @q.result
   end
 
   def show

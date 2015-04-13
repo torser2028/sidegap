@@ -10,6 +10,7 @@ gem 'haml-rails', '~> 0.8'
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 gem 'carrierwave'
+gem 'ransack'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
