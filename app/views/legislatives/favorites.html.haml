@@ -1,0 +1,85 @@
+- content_for :menu do
+  = render 'menu'
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "star"
+        Mis Favoritos
+      .tray.projects
+        .row.filter
+          = search_form_for @q, url: :favorites_legislatives, remote: true do |f|
+            .large-1.medium-2.small-4.columns
+              %label
+                Buscar:
+            .large-3.medium-3.small-8.columns
+              = f.search_field :title_cont, placeholder: "Escriba aquí para filtrar resultados"
+            .large-4.medium-offset-0.medium-5.small-offset-4.small-8.columns
+              %button.success#srch{href: "#", type: "submit"}
+                = fa_icon "search"
+                Buscar
+              %button#avncd{href: "#", type: "button"}
+                = fa_icon "filter"
+                Filtrar
+            .large-offset-4.medium-offset-2.small-12.colums
+        .row.avanced
+          = search_form_for @q, remote: true do |f|
+            .large-2.columns
+              %label
+                Comisión:
+              = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
+            .large-3.columns
+              %label
+                Cámara de Entrada:
+              = f.collection_select :source_eq, Source.all, :name, :name, include_blank: true
+              %label
+                Fecha de Radicación
+              = f.select :filing_at_gteq, options_for_select(Legislative::FILINGFILTERS), include_blank: true
+            .large-3.columns
+              %label
+                Tema de Interés:
+              = f.collection_select :topic_eq, Topic.all, :name, :name, include_blank: true
+              %label
+                Título:
+              = f.search_field :title_cont
+            .large-2.columns
+              %label
+                No. Cámara:
+              = f.search_field :chamber_number_cont
+              %label
+                No. Senado:
+              = f.search_field :senate_number_cont
+            .large-2.columns
+              %label
+                %span.ghost
+                  \_
+              %button.success{href: "#", type: "submit"}
+                = fa_icon "search"
+                Buscar
+              %label
+                %span.ghost
+                  \_
+              %button.secondary#Quit{href: legislatives_path, type: "button"}
+                / = fa_icon "remove"
+                \× Ocultar Filtro
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Num Cámara
+              %th
+                Num Senado
+              %th
+                Título
+              %th
+                Fecha de Radicación
+              %th
+                Opciones
+          %tbody.js_legislatives
+            = render @legislatives

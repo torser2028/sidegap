@@ -14,8 +14,16 @@ Rails.application.routes.draw do
 
     get 'stories/:id' => 'stories#show', as: :story
     resources 'legislatives' do
+        member do
+            get 'follow'
+            get 'unfollow'
+            get 'like'
+            get 'dislike'
+        end
         collection do
             get 'events'
+            get 'favorites'
+            get 'trash'
         end
     end
 
