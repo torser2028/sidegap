@@ -16,11 +16,9 @@ $.datepicker.regional['es'] = {
   yearSuffix: ''
 };
 $.datepicker.setDefaults($.datepicker.regional['es']);
-$(function () {
-  $(".fecha").datepicker();
-});
 
 $(function(){
+  $(".fecha").datepicker();
   // Defines Main Height
   var WndwHght = $( window ).height();
   var NvtnHght = $("nav").outerHeight();
@@ -38,23 +36,6 @@ $(function(){
       $(this).removeClass("thumb");
     });
   }
-  // Show/Hide Filters Options
-  var FltrHght = $(".filter").outerHeight();
-  var AvncdHght = $(".avanced").outerHeight();
-  $(".avanced").css("height", "0px");
-  $("#avncd").click(function(){
-    $(".filter").css("height",FltrHght);
-    setTimeout(function(){
-      $(".avanced").css("height", AvncdHght);
-      $(".filter").css("height","0px");
-    }, 100);
-  });
-  $("#Quit").click(function(){
-    setTimeout(function(){
-      $(".avanced").css("height","0px");
-      $(".filter").css("height", FltrHght);
-    },100);
-  });
 
   if( $(".profileHdr").length > 0){
     var btnsHght = $(".prflActns").outerHeight();

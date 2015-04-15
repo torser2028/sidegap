@@ -49,6 +49,9 @@ class LegislativesController < ApplicationController
     end
   end
 
+  def stakeholders
+  end
+
   private
     def get_legislative(id)
       Legislative.find(id)

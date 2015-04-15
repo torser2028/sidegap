@@ -24,6 +24,7 @@ Rails.application.routes.draw do
             get 'events'
             get 'favorites'
             get 'trash'
+            get 'stakeholders'
         end
     end
 
