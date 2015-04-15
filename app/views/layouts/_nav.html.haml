@@ -1,22 +1,21 @@
 %nav.tab-bar.top-bar{"data-topbar" => "", :role => "navigation"}
   %section.top-bar-section
-    %ul.right
-      %li.has-dropdown.not-click
-        %a{:href => "#"}
-          = current_user.name
-        %ul.dropdown{:role => "menu"}
-          %li
-            %a{:href => "javascript:void(0);"}= current_user.email
-          %li
-            = link_to 'Edit profile', edit_user_registration_path
-          %li
-            = link_to "Logout", destroy_user_session_path, method: :delete
-    %ul.left
-      %li
-        %a.left-off-canvas-toggle.menu-icon{:href => "#"}
-      %li
-        %a.left-off-canvas-toggle
-          = fa_stacked_icon "bars", base: "square-o"
-          Menu
-      = render 'menu' unless %w(welcome sessions registrations).include? controller.controller_name
-    %a.right-off-canvas-toggle.menu-icon
+    .row
+      %ul.right
+        %li.has-dropdown.not-click
+          %a{:href => "#"}
+            = current_user.name
+          %ul.dropdown{:role => "menu"}
+            %li
+              %a{:href => "javascript:void(0);"}= current_user.email
+            %li
+              = link_to 'Editar Perfil', edit_user_registration_path
+            %li
+              = link_to "Cerrar Sesión", destroy_user_session_path, method: :delete
+      %ul.left
+        %li
+          %a.left-off-canvas-toggle
+            = fa_stacked_icon "bars", base: "square-o"
+            Menu
+        = render 'menu' unless %w(welcome sessions registrations).include? controller.controller_name
+      //%a.right-off-canvas-toggle.menu-icon

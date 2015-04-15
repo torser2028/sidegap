@@ -10,32 +10,18 @@ body{
       padding-top: $D-padGlb;
     }
   }
-  aside{
-    &.left-off-canvas-menu{
-      ul{
-          &.off-canvas-list{
-            li{
-
-            }
-            a{
-
-            }
-            span{
-
-            }
-            strong{
-
-            }
-          }
-        }
-    }
-  }
   nav{
     &.top-bar{
       position: fixed;
       width: 100%;
       z-index: 1;
       background: darken($C-enfasis, 10%);
+      .row{
+        max-width: 90%;
+        background: transparent;
+        padding-left: 0;
+        padding-right: 0;
+      }
       .top-bar-section{
         li{
           a{
@@ -72,6 +58,17 @@ body{
         display: inline-block;
         padding: $D-padGlb/2;
         color: $C-luz;
+      }
+    }
+  }
+  aside{
+    &.left-off-canvas-menu{
+      .off-canvas-list{
+        .ico{
+          color: $C-luz;
+          display: inline-block;
+          width: $D-padGlb*1.3;
+        }
       }
     }
   }
@@ -272,6 +269,65 @@ body{
             &:nth-child(even){
               background: lighten($C-enfasis, 55%);
             }
+          }
+        }
+      }
+      .tabs{
+        .tab-title{
+          a{
+            position: relative;
+            transition: all 200ms ease-out;
+            padding: $D-padGlb/4 $D-padGlb/2;
+            margin-left: $D-padGlb/4;
+            background: $C-base;
+            color: lighten($C-base, 55%);
+          }
+          &:hover{
+            a{
+              margin-top: -$D-padGlb/4;
+              padding-bottom:$D-padGlb/2;
+              background: ligthen($C-base, 5%);
+              color: $C-luz;
+            }
+          }
+          &.active{
+            a{
+              color: $C-luz;
+              margin-top: -$D-padGlb/4;
+              padding-bottom:$D-padGlb/2;
+              background: $C-enfasis;
+            }
+          }
+        }
+      }
+      .tabs-content{
+        transition: height 200ms ease-out;
+        section{
+          background: lighten($C-base, 62%);
+          border-top: 1px solid gray;
+          padding: $D-padGlb;
+          .row{
+            background: transparent;
+            .columns{
+              button {
+                a {
+                  color: $C-base;
+                }
+                &.fullwidth{
+                  width: 100%;
+                }
+              }
+              label{
+                display: block;
+                padding: $D-padGlb/2 0;
+              }
+            }
+          }
+        }
+        &>.content{
+          transition: all 200ms ease-out;
+          overflow: hidden;
+          &.active{
           }
         }
       }

@@ -8,7 +8,7 @@
     = javascript_include_tag 'vendor/modernizr'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
-  %body{class: params[:controller]}
+  %body{class: controller.controller_name}
     .off-canvas-wrap{"data-offcanvas" => ""}
       .inner-wrap
         - if user_signed_in?
@@ -20,7 +20,7 @@
               .logo
                 = image_tag("logo_sidegap.png")
             .large-12.columns
-              = render 'title_top' unless %w(welcome sessions registrations).include? controller.controller_name
+              = render 'title_top' unless %w(welcome sessions registrations passwords).include? controller.controller_name
 
         %section.main.main-section
           .row

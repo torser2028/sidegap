@@ -6,30 +6,102 @@
       %label
         Sidegap
     %li
-      %a{:href => legislatives_path}
-        %span.ico
-          = fa_icon "university"
-        %strong Rama Legislativa
-    %li
-      %a{:href => "#"}
-        %span.ico
-          = fa_icon "sitemap"
-        %strong Rama Ejecutiva
-    %li
       %a{:href => "#"}
         %span.ico
           = fa_icon "legal"
-        %strong Rama Judicial
+        %strong Rama Ejecutiva
     %li
+      %a{:href => legislatives_path}
+        %span.ico
+          = fa_icon "sitemap"
+        %strong Rama Legislativa
+    %li.has-submenu
+      %a{:href => "#"}
+        %span.ico
+          = fa_icon "university"
+        %strong Rama Judicial
+      %ul.left-submenu
+        %li.back
+          %a{:href => "#"} Atrás
+        %li
+          %label 
+            Rama Judicial
+        %li
+          %a{:href => "#"}
+            %span.ico
+              = fa_icon "university"
+            %strong
+              Corte Suprema de Justicia
+        %li
+          %a{:href => "#"}
+            %span.ico
+              = fa_icon "university"
+            %strong
+              Corte Constitucional
+        %li
+          %a{:href => "#"}
+            %span.ico
+              = fa_icon "university"
+            %strong
+              Concejo Superior de la Judicatura
+        %li
+          %a{:href => "#"}
+            %span.ico
+              = fa_icon "university"
+            %strong
+              Concejo de Estado
+    %li.has-submenu
       %a{:href => "#"}
         %span.ico
           = fa_icon "eye"
         %strong Organismos de control y ministerio público
-    %li
+      %ul.left-submenu
+        %li.back
+          %a{:href => "#"} Atrás
+        %li
+          %label 
+            Organismos de control y ministerio público
+        %li
+          %a{:href => "#"}
+            %span.ico
+              = fa_icon "eye"
+            %strong
+              Procuraduria General de la Nación
+        %li
+          %a{:href => "#"}
+            %span.ico
+              = fa_icon "eye"
+            %strong
+              Contraloría general de la República
+        %li
+          %a{:href => "#"}
+            %span.ico
+              = fa_icon "eye"
+            %strong
+              Defensoría del Pueblo
+    %li.has-submenu
       %a{:href => "#"}
         %span.ico
           = fa_icon "hand-o-down"
         %strong Organización Electoral
+      %ul.left-submenu
+        %li.back
+          %a{:href => "#"} Atrás
+        %li
+          %label 
+            Organización Electoral
+        %li
+          %a{:href => "#"}
+            %span.ico
+              = fa_icon "hand-o-down"
+            %strong
+              Registraduría Nacional del Estado Civil
+        %li
+          %a{:href => "#"}
+            %span.ico
+              = fa_icon "hand-o-down"
+            %strong
+              Concejo Nacional Electoral
     %li
       %a{:href => "#"}
         %span.ico

@@ -16,7 +16,7 @@ body{
       font-family: 'Hind', sans-serif;
     }
   }
-    aside{
+  aside{
     &.left-off-canvas-menu{
       ul{
           &.off-canvas-list{
@@ -70,7 +70,7 @@ body{
     }
   }
   .news{
-  h2{
+    h2{
       font-family: 'Lato', sans-serif;
       font-weight: 400;
       font-size: $D-hdrFnt;
@@ -187,4 +187,35 @@ body{
       }
     }
   }
+  .tabs{
+    .tab-title{
+      a{
+        font-family: 'Hind', sans-serif;
+      }
+    }
+  }
 }
+body{
+  &.sessions{
+    .actions{
+      ul{
+        li{
+          a{
+            font-family: 'Hind', sans-serif;
+          }
+        }
+      }
+    }
+  }
+  &.passwords{
+    @extend .sessions;
+  }
+  &.registrations{
+    h2{
+      font-family: 'Lato', sans-serif;
+      font-weight: 400;
+      font-size: $D-hdrFnt;
+    }
+  }
+}
+

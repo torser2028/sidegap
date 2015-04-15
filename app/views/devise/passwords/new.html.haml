@@ -1,11 +1,14 @@
 .resetPswd
   %h2
     = fa_icon "key"
-    Forgot your password?
+    ¿Olvidó su Contraseña?
   .row
     .small-12.columns
       = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
         = devise_error_messages!
+        .row
+          .small-12.columns
+            Enviar las instrucciones para restablecer la contraseña
         .row
           .medium-3.small-4.columns.labels
             .field
@@ -16,7 +19,8 @@
           .medium-3.small-4.columns
           .medium-9.small-8.columns
             .actions
-              = f.submit "Send me reset password instructions", class: "button success"
+              = f.submit "Restablecer contraseña", class: "button success"
+              %hr
         .row
           .medium-3.small-4.columns
           .medium-9.small-8.columns.actions

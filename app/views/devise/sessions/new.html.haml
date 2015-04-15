@@ -19,7 +19,7 @@
       .small-12.columns
         - if devise_mapping.rememberable?
           .large-3.medium-3.small-4.columns.labels
-            = f.label :remember_me
+            = f.label :recordar
           .large-9.medium-9.small-8.columns
             .field
               = f.check_box :remember_me
@@ -29,6 +29,7 @@
       .medium-9.small-8.columns
         .actions
           = f.submit "Iniciar Sesión", class: "button success"
+          %hr
     .row
       .medium-3.small-4.columns
       .medium-9.small-8.columns.actions

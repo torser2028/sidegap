@@ -26,7 +26,7 @@ $(function(){
   var NvtnHght = $("nav").outerHeight();
   var HdrHght = $("header").outerHeight();
   var FtrHght = $("footer").outerHeight();
-  $("main").css("min-height", WndwHght - NvtnHght - HdrHght - FtrHght);
+  $(".main").css("min-height", WndwHght - NvtnHght - HdrHght - FtrHght);
   // Defines Dashboard Items Height
   if ($(".dashboard").length > 0){
     $("ul.da-thumbs li").each(function(){
@@ -64,7 +64,7 @@ $(function(){
       $(".prflActns").css("padding-top", colHghst-btnsHght);
     });
   }
-
-
-
+  if( $(".signUp").length > 0){
+    $("body").addClass("sessions");
+  }
 });

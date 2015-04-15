@@ -28,6 +28,47 @@ body{
       padding-top: $D-padGlb;
       padding-bottom: $D-padGlb;
     }
+    .actions{
+      ul{
+        padding: 0;
+        li{
+          display: inline-block;
+          border: 2px solid transparent;
+          border-radius: $D-padGlb/4;
+          margin-top: $D-padGlb/2;
+          background: transparent;
+          padding: $D-padGlb/10 $D-padGlb/4;
+          i{
+            display: inline;
+            transition: transform 400ms ease-in, color 200ms ease-out;
+            transform: rotateY(0deg);
+            margin-left: $D-padGlb/2;
+            width: $D-padGlb;
+            color: $C-enfasis;
+          }
+          a{
+            transition: all 200ms ease-in;
+            display: inline;
+            color: $C-base;
+          }
+          &:hover{
+            background: $C-luz;
+            border: 2px solid transparentize($C-base, 0.8);
+            // border-left: 2px solid $C-enfasis;
+            i{
+              color: darken($C-base, 25%);
+              transform: rotateY(360deg);
+            }
+            a{
+              color: $C-enfasis;
+            }
+          }
+        }
+      }
+      hr{
+        margin: $D-padGlb/8 0;
+      }
+    }
     .row{
       background: transparent;
       .columns{
@@ -40,9 +81,6 @@ body{
           padding: $D-padGlb/2;
           text-align: right;
         }
-        &.actions{
-
-        }
       }
       .logo{
         text-align: center;
@@ -51,7 +89,27 @@ body{
     &.login{
     }
   }
-  &.registrations{
+  &.passwords{
     @extend .sessions;
+  }
+  &.registrations{
+    h2{
+      margin-top: $D-padGlb*2;
+      border-bottom: 1px solid $C-enfasis;
+      i{
+        color: $C-enfasis;
+      }
+    }
+    .row{
+      .columns{
+        &.labels{
+          padding: $D-padGlb/2;
+          text-align: right;
+        }
+      }
+    }
+  }
+  .cancelAccount{
+    display: none;
   }
 }
