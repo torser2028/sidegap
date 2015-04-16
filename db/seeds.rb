@@ -136,18 +136,18 @@ Job.create([
   { name: 'Senadora  De La República' }
   ])
 Company.create([
-  { name: 'Valure', }
-  { name: 'Euphoria-net', }
+  { name: 'Valure' },
+  { name: 'Euphoria-net' },
   { name: 'Google' }
   ])
 Area.create([
-  { name: 'Gerencia', }
-  { name: 'Legal', }
-  { name: 'Jurídica', }
-  { name: 'Administración', }
+  { name: 'Gerencia' },
+  { name: 'Legal' },
+  { name: 'Jurídica' },
+  { name: 'Administración' },
   { name: 'Asuntos' }
   ])
 Role.create([
-  { name: 'admin', }
+  { name: 'admin' },
   { name: 'client' }
   ])
