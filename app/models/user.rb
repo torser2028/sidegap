@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :company
-  belongs_to :area
 
   has_many :assignments
   has_many :roles, through: :assignments

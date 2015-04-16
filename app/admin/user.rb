@@ -7,7 +7,7 @@ ActiveAdmin.register User do
   filter :area
   filter :roles
 
-  permit_params :name, :email, :company_id, :area_id, :job, :role_ids, :password,:password_confirmation
+  permit_params :name, :email, :company_id, :area, :job, :role_ids, :password,:password_confirmation
 
   before_save do |user|
     user.roles.destroy_all
@@ -51,7 +51,7 @@ ActiveAdmin.register User do
       f.input :name
       f.input :email
       f.input :company
-      f.input :area, as: :select, collection: User::AREAS
+      f.input :area, as: :select, collection: Area.pluck(:name)
       f.input :job
       f.input :roles, as: :check_boxes, collection: Role.all
     end
