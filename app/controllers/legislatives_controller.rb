@@ -1,7 +1,26 @@
 class LegislativesController < ApplicationController
   def index
     @q = Legislative.ransack(params[:q])
-    @legislatives = @q.result
+    @legislatives = []
+    @q.result.each do |item|
+      @legislatives << item unless current_user.find_disliked_items.include?(item)
+    end
+  end
+
+  def favorites
+    @q = current_user.following_legislatives.ransack(params[:q])
+    @legislatives = []
+    @q.result.each do |item|
+      @legislatives << item unless current_user.find_disliked_items.include?(item)
+    end
+  end
+
+  def trash
+    @q = Legislative.ransack(params[:q])
+    @legislatives = []
+    @q.result.each do |item|
+      @legislatives << item if current_user.find_disliked_items.include?(item)
+    end
   end
 
   def show
@@ -36,18 +55,6 @@ class LegislativesController < ApplicationController
     redirect_to :back
   end
 
-  def favorites
-    @q = current_user.following_legislatives.ransack(params[:q])
-    @legislatives = @q.result
-  end
-
-  def trash
-    @q = Legislative.ransack(params[:q])
-    @legislatives = []
-    @q.result.each do |item|
-      @legislatives << item if current_user.find_disliked_items.include?(item)
-    end
-  end
 
   def stakeholders
   end

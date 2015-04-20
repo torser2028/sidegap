@@ -9,27 +9,29 @@
   %td.num
     = legislative.filing_at
   %td.actions
-    %a.more{href: legislative_path(legislative)}
-      = fa_icon "arrow-circle-right"
-      %span
-        Ver
-    - if current_user.following?(legislative)
-      %a.follow{href: unfollow_legislative_path(legislative)}
-        = fa_icon "eye-slash"
+    - unless current_user.disliked?(legislative)
+      %a.more{href: legislative_path(legislative)}
+        = fa_icon "arrow-circle-right"
         %span
-          Dejar de Seguir
-    - else
-      %a.follow{href: follow_legislative_path(legislative)}
-        = fa_icon "eye"
-        %span
-          Seguir
-    - if current_user.disliked? legislative
-      %a.return{href: like_legislative_path(legislative)}
-        = fa_icon "reply"
-        %span
-          Reestablecer
-    - else
-      %a.archive{href: dislike_legislative_path(legislative)}
-        = fa_icon "trash"
-        %span
-          Papelera
+          Ver
+      - if current_user.following?(legislative)
+        %a.follow{href: unfollow_legislative_path(legislative)}
+          = fa_icon "eye-slash"
+          %span
+            Dejar de Seguir
+      - else
+        %a.follow{href: follow_legislative_path(legislative)}
+          = fa_icon "eye"
+          %span
+            Seguir
+    - unless current_user.following?(legislative)
+      - if current_user.disliked?(legislative)
+        %a.return{href: like_legislative_path(legislative)}
+          = fa_icon "reply"
+          %span
+            Reestablecer
+      - else
+        %a.archive{href: dislike_legislative_path(legislative)}
+          = fa_icon "trash"
+          %span
+            Papelera

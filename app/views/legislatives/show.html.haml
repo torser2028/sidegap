@@ -15,9 +15,16 @@
               = fa_icon "arrow-left"
               %a{href: legislatives_path}
                 Consultar Proyectos
-            %button.secondary
-              = fa_icon "eye-slash"
-              No seguir
+            - if current_user.following?(@legislative)
+              %button.secondary
+                = fa_icon "eye-slash"
+                %a{ href: unfollow_legislative_path(@legislative) }
+                  No seguir
+            - else
+              %button.secondary
+                = fa_icon "eye-slash"
+                %a{ href: follow_legislative_path(@legislative) }
+                  Seguir
           .large-4.columns
           .large-4.columns.actions
             %a#downloads{"data-reveal-id" => "filesPnl"}

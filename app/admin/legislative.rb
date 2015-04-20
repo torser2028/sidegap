@@ -3,7 +3,7 @@ ActiveAdmin.register Legislative do
   actions :all, :except => [:destroy]
 
   permit_params :title, :source, :chamber_number, :senate_number, :commission, :status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at,
-    legislative_attachments_attributes: [:attachment]
+    legislative_attachments_attributes: [:attachment, :title, :published_at]
 
   index do
     selectable_column
