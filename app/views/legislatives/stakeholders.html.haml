@@ -4,6 +4,134 @@
   .row
     .small-12.columns
       %h2
+        = fa_icon "users"
+        Consultar Congresistas
+      .tray.rep
+        .row
+          .small-12.columns
+            %ul.tabs{"data-tab" => "", :role => "tablist"}
+              %li.tab-title.active{:role => "presentational"}
+                %a{"aria-selected" => "true", :controls => "basicPanel", :href => "#basicPanel", :role => "tab", :tabindex => "0"} 
+                  =fa_icon "search"
+                  Buscador
+              / %li.tab-title{:role => "presentational"}
+              /   %a{"aria-selected" => "false", :controls => "avdPanel", :href => "#avdPanel", :role => "tab", :tabindex => "0"} 
+              /     = fa_icon "search-plus"
+              /     Buscador Avanzado
+            .tabs-content
+              %section#basicPanel.content.active{"aria-hidden" => "false", :role => "tabpanel"}
+                .row
+                  .large-3.columns
+                    %label
+                      Nombre
+                    %input{type: "text"}
+                  .large-2.columns
+                    %label
+                      Comisión
+                    %select
+                      %option
+                        I
+                      %option
+                        II
+                      %option
+                        III
+                      %option
+                        IV
+                      %option
+                        V
+                      %option
+                        VI
+                      %option
+                        VII
+                  .large-3.columns
+                    %label
+                      Región
+                    %select
+                      %option
+                        Opción Uno
+                      %option
+                        Opción Dos
+                      %option
+                        Opción Tres
+                      %option
+                        Opción Cuatro
+                      %option
+                        Opción Cinco
+                      %option
+                        Opción Seis
+                      %option
+                        Opción Siete
+                  .large-2.columns
+                    %label
+                      %span.ghost
+                        \_
+                    %button.success.fullwidth{href: "#", type: "submit"}
+                      = fa_icon "search"
+                      Buscar
+                  .large-2.columns
+                    %label
+                      %span.ghost
+                        \_
+                    %button.secondary.fullwidth{type: "button"}
+                      %a{href: legislatives_path}
+                        \× Quitar Filtros
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Nombre
+              %th
+                Institución
+              %th
+                Partido
+              %th
+                Comisión
+              %th
+                Región
+              %th
+                Opciones
+          %tbody
+            %tr
+              %td
+                Aida Merlano Rebolledo
+              %td
+                Congreso De La República
+              %td
+                Conservador
+              %td
+                II
+              %td
+                Atlántico
+              %td.actions
+                %a.more{href: "#"}
+                  = fa_icon "arrow-circle-right"
+                  %span
+                  Ver
+            %tr
+              %td
+                Albeiro Vanegas Osorio
+              %td
+                Congreso De La República  
+              %td
+                De La U
+              %td
+                I
+              %td
+                Arauca
+              %td.actions
+                %a.more{href: "#"}
+                  = fa_icon "arrow-circle-right"
+                  %span
+                  Ver
+  .row
+    .small-12.columns
+      %h2
         = fa_icon "user"
         Perfil Congresista
       .pryctDtl
