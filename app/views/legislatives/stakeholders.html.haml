@@ -14,18 +14,14 @@
                 %a{"aria-selected" => "true", :controls => "basicPanel", :href => "#basicPanel", :role => "tab", :tabindex => "0"} 
                   =fa_icon "search"
                   Buscador
-              / %li.tab-title{:role => "presentational"}
-              /   %a{"aria-selected" => "false", :controls => "avdPanel", :href => "#avdPanel", :role => "tab", :tabindex => "0"} 
-              /     = fa_icon "search-plus"
-              /     Buscador Avanzado
             .tabs-content
               %section#basicPanel.content.active{"aria-hidden" => "false", :role => "tabpanel"}
                 .row
-                  .large-3.columns
+                  .large-4.columns
                     %label
                       Nombre
                     %input{type: "text"}
-                  .large-2.columns
+                  .large-1.columns
                     %label
                       Comisión
                     %select
@@ -73,7 +69,7 @@
                       %span.ghost
                         \_
                     %button.secondary.fullwidth{type: "button"}
-                      %a{href: legislatives_path}
+                      %a{href: stakeholders_legislatives_path}
                         \× Quitar Filtros
         %table
           %colgroup
@@ -152,11 +148,11 @@
                 %a
                   = fa_icon "file"
                   %span
-                    Ver Autor
+                    Ver en Autor
                 %a
                   = fa_icon "file"
                   %span
-                    Ver Ponentes
+                    Ver en Ponentes
                 %a
                   = fa_icon "file-pdf-o"
                   %span

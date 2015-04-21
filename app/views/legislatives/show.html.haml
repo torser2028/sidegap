@@ -21,8 +21,8 @@
                 %a{ href: unfollow_legislative_path(@legislative) }
                   No seguir
             - else
-              %button.secondary
-                = fa_icon "eye-slash"
+              %button.success
+                = fa_icon "eye"
                 %a{ href: follow_legislative_path(@legislative) }
                   Seguir
           .large-4.columns
@@ -216,7 +216,6 @@
                   %tr
                     %td
                       Ángel Custodio Cabrera Baez
-
 - content_for :modal do
   .reveal-modal.filesPnl.legislatives#filesPnl{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
 

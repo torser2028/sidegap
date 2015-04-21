@@ -379,11 +379,39 @@ body{
         }
       }
       &.projects{
+        button{
+          &.secondary{
+            padding: 0;
+            a{
+              display: inline-block;
+              padding: $D-padGlb/2 $D-padGlb;
+            }
+            &.fullwidth{
+              a{
+                width: 100%;
+              }
+            }
+          }
+        }
         table{
           width: 100%;
         }
       }
       &.rep{
+        button{
+          &.secondary{
+            padding: 0;
+            a{
+              display: inline-block;
+              padding: $D-padGlb/2 $D-padGlb;
+            }
+            &.fullwidth{
+              a{
+                width: 100%;
+              }
+            }
+          }
+        }
         table{
           width: 100%;
         }
@@ -419,6 +447,11 @@ body{
       button{
         a{
           color: $C-luz;
+        }
+        &.secondary{
+          a{
+            color: darken($C-base, 5%);
+          }
         }
       }
     .row{
