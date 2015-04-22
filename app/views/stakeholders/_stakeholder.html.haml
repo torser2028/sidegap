@@ -1,0 +1,16 @@
+%tr
+  %td
+    = stakeholder.name
+  %td
+    Congreso De La República
+  %td
+    = stakeholder.political_party
+  %td
+    = stakeholder.commission
+  %td
+    = stakeholder.region
+  %td.actions
+    %a.more{href: stakeholder_legislatives_path(stakeholder)}
+      = fa_icon "arrow-circle-right"
+      %span
+        Ver

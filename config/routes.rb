@@ -25,6 +25,7 @@ Rails.application.routes.draw do
             get 'favorites'
             get 'trash'
             get 'stakeholders'
+            get 'stakeholder/:id' => 'legislatives#stakeholder', as: :stakeholder
         end
     end
 

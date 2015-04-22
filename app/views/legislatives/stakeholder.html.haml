@@ -1,0 +1,114 @@
+- content_for :menu do
+  = render 'menu'
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "user"
+        Perfil Congresista
+      .pryctDtl
+        %button
+          = fa_icon "arrow-left"
+          %a{href: stakeholders_legislatives_path}
+            Consultar Congresistas
+        .row.cntnr
+          .large-12.columns
+            .row.white.profileHdr
+              .large-3.columns.fixHght
+                %figure
+                  = image_tag @stakeholder.avatar_url(:thumb)
+                  %figcaption
+                    = @stakeholder.name
+              .large-4.columns.fixHght.ghost
+              .large-5.columns.fixHght.ghost.prflActns.actions
+                %a
+                  = fa_icon "file"
+                  %span
+                    Ver en Autor
+                %a
+                  = fa_icon "file"
+                  %span
+                    Ver en Ponentes
+                %a
+                  = fa_icon "file-pdf-o"
+                  %span
+                    Exportar a PDF
+            .row
+              .large-2.columns.labels
+                %label
+                  Nombre
+              .large-10.columns
+                %span
+                  = @stakeholder.name
+            .row
+              .large-2.columns.labels
+                %label
+                  Corporación Institucional
+              .large-4.columns
+                %span
+                  Congreso de la República
+              .large-2.columns.labels
+                %label
+                  Cargo
+              .large-4.columns
+                %span
+                  = @stakeholder.job
+            .row
+              .large-2.columns.labels
+                %label
+                  Partido
+              .large-4.columns
+                %span
+                  = @stakeholder.political_party
+              .large-2.columns.labels
+                %label
+                  Comisión
+              .large-4.columns
+                %span
+                  = @stakeholder.commission
+            .row
+              .large-2.columns.labels
+                %label
+                  Dirección
+              .large-4.columns
+                %span
+                  = @stakeholder.address
+              .large-2.columns.labels
+                %label
+                  Región
+              .large-4.columns
+                %span
+                  = @stakeholder.region
+            .row
+              .large-2.columns.labels
+                %label
+                  Teléfono del Trabajo
+              .large-4.columns
+                %span
+                  = @stakeholder.phone
+              .large-2.columns.labels
+                %label
+                  Oficina
+              .large-4.columns
+                %span
+                  = @stakeholder.office
+            .row
+              .large-2.columns.labels
+                %label
+                  E-mail
+              .large-4.columns
+                %span
+                  = @stakeholder.email
+              .large-2.columns.labels
+                %label
+                  Fuente de Información
+              .large-4.columns
+                %span
+                  = @stakeholder.source
+            .row
+              .large-2.columns.labels
+                %label
+                  Perfil
+              .large-10.columns
+                %span
+                  = simple_format @stakeholder.info

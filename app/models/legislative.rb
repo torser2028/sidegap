@@ -1,8 +1,12 @@
 class Legislative < ActiveRecord::Base
   acts_as_followable
   acts_as_votable
+
   has_many :legislative_attachments
-  accepts_nested_attributes_for :legislative_attachments
+  has_many :legislative_stakeholders
+  has_many :stakeholders, through: :legislative_stakeholders
+  
+  accepts_nested_attributes_for :legislative_attachments, :legislative_stakeholders, allow_destroy: true
 
   FILINGFILTERS = [
     ['Hoy', Date.today],

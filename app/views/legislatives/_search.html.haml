@@ -35,7 +35,7 @@
           = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
         .large-3.columns
           %label
-            Cámara de Entrada:
+            Origen:
           = f.collection_select :source_eq, Source.all, :name, :name, include_blank: true
           %label
             Fecha de Radicación

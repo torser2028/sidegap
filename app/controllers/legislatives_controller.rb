@@ -1,30 +1,30 @@
 class LegislativesController < ApplicationController
   def index
-    @q = Legislative.ransack(params[:q])
+    @q = Legislative.ransack params[:q]
     @legislatives = []
     @q.result.each do |item|
-      @legislatives << item unless current_user.find_disliked_items.include?(item)
+      @legislatives << item unless current_user.find_disliked_items.include? item
     end
   end
 
   def favorites
-    @q = current_user.following_legislatives.ransack(params[:q])
+    @q = current_user.following_legislatives.ransack params[:q]
     @legislatives = []
     @q.result.each do |item|
-      @legislatives << item unless current_user.find_disliked_items.include?(item)
+      @legislatives << item unless current_user.find_disliked_items.include? item
     end
   end
 
   def trash
-    @q = Legislative.ransack(params[:q])
+    @q = Legislative.ransack params[:q]
     @legislatives = []
     @q.result.each do |item|
-      @legislatives << item if current_user.find_disliked_items.include?(item)
+      @legislatives << item if current_user.find_disliked_items.include? item
     end
   end
 
   def show
-    @legislative = get_legislative(params[:id])
+    @legislative = get_legislative params[:id]
   end
 
   def events
@@ -32,35 +32,40 @@ class LegislativesController < ApplicationController
   end
 
   def follow
-    @legislative = get_legislative(params[:id])
-    current_user.follow(@legislative)
+    @legislative = get_legislative params[:id]
+    current_user.follow @legislative
     redirect_to :back
   end
 
   def unfollow
-    @legislative = get_legislative(params[:id])
-    current_user.stop_following(@legislative)
+    @legislative = get_legislative params[:id]
+    current_user.stop_following @legislative
     redirect_to :back
   end
 
   def dislike
-    @legislative = get_legislative(params[:id])
-    current_user.dislikes(@legislative)
+    @legislative = get_legislative params[:id]
+    current_user.dislikes @legislative
     redirect_to :back
   end
 
   def like
-    @legislative = get_legislative(params[:id])
-    current_user.likes(@legislative)
+    @legislative = get_legislative params[:id]
+    current_user.likes @legislative
     redirect_to :back
   end
 
-
   def stakeholders
+    @q = Stakeholder.ransack params[:q]
+    @stakeholders = @q.result
+  end
+
+  def stakeholder
+    @stakeholder = Stakeholder.find params[:id]
   end
 
   private
     def get_legislative(id)
-      Legislative.find(id)
+      Legislative.find id
     end
 end

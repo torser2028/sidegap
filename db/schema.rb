@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150416145447) do
+ActiveRecord::Schema.define(version: 20150422204207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,18 @@ ActiveRecord::Schema.define(version: 20150416145447) do
 
   add_index "legislative_attachments", ["legislative_id"], name: "index_legislative_attachments_on_legislative_id", using: :btree
 
+  create_table "legislative_stakeholders", force: :cascade do |t|
+    t.integer  "legislative_id"
+    t.integer  "stakeholder_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.boolean  "author"
+    t.boolean  "speaker"
+  end
+
+  add_index "legislative_stakeholders", ["legislative_id"], name: "index_legislative_stakeholders_on_legislative_id", using: :btree
+  add_index "legislative_stakeholders", ["stakeholder_id"], name: "index_legislative_stakeholders_on_stakeholder_id", using: :btree
+
   create_table "legislatives", force: :cascade do |t|
     t.string   "title"
     t.string   "source"
@@ -149,6 +161,23 @@ ActiveRecord::Schema.define(version: 20150416145447) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "stakeholders", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "political_party"
+    t.string   "job"
+    t.string   "commission"
+    t.string   "region"
+    t.string   "office"
+    t.text     "info"
+    t.string   "source"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.string   "avatar"
   end
 
   create_table "statuses", force: :cascade do |t|
@@ -212,5 +241,7 @@ ActiveRecord::Schema.define(version: 20150416145447) do
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
   add_foreign_key "legislative_attachments", "legislatives"
+  add_foreign_key "legislative_stakeholders", "legislatives"
+  add_foreign_key "legislative_stakeholders", "stakeholders"
   add_foreign_key "users", "companies"
 end

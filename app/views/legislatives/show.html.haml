@@ -6,8 +6,6 @@
       %h2
         = fa_icon "star"
         Detalles del proyecto
-        / %span{style: "color:red"}
-        /   (*)
       .pryctDtl
         .row.cntnr.white
           .large-4.columns
@@ -15,7 +13,7 @@
               = fa_icon "arrow-left"
               %a{href: legislatives_path}
                 Consultar Proyectos
-            - if current_user.following?(@legislative)
+            - if current_user.following? @legislative
               %button.secondary
                 = fa_icon "eye-slash"
                 %a{ href: unfollow_legislative_path(@legislative) }
