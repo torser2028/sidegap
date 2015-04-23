@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   belongs_to :company
 
   has_many :assignments
+  has_many :legislative_users
+  has_many :legislatives, through: :legislative_users
   has_many :roles, through: :assignments
 
   validates :name, :email, :company, :area, :job, presence: true

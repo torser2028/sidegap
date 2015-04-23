@@ -4,6 +4,8 @@ class Legislative < ActiveRecord::Base
 
   has_many :legislative_attachments
   has_many :legislative_stakeholders
+  has_many :legislative_users
+  has_many :users, through: :legislative_users
   has_many :stakeholders, through: :legislative_stakeholders
   
   accepts_nested_attributes_for :legislative_attachments, :legislative_stakeholders, allow_destroy: true
