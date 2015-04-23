@@ -589,6 +589,15 @@ body{
   }
   .modal-bigTbl{
     max-width: 97%;
+    .autors{
+      table{
+        display: block;
+        max-height: 480px;
+        overflow-y: auto;
+        tbody{
+        }
+      }
+    }
   }
   .button{
     padding: $D-padGlb/2 $D-padGlb;
@@ -725,6 +734,15 @@ body{
 // Small Screens
 @media screen and (max-width: 480px){
   body{
+    header{
+      padding-top: 0;
+      h1{
+        margin-top: 0;
+      }
+      .logo{
+        text-align: center;
+      }
+    }
     nav{
       padding-bottom: $D-padGlb/4;
       &.top-bar{

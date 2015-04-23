@@ -36,14 +36,17 @@ $(function(){
       $(this).removeClass("thumb");
     });
   }
-
+  // Set Profile Height
   if( $(".profileHdr").length > 0){
-    var btnsHght = $(".prflActns").outerHeight();
-    $(".profileHdr figure img").load(function(){
-      var colHghst = $(".profileHdr .fixHght:first-child").outerHeight();
-      $(".profileHdr .fixHght").css("height", colHghst);
-      $(".prflActns").css("padding-top", colHghst-btnsHght);
-    });
+    var WndwWdth = $( window ).width();
+    if( WndwWdth > 640){
+      var btnsHght = $(".prflActns").outerHeight();
+      $(".profileHdr figure img").load(function(){
+        var colHghst = $(".profileHdr .fixHght:first-child").outerHeight();
+        $(".profileHdr .fixHght").css("height", colHghst);
+        $(".prflActns").css("padding-top", colHghst-btnsHght);
+      });
+    }
   }
   if( $(".signUp").length > 0){
     $("body").addClass("sessions");
