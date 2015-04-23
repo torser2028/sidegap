@@ -18,6 +18,7 @@ $.datepicker.regional['es'] = {
 $.datepicker.setDefaults($.datepicker.regional['es']);
 
 $(function(){
+  $(".alert-box").delay(5000).fadeOut();
   $(".fecha").datepicker();
   // Defines Main Height
   var WndwHght = $( window ).height();

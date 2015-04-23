@@ -583,6 +583,10 @@ body{
       background: lighten($C-enfasis, 50%);
       border-color: lighten($C-enfasis, 33%);
     }
+    &.notice{
+      background: $success-color;
+      border-color: darken($success-color, 15%);
+    }
   }
   .reveal-modal-bg{
     position: fixed;
