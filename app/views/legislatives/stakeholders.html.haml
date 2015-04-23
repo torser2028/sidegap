@@ -17,11 +17,11 @@
             .tabs-content
               %section#basicPanel.content.active{"aria-hidden" => "false", :role => "tabpanel"}
                 .row
-                  .large-4.columns
+                  .large-4.medium-6.columns
                     %label
                       Nombre
                     %input{type: "text"}
-                  .large-1.columns
+                  .large-1.medium-2.columns
                     %label
                       Comisión
                     %select
@@ -39,7 +39,7 @@
                         VI
                       %option
                         VII
-                  .large-3.columns
+                  .large-3.medium-4.columns
                     %label
                       Región
                     %select
@@ -57,14 +57,14 @@
                         Opción Seis
                       %option
                         Opción Siete
-                  .large-2.columns
+                  .large-offset-0.large-2.medium-offset-3.medium-3.columns
                     %label
                       %span.ghost
                         \_
                     %button.success.fullwidth{href: "#", type: "submit"}
                       = fa_icon "search"
                       Buscar
-                  .large-2.columns
+                  .large-offset-0.large-2.medium-3.end.columns
                     %label
                       %span.ghost
                         \_

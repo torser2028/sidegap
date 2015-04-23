@@ -8,13 +8,23 @@ body{
   header{
     .logo{
       padding-top: $D-padGlb;
+      position: relative;
+      z-index: 1;
+    }
+    .breadcrumbs{
+      li{
+        color: lighten($C-base, 15%);
+        a{
+          color: $C-enfasis;
+        }
+      }
     }
   }
   nav{
     &.top-bar{
       position: fixed;
       width: 100%;
-      z-index: 1;
+      z-index: 2;
       background: darken($C-enfasis, 10%);
       .row{
         max-width: 90%;
@@ -40,6 +50,12 @@ body{
               span{
                 &.ico{
                   color: $C-luz;
+                }
+              }
+            }
+            &.menuToggle{
+              span{
+                &.txtMenu{
                 }
               }
             }
@@ -194,6 +210,16 @@ body{
         padding: $D-padGlb/4;
       }
     }
+    .panels{
+      transition: opacity 500ms ease-out;
+      &.showing{
+        display: block;
+        overflow-y: auto;
+      }
+      &.hiding{
+        display: none;
+      }
+    }
     .tray{
       padding-top: $D-padGlb;
       span{
@@ -216,6 +242,9 @@ body{
               padding: $D-padGlb/4 $D-padGlb/2;
               p{
                 margin: $D-padGlb/2 0 0 0;
+              }
+              a{
+                color: $C-base;
               }
               dl{
                 dt{
@@ -309,7 +338,16 @@ body{
           .row{
             background: transparent;
             .columns{
+              input{
+                margin-bottom: 0;
+                //padding: $D-padGlb/3;
+              }
+              select{
+                margin-bottom: 0;
+                //padding: $D-padGlb/3;
+              }
               button {
+                margin-bottom: 0;
                 a {
                   color: $C-base;
                 }
@@ -319,7 +357,7 @@ body{
               }
               label{
                 display: block;
-                padding: $D-padGlb/2 0;
+                padding: $D-padGlb/4 0 0 0;
               }
             }
           }
@@ -329,30 +367,6 @@ body{
           overflow: hidden;
           &.active{
           }
-        }
-      }
-      .filter{
-        transition: height 500ms ease-out;
-        overflow: hidden;
-        label{
-          text-align: right;
-          padding-top: $D-padGlb/2;
-        }
-        &.hide{
-          height: 0px;
-        }
-        &.show{
-          height: auto;
-        }
-      }
-      .avanced{
-        transition: height 500ms ease-out;
-        overflow: hidden;
-        &.hide{
-          height: 0px;
-        }
-        &.show{
-          height: auto;
         }
       }
       &.calendar{
@@ -412,6 +426,11 @@ body{
             }
           }
         }
+        table{
+          width: 100%;
+        }
+      }
+      &.rapprtr{
         table{
           width: 100%;
         }
@@ -636,6 +655,7 @@ body{
   }
 }
 // RESPONSIVE ADDONS
+// Normal Up
 @media screen and (min-width: 1024px){
   body{
     .row{
@@ -647,6 +667,29 @@ body{
       }
     }
   }
+}
+// Normal Down
+@media screen and (max-width: 1024px){
+  body{
+    nav{
+      &.top-bar{
+        .top-bar-section{
+          li{
+            a{
+              padding: 0 $D-padGlb !important;
+              &.menuToggle{
+                span{
+                  &.txtMenu{
+                    display: none;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }  
 }
 @media screen and (max-width: 640px){
   body{

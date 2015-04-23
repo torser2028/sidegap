@@ -14,8 +14,8 @@
               = link_to "Cerrar Sesión", destroy_user_session_path, method: :delete
       %ul.left
         %li
-          %a.left-off-canvas-toggle
+          %a.left-off-canvas-toggle.menuToggle
             = fa_stacked_icon "bars", base: "square-o"
-            Menu
+            %span.txtMenu
+              Menu
         = render 'menu' unless %w(welcome sessions registrations).include? controller.controller_name
-      //%a.right-off-canvas-toggle.menu-icon

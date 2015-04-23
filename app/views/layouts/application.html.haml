@@ -18,10 +18,13 @@
           .row
             .large-12.columns
               .logo
-                = image_tag("logo_sidegap.png")
+                %a{href: root_path}
+                  = image_tag("logo_sidegap.png")
             .large-12.columns
-              = render 'title_top' unless %w(welcome sessions registrations passwords).include? controller.controller_name
-
+              - unless %w(welcome sessions registrations passwords).include? controller.controller_name
+                = render 'title_top'
+                %ul.breadcrumbs
+                  = render_breadcrumbs tag: :li, separator: ""
         %section.main.main-section
           .row
             .large-12.columns

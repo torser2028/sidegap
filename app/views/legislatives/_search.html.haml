@@ -29,32 +29,39 @@
     //%h3 Buscador Avanzado
     .row
       = search_form_for @q, url: url_for, remote: true do |f|
-        .large-2.columns
+        .large-2.medium-3.columns
           %label
-            Comisión:
+            Comisión
           = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
-        .large-3.columns
+          %label
+            Estado
+          = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
+        .large-2.medium-3.columns
           %label
             Origen:
           = f.collection_select :source_eq, Source.all, :name, :name, include_blank: true
           %label
             Fecha de Radicación
           = f.select :filing_at_gteq, options_for_select(Legislative::FILINGFILTERS), include_blank: true
-        .large-3.columns
+        .large-2.medium-3.columns
           %label
-            Tema de Interés:
+            Tema de Interés
           = f.collection_select :topic_eq, Topic.all, :name, :name, include_blank: true
           %label
-            Título:
+            Título
           = f.search_field :title_cont
-        .large-2.columns
+        .large-2.medium-3.columns
           %label
-            No. Cámara:
+            No. Cámara
           = f.search_field :chamber_number_cont
           %label
-            No. Senado:
+            No. Senado
           = f.search_field :senate_number_cont
-        .large-2.columns
+        .large-2.medium-3.columns
+          %label
+            Legislación
+          = f.search_field :chamber_number_cont
+        .large-2.medium-3.columns
           %label
             %span.ghost
               \_
