@@ -243,9 +243,6 @@ body{
               p{
                 margin: $D-padGlb/2 0 0 0;
               }
-              a{
-                color: $C-base;
-              }
               dl{
                 dt{
                   margin: $D-padGlb/2 0 0 0;
@@ -447,6 +444,7 @@ body{
           tbody{
             td{
               a{
+                color: $C-base;
                 &.down{
                   i{
                     color: $success-color;
@@ -589,6 +587,9 @@ body{
   .reveal-modal-bg{
     position: fixed;
   }
+  .modal-bigTbl{
+    max-width: 97%;
+  }
   .button{
     padding: $D-padGlb/2 $D-padGlb;
   }
@@ -654,7 +655,7 @@ body{
     }
   }
 }
-// RESPONSIVE ADDONS
+// ------ RESPONSIVE ADDONS ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
 // Normal Up
 @media screen and (min-width: 1024px){
   body{
@@ -711,7 +712,7 @@ body{
               }
               &.actions{
                 a{
-                  display: inline-block !important;
+                  /*display: inline-block !important;*/
                 }
               }
             }
@@ -721,3 +722,118 @@ body{
     }
   }
 }
+// Small Screens
+@media screen and (max-width: 480px){
+  body{
+    nav{
+      padding-bottom: $D-padGlb/4;
+      &.top-bar{
+        position: relative;
+        height: auto;
+        section{
+          &.top-bar-section{
+            ul{
+              li{
+                width: auto;
+                display: inline-block;
+                a{
+                  display: inline-block;
+                  padding: $D-padGlb/2 !important;
+                }
+              }
+              &.left{
+                li{
+                  &.menuTg{
+                    display: block;
+                    width: 100%;
+                    position: relative;
+                    margin-top: -2em;
+                  }
+                    margin-top: $D-padGlb/8;
+                    width: 40%;
+                  a{
+                    border: 1px solid lighten($C-enfasis, 5%);
+                    &.menuToggle{
+                      border: none;
+                    }
+                  }
+                }
+
+              }
+              &.right{
+                &>li{
+                  float: right;
+                  z-index: 3;
+                  &>a{
+                    padding-right: $D-padGlb*3 !important;
+                  }
+                  ul{
+                    li{
+                      float: none;
+                      border: 1px solid lighten($C-enfasis, 5%);
+                      &.back{
+                        float: left;
+                        border: none;
+                        h5{
+                          margin: none;
+                        }
+                      }
+                      &.parent-link{
+                        border: none;
+                      }
+                    }
+                  }
+                }
+
+              }
+            }
+          }
+        }
+      }
+    }
+    .legislative_search{
+      button{
+        margin-bottom: $D-padGlb/4 !important;
+        width: 100%;
+      }
+      input{
+        margin-bottom: $D-padGlb/4 !important;
+      }
+    }
+    .tray{
+      table{
+        display: block;
+        overflow-x: scroll;
+        thead{
+          width: auto;
+          white-space: nowrap;
+          th{
+            display: table-cell !important;
+            white-space: normal !important;
+          }
+          td{
+
+          }
+        }
+        tbody{
+          width: auto;
+          white-space: nowrap;
+          td{
+            display: table-cell !important;
+            &.desc{
+              min-width: $D-padGlb*15;
+              max-width: $D-padGlb*25;
+              white-space: normal;
+            }
+            &.actions{
+              a{
+                display: block !important;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// ------ /RESPONSIVE ADDONS ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------

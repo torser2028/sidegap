@@ -20,11 +20,7 @@
                   %figcaption
                     = @stakeholder.name
               .large-2.medium-1.columns.fixHght.ghost
-              .large-7.medium-7.columns.fixHght.ghost.actions
-                %a
-                  = fa_icon "user"
-                  %span
-                    Ver Perfil
+              .large-7.medium-7.columns.fixHght.ghost.actions.prflActns
                 %a{"data-reveal-id" => "autorPop"}
                   = fa_icon "file"
                   %span
@@ -118,7 +114,7 @@
                 %span
                   = simple_format @stakeholder.info
 - content_for :modal do
-  .reveal-modal.legislatives#autorPop{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
+  .reveal-modal.modal-bigTbl.legislatives#autorPop{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
     %a.close-reveal-modal{"aria-label" => "Close"}
       &#215;
     .row.panels-view
@@ -158,7 +154,7 @@
                   = legislative.filing_at
 
 - content_for :modal do
-  .reveal-modal.legislatives#ponentePop{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
+  .reveal-modal.modal-bigTbl.legislatives#ponentePop{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
     %a.close-reveal-modal{"aria-label" => "Close"}
       &#215;
     .row.panels-view
