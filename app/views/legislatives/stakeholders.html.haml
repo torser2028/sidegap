@@ -17,60 +17,33 @@
             .tabs-content
               %section#basicPanel.content.active{"aria-hidden" => "false", :role => "tabpanel"}
                 .row
-                  .large-4.medium-6.columns
-                    %label
-                      Nombre
-                    %input{type: "text"}
-                  .large-1.medium-2.columns
-                    %label
-                      Comisión
-                    %select
-                      %option
-                        I
-                      %option
-                        II
-                      %option
-                        III
-                      %option
-                        IV
-                      %option
-                        V
-                      %option
-                        VI
-                      %option
-                        VII
-                  .large-3.medium-4.columns
-                    %label
-                      Región
-                    %select
-                      %option
-                        Opción Uno
-                      %option
-                        Opción Dos
-                      %option
-                        Opción Tres
-                      %option
-                        Opción Cuatro
-                      %option
-                        Opción Cinco
-                      %option
-                        Opción Seis
-                      %option
-                        Opción Siete
-                  .large-offset-0.large-2.medium-offset-3.medium-3.columns
-                    %label
-                      %span.ghost
-                        \_
-                    %button.success.fullwidth{href: "#", type: "submit"}
-                      = fa_icon "search"
-                      Buscar
-                  .large-offset-0.large-2.medium-3.end.columns
-                    %label
-                      %span.ghost
-                        \_
-                    %button.secondary.fullwidth{type: "button"}
-                      %a{href: stakeholders_legislatives_path}
-                        \× Quitar Filtros
+                  = search_form_for @q, url: :stakeholders_legislatives, remote: true do |f|
+                    .large-4.medium-6.columns
+                      %label
+                        Nombre
+                      = f.search_field :name_cont
+                    .large-1.medium-2.columns
+                      %label
+                        Comisión
+                      = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
+                    .large-3.medium-4.columns
+                      %label
+                        Región
+                      = f.collection_select :commission_eq, Region.all, :name, :name, include_blank: true
+                    .large-offset-0.large-2.medium-offset-3.medium-3.columns
+                      %label
+                        %span.ghost
+                          \_
+                      %button.success.fullwidth{type: "submit"}
+                        = fa_icon "search"
+                        Buscar
+                    .large-offset-0.large-2.medium-3.end.columns
+                      %label
+                        %span.ghost
+                          \_
+                      %button.secondary.fullwidth{type: "button"}
+                        %a{href: stakeholders_legislatives_path}
+                          \× Quitar Filtros
         %table
           %colgroup
             %col

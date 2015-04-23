@@ -179,27 +179,10 @@
                     %th
                       Nombre de Autor
                 %tbody
-                  %tr
-                    %td
-                      Alfredo Ramos Maya
-                  %tr
-                    %td
-                      Álvaro Uribe Vélez
-                  %tr
-                    %td
-                      Ernesto Macías Tovar
-                  %tr
-                    %td
-                      Iván Duque Márquez
-                  %tr
-                    %td
-                      Jaime Alejandro Amín Hernández
-                  %tr
-                    %td
-                      José Obdulio Gaviria Vélez
-                  %tr
-                    %td
-                      Paloma Susana Valencia Laserna
+                  - @authors.each do |author|
+                    %tr
+                      %td
+                        = link_to author.name, stakeholder_legislatives_path(author)
           .large-6.columns
             %h3
               = fa_icon "users"
@@ -211,9 +194,10 @@
                     %th
                       Nombre de Ponente
                 %tbody
-                  %tr
-                    %td
-                      Ángel Custodio Cabrera Baez
+                  - @speakers.each do |speaker|
+                    %tr
+                      %td
+                        = link_to speaker.name, stakeholder_legislatives_path(speaker)
 - content_for :modal do
   .reveal-modal.filesPnl.legislatives#filesPnl{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
 

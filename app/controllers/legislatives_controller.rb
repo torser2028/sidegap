@@ -35,6 +35,8 @@ class LegislativesController < ApplicationController
     add_breadcrumb "Proyecto", :legislative_path
 
     @legislative = get_legislative params[:id]
+    @authors = @legislative.stakeholders.authors
+    @speakers = @legislative.stakeholders.speakers
   end
 
   def events
