@@ -37,6 +37,8 @@ class LegislativesController < ApplicationController
     @legislative = get_legislative params[:id]
     @authors = @legislative.stakeholders.authors
     @speakers = @legislative.stakeholders.speakers
+
+    @legislative_user = LegislativeUser.where(user: current_user, legislative: @legislative).first_or_initialize
   end
 
   def events
