@@ -146,42 +146,17 @@
               %th
                 Fecha de Radicación
           %tbody
-            %tr
-              %td
-                CAM
-              %td
-                SEN
-              %td
-                TTLE
-              %td
-                DATE
-            %tr
-              %td
-                CAM
-              %td
-                SEN
-              %td
-                TTLE
-              %td
-                DATE
-            %tr
-              %td
-                CAM
-              %td
-                SEN
-              %td
-                TTLE
-              %td
-                DATE
-            %tr
-              %td
-                CAM
-              %td
-                SEN
-              %td
-                TTLE
-              %td
-                DATE
+            - @legislatives_as_author.each do |legislative|
+              %tr
+                %td
+                  = legislative.chamber_number
+                %td
+                  = legislative.senate_number
+                %td
+                  = legislative.title
+                %td
+                  = legislative.filing_at
+
 - content_for :modal do
   .reveal-modal.legislatives#ponentePop{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
     %a.close-reveal-modal{"aria-label" => "Close"}
@@ -211,39 +186,13 @@
                 %th
                   Fecha de Radicación
             %tbody
-              %tr
-                %td
-                  CAM
-                %td
-                  SEN
-                %td
-                  TTLE
-                %td
-                  DATE
-              %tr
-                %td
-                  CAM
-                %td
-                  SEN
-                %td
-                  TTLE
-                %td
-                  DATE
-              %tr
-                %td
-                  CAM
-                %td
-                  SEN
-                %td
-                  TTLE
-                %td
-                  DATE
-              %tr
-                %td
-                  CAM
-                %td
-                  SEN
-                %td
-                  TTLE
-                %td
-                  DATE
+              - @legislatives_as_speaker.each do |legislative|
+                %tr
+                  %td
+                    = legislative.chamber_number
+                  %td
+                    = legislative.senate_number
+                  %td
+                    = legislative.title
+                  %td
+                    = legislative.filing_at

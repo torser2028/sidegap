@@ -8,6 +8,10 @@ class Legislative < ActiveRecord::Base
   
   accepts_nested_attributes_for :legislative_attachments, :legislative_stakeholders, allow_destroy: true
 
+  scope :as_author, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.authors).uniq }
+  scope :as_speaker, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.speakers).uniq }
+
+
   FILINGFILTERS = [
     ['Hoy', Date.today],
     ['Una semana' , 1.week.ago],

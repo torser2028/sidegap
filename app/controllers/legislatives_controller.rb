@@ -79,6 +79,8 @@ class LegislativesController < ApplicationController
     add_breadcrumb "Pérfil Congresista", :stakeholder_legislatives_path
 
     @stakeholder = Stakeholder.find params[:id]
+    @legislatives_as_author = @stakeholder.legislatives.as_author
+    @legislatives_as_speaker = @stakeholder.legislatives.as_speaker
   end
 
   private

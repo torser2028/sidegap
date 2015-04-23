@@ -29,7 +29,7 @@
                     .large-3.medium-4.columns
                       %label
                         Región
-                      = f.collection_select :commission_eq, Region.all, :name, :name, include_blank: true
+                      = f.collection_select :region_eq, Region.all, :name, :name, include_blank: true
                     .large-offset-0.large-2.medium-offset-3.medium-3.columns
                       %label
                         %span.ghost
@@ -65,5 +65,5 @@
                 Región
               %th
                 Opciones
-          %tbody
+          %tbody.js_stakeholders
             = render @stakeholders
