@@ -813,6 +813,11 @@ body{
         }
       }
     }
+    aside{
+      .menuTg{
+        display: block;
+      }
+    }
     .legislative_search{
       button{
         margin-bottom: $D-padGlb/4 !important;
@@ -859,3 +864,12 @@ body{
   }
 }
 // ------ /RESPONSIVE ADDONS ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
+@media screen and (min-width: 480px){
+  body{
+    aside{
+      .menuTg{
+        display: none;
+      }
+    }
+  }
+}
