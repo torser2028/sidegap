@@ -262,7 +262,6 @@ GEM
     wicked_pdf (0.11.0)
       rails
     wkhtmltopdf-binary (0.9.9.3)
-    wkhtmltopdf-heroku (2.12.2.1)
 
 PLATFORMS
   ruby
@@ -299,4 +298,3 @@ DEPENDENCIES
   web-console (~> 2.0)
   wicked_pdf
   wkhtmltopdf-binary
-  wkhtmltopdf-heroku
