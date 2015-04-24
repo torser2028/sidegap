@@ -83,6 +83,13 @@ class LegislativesController < ApplicationController
     @stakeholder = Stakeholder.find params[:id]
     @legislatives_as_author = @stakeholder.legislatives.as_author
     @legislatives_as_speaker = @stakeholder.legislatives.as_speaker
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "perfil #{@stakeholder.name}".parameterize
+      end
+    end
   end
 
   private
