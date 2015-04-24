@@ -39,6 +39,13 @@ class LegislativesController < ApplicationController
     @speakers = @legislative.stakeholders.speakers
 
     @legislative_user = LegislativeUser.where(user: current_user, legislative: @legislative).first_or_initialize
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "detalle-de-proyecto"
+      end
+    end
   end
 
   def events

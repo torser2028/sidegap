@@ -7,5 +7,7 @@
     = wicked_pdf_javascript_include_tag "application", "data-turbolinks-track" => true 
     = csrf_meta_tags
   %body
+    %header
+      = wicked_pdf_image_tag ("logo_sidegap.png")
     %section.main.main-section
       = yield

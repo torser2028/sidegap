@@ -1,0 +1,92 @@
+body{
+
+}
+@media print{
+  header{
+    img{
+      width: 50mm;
+    }
+  }
+  h2{
+    color: #224484;
+    font-weight: normal;
+    font-family: 'Ubuntu';
+  }
+  body{
+    margin: 0.2cm 1cm 1cm 1cm;
+    figure{
+      float: right;
+      background: whitesmoke;
+      padding: 3mm;
+      border: 1mm solid white;
+      outline: 1pt solid lightgray;
+      //outline: 1pt solid #c6d9ff;
+      img{
+        height: auto;
+      }
+      figcaption{
+        text-align: center;
+        font-family: "Open Sans" !important;
+      }
+    }
+    .pryctDtl{
+      dl{
+        dt{
+          //background: #f9fbff;
+          border-top: 1pt solid lightgray;
+          padding: 1.5mm 1mm 0;
+          margin: 0 -1mm;
+          line-height: 12pt;
+          font-size: 9pt;
+          text-transform: uppercase;
+          font-weight: 600;
+          margin-top: 2mm;
+        }
+        dd{
+          margin-left: 2.5mm;
+          font-size: 13pt !important;
+          border-bottom: 0.5pt solid gray;
+          min-height: 6mm;
+          p{
+            text-align: justify;
+          }
+        }
+      }
+      &.double{
+        dl{
+          float: left;
+          width: 48%;
+          margin-right: 2%;
+        }
+      }
+    }
+    .autors{
+      clear: both;
+      page-break-inside: avoid;
+      table{
+        width: 100%;
+        border: 1px solid gray;
+        thead{
+          background: whitesmoke;
+          th{
+            line-height: 12pt;
+            font-size: 9pt;
+            text-transform: uppercase;
+          }
+        }
+        tbody{
+          td{
+            vertical-align: super;
+            padding: 1.5mm;
+            // border: 1pt solid gray;
+            border-collapse: collapse;
+            &.desc{
+              max-width: 125mm;
+              text-align: justify;
+            }
+          }
+        }
+      }
+    }
+  }
+}
