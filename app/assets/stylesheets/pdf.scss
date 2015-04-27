@@ -10,7 +10,6 @@ body{
   h2{
     color: #224484;
     font-weight: normal;
-    font-family: 'Ubuntu';
   }
   body{
     margin: 0.2cm 1cm 1cm 1cm;
@@ -26,7 +25,6 @@ body{
       }
       figcaption{
         text-align: center;
-        font-family: "Open Sans" !important;
       }
     }
     .pryctDtl{
@@ -67,14 +65,24 @@ body{
         width: 100%;
         border: 1px solid gray;
         thead{
-          background: whitesmoke;
+          background: #224484;
           th{
+            padding: 0.25mm 1mm;
+            color: white;
             line-height: 12pt;
             font-size: 9pt;
             text-transform: uppercase;
           }
         }
         tbody{
+          tr{
+            &:nth-child(odd){
+              /*background: whitesmoke;*/
+            }
+            &:nth-child(even){
+              background: #edf3ff;
+            }
+          }
           td{
             vertical-align: super;
             padding: 1.5mm;

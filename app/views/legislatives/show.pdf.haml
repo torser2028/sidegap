@@ -61,20 +61,16 @@
   .tray.autors
     %h2
       Autores
-    %table
-      %tbody
-        - @authors.each do |author|
-          %tr
-            %td
-              = author.name
+    %ul
+      - @authors.each do |author|
+        %li
+          = author.name
   .tray.autors
     %h2
       Ponentes
-    %table
-      %tbody
-        - @speakers.each do |speaker|
-          %tr
-            %td
-              = speaker.name
+    %ul
+      - @speakers.each do |speaker|
+        %li
+          = speaker.name
 
               
