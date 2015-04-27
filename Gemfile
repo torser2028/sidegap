@@ -48,3 +48,4 @@ end
 
 gem 'rails_12factor', group: :production
 gem 'puma'
+gem 'wkhtmltopdf-heroku'
