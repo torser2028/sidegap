@@ -10,18 +10,18 @@
         .row.cntnr.white
           .large-4.columns
             %button
-              = fa_icon "arrow-left"
               %a{href: legislatives_path}
+                = fa_icon "arrow-left"
                 Consultar Proyectos
             - if current_user.following? @legislative
               %button.secondary
-                = fa_icon "eye-slash"
                 %a{ href: unfollow_legislative_path(@legislative) }
+                  = fa_icon "eye-slash"
                   No seguir
             - else
               %button.success
-                = fa_icon "eye"
                 %a{ href: follow_legislative_path(@legislative) }
+                  = fa_icon "eye"
                   Seguir
           .large-4.columns
           .large-4.columns.actions

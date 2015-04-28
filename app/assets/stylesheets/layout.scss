@@ -462,8 +462,11 @@ body{
   }
   .pryctDtl{
       button{
+        padding: 0;
         a{
           color: $C-luz;
+          padding: $D-padGlb/2 $D-padGlb;
+          display: block;
         }
         &.secondary{
           a{
@@ -607,7 +610,15 @@ body{
     padding: $D-padGlb/2 $D-padGlb;
   }
   button{
-    padding: $D-padGlb/2 $D-padGlb;
+    padding: 0;
+    a{
+      display: block;
+      padding: $D-padGlb/2 $D-padGlb;
+      color: darken($C-base, 5%);
+    }
+    &[type="submit"]{
+      padding: $D-padGlb/2 $D-padGlb;
+    }
   }
 }
 // FIXED JQUERY UI STYLES
