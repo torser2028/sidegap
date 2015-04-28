@@ -4,7 +4,8 @@ ActiveAdmin.register Legislative do
 
   permit_params :title, :source, :chamber_number, :senate_number, :commission, :status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at,
     legislative_attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
-    legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker]
+    legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker],
+    agendas_attributes: [:id, :_destroy, :body, :event_at, :time]
 
 
   filter :title, label: "Titulo"
@@ -103,6 +104,18 @@ ActiveAdmin.register Legislative do
             end
           end
         end
+
+        row "Agenda" do
+          table_for legislative.agendas do
+            column "Fecha", :event_at do |a|
+              a.event_at
+            end
+            column "Hora", :time do |a|
+              a.time.to_s(:time)
+            end
+            column "Descripción", :body
+          end
+        end
       end
     end
     active_admin_comments
@@ -137,6 +150,13 @@ ActiveAdmin.register Legislative do
         la.input :title, label: "Titulo"
         la.input :published_at, as: :datepicker, label: "Fecha"
         la.input :attachment, label: ""
+      end
+    end
+    f.inputs "Agenda" do
+      f.has_many :agendas, heading: "", allow_destroy: true, new_record: "Agregar Agenda" do |a|
+        a.input :event_at, as: :datepicker, label: "Fecha"
+        a.input :time, label: "Hora"
+        a.input :body, label: "Descripción", input_html: { rows: 6 }
       end
     end
     f.actions

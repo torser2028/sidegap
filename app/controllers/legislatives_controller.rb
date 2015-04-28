@@ -51,6 +51,9 @@ class LegislativesController < ApplicationController
   def events
     add_breadcrumb "Eventos y Agenda", :events_legislatives_path
 
+    @q = Agenda.ransack params[:q]
+    @agendas = @q.result
+    @events = Event.all
   end
 
   def follow

@@ -7,23 +7,27 @@
         = fa_icon "calendar"
         Agenda de Plenarias y Comisiones
       .tray.calendar
-        .row
-          .large-12.columns
-            .alert-box.info.radius{"data-alert" => ""}
-              La Agenda muestra los eventos de los próximos 7 días a partir de la fecha
-              %a.close{href: "#"} &times;
-        .row.filter
-          .large-1.medium-2.small-4.columns
-            %label
-              Fecha:
-          .large-2.medium-3.small-8.columns
-            .date{"data-date" => "12-02-2012", "data-date-format" => "dd-mm-yyyy"}
-              %input.fecha.span2{:size => "16", :type => "text", :value => "12-02-2012"}/
-          .large-2.medium-offset-0.medium-2.small-offset-4.small-8.columns
-            %button.success.fullwidth{href: "#", type: "submit"}
-              = fa_icon "search"
-              Buscar
-          .large-offset-7.medium-offset-5.small-12.colums
+        = search_form_for @q, url: url_for, remote: true do |f|
+          .row
+            .large-12.columns
+              .alert-box.info.radius{"data-alert" => ""}
+                La Agenda muestra los eventos de los próximos 7 días a partir de la fecha
+                %a.close{href: "#"} &times;
+          .row.filter
+            .large-1.medium-2.small-4.columns
+              %label
+                Fecha:
+            .large-2.medium-3.small-8.columns
+              .date
+                = f.search_field :event_at_gteq, class: "fecha span2", size: "16"
+            .large-2.medium-offset-0.medium-2.small-offset-4.small-8.columns
+              %button.success.fullwidth{href: "#", type: "submit"}
+                = fa_icon "search"
+                Buscar
+              %button.secondary.fullwidth{type: "button"}
+                %a{href: url_for}
+                  \× Quitar Filtros
+            .large-offset-7.medium-offset-5.small-12.colums
         %table
           %colgroup
             %col
@@ -40,39 +44,8 @@
               %th Num Senado
               %th Proyecto
               %th Evento
-          %tbody
-            %tr
-              %td.num 2015-04-06
-              %td.num 16:00
-              %td.num 028/2013
-              %td.num 156/2013
-              %td.desc
-                %p
-                  Por medio del cual se adiciona un numeral nuevo, que será el 7 al artículo 34 de la ley 906 del 2004 (Código de Procedimiento Penal)” (Juzgamiento de Alcaldes).
-              %td.desc
-                %p Comisión Primera de Senado de la República.
-                %p Se encuentra en el lugar 01 del orden del día.
-            %tr
-              %td.num 2015-04-06
-              %td.num 16:00
-              %td.num
-              %td.num 034/2014
-              %td.desc
-                %p Por la cual se establecen disposiciones para la Participación en Remates Judiciales.
-              %td.desc
-                %p Comisión Primera de Senado de la República.
-                %p Se encuentra en el lugar 02 del orden del día.
-            %tr
-              %td.num 2015-04-06
-              %td.num 16:00
-              %td.num
-              %td.num 066/2014
-              %td.desc
-                %p
-                  Por la cual se modifica y adiciona la ley 5ª de 1992, se crea la comisión legal del congreso de la república para la defensa, protección y promoción de los derechos de los pueblos indígenas y se dictan otras disposiciones.
-              %td.desc
-                %p Comisión Primera de Senado de la República.
-                %p Se encuentra en el lugar 03 del orden del día.
+          %tbody.js_agendas
+            = render @agendas
   .row
     .small-12.columns
       %h2
@@ -96,45 +69,12 @@
               %th
                 Link Noticia
           %tbody
-            %tr
-              %td.num
-                2015-04-06
-              %td.desc
-                %p
-                  Actividad minera en Páramo de Santurbán.
-                %p
-                  Congreso de la República de Colombia, Viernes 10 de Abril de 2015, 08:00 am.
-                %dl
-                  %dt
-                    Lugar:
-                  %dd
-                    Auditorio Luis Guillermo Vélez.
-                  %dt
-                    Organiza:
-                  %dd
-                    Honorable Senador de la República, doctor Iván Cepeda Castro.
-              %td
-                Audiencia Pública
-              %td.actions
-                %a.link{href: "#"}
-                  = fa_icon "external-link-square"
-                  Enlace
-            %tr
-              %td.num
-                2015-03-30
-              %td.desc
-                %p
-                  Día nacional de la memoria y solidaridad con las víctimas (en cumplimiento a lo dispuesto en el artículo 142 de la ley 1448 de 2011)
-                %p
-                  Congreso pleno, Jueves 09 de Abril de 2015, 02:00 pm.
-                %dl
-                  %dt
-                    Lugar:
-                  %dd
-                    Salón Elíptico, Capitolio Nacional.
-              %td
-                Agenda
-              %td.actions
-                %a.link{href: "#"}
-                  = fa_icon "external-link-square"
-                  Enlace
+            - @events.each do |event|
+              %tr
+                %td.num= event.event_at
+                %td.desc= simple_format event.body
+                %td= event.event_type
+                %td.actions
+                  %a.link{href: "#"}
+                    = fa_icon "external-link-square"
+                    Enlace

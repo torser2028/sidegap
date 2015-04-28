@@ -29,7 +29,7 @@
               = fa_icon "download"
               %span
                 Descargar Archivos
-            %a
+            %a{ href: legislative_path(@legislative, format: :pdf), target: "_blank" }
               = fa_icon "file-pdf-o"
               %span
                 Exportar a PDF

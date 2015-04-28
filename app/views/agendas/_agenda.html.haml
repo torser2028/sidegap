@@ -1,0 +1,7 @@
+%tr
+  %td.num= agenda.event_at
+  %td.num= agenda.time.to_s(:time)
+  %td.num= agenda.legislative.chamber_number
+  %td.num= agenda.legislative.senate_number
+  %td.desc= agenda.legislative.title
+  %td.desc= simple_format agenda.body
