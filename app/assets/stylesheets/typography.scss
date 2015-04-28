@@ -234,3 +234,22 @@ body{
     }
   }
 }
+@media screen and (max-width: 480px){
+  body{
+    .main{
+      .dashboard{
+        ul{
+          li{
+            a{
+              span{
+                font-size: $D-smlFnt + 1;
+              }
+              .icon{
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -746,6 +746,9 @@ body{
       .logo{
         text-align: center;
       }
+      .breadcrumbs{
+        display: none;
+      }
     }
     nav{
       padding-bottom: $D-padGlb/4;
@@ -772,7 +775,7 @@ body{
                     margin-top: -2em;
                   }
                     margin-top: $D-padGlb/8;
-                    width: 40%;
+                    width: 47%;
                   a{
                     border: 1px solid lighten($C-enfasis, 5%);
                     &.menuToggle{
@@ -780,7 +783,6 @@ body{
                     }
                   }
                 }
-
               }
               &.right{
                 &>li{
@@ -806,7 +808,6 @@ body{
                     }
                   }
                 }
-
               }
             }
           }

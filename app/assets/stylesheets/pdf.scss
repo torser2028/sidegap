@@ -77,10 +77,10 @@ body{
         tbody{
           tr{
             &:nth-child(odd){
-              /*background: whitesmoke;*/
+              /*background: #edf3ff;*/
             }
             &:nth-child(even){
-              background: #edf3ff;
+              background: #f5f8fc;
             }
           }
           td{

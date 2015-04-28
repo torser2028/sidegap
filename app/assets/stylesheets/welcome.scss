@@ -197,3 +197,41 @@ body{
     }
   }
 }
+@media screen and (max-width: 480px){
+  body{
+    &.welcome{
+      .main{
+        .dashboard{
+          ul{
+            li{
+              a{
+                span{
+                  border-top: 1px solid $C-luz;
+                  border-bottom: 1px solid $C-luz;
+                  margin: 0;
+                }
+                .icon{
+                }
+              }
+              &:hover{
+                a {
+                  color: black;
+                  .icon{
+                    color: white !important;
+                  }
+                  img{
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+          }
+          .overlay{
+            opacity: 0 !important;
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
