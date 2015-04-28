@@ -1,0 +1,63 @@
+@import "variables";
+//Rama Ejecutiva
+.executives{
+  header{
+    h1{
+      border-bottom: $D-padGlb/4 solid $C-matiz2;
+      i{
+        background: $C-matiz2;
+      }
+    }
+  }
+  h2{
+    i{
+      color: $C-matiz2;
+    }
+  }
+  .main{
+    h2{
+      i{
+        color: $C-matiz2;
+      }
+    }
+    h3{
+      i{
+        background: $C-matiz2;
+      }
+    }
+    .tray{
+      table{
+        tbody{
+          tr{
+            td{
+              &.actions{
+                a{
+                  &:hover{
+                    i{
+                      color: $C-matiz2;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .pryctDtl{
+      .row{
+        .columns{
+          &.actions{
+            a{
+              &:hover{
+                i{
+                  color: $C-matiz2;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
