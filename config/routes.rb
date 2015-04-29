@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   scope '(:locale)', locale: /es|en/ do
     # You can have the root of your site routed with "root"
-    root 'welcome#index'
+    authenticated :user do |variable|
+        root 'welcome#index', as: :authenticated_root
+    end
+    root to: redirect('/users/sign_in')
 
     devise_for :users
 
