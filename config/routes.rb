@@ -19,26 +19,26 @@ Rails.application.routes.draw do
 
     concern :followable do
         member do
-            get 'follow'
-            get 'unfollow'
+            get :follow
+            get :unfollow
         end
     end
 
     concern :trashable do
         member do
-            get 'like'
-            get 'dislike'
+            get :like
+            get :dislike
         end
     end
 
     resources :legislatives do
         concerns [:followable, :trashable]
         collection do
-            get 'events'
-            get 'favorites'
-            get 'trash'
-            get 'stakeholders'
-            get 'stakeholder/:id', action: :stakeholder, as: :stakeholder
+            get :events
+            get :favorites
+            get :trash
+            get :stakeholders
+            get 'stakeholder/:id', to: :stakeholder, as: :stakeholder
         end
     end
 
@@ -47,7 +47,7 @@ Rails.application.routes.draw do
     resources :executives do
         concerns :followable
         collection do
-            get 'favorites'
+            get :favorites
         end
     end
 
