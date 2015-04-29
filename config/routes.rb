@@ -16,25 +16,40 @@ Rails.application.routes.draw do
     #   get 'products/:id' => 'catalog#view'
 
     get 'stories/:id' => 'stories#show', as: :story
-    resources :legislatives do
+
+    concern :followable do
         member do
             get 'follow'
             get 'unfollow'
+        end
+    end
+
+    concern :trashable do
+        member do
             get 'like'
             get 'dislike'
         end
+    end
+
+    resources :legislatives do
+        concerns [:followable, :trashable]
         collection do
             get 'events'
             get 'favorites'
             get 'trash'
             get 'stakeholders'
-            get 'stakeholder/:id' => 'legislatives#stakeholder', as: :stakeholder
+            get 'stakeholder/:id', action: :stakeholder, as: :stakeholder
         end
     end
 
     resources :legislative_users, only: [:create, :update]
 
-    resources :executives
+    resources :executives do
+        concerns :followable
+        collection do
+            get 'favorites'
+        end
+    end
 
 
     # Example of named route that can be invoked with purchase_url(id: product.id)
