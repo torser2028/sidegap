@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     #   get 'products/:id' => 'catalog#view'
 
     get 'stories/:id' => 'stories#show', as: :story
-    resources 'legislatives' do
+    resources :legislatives do
         member do
             get 'follow'
             get 'unfollow'
@@ -32,7 +32,10 @@ Rails.application.routes.draw do
         end
     end
 
-    resources 'legislative_users', only: [:create, :update]
+    resources :legislative_users, only: [:create, :update]
+
+    resources :executives
+
 
     # Example of named route that can be invoked with purchase_url(id: product.id)
     #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
