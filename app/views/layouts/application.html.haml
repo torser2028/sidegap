@@ -9,10 +9,11 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body{class: controller.controller_name}
+    - if user_signed_in?
+      = render 'layouts/nav'
     .off-canvas-wrap{"data-offcanvas" => ""}
       .inner-wrap
         - if user_signed_in?
-          = render 'layouts/nav'
           = render 'layouts/sidebar'
         %header
           .row

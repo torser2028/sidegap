@@ -1,21 +1,22 @@
-%nav.tab-bar.top-bar{"data-topbar" => "", :role => "navigation"}
-  %section.top-bar-section
-    .row
-      %ul.right
-        %li.has-dropdown.not-click
-          %a{:href => "#"}
-            = current_user.name
-          %ul.dropdown{:role => "menu"}
-            %li
-              %a{:href => "javascript:void(0);"}= current_user.email
-            %li
-              = link_to 'Editar Perfil', edit_user_registration_path
-            %li
-              = link_to "Cerrar Sesión", destroy_user_session_path, method: :delete
-      %ul.left
-        %li.menuTg
-          %a.left-off-canvas-toggle.menuToggle
-            = fa_stacked_icon "bars", base: "square-o"
-            %span.txtMenu
-              Menu
-        = render 'menu' unless %w(welcome sessions registrations).include? controller.controller_name
+.fixed
+  %nav.tab-bar.top-bar{"data-topbar" => "", :role => "navigation"}
+    %section.top-bar-section
+      .row
+        %ul.right
+          %li.has-dropdown.not-click
+            %a{:href => "#"}
+              = current_user.name
+            %ul.dropdown{:role => "menu"}
+              %li
+                %a{:href => "javascript:void(0);"}= current_user.email
+              %li
+                = link_to 'Editar Perfil', edit_user_registration_path
+              %li
+                = link_to "Cerrar Sesión", destroy_user_session_path, method: :delete
+        %ul.left
+          %li.menuTg
+            %a.left-off-canvas-toggle.menuToggle
+              = fa_stacked_icon "bars", base: "square-o"
+              %span.txtMenu
+                Menu
+          = render 'menu' unless %w(welcome sessions registrations).include? controller.controller_name

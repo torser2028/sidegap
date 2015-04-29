@@ -25,7 +25,7 @@ $(function(){
   var NvtnHght = $("nav").outerHeight();
   var HdrHght = $("header").outerHeight();
   var FtrHght = $("footer").outerHeight();
-  $(".main").css("min-height", WndwHght - NvtnHght - HdrHght - FtrHght);
+  $(".main").css("min-height", WndwHght - (NvtnHght * 2.5) - HdrHght - FtrHght);
   // Defines Dashboard Items Height
   if ($(".dashboard").length > 0){
     $("ul.da-thumbs li").each(function(){
@@ -38,18 +38,23 @@ $(function(){
     });
   }
   // Set Profile Height
-  if( $(".profileHdr").length > 0){
     var WndwWdth = $( window ).width();
     if( WndwWdth > 640){
-      var btnsHght = $(".prflActns").outerHeight();
-      $(".profileHdr figure img").load(function(){
-        var colHghst = $(".profileHdr .fixHght:first-child").outerHeight();
-        $(".profileHdr .fixHght").css("height", colHghst);
-        $(".prflActns").css("padding-top", colHghst-btnsHght);
+      $(window).scroll(function(){
+        $(".off-canvas-list").stop().animate({"marginTop": ($(window).scrollTop()) + "px", "marginLeft":($(window).scrollLeft()) + "px"}, "slow" );
       });
+      if( $(".profileHdr").length > 0){
+        var btnsHght = $(".prflActns").outerHeight();
+        $(".profileHdr figure img").load(function(){
+          var colHghst = $(".profileHdr .fixHght:first-child").outerHeight();
+          $(".profileHdr .fixHght").css("height", colHghst);
+          $(".prflActns").css("padding-top", colHghst-btnsHght);
+        });
+      }
     }
-  }
   if( $(".signUp").length > 0){
     $("body").addClass("sessions");
   }
+
+
 });

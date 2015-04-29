@@ -4,7 +4,6 @@
 
 @import "variables";
 body{
-  /*background: darken($C-luz, 4%) !important;*/
   header{
     .logo{
       padding-top: $D-padGlb;
@@ -22,7 +21,6 @@ body{
   }
   nav{
     &.top-bar{
-      position: fixed;
       width: 100%;
       z-index: 2;
       background: darken($C-enfasis, 10%);
@@ -65,7 +63,6 @@ body{
     }
   }
   header{
-    padding-top: 2.8125rem;
     h1{
       margin-top: -$D-padGlb*2;
       text-align: right;
@@ -275,7 +272,6 @@ body{
                   &:hover{
                     background: $C-luz;
                     border: 2px solid transparentize($C-base, 0.8);
-                    // border-left: 2px solid $C-enfasis;
                     i{
                       transform: rotateY(360deg);
                     }
@@ -718,6 +714,9 @@ body{
 }
 @media screen and (max-width: 640px){
   body{
+    .fixed{
+      position: absolute;
+    }
     .tray{
       table{
         thead{
@@ -736,7 +735,6 @@ body{
               }
               &.actions{
                 a{
-                  /*display: inline-block !important;*/
                 }
               }
             }
