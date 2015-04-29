@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428163909) do
+ActiveRecord::Schema.define(version: 20150429210440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 20150428163909) do
     t.string   "event_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "excecutives", force: :cascade do |t|
+    t.text     "title"
+    t.string   "number"
+    t.string   "kind"
+    t.string   "institution"
+    t.date     "filing_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "final_statuses", force: :cascade do |t|
@@ -147,7 +157,7 @@ ActiveRecord::Schema.define(version: 20150428163909) do
   add_index "legislative_users", ["user_id"], name: "index_legislative_users_on_user_id", using: :btree
 
   create_table "legislatives", force: :cascade do |t|
-    t.string   "title"
+    t.text     "title"
     t.string   "source"
     t.string   "chamber_number"
     t.string   "senate_number"
