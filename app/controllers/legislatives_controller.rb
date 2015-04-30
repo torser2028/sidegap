@@ -6,8 +6,9 @@ class LegislativesController < ApplicationController
 
     @q = Legislative.ransack params[:q]
     @legislatives = []
+    not_available_legislatives = current_user.find_disliked_items + current_user.following_legislatives
     @q.result.each do |item|
-      @legislatives << item unless current_user.find_disliked_items.include? item
+      @legislatives << item unless not_available_legislatives.include? item
     end
   end
 
