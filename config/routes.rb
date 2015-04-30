@@ -38,7 +38,7 @@ Rails.application.routes.draw do
             get :favorites
             get :trash
             get :stakeholders
-            get 'stakeholder/:id', to: :stakeholder, as: :stakeholder
+            get 'stakeholder/:id', action: :stakeholder, as: :stakeholder
         end
     end
 
