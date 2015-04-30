@@ -3,7 +3,7 @@ ActiveAdmin.register Legislative do
   actions :all, except: [:destroy]
 
   permit_params :title, :source, :chamber_number, :senate_number, :commission, :status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at,
-    legislative_attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
+    attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
     legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker],
     agendas_attributes: [:id, :_destroy, :body, :event_at, :time]
 
@@ -12,10 +12,10 @@ ActiveAdmin.register Legislative do
   filter :source, label: "Origen"
   filter :chamber_number, label: "Número de Cámara"
   filter :senate_number, label: "Número de Senado"
-  filter :commission, label: "Comisión", as: :select, collection: Commission.pluck(:name)
-  filter :status, label: "Estatus", as: :select, collection: Status.pluck(:name)
-  filter :probability, label: "Probabilidad", as: :select, collection: Probability.pluck(:name)
-  filter :legislative_attachments, label: "Archivos Adjuntos"
+  filter :commission, label: "Comisión", as: :select, collection: ->{ Commission.pluck(:name) }
+  filter :status, label: "Estatus", as: :select, collection: -> { Status.pluck(:name) }
+  filter :probability, label: "Probabilidad", as: :select, collection: -> { Probability.pluck(:name) }
+  filter :attachments, label: "Archivos Adjuntos", as: :select, collection: -> { Attachment.legislatives }
   filter :filing_at, label: "Fecha de Radicación"
 
   index do
@@ -97,9 +97,9 @@ ActiveAdmin.register Legislative do
 
         row "Archivos Adjuntos" do
           ul do
-            legislative.legislative_attachments.each do |la|
+            legislative.attachments.each do |a|
               li do
-                link_to la.attachment.file.filename, la.attachment.url
+                link_to a.attachment.file.filename, a.attachment.url
               end
             end
           end
@@ -146,7 +146,7 @@ ActiveAdmin.register Legislative do
       end
     end
     f.inputs "Archivos Adjuntos" do
-      f.has_many :legislative_attachments, heading: "", allow_destroy: true, new_record: "Agregar Archivo" do |la|
+      f.has_many :attachments, heading: "", allow_destroy: true, new_record: "Agregar Archivo" do |la|
         la.input :title, label: "Titulo"
         la.input :published_at, as: :datepicker, label: "Fecha"
         la.input :attachment, label: ""

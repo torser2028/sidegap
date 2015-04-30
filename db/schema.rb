@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150429213544) do
+ActiveRecord::Schema.define(version: 20150430212746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,19 @@ ActiveRecord::Schema.define(version: 20150429213544) do
 
   add_index "assignments", ["role_id"], name: "index_assignments_on_role_id", using: :btree
   add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
+
+  create_table "attachments", force: :cascade do |t|
+    t.string   "attachment"
+    t.string   "title"
+    t.date     "published_at"
+    t.integer  "executive_id"
+    t.integer  "legislative_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "attachments", ["executive_id"], name: "index_attachments_on_executive_id", using: :btree
+  add_index "attachments", ["legislative_id"], name: "index_attachments_on_legislative_id", using: :btree
 
   create_table "commissions", force: :cascade do |t|
     t.string   "name"
@@ -120,17 +133,6 @@ ActiveRecord::Schema.define(version: 20150429213544) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "legislative_attachments", force: :cascade do |t|
-    t.string   "attachment"
-    t.integer  "legislative_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.string   "title"
-    t.date     "published_at"
-  end
-
-  add_index "legislative_attachments", ["legislative_id"], name: "index_legislative_attachments_on_legislative_id", using: :btree
 
   create_table "legislative_stakeholders", force: :cascade do |t|
     t.integer  "legislative_id"
@@ -284,7 +286,8 @@ ActiveRecord::Schema.define(version: 20150429213544) do
   add_foreign_key "agendas", "legislatives"
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
-  add_foreign_key "legislative_attachments", "legislatives"
+  add_foreign_key "attachments", "executives"
+  add_foreign_key "attachments", "legislatives"
   add_foreign_key "legislative_stakeholders", "legislatives"
   add_foreign_key "legislative_stakeholders", "stakeholders"
   add_foreign_key "legislative_users", "legislatives"

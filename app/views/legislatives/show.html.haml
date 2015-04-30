@@ -207,13 +207,13 @@
                 %th
                   
             %tbody
-              - @legislative.legislative_attachments.each do |la|
+              - @legislative.attachments.each do |a|
                 %tr
                   %td
-                    = la.title
+                    = a.title
                   %td
-                    = la.published_at
+                    = a.published_at
                   %td
-                    %a.down{href: la.attachment.url, target: "_blank"}
+                    %a.down{href: a.attachment.url, target: "_blank"}
                       = fa_icon "download"
                       Descargar
