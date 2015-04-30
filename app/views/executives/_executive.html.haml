@@ -1,0 +1,27 @@
+%tr
+  %td.num
+    = executive.number
+  %td.desc
+    %p
+      = executive.title
+  %td.txt
+    = executive.kind
+  %td.desc
+    = executive.institution
+  %td.num
+    = executive.filing_at
+  %td.actions
+    %a.more{href: executive_path(executive)}
+      = fa_icon "arrow-circle-right"
+      %span
+        Ver
+    - if current_user.following? executive
+      %a.follow{href: unfollow_executive_path(executive)}
+        = fa_icon "eye-slash"
+        %span
+          Dejar de Seguir
+    - else
+      %a.follow{href: follow_executive_path(executive)}
+        = fa_icon "eye"
+        %span
+          Seguir

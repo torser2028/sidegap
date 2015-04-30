@@ -31,7 +31,7 @@ Rails.application.routes.draw do
         end
     end
 
-    resources :legislatives do
+    resources :legislatives, only: [:index, :show] do
         concerns [:followable, :trashable]
         collection do
             get :events
@@ -44,7 +44,7 @@ Rails.application.routes.draw do
 
     resources :legislative_users, only: [:create, :update]
 
-    resources :executives do
+    resources :executives, only: [:index, :show] do
         concerns :followable
         collection do
             get :favorites

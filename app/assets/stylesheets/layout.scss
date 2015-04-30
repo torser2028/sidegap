@@ -253,6 +253,7 @@ body{
               &.desc{
               }
               &.actions{
+                white-space: nowrap;
                 a{
                   transition: all 200ms ease-in;
                   background: transparent;

@@ -1,0 +1,102 @@
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "file-text"
+        Detalles de la Norma
+      .pryctDtl
+        .row.cntnr.white
+          .large-4.columns
+            %button
+              %a{href: executives_path}
+                = fa_icon "arrow-left"
+                Consultar Normas
+            - if current_user.following? @executive
+              %button.secondary
+                %a{ href: unfollow_executive_path(@executive) }
+                  = fa_icon "eye-slash"
+                  No seguir
+            - else
+              %button.success
+                %a{ href: follow_executive_path(@executive) }
+                  = fa_icon "eye"
+                  Seguir
+          .large-4.columns
+          .large-4.columns.actions
+            %a#downloads{"data-reveal-id" => "filesPnl"}
+              = fa_icon "download"
+              %span
+                Descargar Archivos
+        .row.cntnr
+          .large-12.columns
+            .row
+              .large-2.columns.labels
+                %label
+                  Título
+              .large-10.columns
+                %span.txtdesc
+                  = @executive.title
+            .row
+              .large-2.columns.labels
+                %label
+                  Número
+              .large-10.columns
+                %span
+                  = @executive.number
+            .row
+              .large-2.columns.labels
+                %label
+                  Fecha
+              .large-10.columns
+                %span
+                  = @executive.filing_at
+            .row
+              .large-2.columns.labels
+                %label
+                  Tipo de Norma
+              .large-10.columns
+                %span
+                  = @executive.kind
+            .row
+              .large-2.columns.labels
+                %label
+                  Institución
+              .large-10.columns
+                %span
+                  = @executive.institution
+- content_for :modal do
+  .reveal-modal.filesPnl.executives#filesPnl{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
+
+    %a.close-reveal-modal{"aria-label" => "Close"}
+      &#215;
+    .row.panels-view
+      .large-12.columns
+        %h2
+          = fa_icon "files-o"
+          Archivos
+    .row.panels-view
+      .large-12.columns
+        .tray.autors
+          %table
+            %colgroup
+              %col
+              %col.date{width: "30%"}
+            %thead
+              %tr
+                %th
+                  Título
+                %th
+                  Fecha de Publicación
+                %th
+                  
+            %tbody
+              -# - @executive.executive_attachments.each do |la|
+              -#   %tr
+              -#     %td
+              -#       = la.title
+              -#     %td
+              -#       = la.published_at
+              -#     %td
+              -#       %a.down{href: la.attachment.url, target: "_blank"}
+              -#         = fa_icon "download"
+              -#         Descargar
