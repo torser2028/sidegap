@@ -546,3 +546,8 @@ sectors.each do |s|
     Institution.create(name: i[:name], sector: sector)
   end
 end
+Kind.create([
+  { name: "Circular", executive: true },
+  { name: "Decreto", executive: true },
+  { name: "Resolución", executive: true },
+  ])
