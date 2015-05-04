@@ -2,7 +2,8 @@ ActiveAdmin.register Executive do
   menu label: "Normas", parent: "Rama Ejecutiva", priority: 0
   actions :all, except: [:destroy]
 
-  permit_params :title, :number, :kind, :institution, :filing_at
+  permit_params :title, :number, :kind, :institution, :filing_at,
+    attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
 
   filter :title, label: "Titulo"
   filter :number, label: "Número"
@@ -38,6 +39,15 @@ ActiveAdmin.register Executive do
         row "Fecha" do
           executive.filing_at
         end
+        row "Archivos Adjuntos" do
+          ul do
+            executive.attachments.each do |a|
+              li do
+                link_to a.attachment.file.filename, a.attachment.url
+              end
+            end
+          end
+        end
       end
     end
     active_admin_comments
@@ -50,6 +60,13 @@ ActiveAdmin.register Executive do
       f.input :kind, label: "Tipo de Norma"
       f.input :institution, label: "Institución"
       f.input :filing_at, label: "Fecha", as: :datepicker
+    end
+    f.inputs "Archivos Adjuntos" do
+      f.has_many :attachments, heading: "", allow_destroy: true, new_record: "Agregar Archivo" do |la|
+        la.input :title, label: "Titulo"
+        la.input :published_at, as: :datepicker, label: "Fecha"
+        la.input :attachment, label: ""
+      end
     end
     f.actions
   end
