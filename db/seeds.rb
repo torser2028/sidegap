@@ -540,3 +540,9 @@ sectors = [
     ]
   },
 ]
+sectors.each do |s|
+  sector = Sector.create(name: s[:name])
+  s[:institutions].each do |i|
+    Institution.create(name: i[:name], sector: sector)
+  end
+end
