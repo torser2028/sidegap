@@ -2,7 +2,7 @@ ActiveAdmin.register Executive do
   menu label: "Normas", parent: "Rama Ejecutiva", priority: 0
   actions :all, except: [:destroy]
 
-  permit_params :title, :number, :kind, :institution, :filing_at,
+  permit_params :title, :number, :kind, :institution_id, :filing_at,
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
 
   filter :title, label: "Titulo"
@@ -33,6 +33,9 @@ ActiveAdmin.register Executive do
         row "Tipo de Norma" do
           executive.kind
         end
+        row "Sector" do
+          executive.institution.sector
+        end
         row "Institución" do
           executive.institution
         end
@@ -58,7 +61,7 @@ ActiveAdmin.register Executive do
       f.input :number, label: "Número"
       f.input :title, label: "Titulo", input_html: { rows: 5 }
       f.input :kind, label: "Tipo de Norma"
-      f.input :institution, label: "Institución"
+      f.input :institution, label: "Institución", collection: option_groups_from_collection_for_select(Sector.all, :institutions, :name, :id, :name)
       f.input :filing_at, label: "Fecha", as: :datepicker
     end
     f.inputs "Archivos Adjuntos" do

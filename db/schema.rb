@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504193018) do
+ActiveRecord::Schema.define(version: 20150504201509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,11 +97,13 @@ ActiveRecord::Schema.define(version: 20150504193018) do
     t.text     "title"
     t.string   "number"
     t.string   "kind"
-    t.string   "institution"
     t.date     "filing_at"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "institution_id"
   end
+
+  add_index "executives", ["institution_id"], name: "index_executives_on_institution_id", using: :btree
 
   create_table "final_statuses", force: :cascade do |t|
     t.string   "name"
@@ -303,6 +305,7 @@ ActiveRecord::Schema.define(version: 20150504193018) do
   add_foreign_key "assignments", "users"
   add_foreign_key "attachments", "executives"
   add_foreign_key "attachments", "legislatives"
+  add_foreign_key "executives", "institutions"
   add_foreign_key "institutions", "sectors"
   add_foreign_key "legislative_stakeholders", "legislatives"
   add_foreign_key "legislative_stakeholders", "stakeholders"
