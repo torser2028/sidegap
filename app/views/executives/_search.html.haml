@@ -31,7 +31,7 @@
           %label
             Número
           = f.search_field :number_eq
-        .large-4.medium-6.columns
+        .large-6.medium-3.columns
           %label
             Titulo
           = f.search_field :title_cont
@@ -42,12 +42,12 @@
         .large-2.medium-3.columns
           %label
             Tipo de Norma
-          = f.search_field :kind_eq
-        .large-2.medium-3.columns
+          = f.collection_select :kind_eq, Kind.executives, :name, :name, include_blank: true
+        .large-8.medium-6.columns
           %label
             Institución
-          = f.search_field :institution_eq
-        .large-2.large-offset-8.medium-3.columns
+          = f.select :institution_id_eq, option_groups_from_collection_for_select(Sector.all, :institutions, :name, :id, :name), include_blank: true
+        .large-2.medium-3.columns
           %label
             %span.ghost
               \_
