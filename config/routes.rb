@@ -48,6 +48,8 @@ Rails.application.routes.draw do
         concerns :followable
         collection do
             get :favorites
+            get :officials
+            get 'official/:id', action: :official, as: :official
         end
     end
 

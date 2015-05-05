@@ -1,0 +1,67 @@
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "users"
+        Consultar Funcionarios
+      .tray.rep
+        .row
+          .small-12.columns
+            %ul.tabs{"data-tab" => "", :role => "tablist"}
+              %li.tab-title.active{:role => "presentational"}
+                %a{"aria-selected" => "true", :controls => "basicPanel", :href => "#basicPanel", :role => "tab", :tabindex => "0"} 
+                  = fa_icon "search"
+                  Buscador
+            .tabs-content
+              %section#basicPanel.content.active{"aria-hidden" => "false", :role => "tabpanel"}
+                .row
+                  = search_form_for @q, url: :officials_executives, remote: true do |f|
+                    .large-4.medium-6.columns
+                      %label
+                        Nombre
+                      = f.search_field :name_cont
+                    .large-1.medium-2.columns
+                      %label
+                        Cargo
+                      = f.search_field :job_eq
+                    .large-3.medium-4.columns
+                      %label
+                        Institución
+                      = f.select :institution_id_eq, option_groups_from_collection_for_select(Sector.all, :institutions, :name, :id, :name), include_blank: true
+                    .large-offset-0.large-2.medium-offset-3.medium-3.columns
+                      %label
+                        %span.ghost
+                          \_
+                      %button.success.fullwidth{type: "submit"}
+                        = fa_icon "search"
+                        Buscar
+                    .large-offset-0.large-2.medium-3.end.columns
+                      %label
+                        %span.ghost
+                          \_
+                      %button.secondary.fullwidth{type: "button"}
+                        %a{href: officials_executives_path}
+                          \× Quitar Filtros
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Nombre
+              %th
+                Cargo
+              %th
+                Institución
+              %th
+                Dirección
+              %th
+                Teléfono
+              %th
+                Opciones
+          %tbody.js_officials
+            = render @officials

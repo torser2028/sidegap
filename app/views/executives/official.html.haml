@@ -1,0 +1,86 @@
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "user"
+        Perfil Funcionario
+      .pryctDtl
+        %button
+          %a{href: officials_executives_path}
+            = fa_icon "arrow-left"
+            Consultar Funcionarios
+        .row.cntnr
+          .large-12.columns
+            .row.white.profileHdr
+              .large-3.medium-4.columns.fixHght
+                %figure
+                  = image_tag @official.avatar_url(:thumb)
+                  %figcaption
+                    = @official.name
+              .large-2.medium-1.columns.fixHght.ghost
+              .large-7.medium-7.columns.fixHght.ghost.actions.prflActns
+                %a{ href: official_executives_path(@official, format: :pdf), target: "_blank"}
+                  = fa_icon "file-pdf-o"
+                  %span
+                    Exportar a PDF
+          .large-12.columns.panels#profilePan
+            .row
+              .large-2.medium-3.columns.labels
+                %label
+                  Nombre
+              .large-10.medium-9.columns
+                %span
+                  = @official.name
+            .row
+              .large-2.medium-3.columns.labels
+                %label
+                  Cargo
+              .large-4.medium-9.columns
+                %span
+                  = @official.job
+              .large-2.medium-3.columns.labels
+                %label
+                  Institución
+              .large-4.medium-9.columns
+                %span
+                  = @official.institution.name
+            .row
+              .large-2.medium-3.columns.labels
+                %label
+                  Dirección
+              .large-4.medium-9.columns
+                %span
+                  = @official.address
+              .large-2.medium-3.columns.labels
+                %label
+                  Teléfono
+              .large-4.medium-9.columns
+                %span
+                  = @official.phone
+            .row
+              .large-2.medium-3.columns.labels
+                %label
+                  Oficina
+              .large-4.medium-9.columns
+                %span
+                  = @official.office
+              .large-2.medium-3.columns.labels
+                %label
+                  E-mail
+              .large-4.medium-9.columns
+                %span
+                  = @official.email
+            .row
+              .large-2.medium-3.columns.labels
+                %label
+                  Fuente de Información
+              .large-10.medium-9.columns
+                %span
+                  = link_to @official.source, @official.source
+            .row
+              .large-2.medium-12.columns.labels
+                %label
+                  Perfil
+              .large-10.medium-12.columns
+                %span
+                  = simple_format @official.info

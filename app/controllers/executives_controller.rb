@@ -21,6 +21,26 @@ class ExecutivesController < InheritedResources::Base
     end
   end
 
+  def officials
+    add_breadcrumb "Altos Funcionarios", :officials_executives_path
+
+    @q = Official.ransack params[:q]
+    @officials = @q.result
+  end
+
+  def official
+    add_breadcrumb "Pérfil Funcionario", :official_executives_path
+
+    @official = Official.find params[:id]
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "perfil #{@official.name}".parameterize
+      end
+    end
+  end
+
   def show
     add_breadcrumb "Detalle de la Norma", :executive_path
 

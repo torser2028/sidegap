@@ -1,0 +1,16 @@
+%tr
+  %td
+    = official.name
+  %td
+    = official.job
+  %td
+    = official.institution.name
+  %td
+    = official.address
+  %td
+    = official.phone
+  %td.actions
+    %a.more{href: official_executives_path(official)}
+      = fa_icon "arrow-circle-right"
+      %span
+        Ver
