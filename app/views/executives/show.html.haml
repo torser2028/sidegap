@@ -63,7 +63,7 @@
                   Institución
               .large-10.columns
                 %span
-                  = @executive.institution
+                  = @executive.institution.name
 - content_for :modal do
   .reveal-modal.filesPnl.executives#filesPnl{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
 
