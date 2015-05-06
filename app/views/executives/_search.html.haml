@@ -46,7 +46,7 @@
         .large-8.medium-6.columns
           %label
             Institución
-          = f.select :institution_id_eq, option_groups_from_collection_for_select(Sector.all, :institutions, :name, :id, :name), include_blank: true
+          = f.select :institution_id_eq, option_groups_from_collection_for_select(Sector.all.includes(:institutions), :institutions, :name, :id, :name), include_blank: true
         .large-2.medium-3.columns
           %label
             %span.ghost

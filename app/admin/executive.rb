@@ -61,7 +61,7 @@ ActiveAdmin.register Executive do
       f.input :number, label: "Número"
       f.input :title, label: "Titulo", input_html: { rows: 5 }
       f.input :kind, label: "Tipo de Norma", collection: Kind.executives.pluck(:name)
-      f.input :institution, label: "Institución", collection: option_groups_from_collection_for_select(Sector.all, :institutions, :name, :id, :name, f.object.institution.try(:id))
+      f.input :institution, label: "Institución", collection: option_groups_from_collection_for_select(Sector.all.includes(:institutions), :institutions, :name, :id, :name, f.object.institution.try(:id))
       f.input :filing_at, label: "Fecha", as: :datepicker
     end
     f.inputs "Archivos Adjuntos" do
