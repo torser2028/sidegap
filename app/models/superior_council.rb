@@ -1,0 +1,2 @@
+class SuperiorCouncil < Judicial
+end

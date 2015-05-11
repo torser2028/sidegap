@@ -1,0 +1,2 @@
+module JudicialsHelper
+end

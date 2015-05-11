@@ -1,0 +1,2 @@
+class ConstitutionalCourt < Judicial
+end

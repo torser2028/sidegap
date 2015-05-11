@@ -71,6 +71,9 @@ body{
         display: inline-block;
         padding: $D-padGlb/2;
         color: $C-luz;
+        img{
+          width: 1.25em;
+        }
       }
     }
   }

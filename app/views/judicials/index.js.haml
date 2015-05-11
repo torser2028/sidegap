@@ -1,0 +1,4 @@
+json.array!(@judicials) do |judicial|
+  json.extract! judicial, :id, :title, :number, :kind, :filing_at, :court, :room, :type
+  json.url judicial_url(judicial, format: :json)
+end

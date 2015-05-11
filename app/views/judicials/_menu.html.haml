@@ -1,0 +1,13 @@
+- if params[:type]
+  %li
+    %a{ :href => "#{params[:type].underscore.pluralize}_path".to_sym }
+      Bandeja de Entrada
+  %li
+    %a{:href => favorites_judicials_path}
+      Mis Provincias Favoritas
+  %li
+    %a{:href => magistrates_judicials_path}
+      Perfil Magistrados
+  %li
+    %a{:href => "#"}
+      Informes

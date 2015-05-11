@@ -1,0 +1,27 @@
+%h1 Listing judicials
+
+%table
+  %thead
+    %tr
+      %th Title
+      %th Number
+      %th Kind
+      %th Filing at
+      %th Court
+      %th Room
+      %th Type
+      %th
+      
+  %tbody
+    - @judicials.each do |judicial|
+      %tr
+        %td= judicial.title
+        %td= judicial.number
+        %td= judicial.kind
+        %td= judicial.filing_at
+        %td= judicial.court
+        %td= judicial.room
+        %td= judicial.type
+        %td= link_to 'Show', '#'
+
+%br
