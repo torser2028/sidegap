@@ -7,7 +7,7 @@ ActiveAdmin.register Executive do
 
   filter :title, label: "Titulo"
   filter :number, label: "Número"
-  filter :kind, label: "Tipo de Norma"
+  filter :kind, label: "Tipo de Norma", as: :select, collection: Kind.executives.pluck(:name)
   filter :institution, label: "Institución"
   filter :filing_at, label: "Fecha"
 
