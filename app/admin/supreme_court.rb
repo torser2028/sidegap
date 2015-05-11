@@ -7,7 +7,7 @@ ActiveAdmin.register SupremeCourt do
 
   filter :title, label: "Titulo"
   filter :number, label: "Número"
-  filter :kind, label: "Tipo de Acción", as: :select, collection: Kind.judicials.pluck(:name)
+  filter :kind, label: "Tipo de Acción", as: :select, collection: -> { Kind.judicials.pluck(:name) }
   filter :court, label: "Corte"
   filter :filing_at, label: "Fecha"
 
