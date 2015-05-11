@@ -1,0 +1,63 @@
+@import "variables";
+//Rama Judicial
+.judicials{
+  header{
+    h1{
+      border-bottom: $D-padGlb/4 solid $C-matiz3;
+      i{
+        background: $C-matiz3;
+      }
+    }
+  }
+  h2{
+    i{
+      color: $C-matiz3;
+    }
+  }
+  .main{
+    h2{
+      i{
+        color: $C-matiz3;
+      }
+    }
+    h3{
+      i{
+        background: $C-matiz3;
+      }
+    }
+    .tray{
+      table{
+        tbody{
+          tr{
+            td{
+              &.actions{
+                a{
+                  &:hover{
+                    i{
+                      color: $C-matiz3;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .pryctDtl{
+      .row{
+        .columns{
+          &.actions{
+            a{
+              &:hover{
+                i{
+                  color: $C-matiz3;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
