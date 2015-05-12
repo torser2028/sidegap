@@ -1,1 +1,30 @@
-Preview
+.dashboard.tackle
+  .row
+    .large-3.medium-1.small-12.columns
+      %span.ghost
+        \-
+    .large-6.medium-10.small-12.columns
+      %ul.small-block-grid-2.medium-block-grid-2.large-block-grid-2
+        %li
+          %a.single{href: supreme_courts_path}
+            %i.icon
+              = image_tag("balanza.svg")
+            %span Corte Suprema de Justicia
+        %li
+          %a.single{href: constitutional_courts_path}
+            %i.icon
+              = image_tag("balanza.svg")
+            %span Corte Constitucional
+        %li
+          %a.single{href: superior_councils_path}
+            %i.icon
+              = image_tag("balanza.svg")
+            %span Concejo Superior de la Judicatura
+        %li
+          %a.single{href: council_states_path}
+            %i.icon
+              = image_tag("balanza.svg")
+            %span Concejo de Estado
+    .large-3.medium-1.small-12.columns 
+      %span.ghost
+        \-

@@ -25,6 +25,24 @@
         background: $C-matiz3;
       }
     }
+    .dashboard{
+      ul{
+        li{
+          background: $C-matiz3;
+          a{
+            span{
+
+            }
+            &:hover{
+              span{
+                color: $C-matiz3;
+              }
+            }
+          }
+        }
+      }
+    }
+
     .tray{
       table{
         tbody{
