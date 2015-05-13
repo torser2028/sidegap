@@ -1,0 +1,29 @@
+%tr
+  %td.num
+    = supreme_court.number
+  %td.desc
+    %p
+      = supreme_court.title
+  %td.txt
+    = supreme_court.kind
+  %td.descl
+    = supreme_court.court
+  %td.num
+    = supreme_court.room
+  %td.num
+    = supreme_court.filing_at
+  %td.actions
+    %a.more{href: judicial_path(supreme_court)}
+      = fa_icon "arrow-circle-right"
+      %span
+        Ver
+    - if current_user.following? supreme_court
+      %a.follow{href: unfollow_judicial_path(supreme_court)}
+        = fa_icon "eye-slash"
+        %span
+          Dejar de Seguir
+    - else
+      %a.follow{href: follow_judicial_path(supreme_court)}
+        = fa_icon "eye"
+        %span
+          Seguir

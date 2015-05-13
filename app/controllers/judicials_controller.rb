@@ -8,7 +8,8 @@ class JudicialsController < InheritedResources::Base
   def index
     add_breadcrumb "Bandeja de Entrada", "#{get_model.underscore.pluralize}_path".to_sym
 
-    @judicials = juditial_type.all
+    @q = juditial_type.ransack params[:q]
+    @judicials = @q.result
   end
 
   private

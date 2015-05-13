@@ -1,0 +1,29 @@
+%tr
+  %td.num
+    = constitutional_court.number
+  %td.desc
+    %p
+      = constitutional_court.title
+  %td.txt
+    = constitutional_court.kind
+  %td.descl
+    = constitutional_court.court
+  %td.num
+    = constitutional_court.room
+  %td.num
+    = constitutional_court.filing_at
+  %td.actions
+    %a.more{href: judicial_path(constitutional_court)}
+      = fa_icon "arrow-circle-right"
+      %span
+        Ver
+    - if current_user.following? constitutional_court
+      %a.follow{href: unfollow_judicial_path(constitutional_court)}
+        = fa_icon "eye-slash"
+        %span
+          Dejar de Seguir
+    - else
+      %a.follow{href: follow_judicial_path(constitutional_court)}
+        = fa_icon "eye"
+        %span
+          Seguir

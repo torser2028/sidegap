@@ -1,0 +1,29 @@
+%tr
+  %td.num
+    = superior_council.number
+  %td.desc
+    %p
+      = superior_council.title
+  %td.txt
+    = superior_council.kind
+  %td.descl
+    = superior_council.court
+  %td.num
+    = superior_council.room
+  %td.num
+    = superior_council.filing_at
+  %td.actions
+    %a.more{href: judicial_path(superior_council)}
+      = fa_icon "arrow-circle-right"
+      %span
+        Ver
+    - if current_user.following? superior_council
+      %a.follow{href: unfollow_judicial_path(superior_council)}
+        = fa_icon "eye-slash"
+        %span
+          Dejar de Seguir
+    - else
+      %a.follow{href: follow_judicial_path(superior_council)}
+        = fa_icon "eye"
+        %span
+          Seguir

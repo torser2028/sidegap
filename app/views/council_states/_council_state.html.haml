@@ -1,0 +1,29 @@
+%tr
+  %td.num
+    = council_state.number
+  %td.desc
+    %p
+      = council_state.title
+  %td.txt
+    = council_state.kind
+  %td.descl
+    = council_state.court
+  %td.num
+    = council_state.room
+  %td.num
+    = council_state.filing_at
+  %td.actions
+    %a.more{href: judicial_path(council_state)}
+      = fa_icon "arrow-circle-right"
+      %span
+        Ver
+    - if current_user.following? council_state
+      %a.follow{href: unfollow_judicial_path(council_state)}
+        = fa_icon "eye-slash"
+        %span
+          Dejar de Seguir
+    - else
+      %a.follow{href: follow_judicial_path(council_state)}
+        = fa_icon "eye"
+        %span
+          Seguir

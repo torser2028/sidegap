@@ -1,27 +1,68 @@
-%h1 Listing judicials
-
-%table
-  %thead
-    %tr
-      %th Title
-      %th Number
-      %th Kind
-      %th Filing at
-      %th Court
-      %th Room
-      %th Type
-      %th
-      
-  %tbody
-    - @judicials.each do |judicial|
-      %tr
-        %td= judicial.title
-        %td= judicial.number
-        %td= judicial.kind
-        %td= judicial.filing_at
-        %td= judicial.court
-        %td= judicial.room
-        %td= judicial.type
-        %td= link_to 'Show', '#'
-
-%br
+.panels-view
+  .row
+    .small-12.columns
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "inbox"
+        Bandeja de Entrada
+      .tray.projects
+        .row
+          .small-12.columns
+            = render 'search'
+        %table
+          %colgroup
+            %col
+            %col{width: "50%"}
+            %col{width: "15%"}
+            %col{width: "25%"}
+            %col
+            %col
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Número
+              %th
+                Titulo
+              %th
+                Tipo
+              %th
+                Corte
+              %th
+                Sala
+              %th
+                Fecha
+              %th
+                Opciones
+          %tbody.js_judicials
+            - @judicials.each do |judicial|
+              %tr
+                %td.num
+                  = judicial.number
+                %td.desc
+                  %p
+                    = judicial.title
+                %td.txt
+                  = judicial.kind
+                %td.descl
+                  = judicial.court
+                %td.num
+                  = judicial.room
+                %td.num
+                  = judicial.filing_at
+                %td.actions
+                  %a.more{href: judicial_path(judicial)}
+                    = fa_icon "arrow-circle-right"
+                    %span
+                      Ver
+                  - if current_user.following? judicial
+                    %a.follow{href: unfollow_judicial_path(judicial)}
+                      = fa_icon "eye-slash"
+                      %span
+                        Dejar de Seguir
+                  - else
+                    %a.follow{href: follow_judicial_path(judicial)}
+                      = fa_icon "eye"
+                      %span
+                        Seguir
