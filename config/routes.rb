@@ -53,7 +53,7 @@ Rails.application.routes.draw do
         end
     end
 
-    resources :judicials, only: [] do
+    resources :judicials, only: [:show] do
         concerns :followable
         collection do
             get :preview
@@ -61,15 +61,12 @@ Rails.application.routes.draw do
             get :magistrates
             get 'magistrate/:id', action: :magistrate, as: :magistrate
 
+            resources :supreme_courts, controller: :judicials, type: 'SupremeCourt', only: [:index]
+            resources :council_states, controller: :judicials, type: 'CouncilState', only: [:index]
+            resources :superior_councils, controller: :judicials, type: 'SuperiorCouncil', only: [:index]
+            resources :constitutional_courts, controller: :judicials, type: 'ConstitutionalCourt', only: [:index]
         end
     end
-    scope 'judicials' do
-        resources :supreme_courts, controller: :judicials, type: 'SupremeCourt', only: [:index, :show]
-        resources :council_states, controller: :judicials, type: 'CouncilState', only: [:index, :show]
-        resources :superior_councils, controller: :judicials, type: 'SuperiorCouncil', only: [:index, :show]
-        resources :constitutional_courts, controller: :judicials, type: 'ConstitutionalCourt', only: [:index, :show]
-    end
-
 
     # Example of named route that can be invoked with purchase_url(id: product.id)
     #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
