@@ -4,6 +4,9 @@ ActiveAdmin.register Official do
 
   permit_params :name, :email, :phone, :address, :institution_id, :job, :office, :info, :source, :avatar
 
+  filter :job, label: "Cargo"
+  filter :institution, label: "Institución"
+
   index title: "Altos Funcionarios" do
     selectable_column
     column "Nombre", :name

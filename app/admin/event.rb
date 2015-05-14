@@ -4,6 +4,10 @@ ActiveAdmin.register Event do
 
   permit_params :body, :event_at, :event_type, :source
 
+  filter :body, label: "Evento"
+  filter :event_type, label: "Tipo de Evento"
+  filter :event_at, label: "Fecha"
+
   index do
     selectable_column
     column "Evento", :body

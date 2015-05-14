@@ -4,6 +4,11 @@ ActiveAdmin.register Stakeholder do
 
   permit_params :name, :email, :phone, :address, :political_party, :job, :commission, :region, :office, :info, :source, :avatar
 
+  filter :name, label: "Nombre"
+  filter :political_party, label: "Partido", as: :select, collection: -> { PoliticalParty.pluck(:name) }
+  filter :commission, label: "Comisión", as: :select, collection: -> { Commission.pluck(:name) }
+  filter :region, label: "Región", as: :select, collection: -> { Region.pluck(:name) }
+
   index do
     selectable_column
     column "Nombre", :name
