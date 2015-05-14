@@ -15,7 +15,6 @@ ActiveAdmin.register Legislative do
   filter :commission, label: "Comisión", as: :select, collection: ->{ Commission.pluck(:name) }
   filter :status, label: "Estatus", as: :select, collection: -> { Status.pluck(:name) }
   filter :probability, label: "Probabilidad", as: :select, collection: -> { Probability.pluck(:name) }
-  filter :attachments, label: "Archivos Adjuntos", as: :select, collection: -> { Attachment.legislatives }
   filter :filing_at, label: "Fecha de Radicación"
 
   index do

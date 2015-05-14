@@ -36,33 +36,4 @@
               %th
                 Opciones
           %tbody.js_judicials
-            - @judicials.each do |judicial|
-              %tr
-                %td.num
-                  = judicial.number
-                %td.desc
-                  %p
-                    = judicial.title
-                %td.txt
-                  = judicial.kind
-                %td.descl
-                  = judicial.court
-                %td.num
-                  = judicial.room
-                %td.num
-                  = judicial.filing_at
-                %td.actions
-                  %a.more{href: judicial_path(judicial)}
-                    = fa_icon "arrow-circle-right"
-                    %span
-                      Ver
-                  - if current_user.following? judicial
-                    %a.follow{href: unfollow_judicial_path(judicial)}
-                      = fa_icon "eye-slash"
-                      %span
-                        Dejar de Seguir
-                  - else
-                    %a.follow{href: follow_judicial_path(judicial)}
-                      = fa_icon "eye"
-                      %span
-                        Seguir
+            = render @judicials

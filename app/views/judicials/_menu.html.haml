@@ -1,6 +1,6 @@
 - if params[:type]
   %li
-    %a{ :href => "#{params[:type].underscore.pluralize}_path".to_sym }
+    %a{ :href => params[:type].underscore.pluralize }
       Bandeja de Entrada
   %li
     %a{:href => favorites_judicials_path}
