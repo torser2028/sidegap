@@ -46,7 +46,7 @@ ActiveAdmin.register Executive do
           ul do
             executive.attachments.each do |a|
               li do
-                link_to a.attachment.file.filename, a.attachment.url
+                link_to a.title, a.attachment.url
               end
             end
           end
