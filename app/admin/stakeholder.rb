@@ -73,7 +73,10 @@ ActiveAdmin.register Stakeholder do
       f.input :office, label: "Oficina"
       f.input :info, label: "Pérfil"
       f.input :source, label: "Fuente de Información"
-      f.input :avatar
+      f.input :avatar, hint: f.object.avatar.present? \
+        ? image_tag(f.object.avatar_url(:thumb))
+        : content_tag(:span, "no tiene image")
+      f.input :avatar_cache, as: :hidden
     end
     f.actions
   end
