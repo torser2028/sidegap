@@ -1,62 +1,65 @@
 .dashboard
-  %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-4.da-thumbs{id: "da-thumbs"}
-    %li.lgsltv
-      %a.single{href: legislatives_path}
-        .overlay
-          %strong Información sobre el Trámite de Proyectos de Ley y Reformas Constitucionales
-        %i.icon
-          = fa_icon "legal"
-        %span Rama Legislativa
-    %li.ejctv
-      %a.single{href: executives_path}
-        .overlay
-          %strong Información sobre Decretos, Circulares y Resoluciones de las entidades que componen la Rama Ejecutiva del Poder Público desde 1 de enero de 2014
-        %i.icon
-          = fa_icon "sitemap"
-        %span Rama Ejecutiva
-    %li.jdcl
-      %a.single{href: preview_judicials_path}
-        .overlay
-          %strong Información sobre las Sentencias de la Corte Constitucional, Consejo de Estado, Corte Suprema de Justicia y Consejo Superior de la Judicatura
-        %i.icon
-          = image_tag("balanza.svg")
-        %span Rama Judicial
-    %li.cntrl
-      %a.triple{href: "#"}
-        .overlay
-          %strong Información sobre las decisiones de la Contraloría, Procuraduría y Defensoría del Pueblo
-        %i.icon
-          = fa_icon "eye"
-        %span.minus Organismos de control y ministerio público
-    %li.elctrl
-      %a.double{href: "#"}
-        .overlay
-          %strong Información sobre las decisiones de la Registraduría Nacional del Estado Civil y del Consejo Nacional Electoral
-        %i.icon
-          = fa_icon "hand-o-down"
-        %span Organización Electoral
-    %li.nms
-      %a.quad{href: "#"}
-        .overlay
-          %strong Información sobre circulares, resoluciones y decretos que se ponen  a consideración ciudadana para comentarios
-        %i.icon
-          = fa_icon "users"
-        %span.minus Normas en proceso de consulta ciudadana de la Rama Ejecutiva del Poder Público
-    %li.cncjs
-      %a.double{href: "#"}
-        .overlay
-          %strong Información sobre Proyectos de Acuerdo en trámite en los Concejos municipales o Distritales de Bogotá, Medellín, Cali, Bucaramanga y Barranquilla
-        %i.icon
-          = fa_icon "comments"
-        %span Concejos Municipales
-    %li.bogta
-      %a.double{href: "#"}
-        .overlay
-          %strong Información sobre las normas expedidas en el Distrito Capital de Bogotá por parte de todas las entidades que lo componen
-        %i.icon
-          = image_tag("bogota.svg")
-          //= fa_icon "building-o"
-        %span Distrito capital de Bogotá
+  .row
+    .large-12.columns
+      .row
+        %ul.small-block-grid-2.medium-block-grid-3.large-block-grid-3.da-thumbs{id: "da-thumbs"}
+          %li.lgsltv
+            %a.single{href: legislatives_path}
+              .overlay
+                %strong Información sobre el Trámite de Proyectos de Ley y Reformas Constitucionales
+              %i.icon
+                = fa_icon "legal"
+              %span Rama Legislativa
+          %li.nms
+            %a.double{href: "#"}
+              .overlay
+                %strong Información sobre circulares, resoluciones y decretos que se ponen  a consideración ciudadana para comentarios
+              %i.icon
+                = fa_icon "users"
+              %span.minus Normas en proceso de consulta ciudadana de la Rama Ejecutiva del Poder Público
+          %li.cncjs
+            %a.single{href: "#"}
+              .overlay
+                %strong Información sobre Proyectos de Acuerdo en trámite en los Concejos municipales o Distritales de Bogotá, Medellín, Cali, Bucaramanga y Barranquilla
+              %i.icon
+                = fa_icon "comments"
+              %span Concejos Municipales
+          / %li.ejctv
+          /   %a.single{href: executives_path}
+          /     .overlay
+          /       %strong Información sobre Decretos, Circulares y Resoluciones de las entidades que componen la Rama Ejecutiva del Poder Público desde 1 de enero de 2014
+          /     %i.icon
+          /       = fa_icon "sitemap"
+          /     %span Rama Ejecutiva
+          / %li.jdcl
+          /   %a.single{href: preview_judicials_path}
+          /     .overlay
+          /       %strong Información sobre las Sentencias de la Corte Constitucional, Consejo de Estado, Corte Suprema de Justicia y Consejo Superior de la Judicatura
+          /     %i.icon
+          /       = image_tag("balanza.svg")
+          /     %span Rama Judicial
+          / %li.cntrl
+          /   %a.triple{href: "#"}
+          /     .overlay
+          /       %strong Información sobre las decisiones de la Contraloría, Procuraduría y Defensoría del Pueblo
+          /     %i.icon
+          /       = fa_icon "eye"
+          /     %span.minus Organismos de control y ministerio público
+          / %li.elctrl
+          /   %a.double{href: "#"}
+          /     .overlay
+          /       %strong Información sobre las decisiones de la Registraduría Nacional del Estado Civil y del Consejo Nacional Electoral
+          /     %i.icon
+          /       = fa_icon "hand-o-down"
+          /     %span Organización Electoral
+          / %li.bogta
+          /   %a.double{href: "#"}
+          /     .overlay
+          /       %strong Información sobre las normas expedidas en el Distrito Capital de Bogotá por parte de todas las entidades que lo componen
+          /     %i.icon
+          /       = image_tag("bogota.svg")
+          /       //= fa_icon "building-o"
+          /     %span Distrito capital de Bogotá
 .confignews
   .row
     .large-4.large-offset-8.columns
@@ -65,7 +68,7 @@
         %span.glyph
           = fa_icon "gear"
 %h1 Noticias
-%ul.news.small-block-grid-1.medium-block-grid-2.large-block-grid-3
+%ul.news.small-block-grid-1.medium-block-grid-2.large-block-grid-2
   - @stories.each do |story|
     %li.new
       %h2
