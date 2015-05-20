@@ -4,6 +4,7 @@ class Stakeholder < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
+  default_scope { order(name: :asc) }
   scope :authors, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.authors).uniq }
   scope :speakers, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.speakers).uniq }
 end
