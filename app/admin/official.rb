@@ -1,3 +1,4 @@
+=begin
 ActiveAdmin.register Official do
   menu label: "Altos Funcionarios", parent: "Rama Ejecutiva", priority: 1
   actions :all, except: [:destroy]
@@ -72,3 +73,4 @@ ActiveAdmin.register Official do
     f.actions
   end
 end
+=end

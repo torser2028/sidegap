@@ -1,3 +1,4 @@
+=begin
 ActiveAdmin.register ConstitutionalCourt do
   menu label: "Corte Constitucional", parent: "Rama Judicial", priority: 1
   actions :all, except: [:destroy]
@@ -72,3 +73,4 @@ ActiveAdmin.register ConstitutionalCourt do
   end
 end
 
+=end

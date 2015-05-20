@@ -1,3 +1,4 @@
+=begin
 ActiveAdmin.register SuperiorCouncil do
   menu label: "Consejo Superior de la Judicatura", parent: "Rama Judicial", priority: 2
   actions :all, except: [:destroy]
@@ -72,3 +73,4 @@ ActiveAdmin.register SuperiorCouncil do
   end
 end
 
+=end

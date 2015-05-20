@@ -1,3 +1,4 @@
+=begin
 ActiveAdmin.register SupremeCourt do
   menu label: "Corte Suprema", parent: "Rama Judicial", priority: 0
   actions :all, except: [:destroy]
@@ -71,3 +72,4 @@ ActiveAdmin.register SupremeCourt do
     f.actions
   end
 end
+=end
