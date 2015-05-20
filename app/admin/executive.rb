@@ -1,3 +1,4 @@
+=begin
 ActiveAdmin.register Executive do
   menu label: "Normas", parent: "Rama Ejecutiva", priority: 0
   actions :all, except: [:destroy]
@@ -74,3 +75,4 @@ ActiveAdmin.register Executive do
     f.actions
   end
 end
+=end

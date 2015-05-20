@@ -1,3 +1,4 @@
+=begin
 ActiveAdmin.register CouncilState do
   menu label: "Consejo de Estado", parent: "Rama Judicial", priority: 3
   actions :all, except: [:destroy]
@@ -71,3 +72,4 @@ ActiveAdmin.register CouncilState do
     f.actions
   end
 end
+=end

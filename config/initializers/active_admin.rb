@@ -192,8 +192,8 @@ ActiveAdmin.setup do |config|
   config.namespace :admin do |admin|
     admin.build_menu :default do |menu|
       menu.add label: "Rama Legislativa", priority: 1
-      menu.add label: "Rama Ejecutiva", priority: 2
-      menu.add label: "Rama Judicial", priority: 3
+      # menu.add label: "Rama Ejecutiva", priority: 2
+      # menu.add label: "Rama Judicial", priority: 3
     end
   end
 
