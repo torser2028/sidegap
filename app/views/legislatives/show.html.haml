@@ -127,29 +127,30 @@
                   = @legislative.probability
               .large-8.columns
                 %span
-            = form_for @legislative_user do |f|
-              .row.white
-                .large-2.columns.labels
-                  %label
-                    Impacto
-                .large-2.columns
-                  = f.select :impact, options_for_select(LegislativeUser::IMPACT, @legislative_user.impact), include_blank: true
-                .large-8.columns
-                  %span.ghost
-                    \-
-              .row.white
-                .large-2.columns.labels
-                  %label
-                    Comentario
-                .large-6.columns
-                  = f.text_area :comment, class: "comments", rows: 6
-                  = f.hidden_field :legislative_id, value: @legislative.id
-                  %button.success{type: "submit"}
-                    = fa_icon "save"
-                    Guardar
-                .large-4.columns
-                  %span.ghost
-                    \-
+            - if current_user.following? @legislative
+              = form_for @legislative_user do |f|
+                .row.white
+                  .large-2.columns.labels
+                    %label
+                      Impacto
+                  .large-2.columns
+                    = f.select :impact, options_for_select(LegislativeUser::IMPACT, @legislative_user.impact), include_blank: true
+                  .large-8.columns
+                    %span.ghost
+                      \-
+                .row.white
+                  .large-2.columns.labels
+                    %label
+                      Comentario
+                  .large-6.columns
+                    = f.text_area :comment, class: "comments", rows: 6
+                    = f.hidden_field :legislative_id, value: @legislative.id
+                    %button.success{type: "submit"}
+                      = fa_icon "save"
+                      Guardar
+                  .large-4.columns
+                    %span.ghost
+                      \-
         .row
           .large-6.columns
             %h3
