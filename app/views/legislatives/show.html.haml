@@ -82,16 +82,29 @@
             .row
               .large-2.columns.labels
                 %label
-                  Comisión
+                  Probabilidad
               .large-2.columns
                 %span
+                  = @legislative.probability
+              .large-2.columns.labels
+                %label
+                  Comisión
+              .large-6.columns
+                %span
                   = @legislative.commission
+            .row
               .large-2.columns.labels
                 %label
                   Estatus
-              .large-6.columns
+              .large-2.columns
                 %span
                   = @legislative.status
+              .large-2.columns.labels
+                %label
+                  Estatus Final
+              .large-6.columns
+                %span
+                  = @legislative.final_status
             .row
               .large-2.columns.labels
                 %label 
@@ -118,15 +131,6 @@
               .large-6.columns
                 %span
                   = @legislative.law
-            .row
-              .large-2.columns.labels
-                %label
-                  Probabilidad
-              .large-2.columns
-                %span
-                  = @legislative.probability
-              .large-8.columns
-                %span
             - if current_user.following? @legislative
               = form_for @legislative_user do |f|
                 .row.white
