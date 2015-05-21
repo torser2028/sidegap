@@ -2,7 +2,7 @@ ActiveAdmin.register Legislative do
   menu label: "Proyectos", parent: "Rama Legislativa", priority: 0
   actions :all, except: [:destroy]
 
-  permit_params :title, :source, :chamber_number, :senate_number, :commission, :status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at,
+  permit_params :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at,
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
     legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker],
     agendas_attributes: [:id, :_destroy, :body, :event_at, :time]
@@ -14,6 +14,7 @@ ActiveAdmin.register Legislative do
   filter :senate_number, label: "Número de Senado"
   filter :commission, label: "Comisión", as: :select, collection: ->{ Commission.pluck(:name) }
   filter :status, label: "Estatus", as: :select, collection: -> { Status.pluck(:name) }
+  filter :final_status, label: "Estatus Final", as: :select, collection: -> { FinalStatus.pluck(:name) }
   filter :probability, label: "Probabilidad", as: :select, collection: -> { Probability.pluck(:name) }
   filter :filing_at, label: "Fecha de Radicación"
 
@@ -50,6 +51,10 @@ ActiveAdmin.register Legislative do
           
         row "Estatus" do
           legislative.status
+        end
+
+        row "Estatus Final" do
+          legislative.final_status
         end
           
         row "Tema de Interes" do
@@ -128,6 +133,7 @@ ActiveAdmin.register Legislative do
       f.input :senate_number, label: "Número de Senado"
       f.input :commission, label: "Comisión", collection: Commission.pluck(:name)
       f.input :status, label: "Estatus", collection: Status.pluck(:name)
+      f.input :final_status, label: "Estatus Final", collection: FinalStatus.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)
       f.input :law, label: "Tipo de Ley", collection: Law.pluck(:name)
       f.input :probability, label: "Probabilidad", collection: Probability.pluck(:name)
