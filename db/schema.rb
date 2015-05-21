@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150511173658) do
+ActiveRecord::Schema.define(version: 20150521163845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -268,7 +268,7 @@ ActiveRecord::Schema.define(version: 20150511173658) do
     t.string   "name"
     t.string   "email"
     t.string   "phone"
-    t.string   "address"
+    t.string   "address",         default: "Capitolio Nacional, Calle 10 N° 7-50"
     t.string   "political_party"
     t.string   "job"
     t.string   "commission"
@@ -276,8 +276,8 @@ ActiveRecord::Schema.define(version: 20150511173658) do
     t.string   "office"
     t.text     "info"
     t.string   "source"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
     t.string   "avatar"
   end
 

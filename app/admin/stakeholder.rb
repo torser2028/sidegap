@@ -65,9 +65,9 @@ ActiveAdmin.register Stakeholder do
       f.input :name, label: "Nombre"
       f.input :email
       f.input :phone, label: "Teléfono"
-      f.input :address, label: "Dirección"
+      f.input :address, label: "Dirección", input_html: { disabled: true }
       f.input :political_party, label: "Partido", collection: PoliticalParty.pluck(:name)
-      f.input :job, label: "Cargo"
+      f.input :job, label: "Cargo", collection: Job.pluck(:name)
       f.input :commission, label: "Comisión", collection: Commission.pluck(:name)
       f.input :region, label: "Región", collection: Region.pluck(:name)
       f.input :office, label: "Oficina"
