@@ -1,0 +1,63 @@
+@import "variables";
+// Normas en proceso de consulta ciudadana de la Rama Ejecutiva del Poder Público
+.consultations{
+  header{
+    h1{
+      border-bottom: $D-padGlb/4 solid $C-matiz6;
+      i{
+        background: $C-matiz6;
+      }
+    }
+  }
+  h2{
+    i{
+      color: $C-matiz6;
+    }
+  }
+  .main{
+    h2{
+      i{
+        color: $C-matiz6;
+      }
+    }
+    h3{
+      i{
+        background: $C-matiz6;
+      }
+    }
+    .tray{
+      table{
+        tbody{
+          tr{
+            td{
+              &.actions{
+                a{
+                  &:hover{
+                    i{
+                      color: $C-matiz6;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .pryctDtl{
+      .row{
+        .columns{
+          &.actions{
+            a{
+              &:hover{
+                i{
+                  color: $C-matiz6;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
