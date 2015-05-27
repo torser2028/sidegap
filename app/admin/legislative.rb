@@ -24,7 +24,7 @@ ActiveAdmin.register Legislative do
     column "Número de Cámara", :chamber_number
     column "Número de Senado", :senate_number
     column "Fecha de Radicación", :filing_at
-    actions
+    actions() {|legislative| link_to "Eliminar", inactive_admin_legislative_path(legislative), method: :put }
   end
 
   show title: "Detalle del Proyecto" do |legislative|
@@ -165,5 +165,14 @@ ActiveAdmin.register Legislative do
       end
     end
     f.actions
+  end
+
+  member_action :inactive, method: :put do
+    resource.inactive!
+    redirect_to admin_legislatives_path, notice: "El Proyecto ha sido eliminado."
+  end
+
+  action_item :inactive, only: :show do
+    link_to "Inactive", inactive_admin_legislative_path(legislative), method: :put
   end
 end
