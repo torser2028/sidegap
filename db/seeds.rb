@@ -543,7 +543,7 @@ sectors = [
 sectors.each do |s|
   sector = Sector.create(name: s[:name])
   s[:institutions].each do |i|
-    Institution.create(name: i[:name], sector: sector)
+    Institution.create(name: i[:name], sector: sector, executive: i[:executive], rule: i[:rule])
   end
 end
 Kind.create([
