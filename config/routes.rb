@@ -44,6 +44,13 @@ Rails.application.routes.draw do
 
     resources :legislative_users, only: [:create, :update]
 
+    resources :rules, only: [:index, :show] do
+        concerns :followable
+        collection do
+            get :favorites
+        end
+    end
+
     # resources :executives, only: [:index, :show] do
     #     concerns :followable
     #     collection do

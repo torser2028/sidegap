@@ -1,0 +1,102 @@
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "file-text"
+        Detalles de la Norma
+      .pryctDtl
+        .row.cntnr.white
+          .large-4.columns
+            %button
+              %a{href: rules_path}
+                = fa_icon "arrow-left"
+                Consultar Normas
+            - if current_user.following? @rule
+              %button.secondary
+                %a{ href: unfollow_rule_path(@rule) }
+                  = fa_icon "eye-slash"
+                  No seguir
+            - else
+              %button.success
+                %a{ href: follow_rule_path(@rule) }
+                  = fa_icon "eye"
+                  Seguir
+          .large-4.columns
+          .large-4.columns.actions
+            %a#downloads{"data-reveal-id" => "filesPnl"}
+              = fa_icon "download"
+              %span
+                Descargar Archivos
+        .row.cntnr
+          .large-12.columns
+            .row
+              .large-2.columns.labels
+                %label
+                  Título
+              .large-10.columns
+                %span.txtdesc
+                  = @rule.title
+            .row
+              .large-2.columns.labels
+                %label
+                  Fecha
+              .large-10.columns
+                %span
+                  = @rule.filing_at
+            .row
+              .large-2.columns.labels
+                %label
+                  Tipo de Norma
+              .large-10.columns
+                %span
+                  = @rule.kind
+            .row
+              .large-2.columns.labels
+                %label
+                  Sector
+              .large-10.columns
+                %span
+                  = @rule.institution.sector.name
+            .row
+              .large-2.columns.labels
+                %label
+                  Institución
+              .large-10.columns
+                %span
+                  = @rule.institution.name
+- content_for :modal do
+  .reveal-modal.filesPnl.rules#filesPnl{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
+
+    %a.close-reveal-modal{"aria-label" => "Close"}
+      &#215;
+    .row.panels-view
+      .large-12.columns
+        %h2
+          = fa_icon "files-o"
+          Archivos
+    .row.panels-view
+      .large-12.columns
+        .tray.autors
+          %table
+            %colgroup
+              %col
+              %col.date{width: "30%"}
+            %thead
+              %tr
+                %th
+                  Título
+                %th
+                  Fecha de Publicación
+                %th
+
+            %tbody
+              - @rule.attachments.each do |a|
+                %tr
+                  %td
+                    = a.title
+                  %td
+                    = a.published_at
+                  %td
+                    %a.down{href: a.attachment.url, target: "_blank"}
+                      = fa_icon "download"
+                      Descargar

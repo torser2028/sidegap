@@ -1,0 +1,59 @@
+%ul.tabs{"data-tab" => "", :role => "tablist"}
+  %li.tab-title.active{:role => "presentational"}
+    %a{"aria-selected" => "true", :controls => "bscPanel", :href => "#bscPanel", :role => "tab", :tabindex => "0"}
+      =fa_icon "search"
+      Buscador Básico
+  %li.tab-title{:role => "presentational"}
+    %a{"aria-selected" => "false", :controls => "avdPanel", :href => "#avdPanel", :role => "tab", :tabindex => "0"}
+      = fa_icon "search-plus"
+      Buscador Avanzado
+.tabs-content
+  %section#bscPanel.content.active{"aria-hidden" => "false", :role => "tabpanel"}
+    .row
+      = search_form_for @q, url: url_for, remote: true do |f|
+        .large-1.medium-2.small-12.columns
+          %label
+            Buscar:
+        .large-3.medium-3.small-12.columns
+          = f.search_field :title_cont, placeholder: "Escriba aquí para filtrar resultados"
+        .large-4.medium-offset-0.medium-5.small-12.columns
+          %button.success{type: "submit"}
+            = fa_icon "search"
+            Buscar
+          %button.secondary{type: "button"}
+            %a{href: url_for}
+              \× Quitar Filtro
+        .large-4.medium-2.columns
+  %section#avdPanel.content{"aria-hidden" => "true", :role => "tabpanel"}
+    .row
+      = search_form_for @q, url: url_for, remote: true do |f|
+        .large-8.medium-6.columns
+          %label
+            Titulo
+          = f.search_field :title_cont
+        .large-2.medium-3.columns
+          %label
+            Fecha
+          = f.search_field :filing_at_eq, class: "fecha"
+        .large-2.medium-3.columns
+          %label
+            Tipo de Norma
+          = f.collection_select :kind_eq, Kind.rules, :name, :name, include_blank: true
+        .large-8.medium-6.columns
+          %label
+            Institución
+          = f.collection_select :institution_id_eq, Institution.rules, :id, :name, include_blank: true
+        .large-2.medium-3.columns
+          %label
+            %span.ghost
+              \_
+          %button.success.fullwidth{href: "#", type: "submit"}
+            = fa_icon "search"
+            Buscar
+        .large-2.medium-3.columns
+          %label
+            %span.ghost
+              \_
+          %button.secondary.fullwidth{type: "button"}
+            %a{href: url_for}
+              \× Quitar Filtros

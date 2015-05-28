@@ -1,0 +1,25 @@
+%tr
+  %td.desc
+    %p
+      = rule.title
+  %td.txt
+    = rule.kind
+  %td.desc
+    = rule.institution.name
+  %td.num
+    = rule.filing_at
+  %td.actions
+    %a.more{href: rule_path(rule)}
+      = fa_icon "arrow-circle-right"
+      %span
+        Ver
+    - if current_user.following? rule
+      %a.follow{href: unfollow_rule_path(rule)}
+        = fa_icon "eye-slash"
+        %span
+          Dejar de Seguir
+    - else
+      %a.follow{href: follow_rule_path(rule)}
+        = fa_icon "eye"
+        %span
+          Seguir
