@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  menu label: "Usuarios"
+  menu label: "Usuarios", parent: "Sistema", priority: 0
 
   filter :name
   filter :email
