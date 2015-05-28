@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :assignments
   has_many :legislative_users
+  has_many :comments
   has_many :legislatives, through: :legislative_users
   has_many :roles, through: :assignments
 

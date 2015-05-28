@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150526150157) do
+ActiveRecord::Schema.define(version: 20150528172838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,20 @@ ActiveRecord::Schema.define(version: 20150526150157) do
   add_index "attachments", ["judicial_id"], name: "index_attachments_on_judicial_id", using: :btree
   add_index "attachments", ["legislative_id"], name: "index_attachments_on_legislative_id", using: :btree
   add_index "attachments", ["rule_id"], name: "index_attachments_on_rule_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "impact"
+    t.integer  "legislative_id"
+    t.integer  "rule_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "comments", ["legislative_id"], name: "index_comments_on_legislative_id", using: :btree
+  add_index "comments", ["rule_id"], name: "index_comments_on_rule_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "commissions", force: :cascade do |t|
     t.string   "name"
@@ -364,6 +378,9 @@ ActiveRecord::Schema.define(version: 20150526150157) do
   add_foreign_key "attachments", "judicials"
   add_foreign_key "attachments", "legislatives"
   add_foreign_key "attachments", "rules"
+  add_foreign_key "comments", "legislatives"
+  add_foreign_key "comments", "rules"
+  add_foreign_key "comments", "users"
   add_foreign_key "executives", "institutions"
   add_foreign_key "institutions", "sectors"
   add_foreign_key "legislative_stakeholders", "legislatives"

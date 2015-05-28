@@ -25,6 +25,7 @@ class RulesController < InheritedResources::Base
     add_breadcrumb "Detalle de la Norma", :rule_path
 
     @rule = get_rule params[:id]
+    @comment = Comment.where(user: current_user, rule: @rule).first_or_initialize
   end
 
   def follow
