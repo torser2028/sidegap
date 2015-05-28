@@ -132,13 +132,13 @@
                 %span
                   = @legislative.law
             - if current_user.following? @legislative
-              = form_for @legislative_user do |f|
+              = form_for @comment do |f|
                 .row.white
                   .large-2.columns.labels
                     %label
                       Impacto
                   .large-2.columns
-                    = f.select :impact, options_for_select(LegislativeUser::IMPACT, @legislative_user.impact), include_blank: true
+                    = f.select :impact, options_for_select(Comment::IMPACT, @comment.impact), include_blank: true
                   .large-8.columns
                     %span.ghost
                       \-
@@ -147,7 +147,7 @@
                     %label
                       Comentario
                   .large-6.columns
-                    = f.text_area :comment, class: "comments", rows: 6
+                    = f.text_area :body, class: "comments", rows: 6
                     = f.hidden_field :legislative_id, value: @legislative.id
                     %button.success{type: "submit"}
                       = fa_icon "save"
