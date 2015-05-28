@@ -1,0 +1,33 @@
+.panels-view
+  .row
+    .small-12.columns
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "inbox"
+        Bandeja de Normas
+      .tray.projects
+        .row
+          .small-12.columns
+            = render 'search'
+        %table
+          %colgroup
+            %col{width: "50%"}
+            %col{width: "15%"}
+            %col{width: "25%"}
+            %col
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Titulo
+              %th
+                Tipo
+              %th
+                Institución
+              %th
+                Fecha
+              %th
+                Opciones
+          %tbody.js_rules
+            = render @rules
