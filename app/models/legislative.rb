@@ -24,7 +24,7 @@ class Legislative < ActiveRecord::Base
     ['Un mes' , 1.month.ago]
   ]
 
-  def inactive!
-    self.update_attribute(:active, false)
-  end
+  # def inactive!
+  #   self.update_attribute(:active, false)
+  # end
 end
