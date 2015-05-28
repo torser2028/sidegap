@@ -42,7 +42,6 @@ Rails.application.routes.draw do
         end
     end
 
-    resources :legislative_users, only: [:create, :update]
     resources :comments, only: [:create, :update]
 
     resources :rules, only: [:index, :show] do
