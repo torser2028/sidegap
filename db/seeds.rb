@@ -34,17 +34,17 @@ Topic.create([
   { name: 'Derechos Fundamentales y Derechos Humanos' }
   ])
 PoliticalParty.create([
-  { name: 'Partido Liberal Colombiano' },
-  { name: 'Partido Conservador Colombiano' },
-  { name: 'Partido Opcion Ciudadana' },
-  { name: 'Partido Cambio Radical' },
-  { name: 'Partido Alianza Verde ' },
+  { name: 'Liberal Colombiano' },
+  { name: 'Conservador Colombiano' },
+  { name: 'Opcion Ciudadana' },
+  { name: 'Cambio Radical' },
+  { name: 'Alianza Verde' },
   { name: 'Movimiento Autoridades Indigenas de Colombia "Aico"' },
-  { name: 'Partido Alianza Social Independiente "Asi"' },
+  { name: 'Alianza Social Independiente "Asi"' },
   { name: 'Movimiento "Mira"' },
-  { name: 'Partido Social de Unidad Nacional "Partido de la U"' },
-  { name: 'Partido Polo Democratico Alternativo' },
-  { name: 'Partido Union Patriotica "Up"' },
+  { name: 'Social de Unidad Nacional "De la U"' },
+  { name: 'Polo Democratico Alternativo' },
+  { name: 'Union Patriotica "Up"' },
   { name: 'Centro Democratico' },
   { name: 'Movimiento Alternativo Indigena y Social "Mais"' }
   ])
