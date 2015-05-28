@@ -12,20 +12,19 @@
                 La Agenda muestra los eventos de los próximos 7 días a partir de la fecha
                 %a.close{href: "#"} &times;
           .row.filter
-            .large-1.medium-2.small-4.columns
+            .large-1.medium-1.small-3.columns
               %label
                 Fecha:
-            .large-2.medium-3.small-8.columns
+            .large-3.medium-5.small-9.columns
               .date
                 = f.search_field :event_at_gteq, class: "fecha span2", size: "16"
-            .large-2.medium-offset-0.medium-2.small-offset-4.small-8.columns
+            .large-8.medium-offset-0.medium-6.small-offset-3.small-9.columns
               %button.success.fullwidth{href: "#", type: "submit"}
                 = fa_icon "search"
                 Buscar
               %button.secondary.fullwidth{type: "button"}
                 %a{href: url_for}
                   \× Quitar Filtros
-            .large-offset-7.medium-offset-5.small-12.colums
         %table
           %colgroup
             %col
