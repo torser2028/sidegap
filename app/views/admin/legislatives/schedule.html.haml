@@ -1,0 +1,8 @@
+= semantic_form_for @agenda, url: schedule_admin_legislative_path(resource) do |f|
+  = f.inputs name: "Agendar Proyecto" do
+    = f.input :event_at, as: :string, input_html: { class: "datepicker" }, label: "Fecha"
+    = f.input :time, label: "Hora", minute_step: 30, ampm: true
+    = f.input :body, label: "Descripción", input_html: { rows: 6 }
+  = f.actions do
+    = f.action :submit, as: :button
+    = f.action :cancel, as: :link, class: "cancel"
