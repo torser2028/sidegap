@@ -3,6 +3,7 @@ class Rule < ActiveRecord::Base
 
   belongs_to :institution
   has_many :attachments
+  has_many :comments
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
 end
