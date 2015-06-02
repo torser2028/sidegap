@@ -2,12 +2,6 @@ ActiveAdmin.register Legislative do
   menu label: "Proyectos", parent: "Rama Legislativa", priority: 0
   actions :all, except: [:destroy]
 
-  permit_params :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at,
-    attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
-    legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker],
-    agendas_attributes: [:id, :_destroy, :body, :event_at, :time]
-
-
   filter :title, label: "Titulo"
   filter :source, label: "Origen"
   filter :chamber_number, label: "Número de Cámara"
@@ -17,6 +11,7 @@ ActiveAdmin.register Legislative do
   filter :final_status, label: "Estatus Final", as: :select, collection: -> { FinalStatus.pluck(:name) }
   filter :probability, label: "Probabilidad", as: :select, collection: -> { Probability.pluck(:name) }
   filter :filing_at, label: "Fecha de Radicación"
+  filter :agendas_id_not_null, label: "Agendados", as: :boolean, collection: [["Si", true], ["No", false]]
 
   index do
     selectable_column
@@ -24,8 +19,7 @@ ActiveAdmin.register Legislative do
     column "Número de Cámara", :chamber_number
     column "Número de Senado", :senate_number
     column "Fecha de Radicación", :filing_at
-    actions
-    # actions() {|legislative| link_to "Eliminar", inactive_admin_legislative_path(legislative), method: :put }
+    actions() {|legislative| link_to "Agendar", schedule_admin_legislative_path(legislative) }
   end
 
   show title: "Detalle del Proyecto" do |legislative|
@@ -168,6 +162,18 @@ ActiveAdmin.register Legislative do
     f.actions
   end
 
+  member_action :schedule, method: [:get, :post] do
+    if request.post?
+      @agenda = resource.agendas.new(permitted_params[:agenda])
+
+      if @agenda.save
+        redirect_to admin_legislatives_path, notice: "El proyecto ha sido agendado con éxito."
+      end
+    else
+      @agenda = resource.agendas.new
+    end
+  end
+
   # member_action :inactive, method: :put do
   #   resource.inactive!
   #   redirect_to admin_legislatives_path, notice: "El Proyecto ha sido eliminado."
@@ -176,4 +182,14 @@ ActiveAdmin.register Legislative do
   # action_item :inactive, only: :show do
   #   link_to "Inactive", inactive_admin_legislative_path(legislative), method: :put
   # end
+
+  controller do
+    def permitted_params
+      params.permit legislative: [:title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at],
+        attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
+        legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker],
+        agendas_attributes: [:id, :_destroy, :body, :event_at, :time],
+        agenda: [:body, :event_at, :time]
+    end
+  end
 end

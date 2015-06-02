@@ -10,7 +10,7 @@ class Legislative < ActiveRecord::Base
   
   accepts_nested_attributes_for :attachments, :legislative_stakeholders, :agendas, allow_destroy: true
 
-  default_scope { where(active: true) }
+  default_scope { where(active: true).uniq }
   scope :as_author, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.authors).uniq }
   scope :as_speaker, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.speakers).uniq }
 
