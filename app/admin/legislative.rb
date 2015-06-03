@@ -137,6 +137,7 @@ ActiveAdmin.register Legislative do
       f.input :senate_commission_at, label: "Fecha Comisión Senado", as: :datepicker
       f.input :senate_plenary_at, label: "Fecha Plenaria Senado", as: :datepicker
       f.input :filing_at, label: "Fecha de Radicación", as: :datepicker
+      f.input :warning, label: "Mensaje de Urgencia"
     end
     f.inputs "Stakeholders" do
       f.has_many :legislative_stakeholders, heading: "", allow_destroy: true, new_record: "Agregar Stakeholder" do |ls|
