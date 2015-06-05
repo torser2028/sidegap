@@ -13,6 +13,7 @@ class Legislative < ActiveRecord::Base
   default_scope { where(active: true).uniq }
   scope :as_author, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.authors).uniq }
   scope :as_speaker, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.speakers).uniq }
+  scope :with_agenda, -> { includes(:agendas).where.not(agendas: { legislative_id: nil }) }
 
 
   FILINGFILTERS = [
