@@ -53,7 +53,13 @@ class LegislativesController < ApplicationController
     add_breadcrumb "Eventos y Agenda", :events_legislatives_path
 
     @q = Agenda.ransack params[:q]
-    @agendas = @q.result
+    @agendas = []
+    @legislatives = current_user.following_legislatives.with_agenda
+    @q.result.each do |item|
+      @legislatives.each do |legislative|
+        @agendas << item if legislative.agendas.include? item
+      end
+    end
     @events = Event.all
   end
 
