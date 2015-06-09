@@ -1,11 +1,13 @@
 ActiveAdmin.register User do
   menu label: "Usuarios", parent: "Sistema", priority: 0
+  actions :all, except: [:destroy]
 
   filter :name
   filter :email
   filter :company
   filter :area
   filter :roles
+  filter :active, collection: [["Si", true], ["No", false]]
 
   permit_params :name, :email, :company_id, :area, :job, :role_ids, :password,:password_confirmation
 
@@ -26,7 +28,13 @@ ActiveAdmin.register User do
       user.roles.pluck(:name).join(', ')
     end
     column :created_at
-    actions
+    actions defaults: true do |user|
+      if user.active
+        link_to "Desactivar", inactive_admin_user_path(user), class: "member_link", method: :put
+      else
+        link_to "Activar", active_admin_user_path(user), class: "member_link", method: :put
+      end
+    end
   end
 
   show do
@@ -64,4 +72,13 @@ ActiveAdmin.register User do
     f.actions
   end
 
+  member_action :active, method: :put do
+    resource.active!
+    redirect_to admin_users_path, notice: "El usuario ha sido activado."
+  end
+
+  member_action :inactive, method: :put do
+    resource.inactive!
+    redirect_to admin_users_path, notice: "El usuario ha sido desactivado."
+  end
 end
