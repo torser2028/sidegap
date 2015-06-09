@@ -13,7 +13,7 @@ ActiveAdmin.register Legislative do
   filter :filing_at, label: "Fecha de Radicación"
   filter :agendas_id_not_null, label: "Agendados", as: :boolean, collection: [["Si", true], ["No", false]]
 
-  index do
+  index title: "Proyectos" do
     selectable_column
     column "Titulo", :title
     column "Número de Cámara", :chamber_number
@@ -186,10 +186,11 @@ ActiveAdmin.register Legislative do
 
   controller do
     def permitted_params
-      params.permit legislative: [:title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at],
+      params.permit legislative: [
+        :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning,
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
         legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker],
-        agendas_attributes: [:id, :_destroy, :body, :event_at, :time],
+        agendas_attributes: [:id, :_destroy, :body, :event_at, :time]],
         agenda: [:body, :event_at, :time]
     end
   end
