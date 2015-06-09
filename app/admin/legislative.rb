@@ -160,6 +160,9 @@ ActiveAdmin.register Legislative do
         a.input :body, label: "Descripción", input_html: { rows: 6 }
       end
     end
+    f.inputs do
+      f.input :notify, label: "Envíar notificación?"
+    end
     f.actions
   end
 
