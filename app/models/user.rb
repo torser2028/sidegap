@@ -20,6 +20,14 @@ class User < ActiveRecord::Base
     roles.any? { |role| role.name.underscore.to_sym == role_sym }
   end
 
+  def active!
+    self.update_attribute(:active, true)
+  end
+
+  def inactive!
+    self.update_attribute(:active, false)
+  end
+
   def send_welcome_email
     UserMailer.welcome(self).deliver_now
   end
