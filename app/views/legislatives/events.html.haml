@@ -19,10 +19,8 @@
               .date
                 = f.search_field :event_at_gteq, class: "fecha span2", size: "16"
             .large-8.medium-offset-0.medium-6.small-offset-3.small-9.columns
-              %button.success.fullwidth{href: "#", type: "submit"}
-                = fa_icon "search"
-                Buscar
-              %button.secondary.fullwidth{type: "button"}
+              %input.button.success.fullwidth.search{type: "submit", value: "Buscar"}
+              .button.secondary.fullwidth
                 %a{href: url_for}
                   \× Quitar Filtros
         %table

@@ -388,7 +388,7 @@ body{
                 margin-bottom: 0;
                 //padding: $D-padGlb/3;
               }
-              button {
+              .button {
                 margin-bottom: 0;
                 a {
                   color: $C-base;
@@ -435,7 +435,7 @@ body{
         }
       }
       &.projects{
-        button{
+        .button{
           &.secondary{
             padding: 0;
             a{
@@ -454,7 +454,7 @@ body{
         }
       }
       &.rep{
-        button{
+        .button{
           &.secondary{
             padding: 0;
             a{
@@ -506,7 +506,7 @@ body{
     }
   }
   .pryctDtl{
-      button{
+      .button{
         padding: 0;
         a{
           color: $C-luz;
@@ -652,9 +652,9 @@ body{
     }
   }
   .button{
-    padding: $D-padGlb/2 $D-padGlb;
+    /*padding: $D-padGlb/2 $D-padGlb;*/
   }
-  button{
+  .button{
     padding: 0;
     a{
       display: block;
@@ -663,6 +663,13 @@ body{
     }
     &[type="submit"]{
       padding: $D-padGlb/2 $D-padGlb;
+    }
+    &.search{
+      padding: $D-padGlb/2 $D-padGlb $D-padGlb/2 $D-padGlb*2;
+      background-image: url('magnifying.png');
+      background-size: 18px;
+      background-position: 0.5em 50%;
+      background-repeat: no-repeat;
     }
   }
 }
@@ -878,7 +885,7 @@ body{
       }
     }
     .legislative_search{
-      button{
+      .button{
         margin-bottom: $D-padGlb/4 !important;
         width: 100%;
       }
