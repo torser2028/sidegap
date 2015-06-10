@@ -7,7 +7,7 @@
     %p
       = legislative.title
   %td.num
-    = legislative.filing_at
+    = ldate legislative.filing_at
   %td.actions
     - unless current_user.disliked? legislative
       %a.more{href: legislative_path(legislative)}

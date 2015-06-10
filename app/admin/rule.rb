@@ -15,7 +15,9 @@ ActiveAdmin.register Rule do
     column "Titulo", :title
     column "Tipo de Norma", :kind
     column "Institución", :institution
-    column "Fecha", :filing_at
+    column "Fecha" do |rule|
+      ldate rule.filing_at
+    end
     actions
   end
 
@@ -35,7 +37,7 @@ ActiveAdmin.register Rule do
           rule.institution
         end
         row "Fecha" do
-          rule.filing_at
+          ldate rule.filing_at
         end
         row "Archivos Adjuntos" do
           ul do
