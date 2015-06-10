@@ -52,7 +52,7 @@
                   Fecha Comisión Senado
               .large-6.columns
                 %span
-                  = @legislative.senate_commission_at
+                  = ldate @legislative.senate_commission_at
             .row
               .large-2.columns.labels
                 %label
@@ -65,7 +65,7 @@
                   Fecha Plenaria Senado
               .large-6.columns
                 %span
-                  = @legislative.senate_plenary_at
+                  = ldate @legislative.senate_plenary_at
             .row
               .large-2.columns.labels
                 %label
@@ -111,20 +111,20 @@
                   Fecha de Radicación
               .large-2.columns
                 %span
-                  = @legislative.filing_at
+                  = ldate @legislative.filing_at
               .large-2.columns.labels
                 %label
                   Fecha Plenaria Cámara
               .large-6.columns
                 %span
-                  = @legislative.chamber_plenary_at
+                  = ldate @legislative.chamber_plenary_at
             .row
               .large-2.columns.labels
                 %label
                   Fecha Comisión Cámara
               .large-2.columns
                 %span
-                  = @legislative.chamber_commission_at
+                  = ldate @legislative.chamber_commission_at
               .large-2.columns.labels
                 %label
                   Tipo de Ley
@@ -217,7 +217,7 @@
                   %td
                     = a.title
                   %td
-                    = a.published_at
+                    = ldate a.published_at
                   %td
                     %a.down{href: a.attachment.url, target: "_blank"}
                       = fa_icon "download"

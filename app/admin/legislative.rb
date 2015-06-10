@@ -18,7 +18,9 @@ ActiveAdmin.register Legislative do
     column "Titulo", :title
     column "Número de Cámara", :chamber_number
     column "Número de Senado", :senate_number
-    column "Fecha de Radicación", :filing_at
+    column "Fecha de Radicación" do |legislative|
+      ldate legislative.filing_at
+    end
     actions() {|legislative| link_to "Agendar", schedule_admin_legislative_path(legislative) }
   end
 
@@ -65,23 +67,23 @@ ActiveAdmin.register Legislative do
         end
           
         row "Fecha Comisión Cámara" do
-          legislative.chamber_commission_at
+          ldate legislative.chamber_commission_at
         end
           
         row "Fecha Plenaria Cámara" do
-          legislative.chamber_plenary_at
+          ldate legislative.chamber_plenary_at
         end
           
         row "Fecha Comisión Senado" do
-          legislative.senate_commission_at
+          ldate legislative.senate_commission_at
         end
           
         row "Fecha Plenaria Senado" do
-          legislative.senate_plenary_at
+          ldate legislative.senate_plenary_at
         end
           
         row "Fecha de Radicación" do
-          legislative.filing_at
+          ldate legislative.filing_at
         end
 
         row "Stakeholders" do
@@ -107,7 +109,7 @@ ActiveAdmin.register Legislative do
         row "Agenda" do
           table_for legislative.agendas do
             column "Fecha", :event_at do |a|
-              a.event_at
+              ldate a.event_at
             end
             column "Hora", :time do |a|
               a.time.to_s(:time)
