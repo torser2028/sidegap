@@ -149,7 +149,7 @@
                   .large-6.columns
                     = f.text_area :body, class: "comments", rows: 6
                     = f.hidden_field :legislative_id, value: @legislative.id
-                    .button.success{type: "submit"}
+                    %button.success{type: "submit"}
                       = fa_icon "save"
                       Guardar
                   .large-4.columns

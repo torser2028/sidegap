@@ -13,6 +13,6 @@ class DropLegislativeUsers < ActiveRecord::Migration
       t.timestamps null: false
     end
     add_foreign_key :legislative_users, :users
-    add_foreign_key :legislative_users, :legislatives
+    add_foreign_key :legislative_users, :legislatives    
   end
 end
