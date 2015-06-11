@@ -11,16 +11,20 @@
     %li
       %label
         Sidegap
-    %li
+    %li.has-submenu
       %a{:href => legislatives_path}
         %span.ico
           = fa_icon "legal"
         %strong Rama Legislativa
-    %li
+      %ul.left-submenu.branch
+        = render 'legislatives/menu'
+    %li.has-submenu
       %a{:href => rules_path}
         %span.ico
           = fa_icon "users"
         %strong Normas en proceso de consulta ciudadana
+      %ul.left-submenu.branch
+        = render 'rules/menu'
     %li
       %a{:href => "#"}
         %span.ico

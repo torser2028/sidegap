@@ -1,15 +1,29 @@
-%li
+%li.has-dropdown
   %a{:href => legislatives_path}
     Bandeja de Proyectos
+  %ul.left.dropdown
+    %li
+      %a{:href => "#"}
+        Tray1
+    %li
+      %a{:href => "#"}
+        Tray2
 %li
   %a{:href => favorites_legislatives_path}
     Mis Favoritos
 %li
   %a{:href => trash_legislatives_path}
     Papelera de Reciclaje
-%li
+%li.has-dropdown
   %a{:href => events_legislatives_path}
     Eventos y Agenda
+  %ul.left.dropdown
+    %li
+      %a{:href => "#"}
+        Agenda
+    %li
+      %a{:href => "#"}
+        Eventos
 %li
   %a{:href => stakeholders_legislatives_path}
     Perfil Congresistas

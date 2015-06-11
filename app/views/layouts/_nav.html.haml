@@ -19,4 +19,5 @@
               = fa_stacked_icon "bars", base: "square-o"
               %span.txtMenu
                 Menu
+        %ul.left.branch
           = render 'menu' unless %w(welcome sessions registrations).include? controller.controller_name

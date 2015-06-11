@@ -18,11 +18,10 @@
         .large-3.medium-3.small-12.columns
           = f.search_field :title_cont, placeholder: "Escriba aquí para filtrar resultados"
         .large-4.medium-offset-0.medium-5.small-12.columns
-          //= fa_icon "search"
           %input.button.success.search{type: "submit", value: "Buscar"}
-          .button.secondary
+          .button.secondary.quit
             %a{href: url_for}
-              \× Quitar Filtro
+              Quitar Filtro
         .large-4.medium-2.columns
   %section#avdPanel.content{"aria-hidden" => "true", :role => "tabpanel"}
     //%h3 Buscador Avanzado
@@ -65,6 +64,6 @@
           %label
             %span.ghost
               \_
-          .button.secondary.fullwidth
+          .button.secondary.fullwidth.quit
             %a{href: url_for}
-              \× Quitar Filtros
+              \ Quitar Filtros

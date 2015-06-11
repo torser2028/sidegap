@@ -55,6 +55,10 @@ $(function(){
   if( $(".signUp").length > 0){
     $("body").addClass("sessions");
   }
-
-
+  //Change Sidebar Submenu Clases
+  $(".left-off-canvas-menu .has-dropdown").addClass("has-submenu");
+  $(".left-off-canvas-menu .has-dropdown ul").addClass("left-submenu");
+  $("<li class='back'><a href ='#'>Atrás</a></li>").prependTo(".left-off-canvas-menu li ul");
+  $(".left-off-canvas-menu .has-dropdown ul").removeClass("dropdown");
+  $(".left-off-canvas-menu .has-dropdown").removeClass("has-dropdown");
 });

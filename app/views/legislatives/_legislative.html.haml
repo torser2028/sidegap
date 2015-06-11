@@ -6,8 +6,9 @@
   %td.desc
     %p
       = legislative.title
-    %span.round.alert.label
-      Urgente
+    %span.round.label.linear.urgent
+      = fa_icon "exclamation-circle"
+      Mensaje de urgencia
   %td.num
     = ldate legislative.filing_at
   %td.actions

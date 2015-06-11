@@ -666,11 +666,40 @@ body{
     }
     &.search{
       padding: $D-padGlb/2 $D-padGlb $D-padGlb/2 $D-padGlb*2;
-      background-image: url('magnifying.png');
+      background-image: image-url('magnifying.png');
       background-size: 18px;
       background-position: 0.5em 50%;
       background-repeat: no-repeat;
     }
+    &.save{
+      padding: $D-padGlb/2 $D-padGlb $D-padGlb/2 $D-padGlb*2;
+      background-image: image-url('floppy.png');
+      background-size: 18px;
+      background-position: 0.5em 50%;
+      background-repeat: no-repeat; 
+    }
+    &.quit{
+      &.secondary{
+        a{
+          display: block;
+          padding: $D-padGlb/2 $D-padGlb $D-padGlb/2 $D-padGlb*2 !important;
+        }
+      }
+      background-image: image-url('not.png');
+      background-size: 10px;
+      background-position: 0.5em 50%;
+      background-repeat: no-repeat;
+    }
+  }
+  .label{
+    &.linear{
+      background: transparent;
+      padding: 0 !important;
+      &.urgent{
+        color: $alert-color;
+      }
+    }
+
   }
 }
 // FIXED JQUERY UI STYLES
@@ -768,8 +797,24 @@ body{
     }
   }  
 }
+@media screen and (min-width: 640px){
+  
+}
 @media screen and (max-width: 640px){
   body{
+    nav{
+      &.top-bar{
+        section{
+          &.top-bar-section{
+            ul{
+              &.branch{
+                display: none;
+              }
+            }
+          }
+        }
+      }
+    }
     .fixed{
       position: absolute;
     }
@@ -873,6 +918,9 @@ body{
                     }
                   }
                 }
+              }
+              &.branch{
+                display: none;
               }
             }
           }
