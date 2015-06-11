@@ -32,16 +32,14 @@
                       %label
                         %span.ghost
                           \_
-                      %button.success.fullwidth{type: "submit"}
-                        = fa_icon "search"
-                        Buscar
+                      %input.button.success.search.fullwidth{type: "submit", value: "Buscar"}
                     .large-offset-0.large-2.medium-3.end.columns
                       %label
                         %span.ghost
                           \_
-                      %button.secondary.fullwidth{type: "button"}
+                      .button.secondary.fullwidth.quit
                         %a{href: stakeholders_legislatives_path}
-                          \× Quitar Filtros
+                          Quitar Filtros
         %table
           %colgroup
             %col

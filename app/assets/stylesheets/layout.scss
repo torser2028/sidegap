@@ -21,6 +21,7 @@ body{
     .logo{
       width: $D-logoWdth;
       padding-top: $D-padGlb;
+      padding-bottom: $D-padGlb/2;
       position: relative;
       z-index: 1;
     }
@@ -235,7 +236,6 @@ body{
   // Insite
   .panels-view{
     h2{
-      padding-top: $D-padGlb *2;
       border-bottom: 1px solid darken($C-luz, 10%);
       i{
       }
