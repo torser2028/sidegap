@@ -28,6 +28,14 @@ class User < ActiveRecord::Base
     self.update_attribute(:active, false)
   end
 
+  def active_for_authentication?
+    super && self.active # i.e. super && self.is_active
+  end
+
+  def inactive_message
+    I18n.t('devise.failure.user_inactive')
+  end
+
   def send_welcome_email
     UserMailer.welcome(self).deliver_now
   end
