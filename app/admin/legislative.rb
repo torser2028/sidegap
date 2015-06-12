@@ -112,7 +112,7 @@ ActiveAdmin.register Legislative do
               ldate a.event_at
             end
             column "Hora", :time do |a|
-              a.time.to_s(:time)
+              l a.time, format: :simple
             end
             column "Descripción", :body
           end

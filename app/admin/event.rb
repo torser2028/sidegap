@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
   menu label: "Eventos", parent: "Rama Legislativa"
   actions :all, except: [:destroy]
 
-  permit_params :body, :event_at, :event_type, :source
+  permit_params :body, :event_at, :event_type, :source, :time, :commission, :plenary
 
   filter :body, label: "Evento"
   filter :event_type, label: "Tipo de Evento"
@@ -11,7 +11,12 @@ ActiveAdmin.register Event do
   index do
     selectable_column
     column "Evento", :body
-    column "Fecha", :event_at
+    column "Fecha" do |event|
+      ldate event.event_at
+    end
+    column "Hora" do |event|
+      l event.time, format: :simple
+    end
     column "Tipo de Noticia", :event_type
     actions
   end
@@ -20,13 +25,22 @@ ActiveAdmin.register Event do
     panel "Eventos" do
       attributes_table_for event do
         row "Evento" do
-          event.body
+          simple_format event.body
         end
         row "Fecha" do
-          event.event_at
+          ldate event.event_at
+        end
+        row "Hora" do
+          l event.time, format: :simple
         end
         row "Tipo de Evento" do
           event.event_type
+        end
+        row "Comisión" do
+          event.commission
+        end
+        row "Plenaria" do
+          event.plenary
         end
         row "Fuente" do
           event.source
@@ -40,7 +54,10 @@ ActiveAdmin.register Event do
     f.inputs do
       f.input :body, label: "Evento", input_html: { rows: 6 }
       f.input :event_at, as: :datepicker, label: "Fecha"
+      f.input :time, label: "Hora", minute_step: 30, ampm: true
       f.input :event_type, label: "Tipo de Evento"
+      f.input :commission, label: "Comisión"
+      f.input :plenary, label: "Plenaria"
       f.input :source, label: "Fuente"
     end
     f.actions

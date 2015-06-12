@@ -1,6 +1,6 @@
 %tr
   %td.num= ldate agenda.event_at
-  %td.num= agenda.time.to_s(:time)
+  %td.num= l agenda.time, format: :simple
   %td.num= agenda.legislative.chamber_number
   %td.num= agenda.legislative.senate_number
   %td.desc= agenda.legislative.title
