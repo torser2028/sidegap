@@ -35,6 +35,7 @@ Rails.application.routes.draw do
         concerns [:followable, :trashable]
         collection do
             get :events
+            get :events_commission
             get :favorites
             get :trash
             get :stakeholders

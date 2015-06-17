@@ -65,6 +65,14 @@ class LegislativesController < ApplicationController
     @events = Event.all
   end
 
+  def events_commission
+    @q = Legislative.ransack params[:q]
+    @agendas = []
+    @q.result.each do |item|
+      item.agendas.each { |agenda| @agendas << agenda  }
+    end
+  end
+
   def follow
     @legislative = get_legislative params[:id]
     current_user.follow @legislative

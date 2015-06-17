@@ -1,0 +1,39 @@
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "calendar"
+        Agenda de Plenarias y Comisiones
+      .tray.calendar
+        = search_form_for @q, url: url_for, remote: true do |f|
+          .row.filter
+            .large-1.medium-1.small-3.columns
+              %label
+                Comisión:
+            .large-3.medium-5.small-9.columns
+              = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
+            .large-8.medium-offset-0.medium-6.small-offset-3.small-9.columns
+              %input.button.success.fullwidth.search{type: "submit", value: "Buscar"}
+              .button.secondary.fullwidth.quit
+                %a{href: url_for}
+                  Quitar Filtros
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col
+            %col{width: "40%"}
+            %col
+            %col{width: "25%"}
+          %thead
+            %tr
+              %th Fecha Evento
+              %th Hora Evento
+              %th Num Camara
+              %th Num Senado
+              %th Proyecto
+              %th Comisión
+              %th Evento
+          %tbody.js_agendas
+            = render @agendas
