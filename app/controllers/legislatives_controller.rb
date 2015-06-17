@@ -38,6 +38,8 @@ class LegislativesController < ApplicationController
     @legislative = get_legislative params[:id]
     @authors = @legislative.stakeholders.authors
     @speakers = @legislative.stakeholders.speakers
+    @attachments = @legislative.attachments
+    @attachments << @legislative.legislative.try(:attachments) if @legislative.legislative
 
     @comment = Comment.where(user: current_user, legislative: @legislative).first_or_initialize
 

@@ -8,6 +8,8 @@ class Legislative < ActiveRecord::Base
   has_many :stories
   has_many :legislative_stakeholders
   has_many :stakeholders, through: :legislative_stakeholders
+  has_many :legislatives
+  belongs_to :legislative
   
   accepts_nested_attributes_for :attachments, :legislative_stakeholders, :agendas, allow_destroy: true
 

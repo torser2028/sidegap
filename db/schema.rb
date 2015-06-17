@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616150123) do
+ActiveRecord::Schema.define(version: 20150616163324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,7 +221,10 @@ ActiveRecord::Schema.define(version: 20150616150123) do
     t.boolean  "active",                default: true
     t.boolean  "warning",               default: false
     t.boolean  "notify",                default: false
+    t.integer  "legislative_id"
   end
+
+  add_index "legislatives", ["legislative_id"], name: "index_legislatives_on_legislative_id", using: :btree
 
   create_table "officials", force: :cascade do |t|
     t.string   "name"
@@ -381,6 +384,7 @@ ActiveRecord::Schema.define(version: 20150616150123) do
   add_foreign_key "institutions", "sectors"
   add_foreign_key "legislative_stakeholders", "legislatives"
   add_foreign_key "legislative_stakeholders", "stakeholders"
+  add_foreign_key "legislatives", "legislatives"
   add_foreign_key "officials", "institutions"
   add_foreign_key "rules", "institutions"
   add_foreign_key "stories", "legislatives"

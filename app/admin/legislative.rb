@@ -124,6 +124,7 @@ ActiveAdmin.register Legislative do
 
   form do |f|
     f.inputs do
+      f.input :legislative
       f.input :title, label: "Titulo", as: :text, input_html: { rows: 5 }
       f.input :source, label: "Origen", collection: Source.pluck(:name)
       f.input :chamber_number, label: "Número de Cámara"
@@ -192,7 +193,7 @@ ActiveAdmin.register Legislative do
   controller do
     def permitted_params
       params.permit legislative: [
-        :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning,
+        :legislative_id, :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning,
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
         legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker],
         agendas_attributes: [:id, :_destroy, :body, :event_at, :time]],
