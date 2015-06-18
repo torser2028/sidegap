@@ -130,7 +130,7 @@ ActiveAdmin.register Legislative do
       f.input :chamber_number, label: "Número de Cámara"
       f.input :senate_number, label: "Número de Senado"
       f.input :commission, label: "Comisión", collection: Commission.pluck(:name)
-      f.input :status, label: "Estatus", collection: Status.pluck(:name)
+      f.input :status, label: "Estado", collection: Status.pluck(:name)
       f.input :final_status, label: "Estatus Final", collection: FinalStatus.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)
       f.input :type_law, label: "Tipo de Ley", collection: Law.pluck(:name)
