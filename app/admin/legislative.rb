@@ -81,7 +81,23 @@ ActiveAdmin.register Legislative do
         row "Fecha Plenaria Senado" do
           ldate legislative.senate_plenary_at
         end
-          
+
+        row "Fecha Segunda Vuelta Comisión Cámara" do
+          ldate legislative.second_chamber_commission_at
+        end
+
+        row "Fecha Segunda Vuelta Plenaria Cámara" do
+          ldate legislative.second_chamber_plenary_at
+        end
+
+        row "Fecha Segunda Vuelta Comisión Senado" do
+          ldate legislative.second_senate_commission_at
+        end
+
+        row "Fecha Segunda Vuelta Plenaria Senado" do
+          ldate legislative.second_senate_plenary_at
+        end
+
         row "Fecha de Radicación" do
           ldate legislative.filing_at
         end
@@ -139,6 +155,10 @@ ActiveAdmin.register Legislative do
       f.input :chamber_plenary_at, label: "Fecha Plenaria Cámara", as: :datepicker
       f.input :senate_commission_at, label: "Fecha Comisión Senado", as: :datepicker
       f.input :senate_plenary_at, label: "Fecha Plenaria Senado", as: :datepicker
+      f.input :second_chamber_commission_at, label: "Fecha Segunda Vuelta Comisión Cámara", as: :datepicker
+      f.input :second_chamber_plenary_at, label: "Fecha Segunda Vuelta Plenaria Cámara", as: :datepicker
+      f.input :second_senate_commission_at, label: "Fecha Segunda Vuelta Comisión Senado", as: :datepicker
+      f.input :second_senate_plenary_at, label: "Fecha Segunda Vuelta Plenaria Senado", as: :datepicker
       f.input :filing_at, label: "Fecha de Radicación", as: :datepicker
       f.input :warning, label: "Mensaje de Urgencia"
     end
@@ -197,7 +217,7 @@ ActiveAdmin.register Legislative do
   controller do
     def permitted_params
       params.permit legislative: [
-        :legislative_id, :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :type_law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning, :law, :law_number,
+        :legislative_id, :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :type_law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning, :law, :law_number, :second_chamber_commission_at, :second_chamber_plenary_at, :second_senate_commission_at, :second_senate_plenary_at,
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
         legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker],
         agendas_attributes: [:id, :_destroy, :body, :event_at, :time]],
