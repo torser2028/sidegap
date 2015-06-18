@@ -59,7 +59,7 @@ ActiveAdmin.register Legislative do
         end
           
         row "Tipo de Ley" do
-          legislative.law
+          legislative.type_law
         end
           
         row "Probabilidad" do
@@ -133,7 +133,7 @@ ActiveAdmin.register Legislative do
       f.input :status, label: "Estatus", collection: Status.pluck(:name)
       f.input :final_status, label: "Estatus Final", collection: FinalStatus.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)
-      f.input :law, label: "Tipo de Ley", collection: Law.pluck(:name)
+      f.input :type_law, label: "Tipo de Ley", collection: Law.pluck(:name)
       f.input :probability, label: "Probabilidad", collection: Probability.pluck(:name)
       f.input :chamber_commission_at, label: "Fecha Comisión Cámara", as: :datepicker
       f.input :chamber_plenary_at, label: "Fecha Plenaria Cámara", as: :datepicker
@@ -141,6 +141,10 @@ ActiveAdmin.register Legislative do
       f.input :senate_plenary_at, label: "Fecha Plenaria Senado", as: :datepicker
       f.input :filing_at, label: "Fecha de Radicación", as: :datepicker
       f.input :warning, label: "Mensaje de Urgencia"
+    end
+    f.inputs do
+      f.input :law, label: "Ley?"
+      f.input :law_number, label: "Número de Ley"
     end
     f.inputs "Stakeholders" do
       f.has_many :legislative_stakeholders, heading: "", allow_destroy: true, new_record: "Agregar Stakeholder" do |ls|
@@ -193,7 +197,7 @@ ActiveAdmin.register Legislative do
   controller do
     def permitted_params
       params.permit legislative: [
-        :legislative_id, :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning,
+        :legislative_id, :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :type_law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning, :law, :law_number,
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
         legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker],
         agendas_attributes: [:id, :_destroy, :body, :event_at, :time]],

@@ -12,6 +12,20 @@ class LegislativesController < ApplicationController
     end
   end
 
+  def projects_law
+    add_breadcrumb "Proyectos - Ley", :projects_law_legislatives_path
+
+    @q = Legislative.law.ransack params[:q]
+    @legislatives = @q.result
+  end
+
+  def projects_old
+    add_breadcrumb "Proyectos - Archivado y Retirado", :projects_old_legislatives_path
+
+    @q = Legislative.old.ransack params[:q]
+    @legislatives = @q.result
+  end
+
   def favorites
     add_breadcrumb "Mis Favoritos", :favorites_legislatives_path
 

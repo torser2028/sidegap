@@ -17,7 +17,11 @@ class Legislative < ActiveRecord::Base
   scope :as_author, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.authors).uniq }
   scope :as_speaker, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.speakers).uniq }
   scope :with_agenda, -> { includes(:agendas).where.not(agendas: { legislative_id: nil }) }
+  scope :law, -> { where(law: true) }
+  scope :old, -> { where(status: %w(Archivado Retirado)) }
 
+  validates :source, :title, :status, :type_law, :filing_at, presence: true
+  validates :law_number, presence: true, if: :law
 
   FILINGFILTERS = [
     ['Hoy', Date.today],

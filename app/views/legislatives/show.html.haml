@@ -130,7 +130,7 @@
                   Tipo de Ley
               .large-6.columns
                 %span
-                  = @legislative.law
+                  = @legislative.type_law
             - if current_user.following? @legislative
               = form_for @comment do |f|
                 .row.white

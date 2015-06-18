@@ -1,0 +1,33 @@
+.panels-view
+  .row
+    .small-12.columns
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "inbox"
+        Proyectos - Archivado y Retirado
+      .tray.projects
+        .row
+          .small-12.columns
+            = render 'search'
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Num Cámara
+              %th
+                Num Senado
+              %th
+                Título
+              %th
+                Fecha de Radicación
+              %th
+                Opciones
+          %tbody.js_legislatives
+            = render @legislatives

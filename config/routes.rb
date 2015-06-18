@@ -34,6 +34,8 @@ Rails.application.routes.draw do
     resources :legislatives, only: [:index, :show] do
         concerns [:followable, :trashable]
         collection do
+            get :projects_law
+            get :projects_old
             get :events
             get :events_commission
             get :favorites
