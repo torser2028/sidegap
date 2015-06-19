@@ -17,6 +17,7 @@ en:
       unauthenticated: "You need to sign in or sign up before continuing."
       unconfirmed: "You have to confirm your email address before continuing."
       only_admins: "This area is restricted to administrators only."
+      user_inactive: "This user has been deactivated."
     mailer:
       confirmation_instructions:
         subject: "Confirmation instructions"

@@ -53,23 +53,24 @@
             %col
             %col
             %col
+            %col
           %thead
             %tr
               %th
                 Fecha
               %th
+                Hora
+              %th
                 Evento
               %th
-                Tipo de Noticia
+                Tipo de Evento
               %th
-                Link Noticia
+                Lugar
           %tbody
             - @events.each do |event|
               %tr
                 %td.num= event.event_at
+                %td.num= l event.time, format: :simple
                 %td.desc= simple_format event.body
                 %td= event.event_type
-                %td.actions
-                  %a.link{href: "#"}
-                    = fa_icon "external-link-square"
-                    Enlace
+                %td= event.commission.present? ? event.commission : event.plenary
