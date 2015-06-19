@@ -1,0 +1,63 @@
+@import "variables";
+//Rama Legislativa
+.councils{
+  header{
+    h1{
+      border-bottom: $D-padGlb/4 solid $C-matiz7;
+      i{
+        background: $C-matiz7;
+      }
+    }
+  }
+  h2{
+    i{
+      color: $C-matiz7;
+    }
+  }
+  .main{
+    h2{
+      i{
+        color: $C-matiz7;
+      }
+    }
+    h3{
+      i{
+        background: $C-matiz7;
+      }
+    }
+    .tray{
+      table{
+        tbody{
+          tr{
+            td{
+              &.actions{
+                a{
+                  &:hover{
+                    i{
+                      color: $C-matiz7;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .pryctDtl{
+      .row{
+        .columns{
+          &.actions{
+            a{
+              &:hover{
+                i{
+                  color: $C-matiz7;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
