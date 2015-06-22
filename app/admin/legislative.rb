@@ -53,6 +53,10 @@ ActiveAdmin.register Legislative do
         row "Estatus Final" do
           legislative.final_status
         end
+
+        row "Número de Ley" do
+          legislative.law_number
+        end
           
         row "Tema de Interes" do
           legislative.topic

@@ -96,15 +96,20 @@
               .large-2.columns.labels
                 %label
                   Estado
-              .large-2.columns
+              .large-10.columns
                 %span
-                  = @legislative.status
-              .large-2.columns.labels
-                %label
-                  Estatus Final
-              .large-6.columns
-                %span
-                  = @legislative.final_status
+                  - if %w(Archivado Retirado Sancionado).include? @legislative.final_status
+                    = "Es proyecto fue #{@legislative.final_status} en #{@legislative.status}"
+                  - else
+                    = @legislative.status
+            - if @legislative.law_number.present?
+              .row
+                .large-2.columns.labels
+                  %label
+                    Número de Ley
+                .large-10.columns
+                  %span
+                    = @legislative.law_number
             .row
               .large-2.columns.labels
                 %label
