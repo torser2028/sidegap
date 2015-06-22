@@ -39,6 +39,9 @@ ActiveAdmin.register Rule do
         row "Fecha" do
           ldate rule.filing_at
         end
+        row "Fecha Limite para Comentarios" do
+          ldate rule.deadline_comments
+        end
         row "Archivos Adjuntos" do
           ul do
             rule.attachments.each do |a|
@@ -59,6 +62,7 @@ ActiveAdmin.register Rule do
       f.input :kind, label: "Tipo de Norma", collection: Kind.rules.pluck(:name)
       f.input :institution, label: "Institución", collection: Institution.rules
       f.input :filing_at, label: "Fecha", as: :datepicker
+      f.input :deadline_comments, label: "Fecha Limite para Comentarios", as: :datepicker
     end
     f.inputs "Archivos Adjuntos" do
       f.has_many :attachments, heading: "", allow_destroy: true, new_record: "Agregar Archivo" do |la|
