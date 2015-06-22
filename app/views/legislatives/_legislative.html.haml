@@ -12,6 +12,8 @@
         Mensaje de urgencia
   %td.num
     = ldate legislative.filing_at
+  %td
+    = legislative.type_law
   %td.actions
     - unless current_user.disliked? legislative
       %a.more{href: legislative_path(legislative)}
