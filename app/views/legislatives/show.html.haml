@@ -183,7 +183,7 @@
           .large-6.columns
             %h3
               = fa_icon "users"
-              Autores
+              Autores Cámara
             .tray.autors
               %table
                 %thead
@@ -191,14 +191,14 @@
                     %th
                       Nombre de Autor
                 %tbody
-                  - @authors.each do |author|
+                  - @chamber_authors.each do |author|
                     %tr
                       %td
                         = link_to author.name, stakeholder_legislatives_path(author)
           .large-6.columns
             %h3
               = fa_icon "users"
-              Ponentes
+              Ponentes Cámara
             .tray.autors
               %table
                 %thead
@@ -206,7 +206,38 @@
                     %th
                       Nombre de Ponente
                 %tbody
-                  - @speakers.each do |speaker|
+                  - @chamber_speakers.each do |speaker|
+                    %tr
+                      %td
+                        = link_to speaker.name, stakeholder_legislatives_path(speaker)
+        .row
+          .large-6.columns
+            %h3
+              = fa_icon "users"
+              Autores Senado
+            .tray.autors
+              %table
+                %thead
+                  %tr
+                    %th
+                      Nombre de Autor
+                %tbody
+                  - @senate_authors.each do |author|
+                    %tr
+                      %td
+                        = link_to author.name, stakeholder_legislatives_path(author)
+          .large-6.columns
+            %h3
+              = fa_icon "users"
+              Ponentes Senado
+            .tray.autors
+              %table
+                %thead
+                  %tr
+                    %th
+                      Nombre de Ponente
+                %tbody
+                  - @senate_speakers.each do |speaker|
                     %tr
                       %td
                         = link_to speaker.name, stakeholder_legislatives_path(speaker)

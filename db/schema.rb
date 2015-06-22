@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150618201403) do
+ActiveRecord::Schema.define(version: 20150618224656) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -191,10 +191,12 @@ ActiveRecord::Schema.define(version: 20150618201403) do
   create_table "legislative_stakeholders", force: :cascade do |t|
     t.integer  "legislative_id"
     t.integer  "stakeholder_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.boolean  "author"
     t.boolean  "speaker"
+    t.boolean  "senate",         default: false
+    t.boolean  "chamber",        default: false
   end
 
   add_index "legislative_stakeholders", ["legislative_id"], name: "index_legislative_stakeholders_on_legislative_id", using: :btree

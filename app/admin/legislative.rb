@@ -109,6 +109,8 @@ ActiveAdmin.register Legislative do
             end
             column "Autor", :author
             column "Ponente", :speaker
+            column "Senado", :senate
+            column "Cámara", :chamber
           end
         end
 
@@ -171,6 +173,8 @@ ActiveAdmin.register Legislative do
         ls.input :stakeholder
         ls.input :author, label: "Autor"
         ls.input :speaker, label: "Ponente"
+        ls.input :senate, label: "Senado"
+        ls.input :chamber, label: "Cámara"
       end
     end
     f.inputs "Archivos Adjuntos" do
@@ -219,7 +223,7 @@ ActiveAdmin.register Legislative do
       params.permit legislative: [
         :legislative_id, :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :type_law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning, :law, :law_number, :second_chamber_commission_at, :second_chamber_plenary_at, :second_senate_commission_at, :second_senate_plenary_at,
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
-        legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker],
+        legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker, :senate, :chamber],
         agendas_attributes: [:id, :_destroy, :body, :event_at, :time]],
         agenda: [:body, :event_at, :time]
     end
