@@ -4,7 +4,7 @@ class RulesController < InheritedResources::Base
   def index
     add_breadcrumb "Bandeja de Normas", :rules_path
 
-    @q = Rule.ransack params[:q]
+    @q = Rule.deadline_comments.ransack params[:q]
     @rules = []
     @q.result.each do |item|
       @rules << item unless current_user.following_rules.include? item
