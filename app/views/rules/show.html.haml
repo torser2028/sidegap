@@ -7,17 +7,17 @@
       .pryctDtl
         .row.cntnr.white
           .large-4.columns
-            %button
+            .button
               %a{href: rules_path}
                 = fa_icon "arrow-left"
                 Consultar Normas
             - if current_user.following? @rule
-              %button.secondary
+              .button.secondary
                 %a{ href: unfollow_rule_path(@rule) }
                   = fa_icon "eye-slash"
                   No seguir
             - else
-              %button.success
+              .button.success
                 %a{ href: follow_rule_path(@rule) }
                   = fa_icon "eye"
                   Seguir
@@ -82,9 +82,7 @@
                   .large-6.columns
                     = f.text_area :body, class: "comments", rows: 6
                     = f.hidden_field :rule_id, value: @rule.id
-                    %button.success{type: "submit"}
-                      = fa_icon "save"
-                      Guardar
+                    %input.button.success.save{type: "submit",value: "Guardar"}
                   .large-4.columns
                     %span.ghost
                       \-
