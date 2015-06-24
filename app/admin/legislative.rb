@@ -7,8 +7,8 @@ ActiveAdmin.register Legislative do
   filter :chamber_number, label: "Número de Cámara"
   filter :senate_number, label: "Número de Senado"
   filter :commission, label: "Comisión", as: :select, collection: ->{ Commission.pluck(:name) }
-  filter :status, label: "Estatus", as: :select, collection: -> { Status.pluck(:name) }
-  filter :final_status, label: "Estatus Final", as: :select, collection: -> { FinalStatus.pluck(:name) }
+  filter :status, label: "Estado", as: :select, collection: -> { Status.pluck(:name) }
+  filter :final_status, label: "Estado Final", as: :select, collection: -> { FinalStatus.pluck(:name) }
   filter :probability, label: "Probabilidad", as: :select, collection: -> { Probability.pluck(:name) }
   filter :filing_at, label: "Fecha de Radicación"
   filter :agendas_id_not_null, label: "Agendados", as: :boolean, collection: [["Si", true], ["No", false]]
