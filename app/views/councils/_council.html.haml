@@ -1,0 +1,41 @@
+%tr
+  %td.num
+    = council.number
+  %td.desc
+    %p
+      = council.title
+    - if council.warning
+      %span.round.label.linear.urgent
+        = fa_icon "exclamation-circle"
+        Mensaje de urgencia
+  %td.num
+    = ldate council.filing_at
+  %td.desc
+    = council.topic
+  %td.actions
+    - unless current_user.disliked? council
+      %a.more{href: council_path(council)}
+        = fa_icon "arrow-circle-right"
+        %span
+          Ver
+      - if current_user.following? council
+        %a.follow{href: unfollow_council_path(council)}
+          = fa_icon "eye-slash"
+          %span
+            Dejar de Seguir
+      - else
+        %a.follow{href: follow_council_path(council)}
+          = fa_icon "eye"
+          %span
+            Seguir
+    - unless current_user.following? council
+      - if current_user.disliked? council
+        %a.return{href: like_council_path(council)}
+          = fa_icon "reply"
+          %span
+            Reestablecer
+      - else
+        %a.archive{href: dislike_council_path(council)}
+          = fa_icon "trash"
+          %span
+            Papelera

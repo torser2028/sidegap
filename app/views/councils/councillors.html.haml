@@ -1,0 +1,59 @@
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "users"
+        Consultar Congresistas
+      .tray.rep
+        .row
+          .small-12.columns
+            %ul.tabs{"data-tab" => "", :role => "tablist"}
+              %li.tab-title.active{:role => "presentational"}
+                %a{"aria-selected" => "true", :controls => "basicPanel", :href => "#basicPanel", :role => "tab", :tabindex => "0"}
+                  = fa_icon "search"
+                  Buscador
+            .tabs-content
+              %section#basicPanel.content.active{"aria-hidden" => "false", :role => "tabpanel"}
+                .row
+                  = search_form_for @q, url: :councillors_councils, remote: true do |f|
+                    .large-6.medium-6.columns
+                      %label
+                        Nombre
+                      = f.search_field :name_cont
+                    .large-2.medium-2.columns
+                      %label
+                        Comisión
+                      = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
+                    .large-offset-0.large-2.medium-offset-3.medium-3.columns
+                      %label
+                        %span.ghost
+                          \_
+                      %input.button.success.search.fullwidth{type: "submit", value: "Buscar"}
+                    .large-offset-0.large-2.medium-3.end.columns
+                      %label
+                        %span.ghost
+                          \_
+                      .button.secondary.fullwidth.quit
+                        %a{href: councillors_councils_path}
+                          Quitar Filtros
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Nombre
+              %th
+                Institución
+              %th
+                Partido
+              %th
+                Comisión
+              %th
+                Opciones
+          %tbody.js_councillors
+            = render @councillors

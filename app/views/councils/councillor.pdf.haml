@@ -1,0 +1,121 @@
+.panels-view
+  %h2
+    = fa_icon "user"
+    Perfil Congresista
+  .pryctDtl
+    %figure
+      = wicked_pdf_image_tag @stakeholder.avatar_url(:thumb)
+      %figcaption
+        = @stakeholder.name
+    %dl
+      %dt
+        Nombre
+      %dd
+        = @stakeholder.name
+      %dt
+        Corporación Institucional
+      %dd
+        Congreso de la República
+      %dt
+        Cargo
+      %dd
+        = @stakeholder.job
+      %dt
+        Partido
+      %dd
+        = @stakeholder.political_party
+      %dt
+        Comisión
+      %dd
+        = @stakeholder.commission
+      %dt
+        Dirección
+      %dd
+        = @stakeholder.address
+      %dt
+        Región
+      %dd
+        = @stakeholder.region
+      %dt
+        Teléfono del Trabajo
+      %dd
+        = @stakeholder.phone
+      %dt
+        Oficina
+      %dd
+        = @stakeholder.office
+      %dt
+        E-mail
+      %dd
+        = @stakeholder.email
+      %dt
+        Fuente de Información
+      %dd
+        = @stakeholder.source
+      %dt
+        Perfil
+      %dd
+        %p
+          = simple_format @stakeholder.info
+  .tray.autors
+    %h2
+      Autor en
+    %table
+      %colgroup
+        %col
+        %col
+        %col
+        %col
+        %col
+      %thead
+        %tr
+          %th
+            Num Cámara
+          %th
+            Num Senado
+          %th
+            Título
+          %th
+            Fecha de Radicación
+      %tbody
+        - @legislatives_as_author.each do |legislative|
+          %tr
+            %td
+              = legislative.chamber_number
+            %td
+              = legislative.senate_number
+            %td.desc
+              = legislative.title
+            %td
+              = legislative.filing_at
+  .tray.autors
+    %h2
+      Ponente en
+    %table
+      %colgroup
+        %col
+        %col
+        %col
+        %col
+        %col{width: "120"}
+      %thead
+        %tr
+          %th
+            Num Cámara
+          %th
+            Num Senado
+          %th
+            Título
+          %th
+            Fecha de Radicación
+      %tbody
+        - @legislatives_as_speaker.each do |legislative|
+          %tr
+            %td
+              = legislative.chamber_number
+            %td
+              = legislative.senate_number
+            %td.desc
+              = legislative.title
+            %td
+              = legislative.filing_at

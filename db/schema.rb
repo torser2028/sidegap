@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622222447) do
+ActiveRecord::Schema.define(version: 20150625222946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,8 +68,10 @@ ActiveRecord::Schema.define(version: 20150622222447) do
     t.datetime "updated_at",     null: false
     t.integer  "judicial_id"
     t.integer  "rule_id"
+    t.integer  "council_id"
   end
 
+  add_index "attachments", ["council_id"], name: "index_attachments_on_council_id", using: :btree
   add_index "attachments", ["executive_id"], name: "index_attachments_on_executive_id", using: :btree
   add_index "attachments", ["judicial_id"], name: "index_attachments_on_judicial_id", using: :btree
   add_index "attachments", ["legislative_id"], name: "index_attachments_on_legislative_id", using: :btree
@@ -83,8 +85,10 @@ ActiveRecord::Schema.define(version: 20150622222447) do
     t.integer  "user_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "council_id"
   end
 
+  add_index "comments", ["council_id"], name: "index_comments_on_council_id", using: :btree
   add_index "comments", ["legislative_id"], name: "index_comments_on_legislative_id", using: :btree
   add_index "comments", ["rule_id"], name: "index_comments_on_rule_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
@@ -99,6 +103,49 @@ ActiveRecord::Schema.define(version: 20150622222447) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "councillor_assignments", force: :cascade do |t|
+    t.integer  "council_id"
+    t.integer  "councillor_id"
+    t.boolean  "author",        default: false
+    t.boolean  "speaker",       default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+  end
+
+  add_index "councillor_assignments", ["council_id"], name: "index_councillor_assignments_on_council_id", using: :btree
+  add_index "councillor_assignments", ["councillor_id"], name: "index_councillor_assignments_on_councillor_id", using: :btree
+
+  create_table "councillors", force: :cascade do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "political_party"
+    t.string   "job"
+    t.string   "commission"
+    t.string   "office"
+    t.text     "info"
+    t.string   "source"
+    t.string   "avatar"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "councils", force: :cascade do |t|
+    t.text     "title"
+    t.string   "number"
+    t.string   "commission"
+    t.string   "status"
+    t.string   "topic"
+    t.date     "filing_at"
+    t.boolean  "notify"
+    t.boolean  "warning"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.date     "monitoring_at"
+    t.boolean  "aval"
   end
 
   create_table "events", force: :cascade do |t|
@@ -382,13 +429,17 @@ ActiveRecord::Schema.define(version: 20150622222447) do
   add_foreign_key "agendas", "legislatives"
   add_foreign_key "assignments", "roles"
   add_foreign_key "assignments", "users"
+  add_foreign_key "attachments", "councils"
   add_foreign_key "attachments", "executives"
   add_foreign_key "attachments", "judicials"
   add_foreign_key "attachments", "legislatives"
   add_foreign_key "attachments", "rules"
+  add_foreign_key "comments", "councils"
   add_foreign_key "comments", "legislatives"
   add_foreign_key "comments", "rules"
   add_foreign_key "comments", "users"
+  add_foreign_key "councillor_assignments", "councillors"
+  add_foreign_key "councillor_assignments", "councils"
   add_foreign_key "executives", "institutions"
   add_foreign_key "institutions", "sectors"
   add_foreign_key "legislative_stakeholders", "legislatives"

@@ -1,0 +1,14 @@
+%tr
+  %td
+    = councillor.name
+  %td
+    Concejo de Bogotá
+  %td
+    = councillor.political_party
+  %td
+    = councillor.commission
+  %td.actions
+    %a.more{href: councillor_councils_path(councillor)}
+      = fa_icon "arrow-circle-right"
+      %span
+        Ver

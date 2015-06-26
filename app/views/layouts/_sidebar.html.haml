@@ -25,11 +25,13 @@
         %strong Normas en proceso de consulta ciudadana
       %ul.left-submenu.branch
         = render 'rules/menu'
-    %li
-      %a{:href => "#"}
+    %li.has-submenu
+      %a{:href => councils_path}
         %span.ico
           = fa_icon "comments"
-        %strong Concejos Municipales
+        %strong Concejos de Bogotá
+      %ul.left-submenu.branch
+        = render 'councils/menu'
     / %li
     /   %a{:href => executives_path}
     /     %span.ico

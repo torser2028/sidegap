@@ -3,6 +3,7 @@ class Attachment < ActiveRecord::Base
   belongs_to :legislative
   belongs_to :rule
   belongs_to :judicial
+  belongs_to :council
 
   mount_uploader :attachment, AttachmentUploader
 

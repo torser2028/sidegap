@@ -1,0 +1,139 @@
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "file-text"
+        Detalles del proyecto
+      .pryctDtl
+        .row.cntnr.white
+          .large-4.columns
+            .button
+              %a{href: councils_path}
+                = fa_icon "arrow-left"
+                Consultar Proyectos
+            - if current_user.following? @council
+              .button.secondary
+                %a{ href: unfollow_council_path(@council) }
+                  = fa_icon "eye-slash"
+                  No seguir
+            - else
+              .button.success
+                %a{ href: follow_council_path(@council) }
+                  = fa_icon "eye"
+                  Seguir
+          .large-4.columns
+          .large-4.columns.actions
+            %a#downloads{"data-reveal-id" => "filesPnl"}
+              = fa_icon "download"
+              %span
+                Descargar Archivos
+            %a{ href: council_path(@council, format: :pdf), target: "_blank" }
+              = fa_icon "file-pdf-o"
+              %span
+                Exportar a PDF
+        .row.cntnr
+          .large-12.columns
+            .row
+              .large-2.columns.labels
+                %label
+                  Título
+              .large-10.columns
+                %span.txtdesc
+                  = @council.title
+            .row
+              .large-2.columns.labels
+                %label
+                  Número
+              .large-2.columns
+                %span
+                  = @council.number
+              .large-2.columns.labels
+                %label
+                  Tema interés
+              .large-6.columns
+                %span
+                  = @council.topic
+            .row
+              .large-2.columns.labels
+                %label
+                  Fecha de Seguimiento
+              .large-2.columns
+                %span
+                  = ldate @council.monitoring_at
+              .large-2.columns.labels
+                %label
+                  Fecha de Radicación
+              .large-6.columns
+                %span
+                  = ldate @council.filing_at
+            .row
+              .large-2.columns.labels
+                %label
+                  Estado
+              .large-2.columns
+                %span
+                  = @council.status
+              .large-2.columns.labels
+                %label
+                  Comisión
+              .large-6.columns
+                %span
+                  = @council.commission
+            - if current_user.following? @council
+              = form_for @comment do |f|
+                .row.white
+                  .large-2.columns.labels
+                    %label
+                      Impacto
+                  .large-2.columns
+                    = f.select :impact, options_for_select(Comment::IMPACT, @comment.impact), include_blank: true
+                  .large-8.columns
+                    %span.ghost
+                      \-
+                .row.white
+                  .large-2.columns.labels
+                    %label
+                      Comentario
+                  .large-6.columns
+                    = f.text_area :body, class: "comments", rows: 6
+                    = f.hidden_field :council_id, value: @council.id
+                    %input.button.success.save{type: "submit", value: "Guardar"}
+                  .large-4.columns
+                    %span.ghost
+                      \-
+- content_for :modal do
+  .reveal-modal.filesPnl.councils#filesPnl{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
+
+    %a.close-reveal-modal{"aria-label" => "Close"}
+      &#215;
+    .row.panels-view
+      .large-12.columns
+        %h2
+          = fa_icon "files-o"
+          Archivos
+    .row.panels-view
+      .large-12.columns
+        .tray.autors
+          %table
+            %colgroup
+              %col
+              %col.date{width: "30%"}
+            %thead
+              %tr
+                %th
+                  Título
+                %th
+                  Fecha de Publicación
+                %th
+                  
+            %tbody
+              - @attachments.each do |a|
+                %tr
+                  %td
+                    = a.title
+                  %td
+                    = ldate a.published_at
+                  %td
+                    %a.down{href: a.attachment.url, target: "_blank"}
+                      = fa_icon "download"
+                      Descargar

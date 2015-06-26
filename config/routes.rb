@@ -22,12 +22,18 @@ Rails.application.routes.draw do
             get :follow
             get :unfollow
         end
+        collection do
+            get :favorites
+        end
     end
 
     concern :trashable do
         member do
             get :like
             get :dislike
+        end
+        collection do
+            get :trash
         end
     end
 
@@ -38,8 +44,6 @@ Rails.application.routes.draw do
             get :projects_old
             get :events
             get :events_commission
-            get :favorites
-            get :trash
             get :stakeholders
             get 'stakeholder/:id', action: :stakeholder, as: :stakeholder
         end
@@ -49,8 +53,13 @@ Rails.application.routes.draw do
 
     resources :rules, only: [:index, :show] do
         concerns :followable
+    end
+
+    resources :councils, only: [:index, :show] do
+        concerns [:followable, :trashable]
         collection do
-            get :favorites
+            get :councillors
+            get 'councillor/:id', action: :councillor, as: :councillor
         end
     end
 
