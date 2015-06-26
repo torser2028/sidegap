@@ -12,7 +12,7 @@ ActiveAdmin.register Council do
   filter :status, label: "Estado", as: :select, collection: -> { Status.councils.pluck(:name) }
   filter :filing_at, label: "Fecha de Radicación"
 
-  index do
+  index title: "Proyectos" do
     column "Titulo", :title
     column "Número", :number
     column "Fecha de Radicación" do |council|
