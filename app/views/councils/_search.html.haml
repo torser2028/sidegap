@@ -1,10 +1,10 @@
 %ul.tabs{"data-tab" => "", :role => "tablist"}
   %li.tab-title.active{:role => "presentational"}
-    %a{"aria-selected" => "true", :controls => "bscPanel", :href => "#bscPanel", :role => "tab", :tabindex => "0"} 
+    %a{"aria-selected" => "true", :controls => "bscPanel", :href => "#bscPanel", :role => "tab", :tabindex => "0"}
       =fa_icon "search"
       Buscador Básico
   %li.tab-title{:role => "presentational"}
-    %a{"aria-selected" => "false", :controls => "avdPanel", :href => "#avdPanel", :role => "tab", :tabindex => "0"} 
+    %a{"aria-selected" => "false", :controls => "avdPanel", :href => "#avdPanel", :role => "tab", :tabindex => "0"}
       = fa_icon "search-plus"
       Buscador Avanzado
 .tabs-content
@@ -33,7 +33,7 @@
           = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
           %label
             Estado
-          = f.collection_select :status_eq, Status.all, :name, :name, include_blank: true
+          = f.collection_select :status_eq, Status.councils, :name, :name, include_blank: true
         .large-2.medium-3.columns
           %label
             Número

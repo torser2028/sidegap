@@ -7,7 +7,7 @@ ActiveAdmin.register Legislative do
   filter :chamber_number, label: "Número de Cámara"
   filter :senate_number, label: "Número de Senado"
   filter :commission, label: "Comisión", as: :select, collection: ->{ Commission.pluck(:name) }
-  filter :status, label: "Estado", as: :select, collection: -> { Status.pluck(:name) }
+  filter :status, label: "Estado", as: :select, collection: -> { Status.legislatives.pluck(:name) }
   filter :final_status, label: "Estado Final", as: :select, collection: -> { FinalStatus.pluck(:name) }
   filter :probability, label: "Probabilidad", as: :select, collection: -> { Probability.pluck(:name) }
   filter :filing_at, label: "Fecha de Radicación"
@@ -33,19 +33,19 @@ ActiveAdmin.register Legislative do
         row "Origen" do
           legislative.source
         end
-          
+
         row "Número de Cámara" do
           legislative.chamber_number
         end
-          
+
         row "Número de Senado" do
           legislative.senate_number
         end
-          
+
         row "Comisión" do
           legislative.commission
         end
-          
+
         row "Estatus" do
           legislative.status
         end
@@ -57,31 +57,31 @@ ActiveAdmin.register Legislative do
         row "Número de Ley" do
           legislative.law_number
         end
-          
+
         row "Tema de Interes" do
           legislative.topic
         end
-          
+
         row "Tipo de Ley" do
           legislative.type_law
         end
-          
+
         row "Probabilidad" do
           legislative.probability
         end
-          
+
         row "Fecha Comisión Cámara" do
           ldate legislative.chamber_commission_at
         end
-          
+
         row "Fecha Plenaria Cámara" do
           ldate legislative.chamber_plenary_at
         end
-          
+
         row "Fecha Comisión Senado" do
           ldate legislative.senate_commission_at
         end
-          
+
         row "Fecha Plenaria Senado" do
           ldate legislative.senate_plenary_at
         end

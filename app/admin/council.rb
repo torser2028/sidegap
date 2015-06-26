@@ -9,7 +9,7 @@ ActiveAdmin.register Council do
   filter :title, label: "Titulo"
   filter :number, label: "Número"
   filter :commission, label: "Comisión", as: :select, collection: ->{ Commission.pluck(:name) }
-  filter :status, label: "Estado", as: :select, collection: -> { Status.pluck(:name) }
+  filter :status, label: "Estado", as: :select, collection: -> { Status.councils.pluck(:name) }
   filter :filing_at, label: "Fecha de Radicación"
 
   index do
