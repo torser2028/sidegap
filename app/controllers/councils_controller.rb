@@ -36,8 +36,8 @@ class CouncilsController < ApplicationController
     add_breadcrumb "Proyecto", :council_path
 
     @council = get_council params[:id]
-    # @authors = @council.councillors.authors
-    # @speakers = @council.councillors.speakers
+    @authors = @council.councillors.authors
+    @speakers = @council.councillors.speakers
     @attachments = @council.attachments
 
     @comment = Comment.where(user: current_user, council: @council).first_or_initialize

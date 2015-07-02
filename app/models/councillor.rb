@@ -5,4 +5,6 @@ class Councillor < ActiveRecord::Base
   mount_uploader :avatar, AvatarUploader
 
   default_scope { order(name: :asc) }
+  scope :authors, -> { joins(:councillor_assignments).merge(CouncillorAssignment.authors).uniq }
+  scope :speakers, -> { joins(:councillor_assignments).merge(CouncillorAssignment.speakers).uniq }
 end

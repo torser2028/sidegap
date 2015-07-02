@@ -8,7 +8,7 @@ ActiveAdmin.register Event do
   filter :event_type, label: "Tipo de Evento"
   filter :event_at, label: "Fecha"
 
-  index do
+  index title: "Eventos" do
     selectable_column
     column "Evento", :body
     column "Fecha" do |event|
@@ -17,7 +17,7 @@ ActiveAdmin.register Event do
     column "Hora" do |event|
       l event.time, format: :simple
     end
-    column "Tipo de Noticia", :event_type
+    column "Tipo de Evento", :event_type
     actions
   end
 
@@ -60,6 +60,21 @@ ActiveAdmin.register Event do
       f.input :plenary, label: "Plenaria"
       f.input :source, label: "Fuente"
     end
-    f.actions
+    f.actions do
+      f.action :submit, label: "Guardar Evento"
+      li class: "cancel" do
+        link_to "Cancelar", admin_events_path
+      end
+    end
+  end
+  controller do
+    def new
+      @page_title = "Agregar Evento"
+      super
+    end
+
+    def edit
+      @page_title = "Editar Evento"
+    end
   end
 end

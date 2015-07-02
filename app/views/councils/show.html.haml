@@ -101,6 +101,37 @@
                   .large-4.columns
                     %span.ghost
                       \-
+        .row
+          .large-6.columns
+            %h3
+              = fa_icon "users"
+              Autores
+            .tray.autors
+              %table
+                %thead
+                  %tr
+                    %th
+                      Nombre de Autor
+                %tbody
+                  - @authors.each do |author|
+                    %tr
+                      %td
+                        = link_to author.name, councillor_councils_path(author)
+          .large-6.columns
+            %h3
+              = fa_icon "users"
+              Ponentes
+            .tray.autors
+              %table
+                %thead
+                  %tr
+                    %th
+                      Nombre de Ponente
+                %tbody
+                  - @speakers.each do |speaker|
+                    %tr
+                      %td
+                        = link_to speaker.name, councillor_councils_path(speaker)
 - content_for :modal do
   .reveal-modal.filesPnl.councils#filesPnl{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
 
@@ -125,7 +156,7 @@
                 %th
                   Fecha de Publicación
                 %th
-                  
+
             %tbody
               - @attachments.each do |a|
                 %tr

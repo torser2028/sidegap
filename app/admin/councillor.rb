@@ -72,6 +72,22 @@ ActiveAdmin.register Councillor do
         : content_tag(:span, "no tiene imagen")
       f.input :avatar_cache, as: :hidden
     end
-    f.actions
+    f.actions do
+      f.action :submit, label: "Guardar Concejal"
+      li class: "cancel" do
+        link_to "Cancelar", admin_councillors_path
+      end
+    end
+  end
+
+  controller do
+    def new
+      @page_title = "Agregar Concejal"
+      super
+    end
+
+    def edit
+      @page_title = "Editar Concejal"
+    end
   end
 end

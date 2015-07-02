@@ -78,7 +78,7 @@ ActiveAdmin.register Council do
       f.input :title, label: "Titulo", as: :text, input_html: { rows: 5 }
       f.input :number, label: "Número"
       f.input :commission, label: "Comisión", collection: Commission.pluck(:name)
-      f.input :status, label: "Estado", collection: Status.pluck(:name)
+      f.input :status, label: "Estado", collection: Status.councils.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)
       f.input :monitoring_at, label: "Fecha de Seguimiento", as: :datepicker
       f.input :filing_at, label: "Fecha de Radicación", as: :datepicker
@@ -102,6 +102,22 @@ ActiveAdmin.register Council do
     f.inputs do
       f.input :notify, label: "Envíar notificación?"
     end
-    f.actions
+    f.actions do
+      f.action :submit, label: "Guardar Proyecto"
+      li class: "cancel" do
+        link_to "Cancelar", admin_councils_path
+      end
+    end
+  end
+
+  controller do
+    def new
+      @page_title = "Agregar Proyecto"
+      super
+    end
+
+    def edit
+      @page_title = "Editar Proyecto"
+    end
   end
 end

@@ -10,7 +10,7 @@ ActiveAdmin.register Rule do
   filter :institution, label: "Institución", as: :select, collection: -> { Institution.rules }
   filter :filing_at, label: "Fecha"
 
-  index do
+  index title: "Normas" do
     selectable_column
     column "Titulo", :title
     column "Tipo de Norma", :kind
@@ -71,6 +71,23 @@ ActiveAdmin.register Rule do
         la.input :attachment, label: ""
       end
     end
-    f.actions
+    f.actions do
+      f.action :submit, label: "Guardar Norma"
+      li class: "cancel" do
+        link_to "Cancelar", admin_rules_path
+      end
+    end
   end
+
+  controller do
+    def new
+      @page_title = "Agregar Norma"
+      super
+    end
+
+    def edit
+      @page_title = "Editar Norma"
+    end
+  end
+
 end

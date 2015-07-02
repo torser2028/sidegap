@@ -17,7 +17,7 @@ ActiveAdmin.register User do
     roles.each { |role| user.roles << role unless user.roles.include?(role)  }
   end
 
-  index do
+  index title: "Usuarios" do
     selectable_column
     column :name
     column :email
@@ -37,7 +37,7 @@ ActiveAdmin.register User do
     end
   end
 
-  show do
+  show title: "Detalle de Usuario" do
     attributes_table do
       row :name
       row :email
@@ -69,7 +69,12 @@ ActiveAdmin.register User do
         f.input :password_confirmation
       end
     end
-    f.actions
+    f.actions do
+      f.action :submit, label: "Guardar Usuario"
+      li class: "cancel" do
+        link_to "Cancelar", admin_users_path
+      end
+    end
   end
 
   member_action :active, method: :put do
@@ -81,4 +86,16 @@ ActiveAdmin.register User do
     resource.inactive!
     redirect_to admin_users_path, notice: "El usuario ha sido desactivado."
   end
+
+  controller do
+    def new
+      @page_title = "Agregar Usuario"
+      super
+    end
+
+    def edit
+      @page_title = "Editar Usuario"
+    end
+  end
+
 end

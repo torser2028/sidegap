@@ -9,7 +9,7 @@ ActiveAdmin.register Stakeholder do
   filter :commission, label: "Comisión", as: :select, collection: -> { Commission.pluck(:name) }
   filter :region, label: "Región", as: :select, collection: -> { Region.pluck(:name) }
 
-  index do
+  index title: "Congresistas" do
     selectable_column
     column "Nombre", :name
     column "Partido", :political_party
@@ -78,6 +78,22 @@ ActiveAdmin.register Stakeholder do
         : content_tag(:span, "no tiene image")
       f.input :avatar_cache, as: :hidden
     end
-    f.actions
+    f.actions do
+      f.action :submit, label: "Guardar Congresista"
+      li class: "cancel" do
+        link_to "Cancelar", admin_stakeholders_path
+      end
+    end
+  end
+
+  controller do
+    def new
+      @page_title = "Agregar Congresista"
+      super
+    end
+
+    def edit
+      @page_title = "Editar Congresista"
+    end
   end
 end

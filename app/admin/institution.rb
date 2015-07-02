@@ -6,7 +6,7 @@ ActiveAdmin.register Institution do
   filter :sector
   filter :name, label: "Nombre"
 
-  index do
+  index title: "Instituciones" do
     selectable_column
     column :sector
     column "Nombre", :name
@@ -31,6 +31,22 @@ ActiveAdmin.register Institution do
       f.input :name, label: "Nombre"
       f.input :rule, as: :hidden, input_html: { value: true }
     end
-    f.actions
+    f.actions do
+      f.action :submit, label: "Guardar Institución"
+      li class: "cancel" do
+        link_to "Cancelar", admin_institutions_path
+      end
+    end
+  end
+
+  controller do
+    def new
+      @page_title = "Agregar Institución"
+      super
+    end
+
+    def edit
+      @page_title = "Editar Institución"
+    end
   end
 end

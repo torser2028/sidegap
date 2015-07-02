@@ -6,7 +6,7 @@ ActiveAdmin.register Legislative do
   filter :source, label: "Origen"
   filter :chamber_number, label: "Número de Cámara"
   filter :senate_number, label: "Número de Senado"
-  filter :commission, label: "Comisión", as: :select, collection: ->{ Commission.pluck(:name) }
+  filter :commission, label: "Comisión", as: :select, collection: -> { Commission.pluck(:name) }
   filter :status, label: "Estado", as: :select, collection: -> { Status.legislatives.pluck(:name) }
   filter :final_status, label: "Estado Final", as: :select, collection: -> { FinalStatus.pluck(:name) }
   filter :probability, label: "Probabilidad", as: :select, collection: -> { Probability.pluck(:name) }
@@ -152,7 +152,7 @@ ActiveAdmin.register Legislative do
       f.input :chamber_number, label: "Número de Cámara"
       f.input :senate_number, label: "Número de Senado"
       f.input :commission, label: "Comisión", collection: Commission.pluck(:name)
-      f.input :status, label: "Estado", collection: Status.pluck(:name)
+      f.input :status, label: "Estado", collection: Status.legislatives.pluck(:name)
       f.input :final_status, label: "Estatus Final", collection: FinalStatus.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)
       f.input :type_law, label: "Tipo de Ley", collection: Law.pluck(:name)
@@ -198,7 +198,12 @@ ActiveAdmin.register Legislative do
     f.inputs do
       f.input :notify, label: "Envíar notificación?"
     end
-    f.actions
+    f.actions do
+      f.action :submit, label: "Guardar Proyecto"
+      li class: "cancel" do
+        link_to "Cancelar", admin_legislatives_path
+      end
+    end
   end
 
   member_action :schedule, method: [:get, :post] do
@@ -230,6 +235,15 @@ ActiveAdmin.register Legislative do
         legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker, :senate, :chamber],
         agendas_attributes: [:id, :_destroy, :body, :event_at, :time]],
         agenda: [:body, :event_at, :time]
+    end
+
+    def new
+      @page_title = "Agregar Proyecto"
+      super
+    end
+
+    def edit
+      @page_title = "Editar Proyecto"
     end
   end
 end
