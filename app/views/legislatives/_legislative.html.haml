@@ -10,8 +10,11 @@
       %span.round.label.linear.urgent
         = fa_icon "exclamation-circle"
         Mensaje de urgencia
-  %td.num
-    = ldate legislative.filing_at
+  %td.desc
+    - if %w(Archivado Retirado Sancionado).include? legislative.final_status
+      = "Es proyecto fue #{legislative.final_status} en #{legislative.status}"
+    - else
+      = legislative.status
   %td
     = legislative.type_law
   %td.actions

@@ -75,4 +75,10 @@
                 %td.num= l event.time, format: :simple
                 %td.desc= simple_format event.body
                 %td= event.event_type
-                %td= event.commission.present? ? event.commission : event.plenary
+                %td
+                  - if event.commission.present?
+                    = "Comisión " + event.commission
+                  - elsif event.plenary.present?
+                    = "Plenaria " + event.plenary
+                  - else
+                    = event.place

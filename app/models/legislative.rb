@@ -10,8 +10,8 @@ class Legislative < ActiveRecord::Base
   has_many :stakeholders, through: :legislative_stakeholders
   has_many :legislatives
   belongs_to :legislative
-  
-  accepts_nested_attributes_for :attachments, :legislative_stakeholders, :agendas, allow_destroy: true
+
+  accepts_nested_attributes_for :attachments, :legislative_stakeholders, :agendas, :legislatives, allow_destroy: true
 
   default_scope { where(active: true).uniq }
   scope :as_author, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.authors).uniq }
@@ -21,7 +21,6 @@ class Legislative < ActiveRecord::Base
   scope :old, -> { where(status: %w(Archivado Retirado)) }
 
   validates :source, :title, :status, :type_law, :filing_at, presence: true
-  validates :law_number, presence: true, if: :law
 
   FILINGFILTERS = [
     ['Hoy', Date.today],

@@ -2,7 +2,7 @@ ActiveAdmin.register Event do
   menu label: "Eventos", parent: "Rama Legislativa"
   actions :all, except: [:destroy]
 
-  permit_params :body, :event_at, :event_type, :source, :time, :commission, :plenary
+  permit_params :body, :event_at, :event_type, :time, :commission, :plenary, :place
 
   filter :body, label: "Evento"
   filter :event_type, label: "Tipo de Evento"
@@ -42,8 +42,8 @@ ActiveAdmin.register Event do
         row "Plenaria" do
           event.plenary
         end
-        row "Fuente" do
-          event.source
+        row "Lugar" do
+          event.place
         end
       end
     end
@@ -58,7 +58,7 @@ ActiveAdmin.register Event do
       f.input :event_type, label: "Tipo de Evento"
       f.input :commission, label: "Comisión"
       f.input :plenary, label: "Plenaria"
-      f.input :source, label: "Fuente"
+      f.input :place, label: "Lugar"
     end
     f.actions do
       f.action :submit, label: "Guardar Evento"

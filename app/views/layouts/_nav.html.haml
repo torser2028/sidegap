@@ -4,11 +4,11 @@
       .row
         %ul.right
           %li.has-dropdown.not-click
-            %a{:href => "#"}
-              = current_user.name
+            = link_to current_user.name, "javascript:void(0);"
             %ul.dropdown{:role => "menu"}
-              %li
-                %a{:href => "javascript:void(0);"}= current_user.email
+              - if current_user.has_role? :admin
+                %li
+                  = link_to "Administración", admin_root_path
               %li
                 = link_to 'Editar Perfil', edit_user_registration_path
               %li

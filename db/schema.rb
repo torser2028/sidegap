@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150626160630) do
+ActiveRecord::Schema.define(version: 20150703171421) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,12 +152,12 @@ ActiveRecord::Schema.define(version: 20150626160630) do
     t.text     "body"
     t.date     "event_at"
     t.time     "time"
-    t.string   "source"
     t.string   "event_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "commission"
     t.string   "plenary"
+    t.string   "place"
   end
 
   create_table "executives", force: :cascade do |t|
@@ -271,7 +271,6 @@ ActiveRecord::Schema.define(version: 20150626160630) do
     t.boolean  "warning",                      default: false
     t.boolean  "notify",                       default: false
     t.integer  "legislative_id"
-    t.boolean  "law",                          default: false
     t.string   "law_number"
     t.date     "second_senate_commission_at"
     t.date     "second_senate_plenary_at"
@@ -366,10 +365,10 @@ ActiveRecord::Schema.define(version: 20150626160630) do
 
   create_table "statuses", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.boolean  "legislative"
-    t.boolean  "council"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "legislative", default: false
+    t.boolean  "council",     default: false
   end
 
   create_table "stories", force: :cascade do |t|

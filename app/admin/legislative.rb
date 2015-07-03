@@ -12,15 +12,16 @@ ActiveAdmin.register Legislative do
   filter :probability, label: "Probabilidad", as: :select, collection: -> { Probability.pluck(:name) }
   filter :filing_at, label: "Fecha de Radicación"
   filter :agendas_id_not_null, label: "Agendados", as: :boolean, collection: [["Si", true], ["No", false]]
+  filter :warning, label: "Mensaje de Urgencia", collection: [["Si", true], ["No", false]]
 
   index title: "Proyectos" do
-    selectable_column
     column "Titulo", :title
     column "Número de Cámara", :chamber_number
     column "Número de Senado", :senate_number
     column "Fecha de Radicación" do |legislative|
       ldate legislative.filing_at
     end
+    column "Mensaje de Urgencia", :warning
     actions() {|legislative| link_to "Agendar", schedule_admin_legislative_path(legislative) }
   end
 
@@ -46,11 +47,11 @@ ActiveAdmin.register Legislative do
           legislative.commission
         end
 
-        row "Estatus" do
+        row "Estado" do
           legislative.status
         end
 
-        row "Estatus Final" do
+        row "Estado Final" do
           legislative.final_status
         end
 
@@ -146,14 +147,13 @@ ActiveAdmin.register Legislative do
 
   form do |f|
     f.inputs do
-      f.input :legislative
       f.input :title, label: "Titulo", as: :text, input_html: { rows: 5 }
       f.input :source, label: "Origen", collection: Source.pluck(:name)
       f.input :chamber_number, label: "Número de Cámara"
       f.input :senate_number, label: "Número de Senado"
       f.input :commission, label: "Comisión", collection: Commission.pluck(:name)
       f.input :status, label: "Estado", collection: Status.legislatives.pluck(:name)
-      f.input :final_status, label: "Estatus Final", collection: FinalStatus.pluck(:name)
+      f.input :final_status, label: "Estado Final", collection: FinalStatus.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)
       f.input :type_law, label: "Tipo de Ley", collection: Law.pluck(:name)
       f.input :probability, label: "Probabilidad", collection: Probability.pluck(:name)
@@ -169,16 +169,19 @@ ActiveAdmin.register Legislative do
       f.input :warning, label: "Mensaje de Urgencia"
     end
     f.inputs do
-      f.input :law, label: "Ley?"
       f.input :law_number, label: "Número de Ley"
     end
-    f.inputs "Stakeholders" do
-      f.has_many :legislative_stakeholders, heading: "", allow_destroy: true, new_record: "Agregar Stakeholder" do |ls|
-        ls.input :stakeholder
-        ls.input :author, label: "Autor"
-        ls.input :speaker, label: "Ponente"
-        ls.input :senate, label: "Senado"
-        ls.input :chamber, label: "Cámara"
+    unless f.object.new_record?
+      f.inputs "Proyectos Acumulados" do
+        f.has_many :legislatives, heading: "", allow_destroy: true, new_record: "Agregar acumulado" do |l|
+          l.input :title, label: "Titulo", as: :text, input_html: { rows: 5 }
+          l.input :chamber_number, label: "Número de Cámara"
+          l.input :senate_number, label: "Número de Senado"
+          l.input :filing_at, label: "Fecha de Radicación", as: :datepicker
+          l.input :source, as: :hidden, input_html: { value: f.object.source }
+          l.input :status, as: :hidden, input_html: { value: f.object.status }
+          l.input :type_law, as: :hidden, input_html: { value: f.object.type_law }
+        end
       end
     end
     f.inputs "Archivos Adjuntos" do
@@ -230,7 +233,8 @@ ActiveAdmin.register Legislative do
   controller do
     def permitted_params
       params.permit legislative: [
-        :legislative_id, :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :type_law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning, :law, :law_number, :second_chamber_commission_at, :second_chamber_plenary_at, :second_senate_commission_at, :second_senate_plenary_at,
+        :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :type_law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning, :law_number, :second_chamber_commission_at, :second_chamber_plenary_at, :second_senate_commission_at, :second_senate_plenary_at,
+        legislatives_attributes: [:id, :_destroy, :title, :source, :chamber_number, :senate_number, :status, :type_law, :filing_at],
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
         legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker, :senate, :chamber],
         agendas_attributes: [:id, :_destroy, :body, :event_at, :time]],
