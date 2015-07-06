@@ -26,6 +26,7 @@ gem 'foundation-rails'
 gem 'font-awesome-rails'
 gem 'mini_magick'
 gem 'breadcrumbs_on_rails'
+gem 'chosen-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

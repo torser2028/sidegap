@@ -22,7 +22,10 @@ ActiveAdmin.register Legislative do
       ldate legislative.filing_at
     end
     column "Mensaje de Urgencia", :warning
-    actions() {|legislative| link_to "Agendar", schedule_admin_legislative_path(legislative) }
+    actions() do |legislative|
+      link_to("Agendar", schedule_admin_legislative_path(legislative)) + " " +
+      link_to("Stakeholders", stakeholders_admin_legislative_path(legislative))
+    end
   end
 
   show title: "Detalle del Proyecto" do |legislative|
@@ -105,18 +108,6 @@ ActiveAdmin.register Legislative do
 
         row "Fecha de Radicación" do
           ldate legislative.filing_at
-        end
-
-        row "Stakeholders" do
-          table_for legislative.legislative_stakeholders do
-            column "Nombre", :name do |ls|
-              ls.stakeholder.name
-            end
-            column "Autor", :author
-            column "Ponente", :speaker
-            column "Senado", :senate
-            column "Cámara", :chamber
-          end
         end
 
         row "Archivos Adjuntos" do
@@ -221,6 +212,34 @@ ActiveAdmin.register Legislative do
     end
   end
 
+  member_action :stakeholders, method: [:get, :post] do
+    if request.post?
+      chamber_authors = params[:stakeholders][:chamber_authors].delete_if(&:blank?)
+      chamber_speakers = params[:stakeholders][:chamber_speakers].delete_if(&:blank?)
+      senate_authors = params[:stakeholders][:senate_authors].delete_if(&:blank?)
+      senate_speakers = params[:stakeholders][:senate_speakers].delete_if(&:blank?)
+
+      resource.legislative_stakeholders.destroy_all
+
+      chamber_authors.each { |stakeholder_id| resource.legislative_stakeholders.chamber_authors.create!(stakeholder_id: stakeholder_id)  }
+      chamber_speakers.each { |stakeholder_id| resource.legislative_stakeholders.chamber_speakers.create!(stakeholder_id: stakeholder_id)  }
+      senate_authors.each { |stakeholder_id| resource.legislative_stakeholders.senate_authors.create!(stakeholder_id: stakeholder_id)  }
+      senate_speakers.each { |stakeholder_id| resource.legislative_stakeholders.senate_speakers.create!(stakeholder_id: stakeholder_id)  }
+
+      redirect_to admin_legislative_path(resource), notice: "Stakeholders guardados con éxito."
+    else
+      @holders = Stakeholder.all.map { |e| [e.name, e.id] }
+      @chamber_authors = resource.stakeholders.chamber_authors.map(&:id)
+      @chamber_speakers = resource.stakeholders.chamber_speakers.map(&:id)
+      @senate_authors = resource.stakeholders.senate_authors.map(&:id)
+      @senate_speakers = resource.stakeholders.senate_speakers.map(&:id)
+    end
+  end
+
+  action_item :stakeholders, only: :show do
+    link_to "Modificar Stakeholders", stakeholders_admin_legislative_path(legislative), method: :get
+  end
+
   # member_action :inactive, method: :put do
   #   resource.inactive!
   #   redirect_to admin_legislatives_path, notice: "El Proyecto ha sido eliminado."
@@ -236,7 +255,7 @@ ActiveAdmin.register Legislative do
         :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :type_law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning, :law_number, :second_chamber_commission_at, :second_chamber_plenary_at, :second_senate_commission_at, :second_senate_plenary_at,
         legislatives_attributes: [:id, :_destroy, :title, :source, :chamber_number, :senate_number, :status, :type_law, :filing_at],
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
-        legislative_stakeholders_attributes: [:id, :_destroy, :stakeholder_id, :author, :speaker, :senate, :chamber],
+        stakeholders: [:chamber_authors, :chamber_speakers, :senate_authors, :senate_speakers],
         agendas_attributes: [:id, :_destroy, :body, :event_at, :time]],
         agenda: [:body, :event_at, :time]
     end

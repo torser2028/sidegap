@@ -1,0 +1,13 @@
+= semantic_form_for :stakeholders do |f|
+  = f.inputs name: "Agregar Autores Cámara" do
+    = f.input :chamber_authors, collection: options_for_select(@holders, @chamber_authors), input_html: { class: "chosen-select", multiple: true }, label: "Congresistas"
+  = f.inputs name: "Agregar Ponentes Cámara" do
+    = f.input :chamber_speakers, collection: options_for_select(@holders, @chamber_speakers), input_html: { class: "chosen-select", multiple: true }, label: "Congresistas"
+  = f.inputs name: "Agregar Autores Senado" do
+    = f.input :senate_authors, collection: options_for_select(@holders, @senate_authors), input_html: { class: "chosen-select", multiple: true }, label: "Congresistas"
+  = f.inputs name: "Agregar Ponentes Senado" do
+    = f.input :senate_speakers, collection: options_for_select(@holders, @senate_speakers), input_html: { class: "chosen-select", multiple: true }, label: "Congresistas"
+  = f.actions do
+    = f.action :submit, as: :button, label: "Guardar Stakeholders"
+    %li.cancel
+      = link_to "Cancelar", admin_legislatives_path
