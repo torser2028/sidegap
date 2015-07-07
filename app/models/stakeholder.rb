@@ -9,6 +9,7 @@ class Stakeholder < ActiveRecord::Base
   scope :senate_speakers, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.senate_speakers).uniq }
   scope :chamber_authors, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.chamber_authors).uniq }
   scope :chamber_speakers, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.chamber_speakers).uniq }
+  scope :authors, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.authors).uniq }
 
   ADDRESSES = [
     "Capitolio Nacional, Calle 10 N° 7-50",

@@ -185,10 +185,10 @@
                     %span.ghost
                       \-
         .row
-          .large-6.columns
+          .large-12.columns
             %h3
               = fa_icon "users"
-              Autores Cámara
+              Autores
             .tray.autors
               %table
                 %thead
@@ -196,10 +196,11 @@
                     %th
                       Nombre de Autor
                 %tbody
-                  - @chamber_authors.each do |author|
+                  - @authors.each do |author|
                     %tr
                       %td
                         = link_to author.name, stakeholder_legislatives_path(author)
+        .row
           .large-6.columns
             %h3
               = fa_icon "users"
@@ -215,22 +216,6 @@
                     %tr
                       %td
                         = link_to speaker.name, stakeholder_legislatives_path(speaker)
-        .row
-          .large-6.columns
-            %h3
-              = fa_icon "users"
-              Autores Senado
-            .tray.autors
-              %table
-                %thead
-                  %tr
-                    %th
-                      Nombre de Autor
-                %tbody
-                  - @senate_authors.each do |author|
-                    %tr
-                      %td
-                        = link_to author.name, stakeholder_legislatives_path(author)
           .large-6.columns
             %h3
               = fa_icon "users"

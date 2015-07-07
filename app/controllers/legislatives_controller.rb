@@ -50,9 +50,8 @@ class LegislativesController < ApplicationController
     add_breadcrumb "Proyecto", :legislative_path
 
     @legislative = get_legislative params[:id]
-    @senate_authors = @legislative.stakeholders.senate_authors
+    @authors = @legislative.stakeholders.authors
     @senate_speakers = @legislative.stakeholders.senate_speakers
-    @chamber_authors = @legislative.stakeholders.chamber_authors
     @chamber_speakers = @legislative.stakeholders.chamber_speakers
     @attachments = @legislative.attachments
     @attachments << @legislative.legislative.try(:attachments) if @legislative.legislative
