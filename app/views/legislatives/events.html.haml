@@ -51,11 +51,11 @@
       .tray.events
         %table
           %colgroup
-            %col{width: "100"}
             %col
             %col
             %col
-            %col
+            %col{width: "10%"}
+            %col{width: "10%"}
           %thead
             %tr
               %th
@@ -71,14 +71,13 @@
           %tbody
             - @events.each do |event|
               %tr
-                %td.num= event.event_at
+                %td.num= ldate event.event_at
                 %td.num= l event.time, format: :simple
                 %td.desc= simple_format event.body
                 %td= event.event_type
                 %td
                   - if event.commission.present?
-                    = "Comisión " + event.commission
+                    = "Comisión " + event.commission if event.commission.present?
                   - elsif event.plenary.present?
                     = "Plenaria " + event.plenary
-                  - else
-                    = event.place
+                  %p= event.place

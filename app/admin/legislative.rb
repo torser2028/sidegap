@@ -224,24 +224,22 @@ ActiveAdmin.register Legislative do
 
   member_action :stakeholders, method: [:get, :post] do
     if request.post?
-      chamber_authors = params[:stakeholders][:chamber_authors].delete_if(&:blank?)
+      authors = params[:stakeholders][:authors].delete_if(&:blank?)
       chamber_speakers = params[:stakeholders][:chamber_speakers].delete_if(&:blank?)
-      senate_authors = params[:stakeholders][:senate_authors].delete_if(&:blank?)
       senate_speakers = params[:stakeholders][:senate_speakers].delete_if(&:blank?)
 
       resource.legislative_stakeholders.destroy_all
 
-      chamber_authors.each { |stakeholder_id| resource.legislative_stakeholders.chamber_authors.create!(stakeholder_id: stakeholder_id)  }
+      authors.each { |stakeholder_id| resource.legislative_stakeholders.authors.create!(stakeholder_id: stakeholder_id)  }
       chamber_speakers.each { |stakeholder_id| resource.legislative_stakeholders.chamber_speakers.create!(stakeholder_id: stakeholder_id)  }
-      senate_authors.each { |stakeholder_id| resource.legislative_stakeholders.senate_authors.create!(stakeholder_id: stakeholder_id)  }
       senate_speakers.each { |stakeholder_id| resource.legislative_stakeholders.senate_speakers.create!(stakeholder_id: stakeholder_id)  }
 
       redirect_to admin_legislative_path(resource), notice: "Stakeholders guardados con éxito."
     else
       @holders = Stakeholder.all.map { |e| [e.name, e.id] }
-      @chamber_authors = resource.stakeholders.chamber_authors.map(&:id)
+
+      @authors = resource.stakeholders.authors.map(&:id)
       @chamber_speakers = resource.stakeholders.chamber_speakers.map(&:id)
-      @senate_authors = resource.stakeholders.senate_authors.map(&:id)
       @senate_speakers = resource.stakeholders.senate_speakers.map(&:id)
     end
   end
