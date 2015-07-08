@@ -87,7 +87,7 @@ class LegislativesController < ApplicationController
     @q = Legislative.ransack params[:q]
     @agendas = []
     @q.result.each do |item|
-      item.agendas.each { |agenda| @agendas << agenda  }
+      item.agendas.active.each { |agenda| @agendas << agenda  }
     end
   end
 

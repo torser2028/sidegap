@@ -30,6 +30,11 @@
         .row.cntnr
           .large-12.columns
             .row
+              .large-12.columns.labels
+                %label.round.label.linear.urgent
+                  = fa_icon "exclamation-circle"
+                  = "Vencimiento de comentarios - #{ldate @rule.deadline_comments}"
+            .row
               .large-2.columns.labels
                 %label
                   Título
