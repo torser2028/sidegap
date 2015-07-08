@@ -2,20 +2,20 @@ ActiveAdmin.register Rule do
   menu label: "Normas", parent: "Normas en Proceso de Consulta", priority: 0
   actions :all, except: [:destroy]
 
-  permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments,
+  permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments,
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
 
   filter :title, label: "Titulo"
   filter :kind, label: "Tipo de Norma", as: :select, collection: -> { Kind.rules.pluck(:name) }
   filter :institution, label: "Institución", as: :select, collection: -> { Institution.rules }
-  filter :filing_at, label: "Fecha"
+  filter :filing_at, label: "Fecha de Creación"
 
   index title: "Normas" do
     selectable_column
     column "Titulo", :title
     column "Tipo de Norma", :kind
     column "Institución", :institution
-    column "Fecha" do |rule|
+    column "Fecha de Creación" do |rule|
       ldate rule.filing_at
     end
     actions
@@ -36,11 +36,14 @@ ActiveAdmin.register Rule do
         row "Institución" do
           rule.institution
         end
-        row "Fecha" do
+        row "Fecha de Creación" do
           ldate rule.filing_at
         end
         row "Fecha Limite para Comentarios" do
           ldate rule.deadline_comments
+        end
+        row "Comentarios / Sugerencias" do
+          rule.for_comments
         end
         row "Archivos Adjuntos" do
           ul do
@@ -61,8 +64,9 @@ ActiveAdmin.register Rule do
       f.input :title, label: "Titulo", input_html: { rows: 5 }
       f.input :kind, label: "Tipo de Norma", collection: Kind.rules.pluck(:name)
       f.input :institution, label: "Institución", collection: Institution.rules
-      f.input :filing_at, label: "Fecha", as: :datepicker
+      f.input :filing_at, label: "Fecha de Creación", as: :datepicker
       f.input :deadline_comments, label: "Fecha Limite para Comentarios", as: :datepicker
+      f.input :for_comments, label: "Comentarios / Sugerencias", placeholder: "Email / Teléfono"
     end
     f.inputs "Archivos Adjuntos" do
       f.has_many :attachments, heading: "", allow_destroy: true, new_record: "Agregar Archivo" do |la|

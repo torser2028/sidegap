@@ -39,7 +39,7 @@
             .row
               .large-2.columns.labels
                 %label
-                  Fecha
+                  Fecha de Creación
               .large-10.columns
                 %span
                   = @rule.filing_at
@@ -64,6 +64,13 @@
               .large-10.columns
                 %span
                   = @rule.institution.name
+            .row
+              .large-2.columns.labels
+                %label
+                  Para Comentarios o Sugerencias
+              .large-10.columns
+                %span
+                  = @rule.for_comments
             - if current_user.following? @rule
               = form_for @comment do |f|
                 .row.white

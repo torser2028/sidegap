@@ -4,7 +4,7 @@ class LegislativesController < ApplicationController
   def index
     add_breadcrumb "Bandeja de Proyectos", :legislatives_path
 
-    @q = Legislative.ransack params[:q]
+    @q = Legislative.inbox.ransack params[:q]
     @legislatives = []
     not_available_legislatives = current_user.find_disliked_items + current_user.following_legislatives
     @q.result.each do |item|
@@ -68,8 +68,11 @@ class LegislativesController < ApplicationController
 
   def events
     add_breadcrumb "Eventos y Agenda", :events_legislatives_path
-
-    @q = Agenda.ransack params[:q]
+    @q = if params[:q].present?
+      Agenda.ransack params[:q]
+    else
+      Agenda.active.ransack params[:q]
+    end
     @agendas = []
     @legislatives = current_user.following_legislatives.with_agenda
     @q.result.each do |item|

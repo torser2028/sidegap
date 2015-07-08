@@ -13,6 +13,7 @@ ActiveAdmin.register Stakeholder do
     selectable_column
     column "Nombre", :name
     column "Partido", :political_party
+    column "Cargo", :job
     column "Comisión", :commission
     column "Región", :region
     actions

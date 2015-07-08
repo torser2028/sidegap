@@ -162,6 +162,19 @@
               .large-6.columns
                 %span
                   = ldate @legislative.second_senate_commission_at
+            .row
+              .large-2.columns.labels
+                %label
+                  Fecha Conciliación Cámara
+              .large-2.columns
+                %span
+                  = ldate @legislative.chamber_settlement_at
+              .large-2.columns.labels
+                %label
+                  Fecha Conciliación Senado
+              .large-6.columns
+                %span
+                  = ldate @legislative.senate_settlement_at
             - if current_user.following? @legislative
               = form_for @comment do |f|
                 .row.white
