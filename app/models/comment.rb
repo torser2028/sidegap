@@ -4,5 +4,5 @@ class Comment < ActiveRecord::Base
   belongs_to :user
   belongs_to :council
 
-  IMPACT = %w(0 1 2 3 4 5 6)
+  IMPACT = %w(1 2 3 4 5 6)
 end
