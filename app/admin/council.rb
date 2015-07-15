@@ -8,7 +8,7 @@ ActiveAdmin.register Council do
 
   filter :title, label: "Titulo"
   filter :number, label: "Número"
-  filter :commission, label: "Comisión", as: :select, collection: ->{ Commission.pluck(:name) }
+  filter :commission, label: "Comisión", as: :select, collection: ->{ Commission.councils.pluck(:name) }
   filter :status, label: "Estado", as: :select, collection: -> { Status.councils.pluck(:name) }
   filter :filing_at, label: "Fecha de Radicación"
 
@@ -77,7 +77,7 @@ ActiveAdmin.register Council do
     f.inputs do
       f.input :title, label: "Titulo", as: :text, input_html: { rows: 5 }
       f.input :number, label: "Número"
-      f.input :commission, label: "Comisión", collection: Commission.pluck(:name)
+      f.input :commission, label: "Comisión", collection: Commission.councils.pluck(:name)
       f.input :status, label: "Estado", collection: Status.councils.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)
       f.input :monitoring_at, label: "Fecha de Seguimiento", as: :datepicker

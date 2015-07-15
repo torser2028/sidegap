@@ -6,7 +6,7 @@ ActiveAdmin.register Legislative do
   filter :source, label: "Origen"
   filter :chamber_number, label: "Número de Cámara"
   filter :senate_number, label: "Número de Senado"
-  filter :commission, label: "Comisión", as: :select, collection: -> { Commission.pluck(:name) }
+  filter :commission, label: "Comisión", as: :select, collection: -> { Commission.legislatives.pluck(:name) }
   filter :status, label: "Estado", as: :select, collection: -> { Status.legislatives.pluck(:name) }
   filter :final_status, label: "Estado Final", as: :select, collection: -> { FinalStatus.pluck(:name) }
   filter :probability, label: "Probabilidad", as: :select, collection: -> { Probability.pluck(:name) }
@@ -150,7 +150,7 @@ ActiveAdmin.register Legislative do
       f.input :source, label: "Origen", collection: Source.pluck(:name)
       f.input :chamber_number, label: "Número de Cámara"
       f.input :senate_number, label: "Número de Senado"
-      f.input :commission, label: "Comisión", collection: Commission.pluck(:name)
+      f.input :commission, label: "Comisión", collection: Commission.legislatives.pluck(:name)
       f.input :status, label: "Estado", collection: Status.legislatives.pluck(:name)
       f.input :final_status, label: "Estado Final", collection: FinalStatus.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)

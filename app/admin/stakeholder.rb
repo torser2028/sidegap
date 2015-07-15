@@ -6,7 +6,7 @@ ActiveAdmin.register Stakeholder do
 
   filter :name, label: "Nombre"
   filter :political_party, label: "Partido", as: :select, collection: -> { PoliticalParty.pluck(:name) }
-  filter :commission, label: "Comisión", as: :select, collection: -> { Commission.pluck(:name) }
+  filter :commission, label: "Comisión", as: :select, collection: -> { Commission.legislatives.pluck(:name) }
   filter :region, label: "Región", as: :select, collection: -> { Region.pluck(:name) }
 
   index title: "Congresistas" do
@@ -69,7 +69,7 @@ ActiveAdmin.register Stakeholder do
       f.input :address, label: "Dirección", collection: Stakeholder::ADDRESSES
       f.input :political_party, label: "Partido", collection: PoliticalParty.pluck(:name)
       f.input :job, label: "Cargo", collection: Job.pluck(:name)
-      f.input :commission, label: "Comisión", collection: Commission.pluck(:name)
+      f.input :commission, label: "Comisión", collection: Commission.legislatives.pluck(:name)
       f.input :region, label: "Región", collection: Region.pluck(:name)
       f.input :office, label: "Oficina"
       f.input :info, label: "Pérfil"

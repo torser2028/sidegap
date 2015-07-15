@@ -6,7 +6,7 @@ ActiveAdmin.register Councillor do
 
   filter :name, label: "Nombre"
   filter :political_party, label: "Partido", as: :select, collection: -> { PoliticalParty.pluck(:name) }
-  filter :commission, label: "Comisión", as: :select, collection: -> { Commission.pluck(:name) }
+  filter :commission, label: "Comisión", as: :select, collection: -> { Commission.councils.pluck(:name) }
 
   index do
     selectable_column
@@ -63,7 +63,7 @@ ActiveAdmin.register Councillor do
       f.input :address, label: "Dirección"
       f.input :political_party, label: "Partido", collection: PoliticalParty.pluck(:name)
       f.input :job, label: "Cargo", input_html: { value: "Concejal", readonly: true }
-      f.input :commission, label: "Comisión", collection: Commission.pluck(:name)
+      f.input :commission, label: "Comisión", collection: Commission.councils.pluck(:name)
       f.input :office, label: "Oficina"
       f.input :info, label: "Pérfil"
       f.input :source, label: "Fuente de Información"
