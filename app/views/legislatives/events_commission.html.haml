@@ -11,7 +11,7 @@
               %label
                 Comisión:
             .large-3.medium-5.small-9.columns
-              = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
+              = f.collection_select :commission_eq, Commission.legislatives, :name, :name, include_blank: true
             .large-8.medium-offset-0.medium-6.small-offset-3.small-9.columns
               %input.button.success.fullwidth.search{type: "submit", value: "Buscar"}
               .button.secondary.fullwidth.quit

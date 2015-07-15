@@ -30,7 +30,7 @@
         .large-2.medium-3.columns
           %label
             Comisión
-          = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
+          = f.collection_select :commission_eq, Commission.councils, :name, :name, include_blank: true
           %label
             Estado
           = f.collection_select :status_eq, Status.councils, :name, :name, include_blank: true

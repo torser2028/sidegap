@@ -23,7 +23,7 @@
                     .large-2.medium-2.columns
                       %label
                         Comisión
-                      = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
+                      = f.collection_select :commission_eq, Commission.councils, :name, :name, include_blank: true
                     .large-offset-0.large-2.medium-offset-3.medium-3.columns
                       %label
                         %span.ghost

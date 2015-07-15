@@ -23,7 +23,7 @@
                     .large-1.medium-2.columns
                       %label
                         Comisión
-                      = f.collection_select :commission_eq, Commission.all, :name, :name, include_blank: true
+                      = f.collection_select :commission_eq, Commission.legislatives, :name, :name, include_blank: true
                     .large-3.medium-4.columns
                       %label
                         Región
