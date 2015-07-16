@@ -155,7 +155,7 @@ ActiveAdmin.register Legislative do
       f.input :final_status, label: "Estado Final", collection: FinalStatus.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)
       f.input :type_law, label: "Tipo de Ley", collection: Law.pluck(:name)
-      f.input :probability, label: "Probabilidad", collection: Probability.pluck(:name)
+      f.input :probability, label: "Probabilidad", as: :select, collection: Probability.pluck(:name)
       f.input :chamber_commission_at, label: "Fecha Comisión Cámara", as: :datepicker
       f.input :chamber_plenary_at, label: "Fecha Plenaria Cámara", as: :datepicker
       f.input :senate_commission_at, label: "Fecha Comisión Senado", as: :datepicker

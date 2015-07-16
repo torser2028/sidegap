@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150716155623) do
+ActiveRecord::Schema.define(version: 20150716174223) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -261,7 +261,6 @@ ActiveRecord::Schema.define(version: 20150716155623) do
     t.string   "final_status"
     t.string   "topic"
     t.string   "type_law"
-    t.string   "probability"
     t.date     "senate_commission_at"
     t.date     "senate_plenary_at"
     t.date     "chamber_commission_at"
@@ -280,6 +279,7 @@ ActiveRecord::Schema.define(version: 20150716155623) do
     t.date     "second_chamber_plenary_at"
     t.date     "senate_settlement_at"
     t.date     "chamber_settlement_at"
+    t.integer  "probability"
   end
 
   add_index "legislatives", ["legislative_id"], name: "index_legislatives_on_legislative_id", using: :btree
