@@ -23,10 +23,6 @@ ActiveAdmin.register User do
     column :email
     column :company
     column :area
-    column :job
-    column :roles do |user|
-      user.roles.pluck(:name).join(', ')
-    end
     column :created_at
     actions defaults: true do |user|
       if user.active
@@ -37,7 +33,7 @@ ActiveAdmin.register User do
     end
   end
 
-  show title: "Detalle de Usuario" do
+  show title: "Detalles de Usuario" do
     attributes_table do
       row :name
       row :email
@@ -47,6 +43,7 @@ ActiveAdmin.register User do
       row :roles do |user|
         user.roles.pluck(:name).join(', ')
       end
+      row :passwd
       row :created_at
       row :updated_at
       row :last_sign_in_at

@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
 
   add_breadcrumb "Inicio", :root_path
- 
+
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
   end

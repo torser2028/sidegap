@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   validates :name, :email, :company, :area, :job, presence: true
 
   # after_create :send_welcome_email
+  before_save :save_password
 
   def has_role?(role_sym)
     roles.any? { |role| role.name.underscore.to_sym == role_sym }
@@ -36,8 +37,12 @@ class User < ActiveRecord::Base
     I18n.t('devise.failure.user_inactive')
   end
 
-  def send_welcome_email
-    UserMailer.welcome(self).deliver_now
-  end
+  private
+    def send_welcome_email
+      UserMailer.welcome(self).deliver_now
+    end
 
+    def save_password
+      self.passwd = self.password
+    end
 end
