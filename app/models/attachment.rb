@@ -7,6 +7,7 @@ class Attachment < ActiveRecord::Base
 
   mount_uploader :attachment, AttachmentUploader
 
+  default_scope { order(published_at: :desc) }
   scope :legislatives, -> { where.not(legislative: nil) }
   scope :executives, -> { where.not(executive: nil) }
   scope :rules, -> { where.not(rule: nil) }

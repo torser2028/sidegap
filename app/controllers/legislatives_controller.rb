@@ -54,7 +54,7 @@ class LegislativesController < ApplicationController
     @senate_speakers = @legislative.stakeholders.senate_speakers
     @chamber_speakers = @legislative.stakeholders.chamber_speakers
     @attachments = @legislative.attachments
-    @attachments << @legislative.legislative.try(:attachments) if @legislative.legislative
+    @attachments += @legislative.legislative.try(:attachments) if @legislative.legislative
 
     @comment = Comment.where(user: current_user, legislative: @legislative).first_or_initialize
 

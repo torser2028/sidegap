@@ -33,6 +33,24 @@
                 Exportar a PDF
         .row.cntnr
           .large-12.columns
+            - if @legislative.legislative.present?
+              .row
+                .large-2.columns.labels
+                  %label
+                    Acumulado
+                .large-10.columns
+                  %span.txtdesc
+                    = link_to @legislative.legislative.chamber_number.present? ? @legislative.legislative.chamber_number : @legislative.legislative.senate_number, legislative_path(@legislative.legislative.id)
+            - if @legislative.legislatives.present?
+              .row
+                .large-2.columns.labels
+                  %label
+                    Proyectos Acumulados
+                .large-10.columns
+                  %span.txtdesc
+                    - @legislative.legislatives.each do |legislative|
+                      = link_to legislative.chamber_number.present? ? legislative.chamber_number : legislative.senate_number, legislative_path(legislative.id)
+                      ,
             .row
               .large-2.columns.labels
                 %label
@@ -52,7 +70,7 @@
                   Tema interés
               .large-6.columns
                 %span
-                  = @legislative.topic
+                  = @legislative.legislative.try(:topic) || @legislative.topic
             .row
               .large-2.columns.labels
                 %label
@@ -85,13 +103,13 @@
                   Probabilidad
               .large-2.columns
                 %span
-                  = @legislative.probability
+                  = @legislative.legislative.try(:probability) || @legislative.probability
               .large-2.columns.labels
                 %label
                   Comisión
               .large-6.columns
                 %span
-                  = @legislative.commission
+                  = @legislative.legislative.try(:commission) || @legislative.commission
             .row
               .large-2.columns.labels
                 %label
@@ -116,65 +134,65 @@
                   Fecha Comisión Senado
               .large-2.columns
                 %span
-                  = ldate @legislative.senate_commission_at
+                  = ldate @legislative.legislative.try(:senate_commission_at) || @legislative.senate_commission_at
               .large-2.columns.labels
                 %label
                   Fecha Plenaria Cámara
               .large-6.columns
                 %span
-                  = ldate @legislative.chamber_plenary_at
+                  = ldate @legislative.legislative.try(:chamber_plenary_at) || @legislative.chamber_plenary_at
             .row
               .large-2.columns.labels
                 %label
                   Fecha Comisión Cámara
               .large-2.columns
                 %span
-                  = ldate @legislative.chamber_commission_at
+                  = ldate @legislative.legislative.try(:chamber_commission_at) || @legislative.chamber_commission_at
               .large-2.columns.labels
                 %label
                   Fecha Plenaria Senado
               .large-6.columns
                 %span
-                  = ldate @legislative.senate_plenary_at
+                  = ldate @legislative.legislative.try(:senate_plenary_at) || @legislative.senate_plenary_at
             .row
               .large-2.columns.labels
                 %label
                   Fecha Segunda Vuelta Plenaria Cámara
               .large-2.columns
                 %span
-                  = ldate @legislative.second_chamber_plenary_at
+                  = ldate @legislative.legislative.try(:second_chamber_plenary_at) ||  @legislative.second_chamber_plenary_at
               .large-2.columns.labels
                 %label
                   Fecha Segunda Vuelta Comisión Cámara
               .large-6.columns
                 %span
-                  = ldate @legislative.second_chamber_commission_at
+                  = ldate @legislative.legislative.try(:second_chamber_commission_at) ||  @legislative.second_chamber_commission_at
             .row
               .large-2.columns.labels
                 %label
                   Fecha Segunda Vuelta Plenaria Senado
               .large-2.columns
                 %span
-                  = ldate @legislative.second_senate_plenary_at
+                  = ldate @legislative.legislative.try(:second_senate_plenary_at) ||  @legislative.second_senate_plenary_at
               .large-2.columns.labels
                 %label
                   Fecha Segunda Vuelta Comisión Senado
               .large-6.columns
                 %span
-                  = ldate @legislative.second_senate_commission_at
+                  = ldate @legislative.legislative.try(:second_senate_commission_at) ||  @legislative.second_senate_commission_at
             .row
               .large-2.columns.labels
                 %label
                   Fecha Conciliación Cámara
               .large-2.columns
                 %span
-                  = ldate @legislative.chamber_settlement_at
+                  = ldate @legislative.legislative.try(:chamber_settlement_at) || @legislative.chamber_settlement_at
               .large-2.columns.labels
                 %label
                   Fecha Conciliación Senado
               .large-6.columns
                 %span
-                  = ldate @legislative.senate_settlement_at
+                  = ldate @legislative.legislative.try(:senate_settlement_at) || @legislative.senate_settlement_at
             - if current_user.following? @legislative
               = form_for @comment do |f|
                 .row.white
