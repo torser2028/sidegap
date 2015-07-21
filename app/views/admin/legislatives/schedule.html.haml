@@ -3,6 +3,7 @@
     = f.input :event_at, as: :string, input_html: { class: "datepicker" }, label: "Fecha"
     = f.input :time, label: "Hora", minute_step: 30, ampm: true
     = f.input :body, label: "Descripción", input_html: { rows: 6 }
+    = f.input :plenary_commission, label: "Plenaria/Comisión"
   = f.actions do
     = f.action :submit, as: :button
     %li.cancel

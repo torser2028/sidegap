@@ -221,6 +221,7 @@ ActiveAdmin.register Legislative do
         a.input :event_at, as: :datepicker, label: "Fecha"
         a.input :time, label: "Hora", minute_step: 30, ampm: true
         a.input :body, label: "Descripción", input_html: { rows: 6 }
+        a.input :plenary_commission, label: "Plenaria/Comisión"
       end
     end
     f.inputs do
@@ -288,8 +289,8 @@ ActiveAdmin.register Legislative do
         legislatives_attributes: [:id, :_destroy, :title, :source, :chamber_number, :senate_number, :status, :type_law, :filing_at, :final_status],
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
         stakeholders: [:chamber_authors, :chamber_speakers, :senate_authors, :senate_speakers],
-        agendas_attributes: [:id, :_destroy, :body, :event_at, :time]],
-        agenda: [:body, :event_at, :time]
+        agendas_attributes: [:id, :_destroy, :body, :event_at, :time, :plenary_commission]],
+        agenda: [:body, :event_at, :time, :plenary_commission]
     end
 
     def new
