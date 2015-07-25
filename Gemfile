@@ -15,6 +15,7 @@ gem 'acts_as_follower', '~> 0.2.0'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+gem 'puma'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -48,5 +49,7 @@ group :development, :test do
   gem 'letter_opener'
 end
 
-gem 'rails_12factor', group: :production
-gem 'puma'
+group :production do
+  gem 'wkhtmltopdf-heroku'
+  gem 'rails_12factor', group: :production
+end
