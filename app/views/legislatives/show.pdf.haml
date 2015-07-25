@@ -35,10 +35,6 @@
         = @legislative.commission
     %dl
       %dt
-        Estatus
-      %dd
-        = @legislative.status
-      %dt 
         Fecha de Radicación
       %dd
         = @legislative.filing_at
@@ -53,11 +49,18 @@
       %dt
         Tipo de Ley
       %dd
-        = @legislative.law
+        = @legislative.type_law
       %dt
         Probabilidad
       %dd
         = @legislative.probability
+      %dt
+        Estatus
+      %dd
+        - if %w(Archivado Retirado Sancionado).include? @legislative.final_status
+          = "Este proyecto fue #{@legislative.final_status} en #{@legislative.status}"
+        - else
+          = @legislative.status
   .tray.autors
     %h2
       Autores
@@ -67,10 +70,15 @@
           = author.name
   .tray.autors
     %h2
-      Ponentes
+      Ponentes Cámara
     %ul
-      - @speakers.each do |speaker|
+      - @chamber_speakers.each do |speaker|
         %li
           = speaker.name
-
-              
+  .tray.autors
+    %h2
+      Ponentes Senado
+    %ul
+      - @senate_speakers.each do |speaker|
+        %li
+          = speaker.name
