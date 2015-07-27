@@ -16,6 +16,20 @@ body{
     color: #224484;
     font-weight: normal;
   }
+  figure{
+    float: right;
+    background: whitesmoke;
+    padding: 3mm;
+    border: 1mm solid white;
+    outline: 1pt solid lightgray;
+    img{
+      height: auto;
+    }
+    p{
+      text-align: center;
+      font-size: 9pt;
+    }
+  }
   .project{
     dl{
       margin-bottom: 0 !important;

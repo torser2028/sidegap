@@ -1,62 +1,62 @@
 .panels-view
   %h2
-    = fa_icon "user"
     Perfil Congresista
-  .pryctDtl
+  .person
     %figure
       = wicked_pdf_image_tag @stakeholder.avatar_url(:thumb)
-      %figcaption
-        = @stakeholder.name
+      %p
+        Edward Andres Parra Gonzalez
     %dl
       %dt
-        Nombre
+        %label Nombre
       %dd
         = @stakeholder.name
       %dt
-        Corporación Institucional
+        %label Corporación Institucional
       %dd
         Congreso de la República
       %dt
-        Cargo
+        %label Cargo
       %dd
         = @stakeholder.job
       %dt
-        Partido
+        %label Partido
       %dd
         = @stakeholder.political_party
       %dt
-        Comisión
+        %label Comisión
       %dd
         = @stakeholder.commission
       %dt
-        Dirección
+        %label Dirección
       %dd
         = @stakeholder.address
       %dt
-        Región
+        %label Región
       %dd
         = @stakeholder.region
       %dt
-        Teléfono del Trabajo
+        %label Teléfono del Trabajo
       %dd
         = @stakeholder.phone
       %dt
-        Oficina
+        %label Oficina
       %dd
         = @stakeholder.office
       %dt
-        E-mail
+        %label E-mail
       %dd
         = @stakeholder.email
       %dt
-        Fuente de Información
+        %label Fuente de Información
       %dd
         = @stakeholder.source
       %dt
-        Perfil
+        %label Perfil
       %dd
         %p
           = simple_format @stakeholder.info
+.alwaysbreak
   .tray.autors
     %h2
       Autor en
