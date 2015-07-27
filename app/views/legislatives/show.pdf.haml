@@ -1,84 +1,192 @@
 .panels-view
-  %h2
-    Detalle del Proyecto
-  .pryctDtl.double
-    %p
-      = @legislative.title
-    %dl
-      %dt
-        Origen
-      %dd
-        = @legislative.source
-      %dt
-        Fecha Comisión Senado
-      %dd
-        = @legislative.senate_commission_at
-      %dt
-        Número en Cámara
-      %dd
-        = @legislative.chamber_number
-      %dt
-        Fecha Plenaria Senado
-      %dd
-        = @legislative.senate_plenary_at
-      %dt
-        Número Senado
-      %dd
-        = @legislative.senate_number
-      %dt
-        Tema interés
-      %dd
-        = @legislative.topic
-      %dt
-        Comisión
-      %dd
-        = @legislative.commission
-    %dl
-      %dt
-        Fecha de Radicación
-      %dd
-        = @legislative.filing_at
-      %dt
-        Fecha Plenaria Cámara
-      %dd
-        = @legislative.chamber_plenary_at
-      %dt
-        Fecha Comisión Cámara
-      %dd
-        = @legislative.chamber_commission_at
-      %dt
-        Tipo de Ley
-      %dd
-        = @legislative.type_law
-      %dt
-        Probabilidad
-      %dd
-        = @legislative.probability
-      %dt
-        Estatus
-      %dd
-        - if %w(Archivado Retirado Sancionado).include? @legislative.final_status
-          = "Este proyecto fue #{@legislative.final_status} en #{@legislative.status}"
-        - else
-          = @legislative.status
-  .tray.autors
+  .row
+    .small-12.columns
+      %h2
+        Detalles del proyecto
+      .project.double
+        - if @legislative.legislative.present?
+          .row
+            .large-2.columns.labels
+              %label
+                Acumulado
+            .large-10.columns
+              %span.txtdesc
+                = link_to @legislative.legislative.chamber_number.present? ? @legislative.legislative.chamber_number : @legislative.legislative.senate_number, legislative_url(@legislative.legislative.id)
+        %br
+
+        - if @legislative.legislatives.present?
+          .row
+            .large-2.columns.labels
+              %label
+                Proyectos Acumulados
+            .large-10.columns
+              %span.txtdesc
+                - @legislative.legislatives.each do |legislative|
+                  = link_to legislative.chamber_number.present? ? legislative.chamber_number : legislative.senate_number, legislative_url(legislative.id)
+                  ,
+        %br
+
+        .row
+          .large-2.columns.labels
+            %label
+              Título
+          .large-10.columns
+            %span.txtdesc
+              = @legislative.title
+        %br
+
+        .row
+          .large-2.columns.labels
+            %label
+              Estado
+          .large-10.columns
+            %span
+              - if %w(Archivado Retirado Sancionado).include? @legislative.final_status
+                = "Este proyecto fue #{@legislative.final_status} en #{@legislative.status}"
+              - else
+                = @legislative.status
+
+        %dl
+          %dt
+            %label Origen
+          %dd
+            = @legislative.source
+        %dl
+          %dt
+            %label Tema de Interes
+          %dd
+            = @legislative.legislative.try(:topic) || @legislative.topic
+
+        %dl
+          %dt
+            %label Número Cámara
+          %dd
+            = @legislative.chamber_number
+        %dl
+          %dt
+            %label Tipo de Ley
+          %dd
+            = @legislative.type_law
+
+        %dl
+          %dt
+            %label Número Senado
+          %dd
+            = @legislative.senate_number
+        %dl
+          %dt
+            %label Fecha de Radicación
+          %dd
+            = ldate @legislative.filing_at
+
+        %dl
+          %dt
+            %label Probabilidad
+          %dd
+            = @legislative.legislative.try(:probability) || @legislative.probability
+        %dl
+          %dt
+            %label Comisión
+          %dd
+            = @legislative.legislative.try(:commission) || @legislative.commission
+
+        %dl
+          %dt
+            %label Fecha Comisión Senado
+          %dd
+            = ldate @legislative.legislative.try(:senate_commission_at) || @legislative.senate_commission_at
+        %dl
+          %dt
+            %label Fecha Plenaria Cámara
+          %dd
+            = ldate @legislative.legislative.try(:chamber_plenary_at) || @legislative.chamber_plenary_at
+
+        %dl
+          %dt
+            %label Fecha Comisión Cámara
+          %dd
+            = ldate @legislative.legislative.try(:chamber_commission_at) || @legislative.chamber_commission_at
+        %dl
+          %dt
+            %label Fecha Plenaria Senado
+          %dd
+            = ldate @legislative.legislative.try(:senate_plenary_at) || @legislative.senate_plenary_at
+
+        %dl
+          %dt
+            %label Fecha Segunda Vuelta Plenaria Cámara
+          %dd
+            = ldate @legislative.legislative.try(:second_chamber_plenary_at) ||  @legislative.second_chamber_plenary_at
+        %dl
+          %dt
+            %label Fecha Segunda Vuelta Comisión Cámara
+          %dd
+            = ldate @legislative.legislative.try(:second_chamber_commission_at) ||  @legislative.second_chamber_commission_at
+
+        %dl
+          %dt
+            %label Fecha Segunda Vuelta Plenaria Senado
+          %dd
+            = ldate @legislative.legislative.try(:second_senate_plenary_at) ||  @legislative.second_senate_plenary_at
+        %dl
+          %dt
+            %label Fecha Segunda Vuelta Comisión Senado
+          %dd
+            = ldate @legislative.legislative.try(:second_senate_commission_at) ||  @legislative.second_senate_commission_at
+
+        %dl
+          %dt
+            %label Fecha Conciliación Cámara
+          %dd
+            = ldate @legislative.legislative.try(:chamber_settlement_at) || @legislative.chamber_settlement_at
+        %dl
+          %dt
+            %label Fecha Conciliación Senado
+          %dd
+            = ldate @legislative.legislative.try(:senate_settlement_at) || @legislative.senate_settlement_at
+
+
+
+        %br
+
+        - if @legislative.law_number.present?
+          .row
+            .large-2.columns.labels
+              %label
+                Número de Ley
+            .large-10.columns
+              %span
+                = @legislative.law_number
+
+.row.alwaysbreak
+  .large-12.columns
     %h2
       Autores
-    %ul
-      - @authors.each do |author|
-        %li
-          = author.name
-  .tray.autors
+    .tray.autors
+      %table
+        %tbody
+          - @authors.each do |author|
+            %tr
+              %td
+                = author.name
+.row.nobreak
+  .large-6.columns
     %h2
       Ponentes Cámara
-    %ul
-      - @chamber_speakers.each do |speaker|
-        %li
-          = speaker.name
-  .tray.autors
+    .tray.autors
+      %table
+        %tbody
+          - @chamber_speakers.each do |speaker|
+            %tr
+              %td
+                = speaker.name
+  .large-6.columns
     %h2
       Ponentes Senado
-    %ul
-      - @senate_speakers.each do |speaker|
-        %li
-          = speaker.name
+    .tray.autors
+      %table
+        %tbody
+          - @senate_speakers.each do |speaker|
+            %tr
+              %td
+                = speaker.name

@@ -1,47 +1,38 @@
-body{
+@import "foundation_and_overrides";
 
-}
+.alwaysbreak { page-break-before: always; }
+.nobreak:before { clear:both; }
+.nobreak{ page-break-inside: avoid;}
+
 header{
   img{
     width: 50mm;
   }
 }
-h2{
-  color: #224484;
-  font-weight: normal;
-}
 body{
-  margin: 0.2cm 1cm 1cm 1cm;
-  figure{
-    float: right;
-    background: whitesmoke;
-    padding: 3mm;
-    border: 1mm solid white;
-    outline: 1pt solid lightgray;
-    img{
-      height: auto;
-    }
-    figcaption{
-      text-align: center;
-    }
+  font-family: Tahoma;
+  font-size: 11pt;
+  h2{
+    color: #224484;
+    font-weight: normal;
   }
-  .pryctDtl{
+  .project{
     dl{
+      margin-bottom: 0 !important;
       dt{
         border-top: 1pt solid lightgray;
         padding: 1.5mm 1mm 0;
-        margin: 0 -1mm;
-        line-height: 12pt;
-        font-size: 9pt;
-        text-transform: uppercase;
+        line-height: 12px;
         font-weight: 600;
         margin-top: 2mm;
       }
       dd{
         margin-left: 2.5mm;
-        font-size: 13pt !important;
+        margin-bottom: 0 !important;
         border-bottom: 0.5pt solid gray;
         min-height: 6mm;
+        font-size: 11pt;
+        line-height: 12px;
         p{
           text-align: justify;
         }
@@ -56,21 +47,9 @@ body{
     }
   }
   .autors{
-    clear: both;
-    page-break-inside: avoid;
     table{
       width: 100%;
-      border: 1px solid gray;
-      thead{
-        background: #224484;
-        th{
-          padding: 0.25mm 1mm;
-          color: white;
-          line-height: 12pt;
-          font-size: 9pt;
-          text-transform: uppercase;
-        }
-      }
+      border-width: thin;
       tbody{
         tr{
           &:nth-child(odd){
