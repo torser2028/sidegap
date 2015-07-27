@@ -13,7 +13,6 @@
               %span.txtdesc
                 = link_to @legislative.legislative.chamber_number.present? ? @legislative.legislative.chamber_number : @legislative.legislative.senate_number, legislative_url(@legislative.legislative.id)
         %br
-
         - if @legislative.legislatives.present?
           .row
             .large-2.columns.labels
@@ -25,7 +24,6 @@
                   = link_to legislative.chamber_number.present? ? legislative.chamber_number : legislative.senate_number, legislative_url(legislative.id)
                   ,
         %br
-
         .row
           .large-2.columns.labels
             %label
@@ -34,7 +32,6 @@
             %span.txtdesc
               = @legislative.title
         %br
-
         .row
           .large-2.columns.labels
             %label
@@ -45,7 +42,6 @@
                 = "Este proyecto fue #{@legislative.final_status} en #{@legislative.status}"
               - else
                 = @legislative.status
-
         %dl
           %dt
             %label Origen
@@ -144,9 +140,6 @@
             %label Fecha Conciliación Senado
           %dd
             = ldate @legislative.legislative.try(:senate_settlement_at) || @legislative.senate_settlement_at
-
-
-
         %br
 
         - if @legislative.law_number.present?
@@ -157,36 +150,40 @@
             .large-10.columns
               %span
                 = @legislative.law_number
-
-.row.alwaysbreak
-  .large-12.columns
-    %h2
-      Autores
-    .tray.autors
-      %table
-        %tbody
-          - @authors.each do |author|
-            %tr
-              %td
-                = author.name
-.row.nobreak
-  .large-6.columns
-    %h2
-      Ponentes Cámara
-    .tray.autors
-      %table
-        %tbody
-          - @chamber_speakers.each do |speaker|
-            %tr
-              %td
-                = speaker.name
-  .large-6.columns
-    %h2
-      Ponentes Senado
-    .tray.autors
-      %table
-        %tbody
-          - @senate_speakers.each do |speaker|
-            %tr
-              %td
-                = speaker.name
+.alwaysbreak
+  - if @authors.present?
+    .row.nobreak
+      .large-12.columns
+        %h2
+          Autores
+        .tray.autors
+          %table
+            %tbody
+              - @authors.each do |author|
+                %tr
+                  %td
+                    = author.name
+  - if @chamber_speakers.present?
+    .row.nobreak
+      .large-6.columns
+        %h2
+          Ponentes Cámara
+        .tray.autors
+          %table
+            %tbody
+              - @chamber_speakers.each do |speaker|
+                %tr
+                  %td
+                    = speaker.name
+  - if @senate_speakers.present?
+    .row.nobreak
+      .large-6.columns
+        %h2
+          Ponentes Senado
+        .tray.autors
+          %table
+            %tbody
+              - @senate_speakers.each do |speaker|
+                %tr
+                  %td
+                    = speaker.name

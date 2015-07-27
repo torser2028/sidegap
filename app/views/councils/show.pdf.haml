@@ -1,76 +1,72 @@
 .panels-view
-  %h2
-    Detalle del Proyecto
-  .pryctDtl.double
-    %p
-      = @legislative.title
-    %dl
-      %dt
-        Origen
-      %dd
-        = @legislative.source
-      %dt
-        Fecha Comisión Senado
-      %dd
-        = @legislative.senate_commission_at
-      %dt
-        Número en Cámara
-      %dd
-        = @legislative.chamber_number
-      %dt
-        Fecha Plenaria Senado
-      %dd
-        = @legislative.senate_plenary_at
-      %dt
-        Número Senado
-      %dd
-        = @legislative.senate_number
-      %dt
-        Tema interés
-      %dd
-        = @legislative.topic
-      %dt
-        Comisión
-      %dd
-        = @legislative.commission
-    %dl
-      %dt
-        Estatus
-      %dd
-        = @legislative.status
-      %dt 
-        Fecha de Radicación
-      %dd
-        = @legislative.filing_at
-      %dt
-        Fecha Plenaria Cámara
-      %dd
-        = @legislative.chamber_plenary_at
-      %dt
-        Fecha Comisión Cámara
-      %dd
-        = @legislative.chamber_commission_at
-      %dt
-        Tipo de Ley
-      %dd
-        = @legislative.law
-      %dt
-        Probabilidad
-      %dd
-        = @legislative.probability
-  .tray.autors
-    %h2
-      Autores
-    %ul
-      - @authors.each do |author|
-        %li
-          = author.name
-  .tray.autors
-    %h2
-      Ponentes
-    %ul
-      - @speakers.each do |speaker|
-        %li
-          = speaker.name
+  .row
+    .small-12.columns
+      %h2
+        Detalles del proyecto
+      .project.double
+        .row
+          .large-2.columns.labels
+            %label
+              Título
+          .large-10.columns
+            %span.txtdesc
+              = @council.title
+        %br
 
-              
+        %dl
+          %dt
+            %label Número
+          %dd
+            = @council.number
+        %dl
+          %dt
+            %label Tema de Interes
+          %dd
+            = @council.topic
+
+        %dl
+          %dt
+            %label Fecha de Seguimiento
+          %dd
+            = ldate @council.monitoring_at
+        %dl
+          %dt
+            %label Fecha de Radicación
+          %dd
+            = ldate @council.filing_at
+
+        %dl
+          %dt
+            %label Estado
+          %dd
+            = @council.status
+        %dl
+          %dt
+            %label Comisión
+          %dd
+            = @council.commission
+.alwaysbreak
+  - if @authors.present?
+    .row.nobreak
+      .large-12.columns
+        %h2
+          Autores
+        .tray.autors
+          %table
+            %tbody
+              - @authors.each do |author|
+                %tr
+                  %td
+                    = link_to author.name, councillor_councils_path(author)
+  - if @speakers.present?
+    .row.nobreak
+      .large-12.columns
+        %h2
+          Ponentes
+        .tray.autors
+          %table
+            %tbody
+              - @speakers.each do |speaker|
+                %tr
+                  %td
+                    = link_to speaker.name, councillor_councils_path(speaker)

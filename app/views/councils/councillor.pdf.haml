@@ -1,62 +1,58 @@
 .panels-view
   %h2
-    = fa_icon "user"
-    Perfil Congresista
-  .pryctDtl
+    Perfil Concejal
+  .person
     %figure
-      = wicked_pdf_image_tag @stakeholder.avatar_url(:thumb)
-      %figcaption
-        = @stakeholder.name
+      = wicked_pdf_image_tag @councillor.avatar_url(:thumb)
+      %p
+        = @councillor.name
     %dl
       %dt
-        Nombre
+        %label Nombre
       %dd
-        = @stakeholder.name
+        = @councillor.name
       %dt
-        Corporación Institucional
+        %label Corporación Institucional
       %dd
-        Congreso de la República
+        Concejo de Bogotá
       %dt
-        Cargo
+        %label Cargo
       %dd
-        = @stakeholder.job
+        = @councillor.job
       %dt
-        Partido
+        %label Partido
       %dd
-        = @stakeholder.political_party
+        = @councillor.political_party
       %dt
-        Comisión
+        %label Comisión
       %dd
-        = @stakeholder.commission
+        = @councillor.commission
       %dt
-        Dirección
+        %label Dirección
       %dd
-        = @stakeholder.address
+        = @councillor.address
       %dt
-        Región
+        %label Teléfono del Trabajo
       %dd
-        = @stakeholder.region
+        = @councillor.phone
       %dt
-        Teléfono del Trabajo
+        %label Oficina
       %dd
-        = @stakeholder.phone
+        = @councillor.office
       %dt
-        Oficina
+        %label E-mail
       %dd
-        = @stakeholder.office
+        = @councillor.email
       %dt
-        E-mail
+        %label Fuente de Información
       %dd
-        = @stakeholder.email
+        = @councillor.source
       %dt
-        Fuente de Información
-      %dd
-        = @stakeholder.source
-      %dt
-        Perfil
+        %label Perfil
       %dd
         %p
-          = simple_format @stakeholder.info
+          = simple_format @councillor.info
+.alwaysbreak
   .tray.autors
     %h2
       Autor en
@@ -78,16 +74,16 @@
           %th
             Fecha de Radicación
       %tbody
-        - @legislatives_as_author.each do |legislative|
+        - @councils_as_author.each do |council|
           %tr
             %td
-              = legislative.chamber_number
+              = council.chamber_number
             %td
-              = legislative.senate_number
+              = council.senate_number
             %td.desc
-              = legislative.title
+              = council.title
             %td
-              = legislative.filing_at
+              = council.filing_at
   .tray.autors
     %h2
       Ponente en
@@ -109,13 +105,13 @@
           %th
             Fecha de Radicación
       %tbody
-        - @legislatives_as_speaker.each do |legislative|
+        - @councils_as_speaker.each do |council|
           %tr
             %td
-              = legislative.chamber_number
+              = council.chamber_number
             %td
-              = legislative.senate_number
+              = council.senate_number
             %td.desc
-              = legislative.title
+              = council.title
             %td
-              = legislative.filing_at
+              = council.filing_at
