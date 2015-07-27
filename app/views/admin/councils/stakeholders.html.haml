@@ -1,0 +1,12 @@
+.title
+  = resource.title
+%br
+= semantic_form_for :stakeholders do |f|
+  = f.inputs name: "Agregar Autores" do
+    = f.input :authors, collection: options_for_select(@holders, @authors), input_html: { class: "chosen-select", multiple: true }, label: "Stakeholders"
+  = f.inputs name: "Agregar Ponentes" do
+    = f.input :speakers, collection: options_for_select(@holders, @speakers), input_html: { class: "chosen-select", multiple: true }, label: "Stakeholders"
+  = f.actions do
+    = f.action :submit, as: :button, label: "Guardar Stakeholders"
+    %li.cancel
+      = link_to "Cancelar", admin_councils_path

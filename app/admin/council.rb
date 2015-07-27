@@ -18,7 +18,9 @@ ActiveAdmin.register Council do
     column "Fecha de Radicación" do |council|
       ldate council.filing_at
     end
-    actions
+    actions() do |council|
+      link_to("Stakeholders", stakeholders_admin_council_path(council))
+    end
   end
 
   show title: "Detalle del Proyecto" do |council|
@@ -49,16 +51,6 @@ ActiveAdmin.register Council do
           council.aval
         end
 
-        row "Concejales" do
-          table_for council.councillor_assignments do
-            column "Nombre", :name do |ca|
-              ca.councillor.name
-            end
-            column "Autor", :author
-            column "Ponente", :speaker
-          end
-        end
-
         row "Archivos Adjuntos" do
           ul do
             council.attachments.each do |a|
@@ -85,13 +77,6 @@ ActiveAdmin.register Council do
       f.input :aval
       f.input :warning, label: "Mensaje de Urgencia"
     end
-    f.inputs "Concejales" do
-      f.has_many :councillor_assignments, heading: "", allow_destroy: true, new_record: "Agregar Concejal" do |ca|
-        ca.input :councillor
-        ca.input :author, label: "Autor"
-        ca.input :speaker, label: "Ponente"
-      end
-    end
     f.inputs "Archivos Adjuntos" do
       f.has_many :attachments, heading: "", allow_destroy: true, new_record: "Agregar Archivo" do |la|
         la.input :title, label: "Titulo"
@@ -108,6 +93,28 @@ ActiveAdmin.register Council do
         link_to "Cancelar", admin_councils_path
       end
     end
+  end
+
+  member_action :stakeholders, method: [:get, :post] do
+    if request.post?
+      authors = params[:stakeholders][:authors].delete_if(&:blank?)
+      speakers = params[:stakeholders][:speakers].delete_if(&:blank?)
+
+      resource.councillor_assignments.destroy_all
+
+      authors.each { |councillor_id| resource.councillor_assignments.authors.create!(councillor_id: councillor_id)  }
+      speakers.each { |councillor_id| resource.councillor_assignments.speakers.create!(councillor_id: councillor_id)  }
+
+      redirect_to admin_council_path(resource), notice: "Stakeholders guardados con éxito."
+    else
+      @holders = Councillor.all.map { |c| [c.name, c.id] }
+      @authors = resource.councillors.authors.map(&:id)
+      @speakers = resource.councillors.speakers.map(&:id)
+    end
+  end
+
+  action_item :stakeholders, only: :show do
+    link_to "Modificar Stakeholders", stakeholders_admin_council_path(council), method: :get
   end
 
   action_item :pdf, only: :show do
