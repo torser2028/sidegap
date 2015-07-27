@@ -1,3 +1,6 @@
+.title
+  = resource.title
+%br
 = semantic_form_for :stakeholders do |f|
   = f.inputs name: "Agregar Autores" do
     = f.input :authors, collection: options_for_select(@holders, @authors), input_html: { class: "chosen-select", multiple: true }, label: "Congresistas"
