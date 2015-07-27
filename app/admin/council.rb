@@ -110,6 +110,10 @@ ActiveAdmin.register Council do
     end
   end
 
+  action_item :pdf, only: :show do
+    link_to "Exportar a PDF", council_path(council, format: :pdf), target: :_blank
+  end
+
   controller do
     def new
       @page_title = "Agregar Proyecto"

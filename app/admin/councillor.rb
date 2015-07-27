@@ -80,6 +80,10 @@ ActiveAdmin.register Councillor do
     end
   end
 
+  action_item :pdf, only: :show do
+    link_to "Exportar a PDF", councillor_councils_path(councillor, format: :pdf), target: :_blank
+  end
+
   controller do
     def new
       @page_title = "Agregar Concejal"

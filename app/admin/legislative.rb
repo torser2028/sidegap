@@ -273,6 +273,10 @@ ActiveAdmin.register Legislative do
     link_to "Modificar Stakeholders", stakeholders_admin_legislative_path(legislative), method: :get
   end
 
+  action_item :pdf, only: :show do
+    link_to "Exportar a PDF", legislative_path(legislative, format: :pdf), target: :_blank
+  end
+
   # member_action :inactive, method: :put do
   #   resource.inactive!
   #   redirect_to admin_legislatives_path, notice: "El Proyecto ha sido eliminado."
