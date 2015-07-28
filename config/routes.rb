@@ -50,9 +50,13 @@ Rails.application.routes.draw do
     end
 
     resources :comments, only: [:create, :update]
+    resources :user_notifications, only: [:create]
 
     resources :rules, only: [:index, :show] do
         concerns :followable
+        collection do
+          get :notifications
+        end
     end
 
     resources :councils, only: [:index, :show] do

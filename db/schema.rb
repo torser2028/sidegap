@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150721210449) do
+ActiveRecord::Schema.define(version: 20150728161147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -285,6 +285,15 @@ ActiveRecord::Schema.define(version: 20150721210449) do
 
   add_index "legislatives", ["legislative_id"], name: "index_legislatives_on_legislative_id", using: :btree
 
+  create_table "notes", force: :cascade do |t|
+    t.text     "body"
+    t.integer  "report_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "notes", ["report_id"], name: "index_notes_on_report_id", using: :btree
+
   create_table "officials", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -319,6 +328,36 @@ ActiveRecord::Schema.define(version: 20150721210449) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "report_agendas", force: :cascade do |t|
+    t.integer  "report_id"
+    t.integer  "agenda_id"
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "report_agendas", ["agenda_id"], name: "index_report_agendas_on_agenda_id", using: :btree
+  add_index "report_agendas", ["report_id"], name: "index_report_agendas_on_report_id", using: :btree
+
+  create_table "report_events", force: :cascade do |t|
+    t.integer  "report_id"
+    t.integer  "event_id"
+    t.text     "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "report_events", ["event_id"], name: "index_report_events_on_event_id", using: :btree
+  add_index "report_events", ["report_id"], name: "index_report_events_on_report_id", using: :btree
+
+  create_table "reports", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "reports", ["user_id"], name: "index_reports_on_user_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -394,6 +433,16 @@ ActiveRecord::Schema.define(version: 20150721210449) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "institution_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "user_notifications", ["institution_id"], name: "index_user_notifications_on_institution_id", using: :btree
+  add_index "user_notifications", ["user_id"], name: "index_user_notifications_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",   null: false
     t.string   "encrypted_password",     default: "",   null: false
@@ -453,8 +502,16 @@ ActiveRecord::Schema.define(version: 20150721210449) do
   add_foreign_key "legislative_stakeholders", "legislatives"
   add_foreign_key "legislative_stakeholders", "stakeholders"
   add_foreign_key "legislatives", "legislatives"
+  add_foreign_key "notes", "reports"
   add_foreign_key "officials", "institutions"
+  add_foreign_key "report_agendas", "agendas"
+  add_foreign_key "report_agendas", "reports"
+  add_foreign_key "report_events", "events"
+  add_foreign_key "report_events", "reports"
+  add_foreign_key "reports", "users"
   add_foreign_key "rules", "institutions"
   add_foreign_key "stories", "legislatives"
+  add_foreign_key "user_notifications", "institutions"
+  add_foreign_key "user_notifications", "users"
   add_foreign_key "users", "companies"
 end

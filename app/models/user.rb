@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
 
   has_many :assignments
   has_many :comments
+  has_many :user_notifications
   has_many :roles, through: :assignments
 
   validates :name, :email, :company, :area, :job, presence: true

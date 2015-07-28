@@ -40,6 +40,12 @@ class RulesController < InheritedResources::Base
     redirect_to :back
   end
 
+  def notifications
+    add_breadcrumb "Notificaciones", :notifications_rules_path
+    @institutions = Institution.rules
+    @notifications = current_user.user_notifications
+  end
+
   private
     def get_rule(id)
       Rule.find id
