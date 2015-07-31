@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   belongs_to :company
 
-  has_many :assignments
+  has_many :assignments, dependent: :destroy
   has_many :comments
   has_many :user_notifications
   has_many :roles, through: :assignments
