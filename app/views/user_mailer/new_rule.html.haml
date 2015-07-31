@@ -1,0 +1,68 @@
+%table{:cellpadding => "10", :style => "margin: 0 auto; border: 1px solid lightgray; font-family: 'Arial', sans-serif; font-size: 10pt; color: dimgray; line-height: 16pt;", :width => "960px"}
+  %thead
+    %tr
+      %td{:width => "203"}
+        = image_tag("logo_sm.jpg")
+      %td{:style => "text-align: left; font-family: 'verdana', sans-serif; font-size: 12pt; color: steelblue; padding-top: 15px;"}
+        Apreciado Usuario
+        %span{:style => "color: DarkBlue; display: block; font-weight: bold; font-size: 1em; margin-bottom: 1em;"}= @name
+      %td{:width => "203"}
+        = image_tag("imagen.jpg")
+  %tbody
+    %tr
+      %td{:align => "center", :colspan => "3"}
+        %span{:style => "color: DarkBlue; font-family: 'Arial', sans-serif; font-size: 10pt; background: LightSkyBlue; padding: 5px 20px; border-radius: 12px;"}
+          %strong Se ha creado una nueva norma en proceso de consulta de su interés
+    %tr
+      %td{:align => "right"}
+        %strong Fecha:
+      %td{:colspan => "2"}
+        %span= @rule.filing_at
+    %tr
+      %td{:align => "right"}
+        %strong Institución:
+      %td{:colspan => "2"}
+        %span= @institution
+    %tr
+      %td{:align => "right"}
+        %strong Tipo de Norma:
+      %td{:colspan => "2"}
+        %span= @rule.kind
+    %tr
+      %td{:align => "right"}
+        %strong Título:
+      %td{:colspan => "2"}
+        %span
+          = simple_format @rule.title
+    %tr
+      %td{:align => "right"}
+        %strong Plazo para comentarios:
+      %td{:colspan => "2"}
+        %span= @rule.deadline_comments
+    %tr
+      %td{:align => "right"}
+        %strong Comentarios/Sugerencias:
+      %td{:colspan => "2"}
+        %span= @rule.for_comments
+    %tr
+      %td{:align => "right"}
+        = image_tag("doclink.jpg")
+      %td{:colspan => "2"}
+        %strong
+          %a{:href => rule_url(@rule, locale: :es), :style => "display: inline-block; background: LightSkyBlue; padding: 5px 10px; border-radius: 15px; text-decoration: none;", :target => "_blank"} Ver Norma
+    %tr
+      %td{:align => "center", :colspan => "3", :style => " font-family: 'Arial', sans-serif; line-height: 12pt;"}
+        %hr/
+        %span{:style => "color: gray; font-size: 8pt; font-family: verdana;"}
+          %strong Nota:
+          Los periodos de apertura para comentarios sobre las Normas en Proceso de Consulta varían dependiendo del tipo de Norma y de la Institución de las cuales son emitidas. Para verificar estos plazos por favor visite su cuenta de SIDEGAP web
+          %a{:href => "http://www.sidegap.com.co"} sidegap.com.co
+        %br/
+        %br/
+        %span{:style => "color: gray; font-size: 8pt; font-family: verdana;"}
+          Este es un informe automático generado SIDEGAP, por favor no responda este mensaje. Para obtener mas información visite nuestro sitio web
+          %a{:href => "http://www.sidegap.com.co"} sidegap.com.co
+          %br/
+          o comuníquese con nosotros al teléfono 4674110 o al correo electrónico
+          %a{:href => "mailto:sidegap@valure.com.co"} sidegap@valure.com.co
+        %br/

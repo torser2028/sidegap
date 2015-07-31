@@ -60,13 +60,8 @@
           /       = image_tag("bogota.svg")
           /       //= fa_icon "building-o"
           /     %span Distrito capital de Bogotá
-.confignews
-  .row
-    .large-4.large-offset-8.columns
-      %a{role: "button", href: "#"}
-        Notificaciones
-        %span.glyph
-          = fa_icon "gear"
+
+
 %h1 Noticias
 %ul.news.small-block-grid-1.medium-block-grid-2.large-block-grid-2
   - @stories.each do |story|
