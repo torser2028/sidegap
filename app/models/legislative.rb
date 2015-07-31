@@ -31,7 +31,22 @@ class Legislative < ActiveRecord::Base
     ['Un mes' , 1.month.ago]
   ]
 
+  before_update :update_notification, if: :notify
+
   # def inactive!
   #   self.update_attribute(:active, false)
   # end
+
+  private
+    def update_notification
+      change_type = if self.probability_changed?
+        "Probabilidad"
+      elsif self.status_changed? || self.final_status_changed?
+        "Estado"
+      elsif self.attachments.any? { |a| a.changed? }
+        "Archivos Adjuntos"
+      end
+      UserMailer.set_recipients_project_notification(self, change_type)
+      self.update_attribute(:notify, false)
+    end
 end

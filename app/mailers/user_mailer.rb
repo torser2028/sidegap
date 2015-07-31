@@ -18,4 +18,17 @@ class UserMailer < ApplicationMailer
     @name = recipient.name
     mail(to: recipient.email, subject: "Alerta sobre nueva norma en proceso de consulta")
   end
+
+  def self.set_recipients_project_notification(project, change_type)
+    project.followers.each do |recipient|
+      project_notification(recipient, project, change_type).deliver_now
+    end
+  end
+
+  def project_notification(recipient, project, change_type)
+    @project = project
+    @change_type = change_type
+    @name = recipient.name
+    mail(to: recipient.email, subject: "Cambio en un proyecto de ley que es de su interés")
+  end
 end
