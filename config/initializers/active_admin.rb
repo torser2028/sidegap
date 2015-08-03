@@ -194,7 +194,7 @@ ActiveAdmin.setup do |config|
       menu.add label: "Rama Legislativa", priority: 1
       menu.add label: "Normas en Proceso de Consulta", priority: 2
       menu.add label: "Concejo", priority: 3
-      menu.add label: "Sistema", priority: 4
+      menu.add label: "Sistema", priority: 5
       # menu.add label: "Rama Ejecutiva", priority: 2
       # menu.add label: "Rama Judicial", priority: 3
     end
