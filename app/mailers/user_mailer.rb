@@ -16,7 +16,7 @@ class UserMailer < ApplicationMailer
     @rule = rule
     @institution = institution
     @name = recipient.name
-    mail(to: recipient.email, subject: "Alerta sobre nueva norma en proceso de consulta")
+    mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
   end
 
   def self.set_recipients_project_notification(project, change_type)
