@@ -13,7 +13,7 @@
   %td.desc
     - if %w(Archivado Retirado).include? legislative.final_status
       = "Este proyecto fue #{legislative.final_status} en estado #{legislative.status}"
-    - if "Sancionado" == legislative.final_status
+    - elsif "Sancionado" == legislative.final_status
       = legislative.law_number
     - else
       = legislative.status
