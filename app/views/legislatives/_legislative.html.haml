@@ -11,7 +11,7 @@
         = fa_icon "exclamation-circle"
         Mensaje de urgencia
   %td.desc
-    - if %w(Archivado Retirado).inlude? legislative.final_status
+    - if %w(Archivado Retirado).include? legislative.final_status
       = "Este proyecto fue #{legislative.final_status} en estado #{legislative.status}"
     - if "Sancionado" == legislative.final_status
       = legislative.law_number
