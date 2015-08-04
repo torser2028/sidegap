@@ -110,16 +110,6 @@
               .large-6.columns
                 %span
                   = @legislative.legislative.try(:commission) || @legislative.commission
-            .row
-              .large-2.columns.labels
-                %label
-                  Estado
-              .large-10.columns
-                %span
-                  - if %w(Archivado Retirado Sancionado).include? @legislative.final_status
-                    = "Este proyecto fue #{@legislative.final_status} en #{@legislative.status}"
-                  - else
-                    = @legislative.status
             - if @legislative.law_number.present?
               .row
                 .large-2.columns.labels
@@ -128,6 +118,17 @@
                 .large-10.columns
                   %span
                     = @legislative.law_number
+              - else
+              .row
+                .large-2.columns.labels
+                  %label
+                    Estado
+                .large-10.columns
+                  %span
+                    - if %w(Archivado Retirado).include? @legislative.final_status
+                      = "Este proyecto fue #{@legislative.final_status} en estado #{@legislative.status}"
+                    - else
+                      = @legislative.status
             .row
               .large-2.columns.labels
                 %label
