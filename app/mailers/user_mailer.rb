@@ -31,4 +31,16 @@ class UserMailer < ApplicationMailer
     @name = recipient.name
     mail(to: recipient.email, subject: "Cambio en un proyecto de ley que es de su interés")
   end
+
+  def self.set_recipients_alert(alert)
+    User.all.each do |recipient|
+      regulatory_alert(recipient, alert).deliver_now
+    end
+  end
+
+  def regulatory_alert(recipient, alert)
+    @alert = alert
+    @name = recipient.name
+    mail(to: recipient.email, subject: "Nueva alerta regulatoria")
+  end
 end

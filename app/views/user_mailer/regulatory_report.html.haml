@@ -1,0 +1,66 @@
+%table{:cellpadding => "10", :style => "margin: 0 auto;border: 1px solid lightgray; font-family: 'Arial', sans-serif; font-size: 10pt; color: dimgray; line-height: 16pt;", :width => "960px"}
+  %thead
+    %tr
+      %td{:width => "203"}
+        = image_tag("logo_sm.jpg")
+      %td{:style => "text-align: left; font-family: 'verdana', sans-serif; font-size: 12pt; color: steelblue; padding-top: 15px;"}
+        Apreciado Usuario
+        %span{:style => "color: DarkBlue; display: block; font-weight: bold; font-size: 1em; margin-bottom: 1em;"}
+          = @name
+      %td{:width => "203"}
+        = image_tag("imagen.jpg")
+  %tbody
+    %tr
+      %td{:align => "center", :colspan => "3"}
+        %span{:style => "background: DeepSkyBlue; color: white; font-family: 'Arial', sans-serif; font-size: 10pt; padding: 5px 20px; border-radius: 12px;"}
+          %strong Estas son las noticias más importantes en SIDEGAP
+    %tr
+      %td{:align => "left", :colspan => "3", :style => " font-family: 'Arial', sans-serif; border-top: 3px solid #F49027;  "}
+        %span{:style => "color: steelblue; font-size: 14pt; line-height: 24pt;"}
+          %strong RAMA LEGISLATIVA
+        %br/
+        %span{:style => "color: steelblue;"}
+          %strong Congreso de la República
+        %p{:align => "justify"} Sancionada por el Presidente de la República la Ley 1751 de 2015, “por medio de la cual se regula el derecho fundamental a la salud”.
+    %tr
+      %td{:align => "left", :colspan => "3", :style => " font-family: 'Arial', sans-serif; border-top: 3px solid #45C051; "}
+        %span{:style => "color: steelblue; font-size: 14pt; line-height: 24pt;"}
+          %strong NORMAS EN PROCESO DE CONSULTA CIUDADANA DE LA RAMA EJECUTIVA DEL PODER PUBLICO
+        %br/
+        %span{:style => "color: steelblue;"}
+          %strong Ministerio de Hacienda y Crédito Público
+        %p{:align => "justify"} El Ministerio de Hacienda y Crédito Público da a conocer para consulta ciudadana, el proyecto de decreto “por el cual se modifica el parágrafo 1 del artículo 3.1.1.5.1 y el numeral 17 del artículo 3.1.1.10.1 del decreto 2555 de 2010”.- Normas en materia del sector financiero, asegurador y del mercado de valores.
+        %br/
+        %span{:style => "color: steelblue;"}
+          %strong Ministerio de Hacienda y Crédito Público
+        %p{:align => "justify"} El Ministerio de Hacienda y Crédito Público da a conocer para consulta ciudadana, el proyecto de decreto “por medio del cual se adiciona un parágrafo al artículo 9 del decreto 610 de 2002 en desarrollo del artículo 8 de la Ley 358 de 1997 y se establecen reglas para el endeudamiento de las entidades descentralizadas del orden territorial”.
+        %br/
+        %span{:style => "color: steelblue;"}
+          %strong Ministerio de Transporte
+        %p{:align => "justify"} El Ministerio de Transporte publica para consulta ciudadana , el proyecto de decreto “por medio del cual se reglamenta el trámite de solicitud de concesiones para el desarrollo de actividades portuarias, previstas en la Ley 1ª de 1991 y en la Ley 1242 de 2008”.
+    %tr
+      %td{:align => "center", :colspan => "3", :style => " font-family: 'Arial', sans-serif;  "}
+        %span{:style => "color: steelblue; "} Apreciado Usuario para conocer las normas mas reciente haga click sobre la Rama del Poder sobre la cual quisiera obtener la información.
+        %br/
+        %table{:style => "margin-top: 25px;"}
+          %tr
+            %td
+              %a{:href => legislatives_url}
+                = image_tag("legislativa.jpg")
+            %td
+              %a{:href => rules_url}
+                = image_tag("normas.jpg")
+            %td
+              %a{:href => councils_url}
+                = image_tag("concejos.jpg")
+        %br/
+    %tr
+      %td{:align => "center", :colspan => "3", :style => " font-family: 'Arial', sans-serif; line-height: 12pt;"}
+        %hr/
+        %span{:style => "color: gray; font-size: 8pt; font-family: verdana;"}
+          Este es un informe automático generado SIDEGAP, por favor no responda este mensaje. Para obtener mas información visite nuestro sitio web
+          %a{:href => "http://www.sidegap.com.co"} sidegap.com.co
+          %br/
+          o comuníquese con nosotros al teléfono 4674110 o al correo electrónico
+          %a{:href => "mailto:sidegap@valure.com.co"} sidegap@valure.com.co
+        %br/
