@@ -118,8 +118,10 @@ ActiveAdmin.register Legislative do
         end
 
         row "Archivos Adjuntos" do
+          attachments = legislative.attachments
+          attachments += legislative.legislative.try(:attachments) if legislative.legislative
           ul do
-            legislative.attachments.each do |a|
+            attachments.each do |a|
               li do
                 link_to a.title, a.attachment.url
               end
