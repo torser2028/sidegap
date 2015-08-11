@@ -2,13 +2,13 @@ class Legislative < ActiveRecord::Base
   acts_as_followable
   acts_as_votable
 
-  has_many :attachments
-  has_many :comments
-  has_many :agendas
-  has_many :stories
-  has_many :legislative_stakeholders
+  has_many :attachments, dependent: :destroy
+  has_many :comments, dependent: :destroy
+  has_many :agendas, dependent: :destroy
+  has_many :stories, dependent: :destroy
+  has_many :legislative_stakeholders, dependent: :destroy
   has_many :stakeholders, through: :legislative_stakeholders
-  has_many :legislatives
+  has_many :legislatives, dependent: :destroy
   belongs_to :legislative
 
   accepts_nested_attributes_for :attachments, :legislative_stakeholders, :agendas, :legislatives, allow_destroy: true

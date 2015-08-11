@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
   belongs_to :company
 
   has_many :assignments, dependent: :destroy
-  has_many :comments
-  has_many :user_notifications
+  has_many :comments, dependent: :destroy
+  has_many :user_notifications, dependent: :destroy
   has_many :roles, through: :assignments
 
   validates :name, :email, :company, :area, :job, presence: true

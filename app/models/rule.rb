@@ -2,8 +2,8 @@ class Rule < ActiveRecord::Base
   acts_as_followable
 
   belongs_to :institution
-  has_many :attachments
-  has_many :comments
+  has_many :attachments, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
 

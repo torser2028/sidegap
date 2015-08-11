@@ -1,6 +1,5 @@
 ActiveAdmin.register Legislative do
   menu label: "Proyectos", parent: "Rama Legislativa", priority: 0
-  actions :all, except: [:destroy]
 
   filter :title, label: "Titulo"
   filter :source, label: "Origen"

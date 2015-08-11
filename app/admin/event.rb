@@ -1,6 +1,5 @@
 ActiveAdmin.register Event do
   menu label: "Eventos", parent: "Rama Legislativa"
-  actions :all, except: [:destroy]
 
   permit_params :body, :event_at, :event_type, :time, :commission, :plenary, :place
 

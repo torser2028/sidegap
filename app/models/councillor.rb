@@ -1,5 +1,5 @@
 class Councillor < ActiveRecord::Base
-  has_many :councillor_assignments
+  has_many :councillor_assignments, dependent: :destroy
   has_many :councils, through: :councillor_assignments
 
   mount_uploader :avatar, AvatarUploader

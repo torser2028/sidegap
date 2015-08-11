@@ -1,6 +1,5 @@
 ActiveAdmin.register Councillor do
   menu label: "Concejales", parent: "Concejo", priority: 1
-  actions :all, except: [:destroy]
 
   permit_params :name, :email, :phone, :address, :political_party, :job, :commission, :office, :info, :source, :avatar
 

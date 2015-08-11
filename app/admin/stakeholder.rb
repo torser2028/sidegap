@@ -1,6 +1,5 @@
 ActiveAdmin.register Stakeholder do
   menu label: "Congresistas", parent: "Rama Legislativa"
-  actions :all, except: [:destroy]
 
   permit_params :name, :email, :phone, :address, :political_party, :job, :commission, :region, :office, :info, :source, :avatar
 

@@ -1,6 +1,5 @@
 ActiveAdmin.register Council do
   menu label: "Proyectos", parent: "Concejo", priority: 0
-  actions :all, except: [:destroy]
 
   permit_params :title, :number, :commission, :status, :filing_at, :warning, :topic, :monitoring_at, :aval,
     councillor_assignments_attributes: [:id, :_destroy, :councillor_id, :author, :speaker],
