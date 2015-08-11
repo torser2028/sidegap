@@ -114,7 +114,7 @@
               .row
                 .large-2.columns.labels
                   %label
-                    Número de Ley
+                    = @legislative.type_law == "Acto Legislativo" ? "Número de Acto Legislativo" : "Número de Ley"
                 .large-10.columns
                   %span
                     = @legislative.law_number

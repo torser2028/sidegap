@@ -192,7 +192,7 @@ ActiveAdmin.register Legislative do
       f.input :warning, label: "Mensaje de Urgencia"
     end
     f.inputs do
-      f.input :law_number, label: "Número de Ley"
+      f.input :law_number, label: "Número de Ley / Número de Acto Legislativo"
     end
     unless f.object.new_record?
       f.inputs "Proyectos Acumulados" do
