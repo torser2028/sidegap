@@ -8,8 +8,9 @@ ActiveAdmin.register Agenda do
   filter :event_at, label: "Fecha"
   filter :plenary_commission, label: "Plenaria/Comisión"
 
-  scope :active
-  scope :inactive
+  scope "Todo", :all, default: true
+  scope "Próxima Agenda", :active
+  scope "Agenda Pasada", :inactive
 
   index title: "Proyectos Agendados" do
     column "Proyecto" do |agenda|

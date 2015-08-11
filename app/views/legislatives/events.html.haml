@@ -68,16 +68,5 @@
                 Tipo de Evento
               %th
                 Lugar
-          %tbody
-            - @events.each do |event|
-              %tr
-                %td.num= ldate event.event_at
-                %td.num= l event.time, format: :simple
-                %td.desc= simple_format event.body
-                %td= event.event_type
-                %td
-                  - if event.commission.present?
-                    = "Comisión " + event.commission if event.commission.present?
-                  - elsif event.plenary.present?
-                    = "Plenaria " + event.plenary
-                  %p= event.place
+          %tbody.js_events
+            = render @events

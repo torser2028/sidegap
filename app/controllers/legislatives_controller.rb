@@ -68,10 +68,12 @@ class LegislativesController < ApplicationController
 
   def events
     add_breadcrumb "Eventos y Agenda", :events_legislatives_path
-    @q = if params[:q].present?
-      Agenda.ransack params[:q]
+    if params[:q].present?
+      @q = Agenda.ransack params[:q]
+      @events = Event.ransack(params[:q]).result
     else
-      Agenda.active.ransack params[:q]
+      @q = Agenda.active.ransack params[:q]
+      @events = Event.active
     end
     @agendas = []
     @legislatives = current_user.following_legislatives.with_agenda
@@ -80,7 +82,6 @@ class LegislativesController < ApplicationController
         @agendas << item if legislative.agendas.include? item
       end
     end
-    @events = Event.all
   end
 
   def events_commission

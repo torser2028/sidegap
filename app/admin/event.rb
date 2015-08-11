@@ -7,6 +7,10 @@ ActiveAdmin.register Event do
   filter :event_type, label: "Tipo de Evento"
   filter :event_at, label: "Fecha"
 
+  scope "Todo", :all, default: true
+  scope "Próximos Eventos", :active
+  scope "Eventos Pasados", :inactive
+
   index title: "Eventos" do
     selectable_column
     column "Evento", :body

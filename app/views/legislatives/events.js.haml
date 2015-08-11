@@ -1,3 +1,4 @@
 :plain
-  $('.js_agendas').empty();
+  $('.js_agendas, .js_events').empty();
   $("#{escape_javascript(render @agendas)}").appendTo('.js_agendas');
+  $("#{escape_javascript(render @events)}").appendTo('.js_events');
