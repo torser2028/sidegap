@@ -57,9 +57,9 @@
             = @legislative.source
         %dl
           %dt
-            %label Tema de Interes
+            %label Tipo de Ley
           %dd
-            = @legislative.legislative.try(:topic) || @legislative.topic
+            = @legislative.type_law
 
         %dl
           %dt
@@ -68,20 +68,9 @@
             = @legislative.chamber_number
         %dl
           %dt
-            %label Tipo de Ley
-          %dd
-            = @legislative.type_law
-
-        %dl
-          %dt
             %label Número Senado
           %dd
             = @legislative.senate_number
-        %dl
-          %dt
-            %label Fecha de Radicación
-          %dd
-            = ldate @legislative.filing_at
 
         %dl
           %dt
@@ -93,12 +82,38 @@
             %label Comisión
           %dd
             = @legislative.legislative.try(:commission) || @legislative.commission
-
+        .row
+          .large-2.columns.labels
+            %label
+              Tema interés
+          .large-10.columns
+            %span
+              = @legislative.legislative.try(:topic) || @legislative.topic
+        %dl
+          %dt
+        .row
+          .large-2.columns.labels
+            %label
+              Fecha de Radicación
+          .large-10.columns
+            %span
+              = ldate @legislative.filing_at
         %dl
           %dt
             %label Fecha Comisión Senado
           %dd
             = ldate @legislative.legislative.try(:senate_commission_at) || @legislative.senate_commission_at
+        %dl
+          %dt
+            %label Fecha Comisión Cámara
+          %dd
+            = ldate @legislative.legislative.try(:chamber_commission_at) || @legislative.chamber_commission_at
+
+        %dl
+          %dt
+            %label Fecha Plenaria Senado
+          %dd
+            = ldate @legislative.legislative.try(:senate_plenary_at) || @legislative.senate_plenary_at
         %dl
           %dt
             %label Fecha Plenaria Cámara
@@ -107,20 +122,9 @@
 
         %dl
           %dt
-            %label Fecha Comisión Cámara
+            %label Fecha Segunda Vuelta Comisión Senado
           %dd
-            = ldate @legislative.legislative.try(:chamber_commission_at) || @legislative.chamber_commission_at
-        %dl
-          %dt
-            %label Fecha Plenaria Senado
-          %dd
-            = ldate @legislative.legislative.try(:senate_plenary_at) || @legislative.senate_plenary_at
-
-        %dl
-          %dt
-            %label Fecha Segunda Vuelta Plenaria Cámara
-          %dd
-            = ldate @legislative.legislative.try(:second_chamber_plenary_at) ||  @legislative.second_chamber_plenary_at
+            = ldate @legislative.legislative.try(:second_senate_commission_at) ||  @legislative.second_senate_commission_at
         %dl
           %dt
             %label Fecha Segunda Vuelta Comisión Cámara
@@ -134,20 +138,19 @@
             = ldate @legislative.legislative.try(:second_senate_plenary_at) ||  @legislative.second_senate_plenary_at
         %dl
           %dt
-            %label Fecha Segunda Vuelta Comisión Senado
+            %label Fecha Segunda Vuelta Plenaria Cámara
           %dd
-            = ldate @legislative.legislative.try(:second_senate_commission_at) ||  @legislative.second_senate_commission_at
-
-        %dl
-          %dt
-            %label Fecha Conciliación Cámara
-          %dd
-            = ldate @legislative.legislative.try(:chamber_settlement_at) || @legislative.chamber_settlement_at
+            = ldate @legislative.legislative.try(:second_chamber_plenary_at) ||  @legislative.second_chamber_plenary_at
         %dl
           %dt
             %label Fecha Conciliación Senado
           %dd
             = ldate @legislative.legislative.try(:senate_settlement_at) || @legislative.senate_settlement_at
+        %dl
+          %dt
+            %label Fecha Conciliación Cámara
+          %dd
+            = ldate @legislative.legislative.try(:chamber_settlement_at) || @legislative.chamber_settlement_at
 .alwaysbreak
   - if @authors.present?
     .row.nobreak
