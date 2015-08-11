@@ -5,7 +5,6 @@ class Legislative < ActiveRecord::Base
   has_many :attachments, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :agendas, dependent: :destroy
-  has_many :stories, dependent: :destroy
   has_many :legislative_stakeholders, dependent: :destroy
   has_many :stakeholders, through: :legislative_stakeholders
   has_many :legislatives, dependent: :destroy
