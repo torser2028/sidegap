@@ -1,0 +1,41 @@
+%table{:cellpadding => "10", :style => "margin: 0 auto; border: 1px solid lightgray; font-family: 'Arial', sans-serif; font-size: 10pt; color: dimgray; line-height: 16pt;", :width => "960px"}
+  %thead
+    %tr
+      %td{:width => "203"}
+        = image_tag("logo_sm.jpg")
+      %td{:style => "text-align: left; font-family: 'verdana', sans-serif; font-size: 12pt; color: steelblue; padding-top: 15px;"}
+        Apreciado Usuario
+        %span{:style => "color: DarkBlue; display: block; font-weight: bold; font-size: 1em; margin-bottom: 1em;"}= @name
+      %td{:width => "203"}
+        = image_tag("imagen.jpg")
+  %tbody
+    %tr
+      %td{:align => "center", :colspan => "3"}
+        %span{:style => "color: DarkBlue; font-family: 'Arial', sans-serif; font-size: 10pt; background: LightSkyBlue; padding: 5px 20px; border-radius: 12px;"}
+          %strong Se ha creado una nueva alerta regulatoria de su interés
+    %tr
+      %td{:align => "right"}
+        %strong Fecha de Radicación:
+      %td{:colspan => "2"}
+        %span= @alert.filing_at
+    %tr
+      %td{:align => "right"}
+        %strong Título:
+      %td{:colspan => "2"}
+        %span
+          = simple_format @alert.title
+    %tr
+      %td{:align => "right"}
+        %strong Descripción:
+      %td{:colspan => "2"}
+        %span= @alert.body
+    %tr
+      %td{:align => "center", :colspan => "3", :style => " font-family: 'Arial', sans-serif; line-height: 12pt;"}
+        %hr/
+        %span{:style => "color: gray; font-size: 8pt; font-family: verdana;"}
+          Este es un informe automático generado SIDEGAP, por favor no responda este mensaje. Para obtener mas información visite nuestro sitio web
+          %a{:href => "http://www.sidegap.com.co"} sidegap.com.co
+          %br/
+          o comuníquese con nosotros al teléfono 4674110 o al correo electrónico
+          %a{:href => "mailto:sidegap@valure.com.co"} sidegap@valure.com.co
+        %br/
