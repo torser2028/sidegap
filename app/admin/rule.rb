@@ -9,6 +9,9 @@ ActiveAdmin.register Rule do
   filter :institution, label: "Institución", as: :select, collection: -> { Institution.rules }
   filter :filing_at, label: "Fecha de Creación"
 
+  scope "Próximas Normas", :active
+  scope "Normas Pasadas", :inactive
+
   index title: "Normas" do
     selectable_column
     column "Titulo", :title
