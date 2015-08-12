@@ -56,6 +56,7 @@ Rails.application.routes.draw do
         concerns :followable
         collection do
           get :notifications
+          get :inactive
         end
     end
 

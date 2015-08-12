@@ -11,10 +11,17 @@ class RulesController < InheritedResources::Base
     end
   end
 
+  def inactive
+    add_breadcrumb "Bandeja de Normas Pasadas", :inactive_rules_path
+
+    @q = Rule.inactive.ransack params[:q]
+    @rules = @q.result
+  end
+
   def favorites
     add_breadcrumb "Mis Normas Favoritas", :favorites_rules_path
 
-    @q = current_user.following_rules.ransack params[:q]
+    @q = current_user.following_rules.active.ransack params[:q]
     @rules = []
     @q.result.each do |item|
       @rules << item unless current_user.find_disliked_items.include? item
