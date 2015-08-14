@@ -59,7 +59,7 @@
                   Fecha de Seguimiento
               .large-2.columns
                 %span
-                  = ldate @council.monitoring_at
+                  = ldate @council.updated_at, format: :db
               .large-2.columns.labels
                 %label
                   Fecha de Radicación
@@ -75,8 +75,15 @@
                   = @council.status
               .large-2.columns.labels
                 %label
-                  Comisión
+                  Aval
               .large-6.columns
+                %span
+                  = @council.aval == true ? "Si" : "No"
+            .row
+              .large-2.columns.labels
+                %label
+                  Comisión
+              .large-10.columns
                 %span
                   = @council.commission
             - if current_user.following? @council

@@ -28,7 +28,7 @@
           %dt
             %label Fecha de Seguimiento
           %dd
-            = ldate @council.monitoring_at
+            = ldate @council.updated_at, format: :db
         %dl
           %dt
             %label Fecha de Radicación
@@ -45,28 +45,30 @@
             %label Comisión
           %dd
             = @council.commission
-.alwaysbreak
-  - if @authors.present?
-    .row.nobreak
-      .large-12.columns
-        %h2
-          Autores
-        .tray.autors
-          %table
-            %tbody
-              - @authors.each do |author|
-                %tr
-                  %td
-                    = link_to author.name, councillor_councils_path(author)
-  - if @speakers.present?
-    .row.nobreak
-      .large-12.columns
-        %h2
-          Ponentes
-        .tray.autors
-          %table
-            %tbody
-              - @speakers.each do |speaker|
-                %tr
-                  %td
-                    = link_to speaker.name, councillor_councils_path(speaker)
+%br
+%br
+	
+- if @authors.present?
+  .row.nobreak
+    .large-12.columns
+      %h2
+        Autores
+      .tray.autors
+        %table
+          %tbody
+            - @authors.each do |author|
+              %tr
+                %td
+                  = link_to author.name, councillor_councils_path(author)
+- if @speakers.present?
+  .row.nobreak
+    .large-12.columns
+      %h2
+        Ponentes
+      .tray.autors
+        %table
+          %tbody
+            - @speakers.each do |speaker|
+              %tr
+                %td
+                  = link_to speaker.name, councillor_councils_path(speaker)

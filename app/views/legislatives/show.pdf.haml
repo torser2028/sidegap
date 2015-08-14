@@ -47,7 +47,7 @@
             .large-10.columns
               %span
                 - if %w(Archivado Retirado).include? @legislative.final_status
-                  = "Este proyecto fue #{@legislative.final_status} en estado #{@legislative.status}"
+                  = "Este proyecto fue #{@legislative.final_status} en #{@legislative.status}"
                 - else
                   = @legislative.status
         %dl

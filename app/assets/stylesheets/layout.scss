@@ -676,7 +676,7 @@ body{
       background-image: image-url('floppy.png');
       background-size: 18px;
       background-position: 0.5em 50%;
-      background-repeat: no-repeat; 
+      background-repeat: no-repeat;
     }
     &.quit{
       &.secondary{
@@ -760,6 +760,7 @@ body{
     }
   }
 }
+.item-center{ margin: 0 auto; width: 30% }
 // ------ RESPONSIVE ADDONS ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------ ------
 // Normal Up
 @media screen and (min-width: 1024px){
@@ -773,10 +774,12 @@ body{
       }
     }
   }
+  .item-center{ margin: 0 auto; width: 40% }
 }
 // Normal Down
 @media screen and (max-width: 1024px){
   body{
+    .item-center{ margin: 0 auto; width: 40% }
     nav{
       &.top-bar{
         .top-bar-section{
@@ -795,10 +798,10 @@ body{
         }
       }
     }
-  }  
+  }
 }
 @media screen and (min-width: 640px){
-  
+  .item-center{ margin: 0 auto; width: 40% }
 }
 @media screen and (max-width: 640px){
   body{

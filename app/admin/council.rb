@@ -17,6 +17,7 @@ ActiveAdmin.register Council do
     column "Fecha de Radicación" do |council|
       ldate council.filing_at
     end
+    column "Mensaje de Urgencia", :warning
     actions() do |council|
       link_to("Stakeholders", stakeholders_admin_council_path(council))
     end
@@ -41,13 +42,13 @@ ActiveAdmin.register Council do
           council.topic
         end
         row "Fecha de Seguimiento" do
-          ldate council.monitoring_at
+          ldate council.updated_at, format: :db
         end
         row "Fecha de Radicación" do
           ldate council.filing_at
         end
-        row "Fecha de Radicación" do
-          council.aval
+        row "Aval" do
+          council.aval == true ? "Si" : "No"
         end
 
         row "Archivos Adjuntos" do
@@ -71,7 +72,6 @@ ActiveAdmin.register Council do
       f.input :commission, label: "Comisión", collection: Commission.councils.pluck(:name)
       f.input :status, label: "Estado", collection: Status.councils.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)
-      f.input :monitoring_at, label: "Fecha de Seguimiento", as: :datepicker
       f.input :filing_at, label: "Fecha de Radicación", as: :datepicker
       f.input :aval
       f.input :warning, label: "Mensaje de Urgencia"
