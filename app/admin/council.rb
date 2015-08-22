@@ -71,7 +71,7 @@ ActiveAdmin.register Council do
       f.input :number, label: "Número"
       f.input :commission, label: "Comisión", collection: Commission.councils.pluck(:name)
       f.input :status, label: "Estado", collection: Status.councils.pluck(:name)
-      f.input :topic, label: "Tema de Interes", collection: Topic.pluck(:name)
+      f.input :topic, label: "Tema de Interes", collection: Topic.councils.pluck(:name)
       f.input :filing_at, label: "Fecha de Radicación", as: :datepicker
       f.input :aval
       f.input :warning, label: "Mensaje de Urgencia"
