@@ -43,4 +43,25 @@ class UserMailer < ApplicationMailer
     @name = recipient.name
     mail(to: recipient.email, subject: "Nueva alerta regulatoria")
   end
+
+  def self.set_recipients_regulatory
+    legislatives_stories = Story.not_sent.legislatives
+    councils_stories = Story.not_sent.councils
+    rules_stories = Story.not_sent.rules
+
+    if legislatives_stories.present? || councils_stories.present? || rules_stories.present?
+      User.all.each do |recipient|
+        regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories).deliver_now
+      end
+    end
+  end
+
+  def regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories)
+    @legislatives_stories = legislatives_stories
+    @councils_stories = councils_stories
+    @rules_stories = rules_stories
+    @name = recipient.name
+    
+    mail(to: recipient.email, subject: "Actualidad Regulatoria")
+  end
 end
