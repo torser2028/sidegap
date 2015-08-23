@@ -1,8 +1,11 @@
 namespace :scheduler do
   desc 'Send Regulatory Report'
   task :regulatory_report => :environment do
-    if UserMailer.set_recipients_regulatory
-      Story.not_sent.each { |story| story.update_attribute(:sent, true) }
+    time = Time.now
+    if (time.monday? && time.hour == 12) || (time.wednesday? && time.hour == 7) || (time.friday? && time.hour == 7)
+      if UserMailer.set_recipients_regulatory
+        Story.not_sent.each { |story| story.update_attribute(:sent, true) }
+      end
     end
   end
 end
