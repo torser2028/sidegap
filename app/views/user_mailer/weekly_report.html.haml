@@ -44,6 +44,9 @@
                   %tr
                     %td{:style => "color: CornflowerBlue;"}
                       = "(#{@user_with_agenda}) Están en agenda de discusión para la próxima semana"
+                      %p
+                        Para consultar la agenda legislativa de sus proyectos en seguimiento, de los próximos días haga click
+                        %a{:href => events_legislatives_url(locale: :es), :style => "color: steelblue; text-decoration:none;"} aquí.
                   %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
