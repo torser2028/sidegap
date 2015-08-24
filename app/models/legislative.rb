@@ -15,10 +15,13 @@ class Legislative < ActiveRecord::Base
   default_scope { where(active: true).uniq }
   scope :as_author, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.authors).uniq }
   scope :as_speaker, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.speakers).uniq }
-  scope :with_agenda, -> { includes(:agendas).where.not(agendas: { legislative_id: nil }) }
+  scope :with_agenda, -> { includes(:agendas).where.not(agendas: { legislative_id: nil }).merge(Agenda.active) }
   scope :inbox, -> { where.not(final_status: %w(Archivado Retirado Sancionado)) }
   scope :law, -> { where(final_status: 'Sancionado') }
   scope :old, -> { where(final_status: %w(Archivado Retirado)) }
+  scope :archived, -> { where(final_status: 'Archivado') }
+  scope :retired, -> { where(final_status: 'Retirado') }
+  scope :new_projects, -> { where(new_project: true) }
 
   validates :source, :title, :status, :type_law, :filing_at, presence: true
 
@@ -30,7 +33,9 @@ class Legislative < ActiveRecord::Base
     ['Un mes' , 1.month.ago]
   ]
 
+  before_create :set_last_status
   before_update :update_notification, if: :notify
+  before_update :update_last_status
 
   # def inactive!
   #   self.update_attribute(:active, false)
@@ -47,5 +52,13 @@ class Legislative < ActiveRecord::Base
       end
       UserMailer.set_recipients_project_notification(self, change_type)
       self.update_attribute(:notify, false)
+    end
+
+    def set_last_status
+      self.last_status = self.status
+    end
+
+    def update_last_status
+      self.last_status = self.status_was
     end
 end

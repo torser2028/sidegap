@@ -72,7 +72,7 @@ class LegislativesController < ApplicationController
       @q = Agenda.ransack params[:q]
       @events = Event.ransack(params[:q]).result
     else
-      @q = Agenda.active.ransack params[:q]
+      @q = Agenda.ransack params[:q]
       @events = Event.active
     end
     @agendas = []

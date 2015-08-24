@@ -1,0 +1,109 @@
+%table{:cellpadding => "10", :style => "margin: 0 auto; border: 1px solid lightgray; font-family: 'Arial', sans-serif; font-size: 10pt; color: dimgray; line-height: 16pt;", :width => "960px"}
+  %thead
+    %tr
+      %td{:width => "203"}
+        = image_tag("logo_sm.jpg")
+      %td{:style => "text-align: left; font-family: 'verdana', sans-serif; font-size: 12pt; color: steelblue; padding-top: 15px;"}
+        Apreciado Usuario
+        %span{:style => "color: DarkBlue; display: block; font-weight: bold; font-size: 1em; margin-bottom: 1em;"}= @name
+      %td{:width => "203"}
+        = image_tag("legislativa.jpg")
+  %tbody
+    %tr
+      %td{:align => "center", :colspan => "3", :style => "background: whitesmoke; border-top: 1px solid lightgray; "}
+        %span{:style => "color: gray; font-family: 'Arial', sans-serif; font-size: 10pt; padding: 5px 20px; border-radius: 12px; border: 1px solid lightgray;"}
+          %strong
+            El estado actual de su cuenta en
+            %span{:style => "color: RoyalBlue;"} SIDEGAP
+            es
+    %tr
+      %td{:colspan => "3"}
+        %table{:style => "font-size: 8pt; line-height: 11pt;", :width => "100%"}
+          %tr
+            %td{:style => "border: 1px solid gray; vertical-align: top; background: whitesmoke;", :width => "50%"}
+              %table{:cellpadding => "5", :width => "100%"}
+                %thead
+                  %tr
+                    %th{:colspan => "2", :style => "color: royalblue;"} PROYECTOS EN SEGUIMIENTO
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                %tbody
+                  %tr
+                    %td{:width => "35%"} Actualmente está siguiendo:
+                    %td{:style => "color: CornflowerBlue;"}
+                      = "(#{@user_following}) Proyectos de Ley"
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                  %tr
+                    %td{:rowspan => "3"} Sus proyectos en seguimiento:
+                    %td{:style => "color: CornflowerBlue;"}
+                      = "(#{@user_approved}) Han sido aprobados"
+                  %tr
+                    %td{:style => "color: CornflowerBlue;"}
+                      = "(#{@user_changed_status}) Han cambiado de estado"
+                  %tr
+                    %td{:style => "color: CornflowerBlue;"}
+                      = "(#{@user_with_agenda}) Están en agenda de discusión para la próxima semana"
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                  %tr
+                    %td Los temas de interés de sus Proyectos de Ley son:
+                    %td{:style => "color: CornflowerBlue;"}
+                      - @user_topics.each do |topic, count|
+                        = "(#{count}) " + topic
+                        %br/
+            %td{:style => "border: 1px solid #45C051; vertical-align: top; background: AliceBlue;", :width => "50%"}
+              %table{:cellpadding => "5", :width => "100%"}
+                %thead
+                  %tr
+                    %th{:colspan => "2", :style => "color: #45C051;"} NUEVOS PROYECTOS EN EL CONGRESO
+                %tbody
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                  %tr
+                    %td{:width => "35%"} Radicados:
+                    %td{:style => "color: green;"}
+                      = "(#{@new_projects}) Nuevos Proyectos de Ley"
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                  %tr
+                    %td{:width => "50%"} Con los siguientes temas :
+                    %td{:style => "color: green;"}
+                      - @topics.each do |topic, count|
+                        = "(#{count}) " + topic
+                        %br/
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                  %tr
+                    %td{:width => "50%"} Se aprobaron
+                    %td{:style => "color: green;"}
+                      = "(#{@law}) Proyectos de Ley"
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                  %tr
+                    %td{:width => "50%"} Se retiraron
+                    %td{:style => "color: green;"}
+                      = "(#{@retired}) Proyectos de Ley"
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                  %tr
+                    %td{:width => "50%"} Se archivaron
+                    %td{:style => "color: green;"}
+                      = "(#{@archived}) Proyectos de Ley"
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                  %tr
+                    %td{:width => "50%"} La próxima semana están en agenda de discusión:
+                    %td{:style => "color: green;"}
+                      = "(#{@with_agenda}) Proyectos de Ley"
+    %tr
+      %td{:align => "center", :colspan => "3", :style => " font-family: 'Arial', sans-serif; line-height: 12pt;"}
+        %hr/
+        %br/
+        %span{:style => "color: gray; font-size: 8pt; font-family: verdana;"}
+          Este es un informe automático generado SIDEGAP, por favor no responda este mensaje. Para obtener mas información visite nuestro sitio web
+          %a{:href => "http://www.sidegap.com.co"} sidegap.com.co
+          %br/
+          o comuníquese con nosotros al teléfono 4674110 o al correo electrónico
+          %a{:href => "mailto:sidegap@valure.com.co"} sidegap@valure.com.co
+        %br/

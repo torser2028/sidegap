@@ -11,4 +11,17 @@ namespace :scheduler do
       end
     end
   end
+
+  desc 'Send Weekly Report'
+  task :weekly_report => :environment do
+    time = Time.now
+    if time.monday? && time.hour == 5
+      if UserMailer.set_recipients_weekly
+        Legislative.new_projects.each { |legislative| legislative.update_attribute(:new_project, false) }
+        puts 'Weekly report sent.'
+      else
+        puts 'Weekly report not sent.'
+      end
+    end
+  end
 end

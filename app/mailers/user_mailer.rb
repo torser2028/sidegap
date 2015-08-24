@@ -61,7 +61,37 @@ class UserMailer < ApplicationMailer
     @councils_stories = councils_stories
     @rules_stories = rules_stories
     @name = recipient.name
-    
+
+    mail(to: recipient.email, subject: "Actualidad Regulatoria")
+  end
+
+  def self.set_recipients_weekly
+    User.all.each do |recipient|
+      weekly_report(recipient).deliver_now
+    end
+  end
+
+  def weekly_report(recipient)
+    following_legislatives = recipient.following_legislatives
+
+    changed = []
+    following_legislatives.each do |legislative|
+      changed << legislative if legislative.last_status != legislative.status
+    end
+    @user_following = following_legislatives.count
+    @user_approved = following_legislatives.law.count
+    @user_changed_status = changed.count
+    @user_with_agenda = following_legislatives.with_agenda.count
+    @user_topics = following_legislatives.group(:topic).count
+
+    @new_projects = Legislative.new_projects.count
+    @law = Legislative.law.count
+    @archived = Legislative.archived.count
+    @retired = Legislative.retired.count
+    @with_agenda = Legislative.with_agenda.count
+    @topics = Legislative.new_projects.group(:topic).count
+    @name = recipient.name
+
     mail(to: recipient.email, subject: "Actualidad Regulatoria")
   end
 end
