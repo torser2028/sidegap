@@ -327,6 +327,3 @@ DEPENDENCIES
   wicked_pdf
   wkhtmltopdf-binary
   wkhtmltopdf-heroku
-
-BUNDLED WITH
-   1.10.6
