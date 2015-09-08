@@ -92,6 +92,6 @@ class UserMailer < ApplicationMailer
     @topics = Legislative.new_projects.group(:topic).count
     @name = recipient.name
 
-    mail(to: recipient.email, subject: "Actualidad Regulatoria")
+    mail(to: recipient.email, subject: "Estado semanal de su cuenta")
   end
 end
