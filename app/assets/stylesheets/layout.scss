@@ -697,6 +697,9 @@ body{
       padding: 0 !important;
       &.urgent{
         color: $alert-color;
+        display: block;
+        text-align: left;
+        margin: 10px 0;
       }
     }
 

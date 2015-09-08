@@ -36,7 +36,8 @@
             - if @legislative.legislative.present?
               .row
                 .large-2.columns.labels
-                  %label
+                  %label.round.label.linear.urgent
+                    = fa_icon "exclamation-circle"
                     Acumulado
                 .large-10.columns
                   %span.txtdesc
@@ -44,7 +45,8 @@
             - if @legislative.legislatives.present?
               .row
                 .large-2.columns.labels
-                  %label
+                  %label.round.label.linear.urgent
+                    = fa_icon "exclamation-circle"
                     Proyectos Acumulados
                 .large-10.columns
                   %span.txtdesc
@@ -153,7 +155,7 @@
               .large-2.columns.labels
                 %label
                   Fecha Plenaria Cámara
-              .large-2.columns
+              .large-6.columns
                 %span
                   = ldate @legislative.legislative.try(:chamber_plenary_at) || @legislative.chamber_plenary_at
             .row

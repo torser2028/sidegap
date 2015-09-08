@@ -21,6 +21,12 @@ ActiveAdmin.register Legislative do
       ldate legislative.filing_at
     end
     column "Mensaje de Urgencia", :warning
+    column "Proyecto Acumulado" do |legislative|
+      value = legislative.legislative.present? ? "yes" : "no"
+      span class: "status_tag #{value}" do
+        value == "yes" ? "Si" : "No"
+      end
+    end
     actions() do |legislative|
       link_to("Agendar", schedule_admin_legislative_path(legislative)) + " " +
       link_to("Stakeholders", stakeholders_admin_legislative_path(legislative))
@@ -120,11 +126,12 @@ ActiveAdmin.register Legislative do
         row "Archivos Adjuntos" do
           attachments = legislative.attachments
           attachments += legislative.legislative.try(:attachments) if legislative.legislative
-          ul do
-            attachments.each do |a|
-              li do
-                link_to a.title, a.attachment.url
-              end
+          table_for attachments do
+            column "Nombre", :title do |a|
+              link_to a.title, a.attachment.url
+            end
+            column "Fecha", :published_at do |a|
+              ldate a.published_at
             end
           end
         end
@@ -263,10 +270,15 @@ ActiveAdmin.register Legislative do
       redirect_to admin_legislative_path(resource), notice: "Stakeholders guardados con éxito."
     else
       @holders = Stakeholder.all.map { |e| [e.name, e.id] }
-
-      @authors = resource.stakeholders.authors.map(&:id)
-      @chamber_speakers = resource.stakeholders.chamber_speakers.map(&:id)
-      @senate_speakers = resource.stakeholders.senate_speakers.map(&:id)
+      if resource.legislative.present?
+        @authors = resource.legislative.stakeholders.authors.map(&:id)
+        @chamber_speakers = resource.legislative.stakeholders.chamber_speakers.map(&:id)
+        @senate_speakers = resource.legislative.stakeholders.senate_speakers.map(&:id)
+      else
+        @authors = resource.stakeholders.authors.map(&:id)
+        @chamber_speakers = resource.stakeholders.chamber_speakers.map(&:id)
+        @senate_speakers = resource.stakeholders.senate_speakers.map(&:id)
+      end
     end
   end
 

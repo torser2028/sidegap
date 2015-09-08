@@ -10,6 +10,10 @@
       %span.round.label.linear.urgent
         = fa_icon "exclamation-circle"
         Mensaje de urgencia
+    - if legislative.legislative
+      %span.round.label.linear.urgent
+        = fa_icon "exclamation-circle"
+        Proyecto acumulado
   %td.desc
     - if %w(Archivado Retirado).include? legislative.final_status
       = "Este proyecto fue #{legislative.final_status} en #{legislative.status}"

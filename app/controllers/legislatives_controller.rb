@@ -50,11 +50,17 @@ class LegislativesController < ApplicationController
     add_breadcrumb "Proyecto", :legislative_path
 
     @legislative = get_legislative params[:id]
-    @authors = @legislative.stakeholders.authors
-    @senate_speakers = @legislative.stakeholders.senate_speakers
-    @chamber_speakers = @legislative.stakeholders.chamber_speakers
     @attachments = @legislative.attachments
-    @attachments += @legislative.legislative.try(:attachments) if @legislative.legislative
+    if @legislative.legislative
+      @authors = @legislative.legislative.stakeholders.authors
+      @senate_speakers = @legislative.legislative.stakeholders.senate_speakers
+      @chamber_speakers = @legislative.legislative.stakeholders.chamber_speakers
+      @attachments += @legislative.legislative.try(:attachments)
+    else
+      @authors = @legislative.stakeholders.authors
+      @senate_speakers = @legislative.stakeholders.senate_speakers
+      @chamber_speakers = @legislative.stakeholders.chamber_speakers
+    end
 
     @comment = Comment.where(user: current_user, legislative: @legislative).first_or_initialize
 
@@ -95,24 +101,44 @@ class LegislativesController < ApplicationController
   def follow
     @legislative = get_legislative params[:id]
     current_user.follow @legislative
+    if @legislative.legislatives.present?
+      @legislative.legislatives.each do |l|
+        current_user.follow l
+      end
+    end
     redirect_to :back
   end
 
   def unfollow
     @legislative = get_legislative params[:id]
     current_user.stop_following @legislative
+    if @legislative.legislatives.present?
+      @legislative.legislatives.each do |l|
+        current_user.stop_following l
+      end
+    end
     redirect_to :back
   end
 
   def dislike
     @legislative = get_legislative params[:id]
     current_user.dislikes @legislative
+    if @legislative.legislatives.present?
+      @legislative.legislatives.each do |l|
+        current_user.dislikes l
+      end
+    end
     redirect_to :back
   end
 
   def like
     @legislative = get_legislative params[:id]
     current_user.likes @legislative
+    if @legislative.legislatives.present?
+      @legislative.legislatives.each do |l|
+        current_user.likes l
+      end
+    end
     redirect_to :back
   end
 
