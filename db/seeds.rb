@@ -118,8 +118,8 @@ Status.create([
   { name: 'Debate Comisiones Conjuntas' , legislative: true },
   { name: 'Ponencia de Plenarias Simultaneas' , legislative: true },
   { name: 'Debate Plenarias Simultaneas' , legislative: true },
-  { name: 'Aprobado', legislative: true, council: true }
-  { name: 'Archivado', council: true }
+  { name: 'Aprobado', legislative: true, council: true },
+  { name: 'Archivado', council: true },
   { name: 'Retirado',council: true }
   ])
 FinalStatus.create([
