@@ -4,7 +4,7 @@ $ ->
   $('.datepicker').datepicker
     changeMonth: true
     changeYear: true
-    dateFormat: "dd/mm/yy"
+    dateFormat: "yy-mm-dd"
   return
 $ ->
   $('.chosen-select').chosen
