@@ -164,6 +164,148 @@ class LegislativesController < ApplicationController
     end
   end
 
+  def risk_color risk
+    return 'blue' if risk < 5
+    return 'yellow' if risk < 18
+    return 'orange' if risk < 32
+    return 'red'
+  end
+
+  def get_risk_table
+    risk_table = Hash.new
+    # probability, impact
+    risk_table[[ 1, 1 ]] = 1
+    risk_table[[ 1, 2 ]] = 2
+    risk_table[[ 2, 1 ]] = 3
+    risk_table[[ 3, 1 ]] = 4
+    risk_table[[ 4, 1 ]] = 5
+    risk_table[[ 5, 1 ]] = 6
+    risk_table[[ 6, 1 ]] = 7
+    risk_table[[ 1, 3 ]] = 8
+    risk_table[[ 2, 2 ]] = 9
+    risk_table[[ 3, 2 ]] = 10
+    risk_table[[ 4, 2 ]] = 11
+    risk_table[[ 5, 2 ]] = 12
+    risk_table[[ 6, 2 ]] = 13
+    risk_table[[ 1, 4 ]] = 14
+    risk_table[[ 2, 3 ]] = 15
+    risk_table[[ 3, 3 ]] = 16
+    risk_table[[ 1, 5 ]] = 17
+    risk_table[[ 4, 3 ]] = 18
+    risk_table[[ 5, 3 ]] = 19
+    risk_table[[ 6, 3 ]] = 20
+    risk_table[[ 1, 6 ]] = 21
+    risk_table[[ 2, 4 ]] = 22
+    risk_table[[ 3, 4 ]] = 23
+    risk_table[[ 4, 4 ]] = 24
+    risk_table[[ 5, 4 ]] = 25
+    risk_table[[ 6, 4 ]] = 26
+    risk_table[[ 2, 5 ]] = 27
+    risk_table[[ 3, 5 ]] = 28
+    risk_table[[ 4, 5 ]] = 29
+    risk_table[[ 2, 6 ]] = 30
+    risk_table[[ 5, 5 ]] = 31
+    risk_table[[ 3, 6 ]] = 32
+    risk_table[[ 6, 5 ]] = 33
+    risk_table[[ 4, 6 ]] = 34
+    risk_table[[ 5, 6 ]] = 35
+    risk_table[[ 6, 6 ]] = 36
+
+    return risk_table
+  end
+
+  def report
+    risk_table = get_risk_table
+
+    # Summary Week
+    @summary_week = Notice.where(user_id: current_user)
+
+    # Events
+    @today = Date.today
+    @last_week = @today-1.week
+    @last_events = Event.where(event_at: @last_week..@today)
+    
+    @next_week = @today+1.week
+    @next_events = Event.where(event_at: @today..@next_week)
+
+    # Risk and projects
+    risk_list = []
+
+    @legislatives = []
+    Legislative.all.each do |legislative|
+      probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
+      risk = risk_table[[probability, impact]].to_i
+
+      risk_list << risk
+      
+      @legislatives << {
+        risk: risk,
+        status: legislative.status,
+        topic: legislative.topic,
+        title: legislative.title,
+      }
+    end
+
+    @legislatives_by_risk = risk_list.sort.inject(Hash.new(0)) {|count, risk| count[risk] +=1; count}.to_a
+    @legislatives_by_risk.each do |element|
+      element << risk_color(element[0])
+    end
+    
+    @legislatives_by_topic = Legislative.group(:topic).count
+    @total_by_topic = @legislatives_by_topic.values.sum
+    
+    @legislatives_by_status = Legislative.group(:status).count
+    @total_by_status = @legislatives_by_status.values.sum
+    
+    @legislatives_by_source = Legislative.group(:source).count
+    @total_by_source = @legislatives_by_source.values.sum
+
+    # Authors and speakers
+    authors = Stakeholder.authors
+    senate_authors = Stakeholder.senate_authors
+    chamber_authors = Stakeholder.chamber_authors
+    authors = authors + senate_authors + chamber_authors
+
+    @authors = []
+    authors.each do |author|
+      risk_list = []
+      author.legislatives.each do |legislative|
+        probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
+        risk_list << risk_table[[probability, impact]].to_i
+      end
+      @authors << {
+        legislatives: author.legislatives.count,
+        name: author.name,
+        risk: risk_list.sum / risk_list.count
+      }
+    end
+
+    senate_speakers = Stakeholder.senate_speakers
+    chamber_speakers = Stakeholder.chamber_speakers
+    speakers = senate_speakers + chamber_speakers
+
+    @speakers = []
+    speakers.each do |speaker|
+      risk_list = []
+      speaker.legislatives.each do |legislative|
+        probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
+        risk_list << risk_table[[probability, impact]].to_i
+      end
+      @speakers << {
+        legislatives: speaker.legislatives.count,
+        name: speaker.name,
+        risk: risk_list.sum / risk_list.count
+      }
+    end
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "informe-legislativo", orientation: 'Landscape'
+      end
+    end
+  end
+
   private
     def get_legislative(id)
       Legislative.find id
