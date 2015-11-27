@@ -4,9 +4,7 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title Sidegap
-    = wicked_pdf_stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = wicked_pdf_javascript_include_tag 'vendor/modernizr'
-    = wicked_pdf_javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = wicked_pdf_stylesheet_link_tag 'application', media: 'all'
     / Load the AJAX API
     %script{:src => "https://www.google.com/jsapi", :type => "text/javascript"}
     :javascript
