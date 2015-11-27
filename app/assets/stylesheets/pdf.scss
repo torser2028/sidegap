@@ -85,3 +85,58 @@ body{
     }
   }
 }
+
+
+h1.report-title {
+  border: none !important;
+  margin-bottom: .5em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.report {
+  table {
+    width: 100%;
+    &.table-border {
+      border: 2px solid #2D59AC;
+      border-collapse: collapse;
+      th, td {
+        border: 2px solid #2D59AC;
+      }
+    }
+    &.table-report {
+      border: 2px solid #FFFFFF;
+      tr {
+        &.even, &.alt, &:nth-of-type(even) {
+          background: #EAEFF7;
+        }
+        &:nth-of-type(odd) {
+          background: #D2DEEF;
+        }
+        td:first-child {
+          background: #5B9BD5 !important;
+          color: #FFFFFF;
+        }
+      }
+      thead {
+        tr {
+          background: #5B9BD5 !important;
+          th {
+            color: #FFFFFF;
+          }
+        }
+      }
+    }
+    &.table-simple {
+      tr {
+        td:first-child {
+          background: transparent !important;
+          color: #000000;
+        }
+      }
+    }
+  }
+  .section {
+    page-break-after: always;
+  }
+}
