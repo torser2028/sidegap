@@ -29,7 +29,7 @@ ActiveAdmin.register Notice do
     f.inputs do
       f.input :body, label: "Contenido", as: :text
       f.input :user_id, label: 'Cliente', as: :select, \
-        collection: User.all.map{|u| ["#{u.name}", u.id] if u.role_ids.include?(2)}
+        collection: User.all.map{|u| ["#{u.name}", u.id] if u.role_ids.include?(2)}.compact
     end
     f.actions do
       f.action :submit, label: "Guardar Noticia"

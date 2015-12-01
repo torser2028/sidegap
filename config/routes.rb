@@ -47,6 +47,12 @@ Rails.application.routes.draw do
             get :stakeholders
             get 'stakeholder/:id', action: :stakeholder, as: :stakeholder
             get :report
+            get :report_client
+            post :report_client
+            get :agenda_observation
+            post :agenda_observation
+            get :event_observation
+            post :event_observation
         end
     end
 
@@ -67,6 +73,10 @@ Rails.application.routes.draw do
             get :councillors
             get 'councillor/:id', action: :councillor, as: :councillor
         end
+    end
+
+    resources :events, only: [:index, :show] do
+        concerns [:followable, :trashable]
     end
 
     # resources :executives, only: [:index, :show] do

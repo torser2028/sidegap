@@ -30,6 +30,11 @@
 %li
   %a{ href: stakeholders_legislatives_path}
     Perfil Congresistas
-%li
-  %a{ href: report_legislatives_path }
-    Informes
+- if current_user.has_role? :client
+  %li
+    %a{ href: report_legislatives_path }
+      Informe
+- else
+  %li
+    %a{ href: report_client_legislatives_path }
+      Generar Informe

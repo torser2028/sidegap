@@ -1,0 +1,20 @@
+%h2 Añadir Observación
+
+.panels-view
+  %p 
+    %strong Fecha:
+    = ldate @agenda.event_at
+  %p 
+    %strong Hora:
+    = l @agenda.time, format: :simple
+  %p 
+    %strong Evento:
+    = simple_format @agenda.body
+  %p 
+    %strong Tipo de Evento:
+    = @agenda.event_type
+
+= form_tag agenda_observation_legislatives_path(agenda_id: @agenda.id), method: :post do
+  = label_tag :observation, 'Observación'
+  = text_area_tag :observation
+  = submit_tag 'Añadir observación'

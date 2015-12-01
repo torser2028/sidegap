@@ -215,18 +215,39 @@ class LegislativesController < ApplicationController
   end
 
   def report
+    user = current_user
+    @report_date = Date.today.strftime('%d/%m/%Y')
+    
+    if params.has_key? 'user_id'
+      user = User.find params[:user_id]
+      @report_date = session[:report_date]
+    end
+
     risk_table = get_risk_table
 
     # Summary Week
-    @summary_week = Notice.where(user_id: current_user)
+    @summary_week = Notice.where(user_id: user.id)
 
     # Events
     @today = Date.today
     @last_week = @today-1.week
-    @last_events = Event.where(event_at: @last_week..@today)
-    
     @next_week = @today+1.week
-    @next_events = Event.where(event_at: @today..@next_week)
+
+    @last_agendas = []
+    @next_agendas = []
+
+    @legislatives = user.following_legislatives.with_agenda
+    @legislatives.each do |legislative|
+      legislative.agendas.each do |agenda|
+        if agenda.event_at > @last_week && agenda.event_at < @today
+          @last_agendas << agenda
+        elsif agenda.event_at > @today && agenda.event_at < @next_week
+          @next_agendas << agenda
+        end
+      end
+    end
+    
+    @events = user.following_events
 
     # Risk and projects
     risk_list = []
@@ -303,6 +324,58 @@ class LegislativesController < ApplicationController
       format.pdf do
         render pdf: "informe-legislativo", orientation: 'Landscape'
       end
+    end
+  end
+
+  def report_client
+    @users = User.all.map{|u| ["#{u.name}", u.id] if u.role_ids.include?(2)}.compact
+    @users.prepend(['', 0])
+    @user_id = @users[0][1]
+
+    @agendas = []
+    @events = []
+    @legislatives = []
+    @date = ''
+
+    if request.post?
+      if params[:client] != '0'
+        @date = params[:date]
+        session[:report_date] = params[:date]
+        
+        @user_id = params[:client]
+        user = User.find(@user_id)
+        
+        @events = user.following_events
+        
+        @legislatives = user.following_legislatives.with_agenda
+        @legislatives.each do |legislative|
+          legislative.agendas.each do |agenda|
+            @agendas << agenda
+          end
+        end
+      end
+    end
+  end
+
+  def agenda_observation
+    @agenda = Agenda.find params[:agenda_id]
+
+    if request.post?
+      @agenda.observation = params[:observation]
+      @agenda.save
+
+      redirect_to report_client_legislatives_path
+    end
+  end
+
+  def event_observation
+    @event = Event.find params[:event_id]
+
+    if request.post?
+      @event.observation = params[:observation]
+      @event.save
+
+      redirect_to report_client_legislatives_path
     end
   end
 

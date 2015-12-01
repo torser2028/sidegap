@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120155918) do
+ActiveRecord::Schema.define(version: 20151201064107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20151120155918) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "plenary_commission"
+    t.string   "event_type"
+    t.text     "observation"
   end
 
   add_index "agendas", ["legislative_id"], name: "index_agendas_on_legislative_id", using: :btree
@@ -157,11 +159,12 @@ ActiveRecord::Schema.define(version: 20151120155918) do
     t.date     "event_at"
     t.time     "time"
     t.string   "event_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.string   "commission"
     t.string   "plenary"
     t.string   "place"
+    t.text     "observation"
   end
 
   create_table "executives", force: :cascade do |t|
