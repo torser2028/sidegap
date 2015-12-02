@@ -1,6 +1,14 @@
 .panels-view
   
   %h1 Informe Legislativo
+  
+  .right
+    %a{ href: legislative_legislatives_path(format: :xlsx), target: "_blank"}
+      = fa_icon "file-pdf-o"
+      %span
+        Exportar Proyectos a Excel
+
+  %hr/
 
   .options.hide
     %a{ href: report_legislatives_path(user_id: @user_id, format: :pdf), target: "_blank"}

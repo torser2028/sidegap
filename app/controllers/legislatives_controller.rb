@@ -263,7 +263,7 @@ class LegislativesController < ApplicationController
         risk: risk,
         status: legislative.status,
         topic: legislative.topic,
-        title: legislative.title,
+        title: legislative.title
       }
     end
 
@@ -324,6 +324,7 @@ class LegislativesController < ApplicationController
       format.pdf do
         render pdf: "informe-legislativo", orientation: 'Landscape'
       end
+      format.xlsx
     end
   end
 
@@ -376,6 +377,42 @@ class LegislativesController < ApplicationController
       @event.save
 
       redirect_to report_client_legislatives_path
+    end
+  end
+
+  def legislative
+    risk_list = []
+    risk_table = get_risk_table
+
+    @legislatives = []
+    Legislative.all.each do |legislative|
+      probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
+      risk = risk_table[[probability, impact]].to_i
+
+      risk_list << risk
+
+      authors = legislative.stakeholders.authors + legislative.stakeholders.chamber_authors + legislative.stakeholders.senate_authors
+      speakers = legislative.stakeholders.chamber_speakers + legislative.stakeholders.senate_speakers
+      
+      @legislatives << {
+        topic: legislative.topic,
+        source: legislative.source,
+        chamber_number: legislative.chamber_number,
+        senate_number: legislative.senate_number,
+        title: legislative.title,
+        created_at: legislative.created_at,
+        authors: authors.map { |author| author.name }.join(', '),
+        speakers: speakers.map { |speaker| speaker.name }.join(', '),
+        chamber_commission_at: legislative.chamber_commission_at,
+        chamber_plenary_at: legislative.chamber_plenary_at,
+        senate_commission_at: legislative.senate_commission_at,
+        senate_plenary_at: legislative.senate_plenary_at,
+        status: legislative.status,
+        impact: impact,
+        probability: probability,
+        risk: risk,
+        observations: ''
+      }
     end
   end
 

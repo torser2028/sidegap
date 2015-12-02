@@ -1,0 +1,26 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Legislatives") do |sheet|
+
+  sheet.add_row [
+  	'Tema', 'Origen', 'Número Cámara', 'Número Senado', 
+  	'Título', 
+  	'Fecha', 'Autores', 'Ponentes', 
+  	'Aprobación Comisión Cámara', 'Aprobación Plenaria Cámara', 'Aprobación Comisión Senado', 'Aprobación Plenaria Senado', 
+  	'Estado',
+  	'Impacto', 'Probabilidad', 'Riesgo', 'Observaciones'
+  ]
+
+  @legislatives.each do |legislative|
+  	
+  	sheet.add_row [
+  		legislative[:topic], legislative[:source], legislative[:chamber_number], legislative[:senate_number],
+  		legislative[:title],
+  		legislative[:created_at], legislative[:authors], legislative[:speakers],
+  		legislative[:chamber_commission_at], legislative[:chamber_plenary_at], legislative[:senate_commission_at], legislative[:senate_plenary_at],
+  		legislative[:status],
+  		legislative[:impact], legislative[:probability], legislative[:risk], legislative[:observations]
+  	]
+  
+  end
+end

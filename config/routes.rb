@@ -53,6 +53,7 @@ Rails.application.routes.draw do
             post :agenda_observation
             get :event_observation
             post :event_observation
+            get :legislative
         end
     end
 
