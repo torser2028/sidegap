@@ -380,6 +380,7 @@ class LegislativesController < ApplicationController
     end
   end
 
+  # Export legislatives to Excel
   def legislative
     risk_list = []
     risk_table = get_risk_table
