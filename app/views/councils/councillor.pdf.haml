@@ -2,10 +2,11 @@
   %h2
     Perfil Concejal
   .person
-    %figure
-      = wicked_pdf_image_tag @councillor.avatar_url(:thumb)
-      %p
-        = @councillor.name
+    -if @councillor.avatar_url
+      %figure
+        = wicked_pdf_image_tag @councillor.avatar_url(:thumb)
+        %p
+          = @councillor.name
     %dl
       %dt
         %label Nombre

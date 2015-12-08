@@ -19,48 +19,64 @@
       var values_risk = #{@legislatives_by_risk.to_a};
       values_risk.unshift(['Cantidad', 'Riesgo', { role: 'style' }]);
 
+      function errorHandler(errorMessage) {
+        google.visualization.errors.removeError(errorMessage.id);
+      }
+
       function drawChart() {
-        var data_status = google.visualization.arrayToDataTable(values_status);
-        var data_topic = google.visualization.arrayToDataTable(values_topic);
-        var data_risk = google.visualization.arrayToDataTable(values_risk);
       
+        // Risk
+
         var data_risk = google.visualization.arrayToDataTable(values_risk);
         var data_risk = new google.visualization.DataView(data_risk);
         data_risk.setColumns([0, 1, {
           calc: "stringify", sourceColumn: 1, type: "string", role: "annotation"
         }, 2]);
         
-        var options = {
-          width: 600,
-          height: 350
-        };
         var options_risk = {
           width: 500,
           height: 350,
           legend: { position: "none" }
         };
-
-        var legislative_by_status = document.getElementById('legislative_by_status');
-        var legislative_by_topic = document.getElementById('legislative_by_topic');
+        
+        var data_risk = google.visualization.arrayToDataTable(values_risk);
         var legislative_by_risk = document.getElementById('legislative_by_risk');
-
-        var chart_status = new google.visualization.PieChart(legislative_by_status);
-        var chart_topic = new google.visualization.PieChart(legislative_by_topic);
         var chart_risk = new google.visualization.ColumnChart(legislative_by_risk);
         
-        google.visualization.events.addListener(chart_status, 'ready', function () {
-          legislative_by_status.innerHTML = '<img src="' + chart_status.getImageURI() + '">';
-        });
-        google.visualization.events.addListener(chart_topic, 'ready', function () {
-          legislative_by_status.innerHTML = '<img src="' + chart_topic.getImageURI() + '">';
-        });
         google.visualization.events.addListener(chart_risk, 'ready', function () {
           legislative_by_risk.innerHTML = '<img src="' + chart_risk.getImageURI() + '">';
         });
-
-        chart_status.draw(data_status);
-        chart_topic.draw(data_topic);
         chart_risk.draw(data_risk, options_risk);
+
+
+        // Status
+        
+        var legislative_by_topic_2 = document.getElementById('legislative_by_topic_2');
+
+        var data_status_2 = google.visualization.arrayToDataTable(values_status);
+        var legislative_by_status_2 = document.getElementById('legislative_by_status_2');
+        var chart_status_2 = new google.visualization.PieChart(legislative_by_status_2);
+
+        google.visualization.events.addListener(chart_status_2, 'error', errorHandler);
+        google.visualization.events.addListener(chart_status_2, 'ready', function () {
+          legislative_by_topic.innerHTML = '<img src="' + chart_status_2.getImageURI() + '">';
+        });
+        chart_status_2.draw(data_status_2);
+        
+
+        // Topic
+
+        var legislative_by_status = document.getElementById('legislative_by_status');
+
+        var data_topic = google.visualization.arrayToDataTable(values_topic);
+        var legislative_by_topic = document.getElementById('legislative_by_topic');
+        var chart_topic = new google.visualization.PieChart(legislative_by_topic);
+
+        google.visualization.events.addListener(chart_topic, 'ready', function () {
+          legislative_by_status.innerHTML = '<img src="' + chart_topic.getImageURI() + '">';
+        });
+        chart_topic.draw(data_topic);
+
       }
 
   %body
@@ -297,11 +313,13 @@
                   %td= @total_by_status
                   %td 100%
           .small-6.columns
-            #legislative_by_status
+            #legislative_by_topic_2.hide
+            #legislative_by_status_2
 
         %h3 Proyectos por Tema
         .row
           .small-6.columns
+            #legislative_by_status.hide
             #legislative_by_topic
           .small-6.columns
             %table.table-report

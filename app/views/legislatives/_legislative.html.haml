@@ -15,14 +15,15 @@
         = fa_icon "exclamation-circle"
         Proyecto acumulado
   %td.desc
-    - if %w(Archivado Retirado).include? legislative.final_status
+    - if %w(Archivado Retirado Sancionado).include? legislative.final_status
       = "Este proyecto fue #{legislative.final_status} en #{legislative.status}"
-    - elsif "Sancionado" == legislative.final_status
-      = legislative.law_number
     - else
       = legislative.status
   %td
     = legislative.type_law
+  - if @favorite
+    %td
+      = legislative.comments.average(:impact).to_i
   %td.actions
     - unless current_user.disliked? legislative
       %a.more{href: legislative_path(legislative)}

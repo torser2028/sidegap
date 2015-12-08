@@ -2,10 +2,11 @@
   %h2
     Perfil Congresista
   .person
-    %figure
-      = wicked_pdf_image_tag @stakeholder.avatar_url(:thumb)
-      %p
-        = @stakeholder.name
+    - if @stakeholder.avatar_url
+      %figure
+        = wicked_pdf_image_tag @stakeholder.avatar_url(:thumb)
+        %p
+          = @stakeholder.name
     %dl
       %dt
         %label Nombre

@@ -75,4 +75,4 @@
         = fa_icon "newspaper-o "
       %p= story.body
       .more{role: "button"}
-        = link_to "Ver", story.project_rule
+        = link_to "Ver", story.project_rule == '' ? "#" : story.project_rule

@@ -29,6 +29,7 @@ class LegislativesController < ApplicationController
   def favorites
     add_breadcrumb "Mis Favoritos", :favorites_legislatives_path
 
+    @favorite = true
     @q = current_user.following_legislatives.ransack params[:q]
     @legislatives = []
     @q.result.each do |item|
@@ -401,18 +402,18 @@ class LegislativesController < ApplicationController
         chamber_number: legislative.chamber_number,
         senate_number: legislative.senate_number,
         title: legislative.title,
-        created_at: legislative.created_at,
+        created_at: legislative.created_at.strftime('%d %b %Y'),
         authors: authors.map { |author| author.name }.join(', '),
         speakers: speakers.map { |speaker| speaker.name }.join(', '),
-        chamber_commission_at: legislative.chamber_commission_at,
-        chamber_plenary_at: legislative.chamber_plenary_at,
-        senate_commission_at: legislative.senate_commission_at,
-        senate_plenary_at: legislative.senate_plenary_at,
+        chamber_commission_at: legislative.chamber_commission_at ? legislative.chamber_commission_at.strftime('%d %b %Y') : '',
+        chamber_plenary_at: legislative.chamber_plenary_at ? legislative.chamber_plenary_at.strftime('%d %b %Y') : '',
+        senate_commission_at: legislative.senate_commission_at ? legislative.senate_commission_at.strftime('%d %b %Y') : '',
+        senate_plenary_at: legislative.senate_plenary_at ? legislative.senate_plenary_at.strftime('%d %b %Y') : '',
         status: legislative.status,
         impact: impact,
         probability: probability,
         risk: risk,
-        observations: ''
+        observations: legislative.comments.map { |comment| comment.body }.join('. ')
       }
     end
   end
