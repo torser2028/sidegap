@@ -67,9 +67,9 @@
       %thead
         %tr
           %th
-            Num Cámara
+            Número
           %th
-            Num Senado
+            Comisión
           %th
             Título
           %th
@@ -78,9 +78,9 @@
         - @councils_as_author.each do |council|
           %tr
             %td
-              = council.chamber_number
+              = council.number
             %td
-              = council.senate_number
+              = council.commission
             %td.desc
               = council.title
             %td
@@ -98,9 +98,9 @@
       %thead
         %tr
           %th
-            Num Cámara
+            Número
           %th
-            Num Senado
+            Comisión
           %th
             Título
           %th
@@ -109,9 +109,9 @@
         - @councils_as_speaker.each do |council|
           %tr
             %td
-              = council.chamber_number
+              = council.number
             %td
-              = council.senate_number
+              = council.commission
             %td.desc
               = council.title
             %td

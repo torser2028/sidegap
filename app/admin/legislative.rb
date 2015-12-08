@@ -212,6 +212,7 @@ ActiveAdmin.register Legislative do
           l.input :filing_at, label: "Fecha de Radicación", as: :datepicker
           l.input :source, as: :hidden, input_html: { value: f.object.source }
           l.input :status, as: :hidden, input_html: { value: f.object.status }
+          l.input :topic, as: :hidden, input_html: { value: f.object.topic }
           l.input :type_law, as: :hidden, input_html: { value: f.object.type_law }
           l.input :law_number, as: :hidden, input_html: { value: f.object.law_number }
           l.input :final_status, as: :hidden, input_html: { value: f.object.final_status }
@@ -305,7 +306,7 @@ ActiveAdmin.register Legislative do
     def permitted_params
       params.permit legislative: [
         :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :type_law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning, :law_number, :second_chamber_commission_at, :second_chamber_plenary_at, :second_senate_commission_at, :second_senate_plenary_at, :chamber_settlement_at, :senate_settlement_at, :notify,
-        legislatives_attributes: [:id, :_destroy, :title, :source, :chamber_number, :senate_number, :status, :type_law, :filing_at, :final_status],
+        legislatives_attributes: [:id, :_destroy, :title, :source, :topic, :chamber_number, :senate_number, :status, :type_law, :filing_at, :final_status],
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
         stakeholders: [:chamber_authors, :chamber_speakers, :senate_authors, :senate_speakers],
         agendas_attributes: [:id, :_destroy, :body, :event_at, :event_type, :time, :plenary_commission]],
