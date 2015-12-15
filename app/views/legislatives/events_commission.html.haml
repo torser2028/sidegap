@@ -37,3 +37,33 @@
               %th Evento
           %tbody.js_agendas
             = render @agendas
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "check-square-o"
+        Otros Eventos
+      .tray.events
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col{width: "10%"}
+            %col{width: "10%"}
+            %col{width: "10%"}
+          %thead
+            %tr
+              %th
+                Fecha
+              %th
+                Hora
+              %th
+                Evento
+              %th
+                Tipo de Evento
+              %th
+                Lugar
+              %th
+                Opciones
+          %tbody.js_events
+            = render @events

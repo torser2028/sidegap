@@ -28,7 +28,7 @@
       .large-3.medium-5.small-3.columns
         = label_tag :date, 'Fecha Reporte (DD/MM/AAAA)'
       .large-3.medium-5.small-9.columns
-        = text_field_tag :date, '', placeholder: 'DD/MM/AAAA', value: @date
+        = text_field_tag :date, '', placeholder: 'DD/MM/AAAA', value: @date, class: 'datepicker'
       .large-6.columns
     = submit_tag 'Buscar', class: 'button success fullwidth search'
 

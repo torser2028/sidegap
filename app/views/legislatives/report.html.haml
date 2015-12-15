@@ -51,6 +51,16 @@
   %span
     Exportar a PDF
 
+|
+
+%a{ href: legislative_legislatives_path(format: :xlsx, client: true), target: "_blank"}
+  = fa_icon "file-pdf-o"
+  %span
+    Exportar a Excel
+
+%br/
+%br/
+
 .panels-view.report
   .row
     .small-12.columns
@@ -86,6 +96,8 @@
           %tr
             %th Fecha
             %th Plenaria / Comisión
+            %th Núm. Cámara
+            %th Núm. Senado
             %th Evento
             %th Asunto
             %th Observaciones
@@ -94,6 +106,8 @@
             %tr
               %td= agenda.event_at
               %td= agenda.plenary_commission
+              %td= agenda.legislative.chamber_number
+              %td= agenda.legislative.senate_number
               %td= agenda.event_type
               %td= agenda.body
               %td= agenda.observation
@@ -110,6 +124,8 @@
           %tr
             %th Fecha
             %th Plenaria / Comisión
+            %th Núm. Cámara
+            %th Núm. Senado
             %th Evento
             %th Asunto
             %th Observaciones
@@ -118,6 +134,8 @@
             %tr
               %td= agenda.event_at
               %td= agenda.plenary_commission
+              %td= agenda.legislative.chamber_number
+              %td= agenda.legislative.senate_number
               %td= agenda.event_type
               %td= agenda.body
               %td= agenda.observation

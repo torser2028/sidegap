@@ -7,10 +7,16 @@
       .pryctDtl
         .row.cntnr.white
           .large-4.columns
-            .button
-              %a{href: rules_path}
-                = fa_icon "arrow-left"
-                Consultar Normas
+            - if current_user.following? @rule
+              .button
+                %a{href: favorites_rules_path}
+                  = fa_icon "arrow-left"
+                  Consultar Normas
+            - else
+              .button
+                %a{href: rules_path}
+                  = fa_icon "arrow-left"
+                  Consultar Normas
             - if current_user.following? @rule
               .button.secondary
                 %a{ href: unfollow_rule_path(@rule) }
@@ -77,7 +83,7 @@
                 %span
                   = @rule.for_comments
             - if current_user.following? @rule
-              = form_for @comment do |f|
+              - form_for @comment do |f|
                 .row.white
                   .large-2.columns.labels
                     %label

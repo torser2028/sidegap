@@ -49,6 +49,11 @@
         chart_risk.draw(data_risk, options_risk);
 
 
+        var options = {
+          width: 600,
+          height: 350
+        };
+
         // Status
         
         var legislative_by_topic_2 = document.getElementById('legislative_by_topic_2');
@@ -61,7 +66,7 @@
         google.visualization.events.addListener(chart_status_2, 'ready', function () {
           legislative_by_topic.innerHTML = '<img src="' + chart_status_2.getImageURI() + '">';
         });
-        chart_status_2.draw(data_status_2);
+        chart_status_2.draw(data_status_2, options);
         
 
         // Topic
@@ -75,7 +80,7 @@
         google.visualization.events.addListener(chart_topic, 'ready', function () {
           legislative_by_status.innerHTML = '<img src="' + chart_topic.getImageURI() + '">';
         });
-        chart_topic.draw(data_topic);
+        chart_topic.draw(data_topic, options);
 
       }
 
@@ -119,6 +124,8 @@
               %tr
                 %th Fecha
                 %th Plenaria / Comisión
+                %th Núm. Cámara
+                %th Núm. Senado
                 %th Evento
                 %th Asunto
                 %th Observaciones
@@ -127,6 +134,8 @@
                 %tr
                   %td= agenda.event_at
                   %td= agenda.plenary_commission
+                  %td= agenda.legislative.chamber_number
+                  %td= agenda.legislative.senate_number
                   %td= agenda.event_type
                   %td= agenda.body
                   %td= agenda.observation
@@ -143,6 +152,8 @@
               %tr
                 %th Fecha
                 %th Plenaria / Comisión
+                %th Núm. Cámara
+                %th Núm. Senado
                 %th Evento
                 %th Asunto
                 %th Observaciones
@@ -151,6 +162,8 @@
                 %tr
                   %td= agenda.event_at
                   %td= agenda.plenary_commission
+                  %td= agenda.legislative.chamber_number
+                  %td= agenda.legislative.senate_number
                   %td= agenda.event_type
                   %td= agenda.body
                   %td= agenda.observation

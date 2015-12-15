@@ -7,7 +7,7 @@ class LegislativesController < ApplicationController
     @q = Legislative.inbox.ransack params[:q]
     @legislatives = []
     not_available_legislatives = current_user.find_disliked_items + current_user.following_legislatives
-    @q.result.each do |item|
+    @q.result.order(created_at: :desc).each do |item|
       @legislatives << item unless not_available_legislatives.include? item
     end
   end
@@ -77,13 +77,13 @@ class LegislativesController < ApplicationController
     add_breadcrumb "Eventos y Agenda", :events_legislatives_path
     if params[:q].present?
       @q = Agenda.ransack params[:q]
-      @events = Event.ransack(params[:q]).result
+      @events = current_user.following_events.ransack(params[:q]).result.order(event_at: :desc)
     else
       @q = Agenda.ransack params[:q]
-      @events = Event.active
+      @events = current_user.following_events.active.order(event_at: :desc)
     end
     @agendas = []
-    @legislatives = current_user.following_legislatives.with_agenda
+    @legislatives = current_user.following_legislatives.with_agenda.order(created_at: :desc)
     @q.result.each do |item|
       @legislatives.each do |legislative|
         @agendas << item if legislative.agendas.include? item
@@ -94,8 +94,13 @@ class LegislativesController < ApplicationController
   def events_commission
     @q = Legislative.ransack params[:q]
     @agendas = []
-    @q.result.each do |item|
+    @q.result.order(created_at: :desc).each do |item|
       item.agendas.active.each { |agenda| @agendas << agenda  }
+    end
+    @events = []
+    events = current_user.following_events
+    Event.active.order(event_at: :desc).each do |event|
+      @events << event unless events.include? event
     end
   end
 
@@ -237,8 +242,8 @@ class LegislativesController < ApplicationController
     @last_agendas = []
     @next_agendas = []
 
-    @legislatives = user.following_legislatives.with_agenda
-    @legislatives.each do |legislative|
+    legislatives = user.following_legislatives
+    legislatives.with_agenda.order(created_at: :desc).each do |legislative|
       legislative.agendas.each do |agenda|
         if agenda.event_at > @last_week && agenda.event_at < @today
           @last_agendas << agenda
@@ -247,14 +252,14 @@ class LegislativesController < ApplicationController
         end
       end
     end
-    
-    @events = user.following_events
+
+    @events = user.following_events.active.order(event_at: :desc)
 
     # Risk and projects
     risk_list = []
 
     @legislatives = []
-    Legislative.all.each do |legislative|
+    legislatives.each do |legislative|
       probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
       risk = risk_table[[probability, impact]].to_i
 
@@ -273,13 +278,13 @@ class LegislativesController < ApplicationController
       element << risk_color(element[0])
     end
     
-    @legislatives_by_topic = Legislative.group(:topic).count
+    @legislatives_by_topic = legislatives.group(:topic).count
     @total_by_topic = @legislatives_by_topic.values.sum
     
-    @legislatives_by_status = Legislative.group(:status).count
+    @legislatives_by_status = legislatives.group(:status).count
     @total_by_status = @legislatives_by_status.values.sum
     
-    @legislatives_by_source = Legislative.group(:source).count
+    @legislatives_by_source = legislatives.group(:source).count
     @total_by_source = @legislatives_by_source.values.sum
 
     # Authors and speakers
@@ -387,7 +392,14 @@ class LegislativesController < ApplicationController
     risk_table = get_risk_table
 
     @legislatives = []
-    Legislative.all.each do |legislative|
+    
+    if params[:client]
+      legislatives = current_user.following_legislatives
+    else
+      legislatives = Legislative.all
+    end
+
+    legislatives.each do |legislative|
       probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
       risk = risk_table[[probability, impact]].to_i
 

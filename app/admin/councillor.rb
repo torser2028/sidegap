@@ -43,7 +43,7 @@ ActiveAdmin.register Councillor do
         row "Oficina" do
           councillor.office
         end
-        row "Pérfil" do
+        row "Perfil" do
           simple_format councillor.info
         end
         row "Fuente de Información" do
@@ -64,7 +64,7 @@ ActiveAdmin.register Councillor do
       f.input :job, label: "Cargo", input_html: { value: "Concejal", readonly: true }
       f.input :commission, label: "Comisión", collection: Commission.councils.pluck(:name)
       f.input :office, label: "Oficina"
-      f.input :info, label: "Pérfil"
+      f.input :info, label: "Perfil"
       f.input :source, label: "Fuente de Información"
       f.input :avatar, hint: f.object.avatar.present? \
         ? image_tag(f.object.avatar_url(:thumb))

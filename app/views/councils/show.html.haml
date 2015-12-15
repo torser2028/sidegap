@@ -7,10 +7,16 @@
       .pryctDtl
         .row.cntnr.white
           .large-4.columns
-            .button
-              %a{href: councils_path}
-                = fa_icon "arrow-left"
-                Consultar Proyectos
+            - if current_user.following? @council
+              .button
+                %a{href: favorites_councils_path}
+                  = fa_icon "arrow-left"
+                  Consultar Proyectos
+            - else
+              .button
+                %a{href: councils_path}
+                  = fa_icon "arrow-left"
+                  Consultar Proyectos
             - if current_user.following? @council
               .button.secondary
                 %a{ href: unfollow_council_path(@council) }
@@ -87,7 +93,7 @@
                 %span
                   = @council.commission
             - if current_user.following? @council
-              = form_for @comment do |f|
+              - form_for @comment do |f|
                 .row.white
                   .large-2.columns.labels
                     %label

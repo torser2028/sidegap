@@ -7,10 +7,16 @@
       .pryctDtl
         .row.cntnr.white
           .large-4.columns
-            .button
-              %a{href: legislatives_path}
-                = fa_icon "arrow-left"
-                Consultar Proyectos
+            - if current_user.following? @legislative
+              .button
+                %a{href: favorites_legislatives_path}
+                  = fa_icon "arrow-left"
+                  Consultar Proyectos
+            - else
+              .button
+                %a{href: legislatives_path}
+                  = fa_icon "arrow-left"
+                  Consultar Proyectos
             - if current_user.following? @legislative
               .button.secondary
                 %a{ href: unfollow_legislative_path(@legislative) }
