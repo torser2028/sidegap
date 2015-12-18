@@ -1,6 +1,6 @@
 wb = xlsx_package.workbook
 
-wb.add_worksheet(name: "Legislatives") do |sheet|
+wb.add_worksheet(name: "Councils") do |sheet|
 
   wb.styles do |s|
 

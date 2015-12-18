@@ -71,8 +71,11 @@ Rails.application.routes.draw do
     resources :councils, only: [:index, :show] do
         concerns [:followable, :trashable]
         collection do
-            get :councillors
-            get 'councillor/:id', action: :councillor, as: :councillor
+          get :projects_approved
+          get :projects_old
+          get :councillors
+          get 'councillor/:id', action: :councillor, as: :councillor
+          get :report
         end
     end
 

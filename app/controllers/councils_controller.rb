@@ -7,9 +7,23 @@ class CouncilsController < ApplicationController
     @q = Council.ransack params[:q]
     @councils = []
     not_available_councils = current_user.find_disliked_items + current_user.following_councils
-    @q.result.each do |item|
+    @q.result.order(created_at: :desc).each do |item|
       @councils << item unless not_available_councils.include? item
     end
+  end
+
+  def projects_approved
+    add_breadcrumb "Proyectos - Aprobado", :projects_approved_councils_path
+
+    @q = Council.approved.ransack params[:q]
+    @councils = @q.result.order(created_at: :desc)
+  end
+
+  def projects_old
+    add_breadcrumb "Proyectos - Archivado y Retirado", :projects_old_councils_path
+
+    @q = Council.old.ransack params[:q]
+    @councils = @q.result.order(created_at: :desc)
   end
 
   def favorites
@@ -93,6 +107,14 @@ class CouncilsController < ApplicationController
       format.pdf do
         render pdf: "perfil #{@councillor.name}".parameterize
       end
+    end
+  end
+
+  def report
+    if current_user.has_role? :admin
+      councils = current_user.following_councils
+    else
+      councils = Council.all
     end
   end
 

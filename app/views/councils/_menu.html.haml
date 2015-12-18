@@ -1,6 +1,16 @@
-%li
-  %a{ href: councils_path}
-    Bandeja de Proyectos
+%li.has-dropdown
+  %a{ href: "#"}
+    Proyectos
+  %ul.left.dropdown
+    %li
+      %a{ href: councils_path}
+        Bandeja de Proyectos
+    %li
+      %a{ href: projects_approved_councils_path}
+        Proyectos Aprovados
+    %li
+      %a{ href: projects_old_councils_path}
+        Proyectos Archivados y Retirados
 %li
   %a{ href: favorites_councils_path}
     Mis Favoritos

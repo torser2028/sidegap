@@ -16,14 +16,14 @@ class LegislativesController < ApplicationController
     add_breadcrumb "Proyectos - Ley", :projects_law_legislatives_path
 
     @q = Legislative.law.ransack params[:q]
-    @legislatives = @q.result
+    @legislatives = @q.result.order(created_at: :desc)
   end
 
   def projects_old
     add_breadcrumb "Proyectos - Archivado y Retirado", :projects_old_legislatives_path
 
     @q = Legislative.old.ransack params[:q]
-    @legislatives = @q.result
+    @legislatives = @q.result.order(created_at: :desc)
   end
 
   def favorites
@@ -243,7 +243,7 @@ class LegislativesController < ApplicationController
     @next_agendas = []
 
     legislatives = user.following_legislatives
-    legislatives.with_agenda.order(created_at: :desc).each do |legislative|
+    legislatives.all_with_agenda.order(created_at: :desc).each do |legislative|
       legislative.agendas.each do |agenda|
         if agenda.event_at > @last_week && agenda.event_at < @today
           @last_agendas << agenda
@@ -253,7 +253,7 @@ class LegislativesController < ApplicationController
       end
     end
 
-    @events = user.following_events.active.order(event_at: :desc)
+    @events = user.following_events.active_and_past_week.order(event_at: :desc)
 
     # Risk and projects
     risk_list = []
@@ -407,6 +407,9 @@ class LegislativesController < ApplicationController
 
       authors = legislative.stakeholders.authors + legislative.stakeholders.chamber_authors + legislative.stakeholders.senate_authors
       speakers = legislative.stakeholders.chamber_speakers + legislative.stakeholders.senate_speakers
+
+      observation = legislative.comments.find_by(user_id: current_user)
+      observation = observation ? observation.body : ''
       
       @legislatives << {
         topic: legislative.topic,
@@ -421,11 +424,17 @@ class LegislativesController < ApplicationController
         chamber_plenary_at: legislative.chamber_plenary_at ? legislative.chamber_plenary_at.strftime('%d %b %Y') : '',
         senate_commission_at: legislative.senate_commission_at ? legislative.senate_commission_at.strftime('%d %b %Y') : '',
         senate_plenary_at: legislative.senate_plenary_at ? legislative.senate_plenary_at.strftime('%d %b %Y') : '',
+        second_chamber_commission_at: legislative.second_chamber_commission_at ? legislative.second_chamber_commission_at.strftime('%d %b %Y') : '',
+        second_chamber_plenary_at: legislative.second_chamber_plenary_at ? legislative.second_chamber_plenary_at.strftime('%d %b %Y') : '',
+        second_senate_commission_at: legislative.second_senate_commission_at ? legislative.second_senate_commission_at.strftime('%d %b %Y') : '',
+        second_senate_plenary_at: legislative.second_senate_plenary_at ? legislative.second_senate_plenary_at.strftime('%d %b %Y') : '',
+        chamber_settlement_at: legislative.chamber_settlement_at ? legislative.chamber_settlement_at.strftime('%d %b %Y') : '',
+        senate_settlement_at: legislative.senate_settlement_at ? legislative.senate_settlement_at.strftime('%d %b %Y') : '',
         status: legislative.status,
         impact: impact,
         probability: probability,
         risk: risk,
-        observations: legislative.comments.map { |comment| comment.body }.join('. ')
+        observations: observation
       }
     end
   end

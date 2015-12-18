@@ -11,5 +11,7 @@ class Council < ActiveRecord::Base
 
   scope :as_author, -> { joins(:councillor_assignments).merge(CouncillorAssignment.authors).uniq }
   scope :as_speaker, -> { joins(:councillor_assignments).merge(CouncillorAssignment.speakers).uniq }
+  scope :approved, -> { where(status: 'Aprobado') }
+  scope :old, -> { where(status: %w(Archivado Retirado)) }
 
 end

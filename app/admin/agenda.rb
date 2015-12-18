@@ -17,6 +17,12 @@ ActiveAdmin.register Agenda do
     column "Proyecto" do |agenda|
       simple_format agenda.legislative.title
     end
+    column "Núm. Cámara" do |agenda|
+      simple_format agenda.legislative.chamber_number
+    end
+    column "Núm. Senado" do |agenda|
+      simple_format agenda.legislative.senate_number
+    end
     column "Descripción", :body
     column "Tipo de evento", :event_type
     column "Fecha" do |agenda|
