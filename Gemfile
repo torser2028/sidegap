@@ -31,7 +31,7 @@ gem 'mini_magick'
 gem 'breadcrumbs_on_rails'
 gem 'chosen-rails'
 gem 'axlsx_rails'
-# gem 'aws-sdk', '~> 2'
+gem 'aws-sdk', '~> 2'
 gem 'carrierwave_direct', :git => "git://github.com/dwilkie/carrierwave_direct.git"
 
 # Use ActiveModel has_secure_password
