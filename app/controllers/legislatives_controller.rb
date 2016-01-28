@@ -247,7 +247,7 @@ class LegislativesController < ApplicationController
       legislative.agendas.each do |agenda|
         if agenda.event_at > @last_week && agenda.event_at < @today
           @last_agendas << agenda
-        elsif agenda.event_at > @today && agenda.event_at < @next_week
+        elsif agenda.event_at >= @today && agenda.event_at < @next_week
           @next_agendas << agenda
         end
       end
@@ -288,41 +288,37 @@ class LegislativesController < ApplicationController
     @total_by_source = @legislatives_by_source.values.sum
 
     # Authors and speakers
-    authors = Stakeholder.authors
-    senate_authors = Stakeholder.senate_authors
-    chamber_authors = Stakeholder.chamber_authors
-    authors = authors + senate_authors + chamber_authors
-
+    
     @authors = []
-    authors.each do |author|
-      risk_list = []
-      author.legislatives.each do |legislative|
-        probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
-        risk_list << risk_table[[probability, impact]].to_i
+    legislatives.as_author.each do |legislative|
+      legislative.stakeholders.authors.each do |author|
+        risk_list = []
+        author.legislatives.each do |legislative|
+          probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
+          risk_list << risk_table[[probability, impact]].to_i
+        end
+        @authors << {
+          legislatives: author.legislatives.count,
+          name: author.name,
+          risk: risk_list.sum / risk_list.count
+        }
       end
-      @authors << {
-        legislatives: author.legislatives.count,
-        name: author.name,
-        risk: risk_list.sum / risk_list.count
-      }
     end
 
-    senate_speakers = Stakeholder.senate_speakers
-    chamber_speakers = Stakeholder.chamber_speakers
-    speakers = senate_speakers + chamber_speakers
-
     @speakers = []
-    speakers.each do |speaker|
-      risk_list = []
-      speaker.legislatives.each do |legislative|
-        probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
-        risk_list << risk_table[[probability, impact]].to_i
+    legislatives.as_speaker.each do |legislative|
+      legislative.stakeholders.speakers.each do |speaker|
+        risk_list = []
+        speaker.legislatives.each do |legislative|
+          probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
+          risk_list << risk_table[[probability, impact]].to_i
+        end
+        @speakers << {
+          legislatives: speaker.legislatives.count,
+          name: speaker.name,
+          risk: risk_list.sum / risk_list.count
+        }
       end
-      @speakers << {
-        legislatives: speaker.legislatives.count,
-        name: speaker.name,
-        risk: risk_list.sum / risk_list.count
-      }
     end
 
     respond_to do |format|
