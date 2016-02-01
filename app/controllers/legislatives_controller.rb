@@ -267,7 +267,7 @@ class LegislativesController < ApplicationController
       
       @legislatives << {
         risk: risk,
-        status: legislative.status,
+        status: legislative.final_status != '' ? legislative.final_status : legislative.status,
         topic: legislative.topic,
         title: legislative.title
       }
