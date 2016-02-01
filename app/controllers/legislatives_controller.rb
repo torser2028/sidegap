@@ -281,8 +281,13 @@ class LegislativesController < ApplicationController
     @legislatives_by_topic = legislatives.group(:topic).count
     @total_by_topic = @legislatives_by_topic.values.sum
     
-    @legislatives_by_status = legislatives.group(:status).count
-    @total_by_status = @legislatives_by_status.values.sum
+    legislatives_by_final_status = legislatives.group(:final_status).count
+    legislatives_by_final_status = legislatives_by_final_status.delete_if { |k, v| k == "" }
+
+    @legislatives_by_status = legislatives.inbox.group(:status).count
+    @legislatives_by_status = @legislatives_by_status.merge(legislatives_by_final_status)
+    
+    @total_by_status = @legislatives_by_status.values.sum + legislatives_by_final_status.values.sum
     
     @legislatives_by_source = legislatives.group(:source).count
     @total_by_source = @legislatives_by_source.values.sum
