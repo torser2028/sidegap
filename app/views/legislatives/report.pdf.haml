@@ -136,7 +136,7 @@
             %tbody
               - @last_agendas.each do |agenda|
                 %tr
-                  %td= agenda.legislative.filing_at
+                  %td= agenda.event_at
                   %td= agenda.legislative.title
                   %td= agenda.plenary_commission
                   %td= agenda.legislative.chamber_number
@@ -169,7 +169,7 @@
             %tbody
               - @next_agendas.each do |agenda|
                 %tr
-                  %td= agenda.legislative.filing_at
+                  %td= agenda.event_at
                   %td= agenda.legislative.title
                   %td= agenda.plenary_commission
                   %td= agenda.legislative.chamber_number
@@ -375,7 +375,7 @@
         .small-12.columns
           %h2
             = fa_icon "users"
-            Stakeholders de Mayor Impacto
+            Stakeholders de Mayor Riesgo
 
           .row
             .small-6.columns
