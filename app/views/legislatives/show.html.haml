@@ -127,8 +127,10 @@
                     Estado
                 .large-10.columns
                   %span
-                    - if %w(Archivado Retirado Sancionado).include? @legislative.final_status
+                    - if %w(Archivado Retirado).include? @legislative.final_status
                       = "Este proyecto fue #{@legislative.final_status} en #{@legislative.status}"
+                    - elsif %w(Sancionado).include? @legislative.final_status
+                      = "Este proyecto fue #{@legislative.final_status}"
                     - else
                       = @legislative.status
             .row

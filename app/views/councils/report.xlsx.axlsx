@@ -21,7 +21,7 @@ wb.add_worksheet(name: "Councils") do |sheet|
       'Fecha de aprobación / Instancias Actos Legislativos'.upcase, '', '', '', 
       'Fecha de aprobación / Instancias'.upcase, '', '', '', 
       'Estados'.upcase,
-      'Observaciones usuario'.upcase, '', '', '', 
+      'Observaciones usuario'.upcase, '', '', ''
     ]
 
     header = [
