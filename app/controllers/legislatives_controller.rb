@@ -423,6 +423,7 @@ class LegislativesController < ApplicationController
         senate_number: legislative.senate_number,
         title: legislative.title,
         created_at: legislative.created_at.strftime('%d %b %Y'),
+        filing_at: legislative.filing_at.strftime('%d %b %Y'),
         authors: authors.map { |author| author.name }.join(', '),
         speakers: speakers.map { |speaker| speaker.name }.join(', '),
         chamber_commission_at: legislative.chamber_commission_at ? legislative.chamber_commission_at.strftime('%d %b %Y') : '',

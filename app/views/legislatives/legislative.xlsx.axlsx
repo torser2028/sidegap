@@ -18,10 +18,10 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
       'Título'.upcase, 
       'Radicación de proyectos'.upcase, '', '', 
       'Fecha de aprobación / Instancias'.upcase, '', '', '', 
-      'Fecha de aprobación / Instancias Actos Legislativos'.upcase, '', '', '', 
+      'Fecha de aprobación / Instancias Actos Legislativos'.upcase, '', '', '', '',
       'Fecha de aprobación / Instancias'.upcase, '', '', '', 
       'Estados'.upcase,
-      'Observaciones usuario'.upcase, '', '', '', 
+      'Observaciones usuario'.upcase, '', '', ''
     ]
 
     header = [
@@ -36,8 +36,6 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
       'Impacto'.upcase, 'Probabilidad'.upcase, 'Riesgo'.upcase, 'Observaciones'.upcase
     ]
 
-    sheet.add_row main_header, style: [gray_cell, purple_cell, purple_cell, purple_cell, purple_cell, green_cell, pink_cell, pink_cell, pink_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, red_cell, orange_cell, orange_cell, orange_cell, orange_cell], height: 20
-
     sheet.merge_cells('A1:A2')
     sheet.merge_cells('B1:E1')
     sheet.merge_cells('F1:F2')
@@ -47,6 +45,8 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
     sheet.merge_cells('R1:V1')
     sheet.merge_cells('W1:W2')
     sheet.merge_cells('X1:AA1')
+
+    sheet.add_row main_header, style: [gray_cell, purple_cell, purple_cell, purple_cell, purple_cell, green_cell, pink_cell, pink_cell, pink_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, red_cell, orange_cell, orange_cell, orange_cell, orange_cell], height: 20
 
     sheet.add_row header, style: [gray_cell, purple_cell, purple_cell, purple_cell, purple_cell, green_cell, pink_cell, pink_cell, pink_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, red_cell, orange_cell, orange_cell, orange_cell, orange_cell], height: 70
 
@@ -58,7 +58,7 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
         legislative[:topic], 
         legislative[:source], legislative[:chamber_number], legislative[:senate_number], legislative[:commision],
         legislative[:title],
-        legislative[:created_at], legislative[:authors], legislative[:speakers],
+        legislative[:filing_at], legislative[:authors], legislative[:speakers],
         
         legislative[:chamber_commission_at], legislative[:chamber_plenary_at], legislative[:senate_commission_at], legislative[:senate_plenary_at],
 
