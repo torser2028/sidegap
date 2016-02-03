@@ -309,7 +309,7 @@ class LegislativesController < ApplicationController
         }
       end
     end
-    @authors = @authors.sort_by { |k, v| k['risk'] }
+    @authors = @authors.sort_by { |author| -author[:risk] }.take(10)
 
     @speakers = []
     legislatives.as_speaker.each do |legislative|
@@ -326,7 +326,7 @@ class LegislativesController < ApplicationController
         }
       end
     end
-    @speakers = @speakers.sort_by { |k, v| k['risk'] }
+    @speakers = @speakers.sort_by { |speaker| -speaker[:risk] }.take(10)
 
     respond_to do |format|
       format.html
