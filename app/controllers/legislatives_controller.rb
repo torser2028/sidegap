@@ -253,7 +253,7 @@ class LegislativesController < ApplicationController
       end
     end
 
-    @events = user.following_events.active_and_past_week.order(event_at: :desc)
+    @events = user.following_events.active.order(event_at: :desc)
 
     # Risk and projects
     risk_list = []
@@ -309,6 +309,7 @@ class LegislativesController < ApplicationController
         }
       end
     end
+    @authors = @authors.sort_by { |k, v| k['risk'] }
 
     @speakers = []
     legislatives.as_speaker.each do |legislative|
@@ -325,6 +326,7 @@ class LegislativesController < ApplicationController
         }
       end
     end
+    @speakers = @speakers.sort_by { |k, v| k['risk'] }
 
     respond_to do |format|
       format.html

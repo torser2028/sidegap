@@ -44,6 +44,10 @@
       chart_risk.draw(data_risk, options_risk);
     }
 
+    $(document).ready(function() {
+      drawChart();
+      });
+
 %h1.report-title Informe legislativo
 
 %a{ href: report_legislatives_path(format: :pdf), target: "_blank"}
@@ -88,15 +92,17 @@
       %table.table-report
         %colgroup
           %col{width: "10%"}
+          %col{width: "10%"}
           %col{width: "20%"}
           %col
           %col
           %col{width: "15%"}
-          %col{width: "30%"}
+          %col{width: "20%"}
           %col{width: "15%"}
         %thead
           %tr
             %th Fecha
+            %th Título Proyecto
             %th Plenaria / Comisión
             %th Núm. Cámara
             %th Núm. Senado
@@ -106,7 +112,8 @@
         %tbody
           - @last_agendas.each do |agenda|
             %tr
-              %td= agenda.event_at
+              %td= agenda.legislative.filing_at
+              %td= agenda.legislative.title
               %td= agenda.plenary_commission
               %td= agenda.legislative.chamber_number
               %td= agenda.legislative.senate_number
@@ -118,15 +125,17 @@
       %table.table-report
         %colgroup
           %col{width: "10%"}
+          %col{width: "10%"}
           %col{width: "20%"}
           %col
           %col
           %col{width: "15%"}
-          %col{width: "30%"}
+          %col{width: "20%"}
           %col{width: "15%"}
         %thead
           %tr
             %th Fecha
+            %th Título Proyecto
             %th Plenaria / Comisión
             %th Núm. Cámara
             %th Núm. Senado
@@ -136,7 +145,8 @@
         %tbody
           - @next_agendas.each do |agenda|
             %tr
-              %td= agenda.event_at
+              %td= agenda.legislative.filing_at
+              %td= agenda.legislative.title
               %td= agenda.plenary_commission
               %td= agenda.legislative.chamber_number
               %td= agenda.legislative.senate_number

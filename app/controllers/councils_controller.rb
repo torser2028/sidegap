@@ -31,7 +31,7 @@ class CouncilsController < ApplicationController
 
     @q = current_user.following_councils.ransack params[:q]
     @councils = []
-    @q.result.each do |item|
+    @q.result.order(created_at: :desc).each do |item|
       @councils << item unless current_user.find_disliked_items.include? item
     end
   end

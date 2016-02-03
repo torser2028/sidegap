@@ -2,7 +2,7 @@ ActiveAdmin.register Legislative do
   menu label: "Proyectos", parent: "Rama Legislativa", priority: 0
 
   filter :title, label: "Titulo"
-  filter :source, label: "Origen"
+  filter :source, label: "Origen", as: :select, collection: -> { Source.pluck(:name) }
   filter :chamber_number, label: "Número de Cámara"
   filter :senate_number, label: "Número de Senado"
   filter :commission, label: "Comisión", as: :select, collection: -> { Commission.legislatives.pluck(:name) }
