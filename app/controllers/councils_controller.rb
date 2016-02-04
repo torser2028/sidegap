@@ -130,13 +130,15 @@ class CouncilsController < ApplicationController
         commission: council.commission,
         status: council.status,
         title: council.title,
+        topic: council.topic,
         aval: council.aval ? 'SÍ' : 'NO',
         warning: council.warning ? 'SÍ' : 'NO',
         created_at: council.created_at.strftime('%d %b %Y'),
         filing_at: council.filing_at ? council.filing_at.strftime('%d %b %Y') : '',
         monitoring_at: council.monitoring_at ? council.monitoring_at.strftime('%d %b %Y') : '',
-        authors: '',
-        speakers: ''
+        authors: council.councillors.authors.map { |author| author.name }.join(', '),
+        speakers: council.councillors.speakers.map { |speaker| speaker.name }.join(', '),
+        city: 'Bogotá'
       }
     end
   end

@@ -36,19 +36,19 @@ wb.add_worksheet(name: "Councils") do |sheet|
       sheet.add_row [
         council[:number],
         council[:filing_at],
-        council[:commission],
+        '',
         '',
         council[:title],
         council[:aval],
         council[:warning],
         council[:authors],
         council[:speakers],
-        '',
-        '',
+        council[:commission],
+        council[:topic],
         council[:monitoring_at],
         '',
         council[:status],
-        ''
+        council[:city]
       ], style: normal_cell, height: 50
     
     end
