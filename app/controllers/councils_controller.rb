@@ -111,10 +111,33 @@ class CouncilsController < ApplicationController
   end
 
   def report
+  end
+
+  # Export councils to Excel
+  def council
+    @councils = []
+    
     if current_user.has_role? :admin
-      councils = current_user.following_councils
-    else
       councils = Council.all
+    else
+      councils = current_user.following_councils
+    end
+
+    councils.each do |council|
+      @councils << {
+        title: council.title,
+        number: council.number,
+        commission: council.commission,
+        status: council.status,
+        title: council.title,
+        aval: council.aval ? 'SÍ' : 'NO',
+        warning: council.warning ? 'SÍ' : 'NO',
+        created_at: council.created_at.strftime('%d %b %Y'),
+        filing_at: council.filing_at ? council.filing_at.strftime('%d %b %Y') : '',
+        monitoring_at: council.monitoring_at ? council.monitoring_at.strftime('%d %b %Y') : '',
+        authors: '',
+        speakers: ''
+      }
     end
   end
 

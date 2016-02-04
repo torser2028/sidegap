@@ -1,0 +1,60 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Councils") do |sheet|
+
+  wb.styles do |s|
+
+    blue_cell = s.add_style bg_color: "548DD4", fg_color: "00", sz: 11, alignment: { horizontal: :center, vertical: :center }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
+    green_cell = s.add_style bg_color: "A4D76B", fg_color: "00", sz: 11, alignment: { horizontal: :center, vertical: :center }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
+    yellow_cell = s.add_style bg_color: "FFFF00", fg_color: "00", sz: 11, alignment: { horizontal: :center, vertical: :center, wrap_text: true }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
+    light_blue_cell = s.add_style bg_color: "4BACC6", fg_color: "00", sz: 11, alignment: { horizontal: :center, vertical: :center }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
+
+    main_header = [
+      'No. del proyecto'.upcase,
+      'Fecha de radicación'.upcase,
+      'Fecha de comisión'.upcase,
+      'Fecha de plenaria'.upcase,
+      'Título'.upcase,
+      'Aval (si o no)'.upcase,
+      'Mensaje de urgencia'.upcase,
+      'Autores'.upcase,
+      'Ponentes'.upcase,
+      'Comisión'.upcase,
+      'Tema de interés'.upcase,
+      'Fecha seguimiento'.upcase,
+      'Desarrollo y anotaciones'.upcase,
+      'Estado'.upcase,
+      'Ciudad'.upcase
+    ]
+
+    sheet.add_row main_header, style: [blue_cell, blue_cell, blue_cell, blue_cell, blue_cell, yellow_cell, yellow_cell, blue_cell, blue_cell, blue_cell, blue_cell, green_cell, green_cell, green_cell, light_blue_cell], height: 50
+
+    @councils.each do |council|
+    
+    normal_cell = s.add_style sz: 11, alignment: { horizontal: :center, vertical: :center, wrap_text: true }, border: Axlsx::STYLE_THIN_BORDER, font_name: 'Calibri'
+
+      sheet.add_row [
+        council[:number],
+        council[:filing_at],
+        council[:commission],
+        '',
+        council[:title],
+        council[:aval],
+        council[:warning],
+        council[:authors],
+        council[:speakers],
+        '',
+        '',
+        council[:monitoring_at],
+        '',
+        council[:status],
+        ''
+      ], style: normal_cell, height: 50
+    
+    end
+
+    sheet.column_widths 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30
+
+  end
+
+end

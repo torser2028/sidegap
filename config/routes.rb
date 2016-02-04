@@ -76,6 +76,7 @@ Rails.application.routes.draw do
           get :councillors
           get 'councillor/:id', action: :councillor, as: :councillor
           get :report
+          get :council
         end
     end
 
