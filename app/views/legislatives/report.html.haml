@@ -257,11 +257,12 @@
             %th Descripción
         %tbody
           - @legislatives.each do |legislative|
-            %tr
-              %td= legislative[:risk]
-              %td= legislative[:status]
-              %td= legislative[:topic]
-              %td= legislative[:title]
+            - if legislative[:risk] >= 31
+              %tr
+                %td= legislative[:risk]
+                %td= legislative[:status]
+                %td= legislative[:topic]
+                %td= legislative[:title]
 
       .row
         .large-6.columns

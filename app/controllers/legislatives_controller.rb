@@ -263,16 +263,14 @@ class LegislativesController < ApplicationController
       probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
       risk = risk_table[[probability, impact]].to_i
 
-      if risk >= 31
-        risk_list << risk
-        
-        @legislatives << {
-          risk: risk,
-          status: legislative.status != '' ? legislative.final_status : legislative.status,
-          topic: legislative.topic,
-          title: legislative.title
-        }
-      end
+      risk_list << risk
+      
+      @legislatives << {
+        risk: risk,
+        status: legislative.status != '' ? legislative.final_status : legislative.status,
+        topic: legislative.topic,
+        title: legislative.title
+      }
     end
 
     @legislatives_by_risk = risk_list.sort.inject(Hash.new(0)) {|count, risk| count[risk] +=1; count}.to_a
