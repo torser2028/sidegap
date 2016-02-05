@@ -305,7 +305,7 @@ class LegislativesController < ApplicationController
         @authors << {
           legislatives: author.legislatives.count,
           name: author.name,
-          risk: risk_list.sum / risk_list.count
+          risk: ((risk_list.sum / risk_list.count) * 1.25).ceil
         }
       end
     end
@@ -322,7 +322,7 @@ class LegislativesController < ApplicationController
         @speakers << {
           legislatives: speaker.legislatives.count,
           name: speaker.name,
-          risk: risk_list.sum / risk_list.count
+          risk: ((risk_list.sum / risk_list.count) * 1.25).ceil
         }
       end
     end
