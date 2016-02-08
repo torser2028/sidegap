@@ -267,7 +267,7 @@ class LegislativesController < ApplicationController
       
       @legislatives << {
         risk: risk,
-        status: legislative.status != '' ? legislative.final_status : legislative.status,
+        status: legislative.final_status != '' ? legislative.final_status : legislative.status,
         topic: legislative.topic,
         title: legislative.title
       }
@@ -277,8 +277,16 @@ class LegislativesController < ApplicationController
     @legislatives_by_risk.each do |element|
       element << risk_color(element[0])
     end
-    
-    @legislatives_by_topic = legislatives.group(:topic).count
+
+    @legislatives_by_topic = {}
+    @legislatives.each do |legislative|
+      topic = legislative[:topic]
+      if !@legislatives_by_topic.key?(topic) and legislative[:risk] >= 31
+        @legislatives_by_topic[topic] = 1
+      elsif @legislatives_by_topic.key?(topic)
+        @legislatives_by_topic[topic] += 1
+      end
+    end
     @total_by_topic = @legislatives_by_topic.values.sum
     
     legislatives_by_final_status = legislatives.group(:final_status).count

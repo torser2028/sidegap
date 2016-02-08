@@ -247,12 +247,10 @@
         %colgroup
           %col
           %col
-          %col
           %col{width: "50%"}
         %thead
           %tr
             %th Riesgo
-            %th Estado
             %th Tema de interés
             %th Descripción
         %tbody
@@ -260,7 +258,6 @@
             - if legislative[:risk] >= 31
               %tr
                 %td= legislative[:risk]
-                %td= legislative[:status]
                 %td= legislative[:topic]
                 %td= legislative[:title]
 
