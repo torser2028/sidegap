@@ -258,19 +258,19 @@
                     %th Cantidad
                     %th %
                 %tbody
-                  - @legislatives_by_topic.each do |topic, amount|
+                  - @legislatives_by_topic_with_risk.each do |topic, amount|
                     %tr
                       %td= topic
                       %td= amount
                       %td= number_with_precision((amount / @total_by_topic.to_f * 100), precision: 2) + '%'
                   %tr
                     %td Total
-                    %td= @total_by_topic
+                    %td= @total_by_topic_with_risk
                     %td 100%
 
       .row.section
         .small-12.columns
-          %h3 Riesgo Regulatorio Alto / Estado / Definición
+          %h3 Riesgo Regulatorio Alto / Tema / Definición
           %table.table-report
             %colgroup
               %col

@@ -278,15 +278,18 @@ class LegislativesController < ApplicationController
       element << risk_color(element[0])
     end
 
-    @legislatives_by_topic = {}
+    @legislatives_by_topic_with_risk = {}
     @legislatives.each do |legislative|
       topic = legislative[:topic]
-      if !@legislatives_by_topic.key?(topic) and legislative[:risk] >= 31
-        @legislatives_by_topic[topic] = 1
-      elsif @legislatives_by_topic.key?(topic)
-        @legislatives_by_topic[topic] += 1
+      if !@legislatives_by_topic_with_risk.key?(topic) and legislative[:risk] >= 31
+        @legislatives_by_topic_with_risk[topic] = 1
+      elsif @legislatives_by_topic_with_risk.key?(topic)
+        @legislatives_by_topic_with_risk[topic] += 1
       end
     end
+    @total_by_topic_with_risk = @legislatives_by_topic_with_risk.values.sum
+    
+    @legislatives_by_topic = legislatives.group(:topic).count
     @total_by_topic = @legislatives_by_topic.values.sum
     
     legislatives_by_final_status = legislatives.group(:final_status).count
