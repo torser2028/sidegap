@@ -41,7 +41,7 @@ class UserMailer < ApplicationMailer
   def regulatory_alert(recipient, alert)
     @alert = alert
     @name = recipient.name
-    mail(to: recipient.email, subject: "Nueva alerta regulatoria")
+    mail(to: recipient.email, subject: "Alerta regulatoria")
   end
 
   def self.set_recipients_regulatory

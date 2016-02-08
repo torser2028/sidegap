@@ -136,6 +136,8 @@ class CouncilsController < ApplicationController
         created_at: council.created_at.strftime('%d %b %Y'),
         filing_at: council.filing_at ? council.filing_at.strftime('%d %b %Y') : '',
         monitoring_at: council.monitoring_at ? council.monitoring_at.strftime('%d %b %Y') : '',
+        commission_at: council.commission_at ? council.commission_at.strftime('%d %b %Y') : '',
+        plenary_at: council.plenary_at ? council.plenary_at.strftime('%d %b %Y') : '',
         authors: council.councillors.authors.map { |author| author.name }.join(', '),
         speakers: council.councillors.speakers.map { |speaker| speaker.name }.join(', '),
         city: 'Bogotá'

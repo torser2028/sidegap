@@ -1,7 +1,7 @@
 ActiveAdmin.register Council do
   menu label: "Proyectos", parent: "Concejo", priority: 0
 
-  permit_params :title, :number, :commission, :status, :filing_at, :warning, :topic, :monitoring_at, :aval,
+  permit_params :title, :number, :commission, :status, :filing_at, :commission_at, :plenary_at, :warning, :topic, :monitoring_at, :aval,
     councillor_assignments_attributes: [:id, :_destroy, :councillor_id, :author, :speaker],
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
 
@@ -10,12 +10,20 @@ ActiveAdmin.register Council do
   filter :commission, label: "Comisión", as: :select, collection: ->{ Commission.councils.pluck(:name) }
   filter :status, label: "Estado", as: :select, collection: -> { Status.councils.pluck(:name) }
   filter :filing_at, label: "Fecha de Radicación"
+  filter :commission_at, label: "Fecha de Comisión"
+  filter :plenary_at, label: "Fecha de Plenaria"
 
   index title: "Proyectos" do
     column "Titulo", :title
     column "Número", :number
     column "Fecha de Radicación" do |council|
       ldate council.filing_at
+    end
+    column "Fecha de Comisión" do |council|
+      ldate council.commission_at
+    end
+    column "Fecha de Plenaria" do |council|
+      ldate council.plenary_at
     end
     column "Mensaje de Urgencia", :warning
     actions() do |council|
@@ -47,6 +55,12 @@ ActiveAdmin.register Council do
         row "Fecha de Radicación" do
           ldate council.filing_at
         end
+        row "Fecha de Comisión" do
+          ldate council.commission_at
+        end
+        row "Fecha de Plenaria" do
+          ldate council.plenary_at
+        end
         row "Aval" do
           council.aval == true ? "Si" : "No"
         end
@@ -73,6 +87,8 @@ ActiveAdmin.register Council do
       f.input :status, label: "Estado", collection: Status.councils.pluck(:name)
       f.input :topic, label: "Tema de Interes", collection: Topic.councils.pluck(:name)
       f.input :filing_at, label: "Fecha de Radicación", as: :datepicker
+      f.input :commission_at, label: "Fecha de Comisión", as: :datepicker
+      f.input :plenary_at, label: "Fecha de Plenaria", as: :datepicker
       f.input :aval
       f.input :warning, label: "Mensaje de Urgencia"
     end

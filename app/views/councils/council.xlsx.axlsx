@@ -36,8 +36,8 @@ wb.add_worksheet(name: "Councils") do |sheet|
       sheet.add_row [
         council[:number],
         council[:filing_at],
-        '',
-        '',
+        council[:commission_at],
+        council[:plenary_at],
         council[:title],
         council[:aval],
         council[:warning],

@@ -1,9 +1,10 @@
 ActiveAdmin.register RegulatoryAlert do
   menu label: "Alerta Regulatoria", priority: 5
-  permit_params :title, :body, :filing_at
+  permit_params :title, :body, :project_rule, :filing_at
 
   filter :title, label: "Titulo"
   filter :body, label: "Descripción"
+  filter :project_rule, label: "Proyecto / Norma"
   filter :filing_at, label: "Fecha"
 
   index title: "Alerta Regulatoria" do
@@ -11,6 +12,7 @@ ActiveAdmin.register RegulatoryAlert do
     column "Descripción" do |regulatory_alert|
       simple_format regulatory_alert.body
     end
+    column "Proyecto / Norma", :project_rule
     column "Fecha" do |regulatory_alert|
       ldate regulatory_alert.filing_at
     end
@@ -26,6 +28,9 @@ ActiveAdmin.register RegulatoryAlert do
         row "Descripción" do
           simple_format regulatory_alert.body
         end
+        row "Proyecto / Norma" do
+          regulatory_alert.project_rule
+        end
         row "Fecha" do
           ldate regulatory_alert.filing_at
         end
@@ -38,6 +43,7 @@ ActiveAdmin.register RegulatoryAlert do
     f.inputs do
       f.input :title, label: "Titulo"
       f.input :body, label: "Descripción", input_html: { rows: 5 }
+      f.input :project_rule, label: "Proyecto / Norma"
       f.input :filing_at, label: "Fecha", as: :datepicker
     end
     f.actions do
