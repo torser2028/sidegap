@@ -46,7 +46,7 @@ wb.add_worksheet(name: "Councils") do |sheet|
         council[:commission],
         council[:topic],
         council[:monitoring_at],
-        '',
+        council[:observation],
         council[:status],
         council[:city]
       ], style: normal_cell, height: 50

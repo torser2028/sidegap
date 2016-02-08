@@ -17,7 +17,7 @@
       %td{:align => "right"}
         %strong Fecha de Creación:
       %td{:colspan => "2"}
-        %span= @alert.created_at
+        %span= @alert.created_at.strftime('%Y-%m-%d')
     %tr
       %td{:align => "right"}
         %strong Título:
@@ -29,6 +29,12 @@
         %strong Descripción:
       %td{:colspan => "2"}
         %span= @alert.body
+    %tr
+      %td{:align => "right"}
+        = image_tag("doclink.jpg")
+      %td{:colspan => "2"}
+        %strong
+          %a{:href => @alert.project_rule, :style => "display: inline-block; background: LightSkyBlue; padding: 5px 10px; border-radius: 15px; text-decoration: none;", :target => "_blank"} Ver Proyecto
     %tr
       %td{:align => "center", :colspan => "3", :style => " font-family: 'Arial', sans-serif; line-height: 12pt;"}
         %hr/

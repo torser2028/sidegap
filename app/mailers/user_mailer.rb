@@ -32,6 +32,26 @@ class UserMailer < ApplicationMailer
     mail(to: recipient.email, subject: "Cambio en un proyecto de ley que es de su interés")
   end
 
+  def self.set_recipients_stakeholder_notification(project, authors, chamber_speakers, senate_speakers)
+    project.followers.each do |recipient|
+      stakeholder_notification(recipient, project, authors, chamber_speakers, senate_speakers).deliver_now
+    end
+  end
+
+  def stakeholder_notification(recipient, project, authors, chamber_speakers, senate_speakers)
+    @project = project
+    @name = recipient.name
+    
+    @authors = []
+    @chamber_speakers = []
+    @senate_speakers = []
+    authors.each { |author| @authors << Stakeholder.find(author) }
+    chamber_speakers.each { |chamber_speaker| @chamber_speakers << Stakeholder.find(chamber_speaker) }
+    senate_speakers.each { |senate_speaker| @senate_speakers << Stakeholder.find(senate_speaker) }
+    
+    mail(to: recipient.email, subject: "Cambio en los autores y ponentes de un proyecto de ley que es de su interés")
+  end
+
   def self.set_recipients_alert(alert)
     User.all.each do |recipient|
       regulatory_alert(recipient, alert).deliver_now

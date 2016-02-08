@@ -8,6 +8,8 @@
     = f.input :chamber_speakers, collection: options_for_select(@holders, @chamber_speakers), input_html: { class: "chosen-select", multiple: true }, label: "Congresistas"
   = f.inputs name: "Agregar Ponentes Senado" do
     = f.input :senate_speakers, collection: options_for_select(@holders, @senate_speakers), input_html: { class: "chosen-select", multiple: true }, label: "Congresistas"
+  = f.inputs name: "¿Enviar notificación?" do
+    = f.input :notify, as: :boolean, label: "Enviar"
   = f.actions do
     = f.action :submit, as: :button, label: "Guardar Stakeholders"
     %li.cancel

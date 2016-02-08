@@ -264,6 +264,34 @@ ActiveAdmin.register Legislative do
       chamber_speakers = params[:stakeholders][:chamber_speakers].delete_if(&:blank?)
       senate_speakers = params[:stakeholders][:senate_speakers].delete_if(&:blank?)
 
+      if params[:stakeholders][:notify] == '1'
+
+        list_authors = []
+        list_chamber_speakers = []
+        list_senate_speakers = []
+        
+        authors.each do |stakeholder_id|
+          if not resource.stakeholders.authors.map(&:id).include? stakeholder_id.to_i
+            list_authors << stakeholder_id
+          end
+        end
+
+        chamber_speakers.each do |stakeholder_id|
+          if not resource.stakeholders.chamber_speakers.map(&:id).include? stakeholder_id.to_i
+            list_chamber_speakers << stakeholder_id
+          end
+        end
+
+        senate_speakers.each do |stakeholder_id|
+          if not resource.stakeholders.senate_speakers.map(&:id).include? stakeholder_id.to_i
+            list_senate_speakers << stakeholder_id
+          end
+        end
+
+        UserMailer.set_recipients_stakeholder_notification(
+          resource, list_authors, list_chamber_speakers, list_senate_speakers)
+      end
+
       resource.legislative_stakeholders.destroy_all
 
       authors.each { |stakeholder_id| resource.legislative_stakeholders.authors.create!(stakeholder_id: stakeholder_id)  }
@@ -308,7 +336,7 @@ ActiveAdmin.register Legislative do
         :title, :source, :chamber_number, :senate_number, :commission, :status, :final_status, :topic, :type_law, :probability, :chamber_commission_at, :chamber_plenary_at, :senate_commission_at, :senate_plenary_at, :filing_at, :warning, :law_number, :second_chamber_commission_at, :second_chamber_plenary_at, :second_senate_commission_at, :second_senate_plenary_at, :chamber_settlement_at, :senate_settlement_at, :notify,
         legislatives_attributes: [:id, :_destroy, :title, :source, :topic, :chamber_number, :senate_number, :status, :type_law, :filing_at, :final_status],
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
-        stakeholders: [:chamber_authors, :chamber_speakers, :senate_authors, :senate_speakers],
+        stakeholders: [:chamber_authors, :chamber_speakers, :senate_authors, :senate_speakers, :notify],
         agendas_attributes: [:id, :_destroy, :body, :event_at, :event_type, :time, :plenary_commission]],
         agenda: [:body, :event_at, :event_type, :time, :plenary_commission]
     end

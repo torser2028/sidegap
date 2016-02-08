@@ -140,7 +140,8 @@ class CouncilsController < ApplicationController
         plenary_at: council.plenary_at ? council.plenary_at.strftime('%d %b %Y') : '',
         authors: council.councillors.authors.map { |author| author.name }.join(', '),
         speakers: council.councillors.speakers.map { |speaker| speaker.name }.join(', '),
-        city: 'Bogotá'
+        city: 'Bogotá',
+        observation: council.observation
       }
     end
   end
