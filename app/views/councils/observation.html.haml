@@ -1,0 +1,17 @@
+%h2 Añadir Observación
+
+.panels-view
+  %p 
+    %strong Fecha:
+    = @council.created_at.strftime('%Y-%m-%d')
+  %p 
+    %strong Título:
+    = @council.title
+  %p 
+    %strong Estado:
+    = @council.status
+
+= form_tag observation_councils_path(council_id: @council.id), method: :post do
+  = label_tag :observation, 'Observación'
+  = text_area_tag :observation
+  = submit_tag 'Añadir observación'

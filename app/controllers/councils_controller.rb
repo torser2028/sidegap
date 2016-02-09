@@ -111,6 +111,30 @@ class CouncilsController < ApplicationController
   end
 
   def report
+    @users = User.all.map{|u| ["#{u.name}", u.id] if u.role_ids.include?(2)}.compact
+    @users.prepend(['', 0])
+    @user_id = @users[0][1]
+
+    @councils = []
+    
+    if request.post?
+      if params[:client] != '0'
+        @user_id = params[:client]
+        user = User.find(@user_id)
+        @councils = user.following_councils
+      end
+    end
+  end
+
+  def observation
+    @council = Council.find params[:council_id]
+
+    if request.post?
+      @council.observation = params[:observation]
+      @council.save
+
+      redirect_to report_councils_path
+    end
   end
 
   # Export councils to Excel
