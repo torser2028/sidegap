@@ -107,11 +107,6 @@ class UserMailer < ApplicationMailer
     @user_with_agenda = following_legislatives.with_agenda.count
     @user_topics = following_legislatives.group(:topic).count
 
-    # @user_council_following = following_councils.count
-    # @user_council_approved = following_councils.law.count
-    # @user_council_with_agenda = following_councils.with_agenda.count
-    # @user_council_topics = following_councils.group(:topic).count
-
     @new_projects = following_legislatives.new_projects.count
     @law = following_legislatives.law.count
     @archived = following_legislatives.archived.count
