@@ -92,7 +92,10 @@ class UserMailer < ApplicationMailer
   end
 
   def weekly_report(recipient)
+    @name = recipient.name
+    
     following_legislatives = recipient.following_legislatives
+    following_councils = recipient.following_councils
 
     changed = []
     following_legislatives.each do |legislative|
@@ -104,13 +107,22 @@ class UserMailer < ApplicationMailer
     @user_with_agenda = following_legislatives.with_agenda.count
     @user_topics = following_legislatives.group(:topic).count
 
-    @new_projects = Legislative.new_projects.count
-    @law = Legislative.law.count
-    @archived = Legislative.archived.count
-    @retired = Legislative.retired.count
-    @with_agenda = Legislative.with_agenda.count
-    @topics = Legislative.new_projects.group(:topic).count
-    @name = recipient.name
+    # @user_council_following = following_councils.count
+    # @user_council_approved = following_councils.law.count
+    # @user_council_with_agenda = following_councils.with_agenda.count
+    # @user_council_topics = following_councils.group(:topic).count
+
+    @new_projects = following_legislatives.new_projects.count
+    @law = following_legislatives.law.count
+    @archived = following_legislatives.archived.count
+    @retired = following_legislatives.retired.count
+    @with_agenda = following_legislatives.with_agenda.count
+    @topics = following_legislatives.new_projects.group(:topic).count
+
+    @actual_projects = following_legislatives
+    @law_first_debate_projects = following_legislatives.law_first_debate
+    @archived_projects = following_legislatives.archived
+    @retired_projects = following_legislatives.retired
 
     mail(to: recipient.email, subject: "Estado semanal de su cuenta")
   end

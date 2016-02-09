@@ -454,6 +454,11 @@ class LegislativesController < ApplicationController
     end
   end
 
+  def manual_weekly_report
+    UserMailer.set_recipients_weekly
+    redirect_to :back
+  end
+
   private
     def get_legislative(id)
       Legislative.find id

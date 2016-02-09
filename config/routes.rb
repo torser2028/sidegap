@@ -54,6 +54,7 @@ Rails.application.routes.draw do
             get :event_observation
             post :event_observation
             get :legislative
+            get :manual_weekly_report
         end
     end
 
@@ -69,6 +70,7 @@ Rails.application.routes.draw do
     end
 
     resources :councils, only: [:index, :show] do
+        concerns [:followable, :trashable]
         concerns [:followable, :trashable]
         collection do
           get :projects_approved

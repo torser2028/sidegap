@@ -55,6 +55,7 @@
                       - @user_topics.each do |topic, count|
                         = "(#{count}) " + topic
                         %br/
+
             %td{:style => "border: 1px solid #45C051; vertical-align: top; background: AliceBlue;", :width => "50%"}
               %table{:cellpadding => "5", :width => "100%"}
                 %thead
@@ -99,6 +100,156 @@
                     %td{:width => "50%"} La próxima semana están en agenda de discusión:
                     %td{:style => "color: green;"}
                       = "(#{@with_agenda}) Proyectos de Ley"
+    
+    %tr
+      %td{:colspan => "3"}
+        %table{:style => "font-size: 8pt; line-height: 11pt;", :width => "100%"}
+          %tr
+            %td{:style => "border: 1px solid gray; vertical-align: top; background: whitesmoke;", :width => "100%"}
+              %table{:cellpadding => "5", :width => "100%"}
+                %thead
+                  %tr
+                    %th{:colspan => "2", :style => "color: royalblue;"} PROYECTOS
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                %tbody
+                  %tr
+                    %td{:width => "30%"} Proyectos presentados:
+                    %td
+                      - if !@actual_projects.size.zero?
+                        %table{:cellpadding => "5", :width => "80%"}
+                          %tbody
+                          - @actual_projects.each do |project|
+                            %tr
+                              %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Número:
+                              %td{:style => "color: CornflowerBlue;"}
+                                = project.chamber_number ? project.chamber_number : project.senate_number
+                            %tr
+                              %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Título:
+                              %td{:style => "color: CornflowerBlue;"}
+                                = project.title
+                            - if !project.stakeholders.authors.size.zero?
+                              %tr
+                                %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Autor(es):
+                                %td{:style => "color: CornflowerBlue;"}
+                                  %ul
+                                    - project.stakeholders.authors.each do |author|
+                                      %li= author.name
+                            - if !project.stakeholders.speakers.size.zero?
+                              %tr
+                                %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Ponente(s):
+                                %td{:style => "color: CornflowerBlue;"}
+                                  %ul
+                                    - project.stakeholders.speakers.each do |speaker|
+                                      %li= speaker.name
+                            %tr
+                              %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                      - else
+                        %p{:style => "color: CornflowerBlue;"}
+                          No hay proyectos presentados
+                  %tr
+                    %td{:width => "30%"} Proyectos aprobados en primer debate:
+                    %td
+                      - if !@law_first_debate_projects.size.zero?
+                        %table{:cellpadding => "5", :width => "80%"}
+                          %tbody
+                          - @law_first_debate_projects.each do |project|
+                            %tr
+                              %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Número:
+                              %td{:style => "color: CornflowerBlue;"}
+                                = project.chamber_number ? project.chamber_number : project.senate_number
+                            %tr
+                              %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Título:
+                              %td{:style => "color: CornflowerBlue;"}
+                                = project.title
+                            - if !project.stakeholders.authors.size.zero?
+                              %tr
+                                %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Autor(es):
+                                %td{:style => "color: CornflowerBlue;"}
+                                  %ul
+                                    - project.stakeholders.authors.each do |author|
+                                      %li= author.name
+                            - if !project.stakeholders.speakers.size.zero?
+                              %tr
+                                %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Ponente(s):
+                                %td{:style => "color: CornflowerBlue;"}
+                                  %ul
+                                    - project.stakeholders.speakers.each do |speaker|
+                                      %li= speaker.name
+                            %tr
+                              %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                      - else
+                        %p{:style => "color: CornflowerBlue;"}
+                          No hay proyectos aprobados en primer debate
+                  %tr
+                    %td{:width => "30%"} Proyectos archivados:
+                    %td
+                      %table{:cellpadding => "5", :width => "80%"}
+                        %tbody
+                        - if !@archived_projects.size.zero?
+                          - @archived_projects.each do |project|
+                            %tr
+                              %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Número:
+                              %td{:style => "color: CornflowerBlue;"}
+                                = project.chamber_number ? project.chamber_number : project.senate_number
+                            %tr
+                              %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Título:
+                              %td{:style => "color: CornflowerBlue;"}
+                                = project.title
+                            - if !project.stakeholders.authors.size.zero?
+                              %tr
+                                %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Autor(es):
+                                %td{:style => "color: CornflowerBlue;"}
+                                  %ul
+                                    - project.stakeholders.authors.each do |author|
+                                      %li= author.name
+                            - if !project.stakeholders.speakers.size.zero?
+                              %tr
+                                %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Ponente(s):
+                                %td{:style => "color: CornflowerBlue;"}
+                                  %ul
+                                    - project.stakeholders.speakers.each do |speaker|
+                                      %li= speaker.name
+                          %tr
+                            %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                        - else
+                          %p{:style => "color: CornflowerBlue;"}
+                            No hay proyectos archivados
+                  %tr
+                    %td{:width => "30%"} Proyectos retirados:
+                    %td
+                      - if !@retired_projects.size.zero?
+                        %table{:cellpadding => "5", :width => "80%"}
+                          %tbody
+                          - @retired_projects.each do |project|
+                            %tr
+                              %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Número:
+                              %td{:style => "color: CornflowerBlue;"}
+                                = project.chamber_number ? project.chamber_number : project.senate_number
+                            %tr
+                              %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Título:
+                              %td{:style => "color: CornflowerBlue;"}
+                                = project.title
+                            - if !project.stakeholders.authors.size.zero?
+                              %tr
+                                %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Autor(es):
+                                %td{:style => "color: CornflowerBlue;"}
+                                  %ul
+                                    - project.stakeholders.authors.each do |author|
+                                      %li= author.name
+                            - if !project.stakeholders.speakers.size.zero?
+                              %tr
+                                %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Ponente(s):
+                                %td{:style => "color: CornflowerBlue;"}
+                                  %ul
+                                    - project.stakeholders.speakers.each do |speaker|
+                                      %li= speaker.name
+                            %tr
+                              %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                      - else
+                        %p{:style => "color: CornflowerBlue;"}
+                          No hay proyectos retirados
+      
     %tr
       %td{:align => "center", :colspan => "3", :style => " font-family: 'Arial', sans-serif; line-height: 12pt;"}
         %hr/

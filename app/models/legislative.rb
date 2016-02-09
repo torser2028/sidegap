@@ -23,6 +23,7 @@ class Legislative < ActiveRecord::Base
   scope :archived, -> { where(final_status: 'Archivado') }
   scope :retired, -> { where(final_status: 'Retirado') }
   scope :new_projects, -> { where(new_project: true) }
+  scope :law_first_debate, -> { where(status: '1er Debate', final_status: 'Sancionado') }
 
   validates :source, :title, :status, :type_law, :filing_at, presence: true
 
