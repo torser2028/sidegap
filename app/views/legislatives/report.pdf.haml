@@ -202,12 +202,9 @@
               - @events.each do |event|
                 %tr
                   %td= event.event_at
-                  - if event.plenary
-                    %td= event.plenary
-                  - else
-                    %td= event.commission
+                  %td= event.commission ? event.commission : event.plenary
                   %td= event.event_type
-                  %td= event.body
+                  %td= simple_format event.body
                   %td= event.observation
 
       .row.section
@@ -249,8 +246,8 @@
               %h3 Riesgo Regulatorio Alto / Tema
               %table.table-report
                 %colgroup
-                  %col{width: "60%"}
-                  %col
+                  %col{width: "70%"}
+                  %col{width: "10%"}
                   %col{width: "20%"}
                 %thead
                   %tr

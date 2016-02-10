@@ -313,11 +313,14 @@ class LegislativesController < ApplicationController
           probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
           risk_list << risk_table[[probability, impact]].to_i
         end
-        @authors << {
-          legislatives: author.legislatives.count,
-          name: author.name,
-          risk: ((risk_list.sum / risk_list.count) * 1.25).ceil
-        }
+        risk = ((risk_list.sum / risk_list.count) * 1.25).ceil
+        if risk >= 31
+          @authors << {
+            legislatives: author.legislatives.count,
+            name: author.name,
+            risk: risk
+          }
+        end
       end
     end
     @authors = @authors.sort_by { |author| -author[:risk] }.take(10)
@@ -330,11 +333,14 @@ class LegislativesController < ApplicationController
           probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
           risk_list << risk_table[[probability, impact]].to_i
         end
-        @speakers << {
-          legislatives: speaker.legislatives.count,
-          name: speaker.name,
-          risk: ((risk_list.sum / risk_list.count) * 1.25).ceil
-        }
+        risk = ((risk_list.sum / risk_list.count) * 1.25).ceil
+        if risk >= 31
+          @speakers << {
+            legislatives: speaker.legislatives.count,
+            name: speaker.name,
+            risk: risk
+          }
+        end
       end
     end
     @speakers = @speakers.sort_by { |speaker| -speaker[:risk] }.take(10)
@@ -366,9 +372,9 @@ class LegislativesController < ApplicationController
         @user_id = params[:client]
         user = User.find(@user_id)
         
-        @events = user.following_events
+        @events = user.following_events.past_week
         
-        @legislatives = user.following_legislatives.with_agenda
+        @legislatives = user.following_legislatives.with_past_agenda
         @legislatives.each do |legislative|
           legislative.agendas.each do |agenda|
             @agendas << agenda
@@ -430,6 +436,7 @@ class LegislativesController < ApplicationController
         source: legislative.source,
         chamber_number: legislative.chamber_number,
         senate_number: legislative.senate_number,
+        commission: legislative.commission,
         title: legislative.title,
         created_at: legislative.created_at.strftime('%d %b %Y'),
         filing_at: legislative.filing_at.strftime('%d %b %Y'),
@@ -445,7 +452,7 @@ class LegislativesController < ApplicationController
         second_senate_plenary_at: legislative.second_senate_plenary_at ? legislative.second_senate_plenary_at.strftime('%d %b %Y') : '',
         chamber_settlement_at: legislative.chamber_settlement_at ? legislative.chamber_settlement_at.strftime('%d %b %Y') : '',
         senate_settlement_at: legislative.senate_settlement_at ? legislative.senate_settlement_at.strftime('%d %b %Y') : '',
-        status: legislative.status,
+        status: (legislative.final_status && legislative.final_status != '') ? legislative.final_status : legislative.status,
         impact: impact,
         probability: probability,
         risk: risk,

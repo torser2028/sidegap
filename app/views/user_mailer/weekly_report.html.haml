@@ -71,11 +71,15 @@
                   %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
-                    %td{:width => "50%"} Con los siguientes temas :
+                    %td{:width => "50%"} Con los siguientes temas:
                     %td{:style => "color: green;"}
                       - @topics.each do |topic, count|
                         = "(#{count}) " + topic
                         %br/
+                %thead
+                  %tr
+                    %th{:colspan => "2", :style => "color: #45C051;"} ESTADO GENERAL DE PROYECTOS
+                %tbody
                   %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
@@ -109,7 +113,7 @@
               %table{:cellpadding => "5", :width => "100%"}
                 %thead
                   %tr
-                    %th{:colspan => "2", :style => "color: royalblue;"} PROYECTOS
+                    %th{:colspan => "2", :style => "color: royalblue;"} PROYECTOS EN EL CONGRESO
                   %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                 %tbody
@@ -148,6 +152,8 @@
                         %p{:style => "color: CornflowerBlue;"}
                           No hay proyectos presentados
                   %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                  %tr
                     %td{:width => "30%"} Proyectos aprobados en primer debate:
                     %td
                       - if !@approved_projects.size.zero?
@@ -182,6 +188,8 @@
                         %p{:style => "color: CornflowerBlue;"}
                           No hay proyectos aprobados en primer debate
                   %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                  %tr
                     %td{:width => "30%"} Proyectos archivados:
                     %td
                       %table{:cellpadding => "5", :width => "80%"}
@@ -215,6 +223,8 @@
                         - else
                           %p{:style => "color: CornflowerBlue;"}
                             No hay proyectos archivados
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "30%"} Proyectos retirados:
                     %td

@@ -56,7 +56,7 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
 
       sheet.add_row [
         legislative[:topic], 
-        legislative[:source], legislative[:chamber_number], legislative[:senate_number], legislative[:commision],
+        legislative[:source], legislative[:chamber_number], legislative[:senate_number], legislative[:commission],
         legislative[:title],
         legislative[:filing_at], legislative[:authors], legislative[:speakers],
         

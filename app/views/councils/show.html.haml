@@ -75,6 +75,19 @@
             .row
               .large-2.columns.labels
                 %label
+                  Fecha de Comisión
+              .large-2.columns
+                %span
+                  = ldate @council.commission_at
+              .large-2.columns.labels
+                %label
+                  Fecha de Plenaria
+              .large-6.columns
+                %span
+                  = ldate @council.plenary_at
+            .row
+              .large-2.columns.labels
+                %label
                   Estado
               .large-2.columns
                 %span
