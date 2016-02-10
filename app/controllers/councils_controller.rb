@@ -148,6 +148,9 @@ class CouncilsController < ApplicationController
     end
 
     councils.each do |council|
+      observation = council.comments.find_by(user_id: current_user)
+      observation = observation ? observation.body : ''
+
       @councils << {
         title: council.title,
         number: council.number,
@@ -165,7 +168,7 @@ class CouncilsController < ApplicationController
         authors: council.councillors.authors.map { |author| author.name }.join(', '),
         speakers: council.councillors.speakers.map { |speaker| speaker.name }.join(', '),
         city: 'Bogotá',
-        observation: council.observation
+        observation: observation
       }
     end
   end

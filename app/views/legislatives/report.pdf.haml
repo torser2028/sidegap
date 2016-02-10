@@ -262,7 +262,7 @@
                     %tr
                       %td= topic
                       %td= amount
-                      %td= number_with_precision((amount / @total_by_topic.to_f * 100), precision: 2) + '%'
+                      %td= number_with_precision((amount / @total_by_topic_with_risk.to_f * 100), precision: 2) + '%'
                   %tr
                     %td Total
                     %td= @total_by_topic_with_risk

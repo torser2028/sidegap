@@ -22,8 +22,15 @@ class Legislative < ActiveRecord::Base
   scope :old, -> { where(final_status: %w(Archivado Retirado)) }
   scope :archived, -> { where(final_status: 'Archivado') }
   scope :retired, -> { where(final_status: 'Retirado') }
-  scope :new_projects, -> { where(new_project: true) }
-  scope :law_first_debate, -> { where(status: '1er Debate', final_status: 'Sancionado') }
+
+  time_range = (Time.now - 7.day)..(Time.now.midnight - 2.day)
+  status_approved = [
+    '1er Debate', '2do Debate', '3er Debate', '4to Debate', 
+    '5to Debate', '6to Debate', '7mo Debate', '8vo Debate'
+  ]
+  
+  scope :actual, -> { where(created_at: time_range) }
+  scope :approved, -> { where(status: status_approved) }
 
   validates :source, :title, :status, :type_law, :filing_at, presence: true
 

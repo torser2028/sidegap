@@ -171,9 +171,9 @@ class LegislativesController < ApplicationController
   end
 
   def risk_color risk
-    return 'blue' if risk < 5
-    return 'yellow' if risk < 18
-    return 'orange' if risk < 32
+    return 'blue' if risk < 15
+    return 'yellow' if risk < 25
+    return 'orange' if risk < 31
     return 'red'
   end
 
@@ -283,7 +283,7 @@ class LegislativesController < ApplicationController
       topic = legislative[:topic]
       if !@legislatives_by_topic_with_risk.key?(topic) and legislative[:risk] >= 31
         @legislatives_by_topic_with_risk[topic] = 1
-      elsif @legislatives_by_topic_with_risk.key?(topic)
+      elsif @legislatives_by_topic_with_risk.key?(topic) and legislative[:risk] >= 31
         @legislatives_by_topic_with_risk[topic] += 1
       end
     end

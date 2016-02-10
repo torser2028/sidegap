@@ -11,6 +11,10 @@ ActiveAdmin.register_page "Dashboard" do
   end
   
   action_item :dashboard do
+    link_to "Informe Consejo", report_councils_path
+  end
+  
+  action_item :dashboard do
     link_to "Reporte Semanal Manual", manual_weekly_report_legislatives_path
   end
 

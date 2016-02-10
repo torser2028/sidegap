@@ -114,6 +114,19 @@
                   .large-4.columns
                     %span.ghost
                       \-
+            - if current_user.following? @council
+              = form_for @comment do |f|
+                .row.white
+                  .large-2.columns.labels
+                    %label
+                      Comentario
+                  .large-6.columns
+                    = f.text_area :body, class: "comments", rows: 6
+                    = f.hidden_field :council_id, value: @council.id
+                    %input.button.success.save{type: "submit", value: "Guardar"}
+                  .large-4.columns
+                    %span.ghost
+                      \-
         .row
           .large-6.columns
             %h3

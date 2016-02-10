@@ -67,7 +67,7 @@
                   %tr
                     %td{:width => "35%"} Radicados:
                     %td{:style => "color: green;"}
-                      = "(#{@new_projects}) Nuevos Proyectos de Ley"
+                      = "(#{@actual}) Nuevos Proyectos de Ley"
                   %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
@@ -81,7 +81,7 @@
                   %tr
                     %td{:width => "50%"} Se aprobaron
                     %td{:style => "color: green;"}
-                      = "(#{@law}) Proyectos de Ley"
+                      = "(#{@actual}) Proyectos de Ley"
                   %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
@@ -150,10 +150,10 @@
                   %tr
                     %td{:width => "30%"} Proyectos aprobados en primer debate:
                     %td
-                      - if !@law_first_debate_projects.size.zero?
+                      - if !@approved_projects.size.zero?
                         %table{:cellpadding => "5", :width => "80%"}
                           %tbody
-                          - @law_first_debate_projects.each do |project|
+                          - @approved_projects.each do |project|
                             %tr
                               %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Número:
                               %td{:style => "color: CornflowerBlue;"}

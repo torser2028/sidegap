@@ -29,7 +29,7 @@ class UserMailer < ApplicationMailer
     @project = project
     @change_type = change_type
     @name = recipient.name
-    mail(to: recipient.email, subject: "Cambio en un proyecto de ley que es de su interés")
+    mail(to: recipient.email, subject: "Cambios en mis proyectos favoritos")
   end
 
   def self.set_recipients_stakeholder_notification(project, authors, chamber_speakers, senate_speakers)
@@ -49,7 +49,7 @@ class UserMailer < ApplicationMailer
     chamber_speakers.each { |chamber_speaker| @chamber_speakers << Stakeholder.find(chamber_speaker) }
     senate_speakers.each { |senate_speaker| @senate_speakers << Stakeholder.find(senate_speaker) }
     
-    mail(to: recipient.email, subject: "Cambio en los autores y ponentes de un proyecto de ley que es de su interés")
+    mail(to: recipient.email, subject: "Cambios en mis proyectos favoritos")
   end
 
   def self.set_recipients_alert(alert)
@@ -107,15 +107,14 @@ class UserMailer < ApplicationMailer
     @user_with_agenda = following_legislatives.with_agenda.count
     @user_topics = following_legislatives.group(:topic).count
 
-    @new_projects = following_legislatives.new_projects.count
-    @law = following_legislatives.law.count
+    @actual = following_legislatives.actual.count
     @archived = following_legislatives.archived.count
     @retired = following_legislatives.retired.count
     @with_agenda = following_legislatives.with_agenda.count
-    @topics = following_legislatives.new_projects.group(:topic).count
+    @topics = following_legislatives.actual.group(:topic).count
 
-    @actual_projects = following_legislatives
-    @law_first_debate_projects = following_legislatives.law_first_debate
+    @actual_projects = following_legislatives.actual
+    @approved_projects = following_legislatives.approved
     @archived_projects = following_legislatives.archived
     @retired_projects = following_legislatives.retired
 

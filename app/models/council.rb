@@ -14,4 +14,11 @@ class Council < ActiveRecord::Base
   scope :approved, -> { where(status: 'Aprobado') }
   scope :old, -> { where(status: %w(Archivado Retirado)) }
 
+  before_update :update_monitoring_date
+
+  private
+    def update_monitoring_date
+      self.monitoring_at = Date.today
+    end
+
 end
