@@ -10,21 +10,21 @@ wb.add_worksheet(name: "Councils") do |sheet|
     light_blue_cell = s.add_style bg_color: "4BACC6", fg_color: "00", sz: 11, alignment: { horizontal: :center, vertical: :center }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
 
     main_header = [
-      'No. del proyecto'.upcase,
-      'Fecha de radicación'.upcase,
-      'Fecha de comisión'.upcase,
-      'Fecha de plenaria'.upcase,
-      'Título'.upcase,
-      'Aval (si o no)'.upcase,
-      'Mensaje de urgencia'.upcase,
-      'Autores'.upcase,
-      'Ponentes'.upcase,
-      'Comisión'.upcase,
-      'Tema de interés'.upcase,
-      'Fecha seguimiento'.upcase,
-      'Desarrollo y anotaciones'.upcase,
-      'Estado'.upcase,
-      'Ciudad'.upcase
+      'No. DEL PROYECTO',
+      'FECHA DE RADICACIÓN',
+      'FECHA DE COMISIÓN',
+      'FECHA DE PLENARIA',
+      'TÍTULO',
+      'AVAL (SI O NO)',
+      'MENSAJE DE URGENCIA',
+      'AUTORES',
+      'PONENTES',
+      'COMISIÓN',
+      'TEMA DE INTERÉS',
+      'FECHA SEGUIMIENTO',
+      'DESARROLLO Y ANOTACIONES',
+      'ESTADO',
+      'CIUDAD'
     ]
 
     sheet.add_row main_header, style: [blue_cell, blue_cell, blue_cell, blue_cell, blue_cell, yellow_cell, yellow_cell, blue_cell, blue_cell, blue_cell, blue_cell, green_cell, green_cell, green_cell, light_blue_cell], height: 50

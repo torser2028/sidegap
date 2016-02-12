@@ -13,15 +13,15 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
     orange_cell = s.add_style bg_color: "FF9F5D", fg_color: "00", sz: 11, alignment: { horizontal: :center, vertical: :center }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
 
     main_header = [
-      'Tema'.upcase, 
-      'Entrada de proyectos'.upcase, '', '', '', 
-      'Título'.upcase, 
-      'Radicación de proyectos'.upcase, '', '', 
-      'Fecha de aprobación / Instancias'.upcase, '', '', '', 
-      'Fecha de aprobación / Instancias Actos Legislativos'.upcase, '', '', '', '',
-      'Fecha de aprobación / Instancias'.upcase, '', '', '', 
-      'Estados'.upcase,
-      'Observaciones usuario'.upcase, '', '', ''
+      'TEMA', 
+      'ENTRADA DE PROYECTOS', '', '', '', 
+      'TÍTULO', 
+      'RADICACIÓN DE PROYECTOS', '', '', 
+      'FECHA DE APROBACIÓN / INSTANCIAS', '', '', '', 
+      'FECHA DE APROBACIÓN / INSTANCIAS ACTOS LEGISLATIVOS', '', '', '', 
+      'FECHA DE APROBACIÓN / INSTANCIAS', '', '', '', '',
+      'ESTADOS',
+      'OBSERVACIONES USUARIO', '', '', ''
     ]
 
     header = [

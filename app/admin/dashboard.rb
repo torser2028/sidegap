@@ -11,7 +11,7 @@ ActiveAdmin.register_page "Dashboard" do
   end
   
   action_item :dashboard do
-    link_to "Informe Consejo", report_councils_path
+    link_to "Informe Concejo", report_councils_path
   end
   
   action_item :dashboard do

@@ -30,7 +30,7 @@
               Título
           .large-10.columns
             %span.txtdesc
-              = @legislative.title
+              = simple_format @legislative.title
         - if @legislative.law_number.present?
           .row
             .large-2.columns.labels

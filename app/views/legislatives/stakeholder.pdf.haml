@@ -87,7 +87,7 @@
               %td
                 = legislative.senate_number
               %td.desc
-                = legislative.title
+                = simple_format legislative.title
               %td
                 = legislative.filing_at
   - if @legislatives_as_speaker.present?
@@ -119,6 +119,6 @@
               %td
                 = legislative.senate_number
               %td.desc
-                = legislative.title
+                = simple_format legislative.title
               %td
                 = legislative.filing_at

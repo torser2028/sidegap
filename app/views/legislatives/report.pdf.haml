@@ -137,7 +137,7 @@
               - @last_agendas.each do |agenda|
                 %tr
                   %td= agenda.event_at
-                  %td= agenda.legislative.title
+                  %td= simple_format agenda.legislative.title
                   %td= agenda.plenary_commission
                   %td= agenda.legislative.chamber_number
                   %td= agenda.legislative.senate_number
@@ -170,7 +170,7 @@
               - @next_agendas.each do |agenda|
                 %tr
                   %td= agenda.event_at
-                  %td= agenda.legislative.title
+                  %td= simple_format agenda.legislative.title
                   %td= agenda.plenary_commission
                   %td= agenda.legislative.chamber_number
                   %td= agenda.legislative.senate_number

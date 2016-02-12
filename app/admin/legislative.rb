@@ -14,7 +14,9 @@ ActiveAdmin.register Legislative do
   filter :warning, label: "Mensaje de Urgencia", collection: [["Si", true], ["No", false]]
 
   index title: "Proyectos" do
-    column "Titulo", :title
+    column "Titulo" do |legislative|
+      simple_format legislative.title
+    end
     column "Número de Cámara", :chamber_number
     column "Número de Senado", :senate_number
     column "Fecha de Radicación" do |legislative|
@@ -37,7 +39,7 @@ ActiveAdmin.register Legislative do
     panel "Detalles" do
       attributes_table_for legislative do
         row "Titulo" do
-          legislative.title
+          simple_format legislative.title
         end
         row "Origen" do
           legislative.source

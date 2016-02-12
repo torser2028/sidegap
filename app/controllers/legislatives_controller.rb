@@ -314,13 +314,11 @@ class LegislativesController < ApplicationController
           risk_list << risk_table[[probability, impact]].to_i
         end
         risk = ((risk_list.sum / risk_list.count) * 1.25).ceil
-        if risk >= 31
-          @authors << {
-            legislatives: author.legislatives.count,
-            name: author.name,
-            risk: risk
-          }
-        end
+        @authors << {
+          legislatives: author.legislatives.count,
+          name: author.name,
+          risk: risk
+        }
       end
     end
     @authors = @authors.sort_by { |author| -author[:risk] }.take(10)
@@ -334,13 +332,11 @@ class LegislativesController < ApplicationController
           risk_list << risk_table[[probability, impact]].to_i
         end
         risk = ((risk_list.sum / risk_list.count) * 1.25).ceil
-        if risk >= 31
-          @speakers << {
-            legislatives: speaker.legislatives.count,
-            name: speaker.name,
-            risk: risk
-          }
-        end
+        @speakers << {
+          legislatives: speaker.legislatives.count,
+          name: speaker.name,
+          risk: risk
+        }
       end
     end
     @speakers = @speakers.sort_by { |speaker| -speaker[:risk] }.take(10)

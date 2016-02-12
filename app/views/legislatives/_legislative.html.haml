@@ -5,7 +5,7 @@
     = legislative.senate_number
   %td.desc
     %p
-      = legislative.title
+      = simple_format legislative.title
     - if legislative.warning
       %span.round.label.linear.urgent
         = fa_icon "exclamation-circle"
