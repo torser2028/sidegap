@@ -256,9 +256,9 @@ class LegislativesController < ApplicationController
     legislatives = user.following_legislatives
     legislatives.all_with_agenda.order(created_at: :desc).each do |legislative|
       legislative.agendas.each do |agenda|
-        if agenda.event_at > @last_week && agenda.event_at < @today
+        if agenda.event_at > @last_week && agenda.event_at <= @today
           @last_agendas << agenda
-        elsif agenda.event_at >= @today && agenda.event_at < @next_week
+        elsif agenda.event_at > @today && agenda.event_at < @next_week
           @next_agendas << agenda
         end
       end
