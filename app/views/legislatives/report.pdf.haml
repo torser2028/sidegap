@@ -386,10 +386,10 @@
                     %th Nombre
                     %th Riesgo Promedio
                 %tbody
-                  - @authors.each do |stakeholder|
+                  - @list_authors.each do |name, stakeholder|
                     %tr
                       %td= stakeholder[:legislatives]
-                      %td= stakeholder[:name]
+                      %td= name
                       %td= stakeholder[:risk]
 
             .small-6.columns
@@ -405,8 +405,8 @@
                     %th Nombre
                     %th Riesgo Promedio
                 %tbody
-                  - @speakers.each do |stakeholder|
+                  - @list_speakers.each do |name, stakeholder|
                     %tr
                       %td= stakeholder[:legislatives]
-                      %td= stakeholder[:name]
+                      %td= name
                       %td= stakeholder[:risk]

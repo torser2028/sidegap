@@ -1,0 +1,88 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Agenda") do |sheet|
+
+  wb.styles do |s|
+
+    blue_cell = s.add_style bg_color: "548DD4", fg_color: "00", sz: 11, alignment: { horizontal: :center, vertical: :center }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
+
+    title_cell = s.add_style sz: 14, alignment: { horizontal: :center, vertical: :center, wrap_text: true }, border: Axlsx::STYLE_THIN_BORDER, font_name: 'Calibri', b: true
+    
+    normal_cell = s.add_style sz: 11, alignment: { horizontal: :center, vertical: :center, wrap_text: true }, border: Axlsx::STYLE_THIN_BORDER, font_name: 'Calibri'
+
+    sheet.add_row ['AGENDA DE PLENARIAS Y COMISIONES', '', '', '', '', '', ''], style: title_cell, height: 50
+    sheet.merge_cells('A1:G1')
+
+    main_header = [
+      'FECHA EVENTO',
+      'HORA EVENTO',
+      'NÚM. CÁMARA',
+      'NÚM. SENADO',
+      'PROYECTO',
+      'PLENARIA / COMISIÓN',
+      'EVENTO'
+    ]
+
+    sheet.add_row main_header, style: [blue_cell, blue_cell, blue_cell, blue_cell, blue_cell, blue_cell, blue_cell], height: 50
+
+    @agendas.each do |agenda|
+
+      sheet.add_row [
+        (ldate agenda.event_at),
+        (l agenda.time, format: :simple),
+        agenda.legislative.chamber_number,
+        agenda.legislative.senate_number,
+        agenda.legislative.title,
+        agenda.plenary_commission,
+        agenda.body
+      ], style: normal_cell, height: 50
+    
+    end
+
+    sheet.column_widths 30, 30, 30, 30, 30, 30, 30
+
+
+    sheet.add_row
+    sheet.add_row
+
+
+    next_row = (@agendas.size + 5).to_s
+    title_event_row = 'A' + next_row + ':E' + next_row
+
+    sheet.add_row ['OTROS EVENTOS', title_event_row, '', '', ''], style: title_cell, height: 50
+    sheet.merge_cells(title_event_row)
+
+    main_header = [
+      'FECHA',
+      'HORA',
+      'EVENTO',
+      'TIPO DE EVENTO',
+      'LUGAR'
+    ]
+
+    sheet.add_row main_header, style: [blue_cell, blue_cell, blue_cell, blue_cell, blue_cell], height: 50
+
+    @events.each do |event|
+
+      senate_number = ''
+      if event.commission.present?
+        senate_number = "Comisión " + event.commission if event.commission.present?
+      elsif event.plenary.present?
+        senate_number = "Plenaria " + event.plenary
+      end
+
+      sheet.add_row [
+        (ldate event.event_at),
+        (l event.time, format: :simple),
+        event.event_type,
+        senate_number,
+        event.place
+      ], style: normal_cell, height: 50
+    
+    end
+
+    sheet.column_widths 30, 30, 30, 30, 30, 30, 30
+
+  end
+
+end

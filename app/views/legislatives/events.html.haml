@@ -23,6 +23,13 @@
               .button.secondary.fullwidth.quit
                 %a{href: url_for}
                   Quitar Filtros
+
+        %a{ href: events_legislatives_path(format: :xlsx), target: "_blank"}
+          = fa_icon "file-pdf-o"
+          %span
+            Exportar a Excel
+        %hr/
+
         %table
           %colgroup
             %col

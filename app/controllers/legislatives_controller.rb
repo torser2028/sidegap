@@ -89,8 +89,13 @@ class LegislativesController < ApplicationController
         @agendas << item if legislative.agendas.include? item
       end
     end
-  end
 
+    respond_to do |format|
+      format.html
+      format.xlsx
+    end
+  end
+  
   def events_commission
     @q = Legislative.ransack params[:q]
     @agendas = []
@@ -101,6 +106,11 @@ class LegislativesController < ApplicationController
     events = current_user.following_events
     Event.active.order(event_at: :desc).each do |event|
       @events << event unless events.include? event
+    end
+
+    respond_to do |format|
+      format.html
+      format.xlsx
     end
   end
 
@@ -306,7 +316,8 @@ class LegislativesController < ApplicationController
     # Authors and speakers
     
     @authors = []
-    legislatives.as_author.each do |legislative|
+    @list_authors = {}
+    legislatives.each do |legislative|
       legislative.stakeholders.authors.each do |author|
         risk_list = []
         author.legislatives.each do |legislative|
@@ -323,7 +334,17 @@ class LegislativesController < ApplicationController
     end
     @authors = @authors.sort_by { |author| -author[:risk] }.take(10)
 
+    @authors.each do |author|
+      name = author[:name]
+      if @list_authors.keys.include? (name)
+        @list_authors[name][:legislatives] += 1
+      else
+        @list_authors[name] = { legislatives: 1, risk: author[:risk] }
+      end
+    end
+
     @speakers = []
+    @list_speakers = {}
     legislatives.as_speaker.each do |legislative|
       legislative.stakeholders.speakers.each do |speaker|
         risk_list = []
@@ -340,6 +361,15 @@ class LegislativesController < ApplicationController
       end
     end
     @speakers = @speakers.sort_by { |speaker| -speaker[:risk] }.take(10)
+
+    @speakers.each do |speaker|
+      name = speaker[:name]
+      if @list_speakers.keys.include? (name)
+        @list_speakers[name][:legislatives] += 1
+      else
+        @list_speakers[name] = { legislatives: 1, risk: speaker[:risk] }
+      end
+    end
 
     respond_to do |format|
       format.html
