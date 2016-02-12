@@ -264,7 +264,7 @@ class LegislativesController < ApplicationController
       end
     end
 
-    @events = user.following_events.active_less_today.order(event_at: :desc)
+    @events = user.following_events.past_week.order(event_at: :desc)
 
     # Risk and projects
     risk_list = []
