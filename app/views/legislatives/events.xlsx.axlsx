@@ -66,9 +66,9 @@ wb.add_worksheet(name: "Agenda") do |sheet|
 
       senate_number = ''
       if event.commission.present?
-        senate_number = "Comisión " + event.commission if event.commission.present?
+        senate_number = event.commission if event.commission.present?
       elsif event.plenary.present?
-        senate_number = "Plenaria " + event.plenary
+        senate_number = event.plenary
       end
 
       sheet.add_row [

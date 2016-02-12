@@ -5,9 +5,9 @@
   %td= event.event_type
   %td
     - if event.commission.present?
-      = "Comisión " + event.commission if event.commission.present?
+      = event.commission if event.commission.present?
     - elsif event.plenary.present?
-      = "Plenaria " + event.plenary
+      = event.plenary
     %p= event.place
   %td
     - if current_user.following? event
