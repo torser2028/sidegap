@@ -316,61 +316,61 @@ class LegislativesController < ApplicationController
 
     # Authors and speakers
     
-    @authors = []
-    @list_authors = {}
+    @authors = {}
     legislatives.each do |legislative|
+
       legislative.stakeholders.authors.each do |author|
-        risk_list = []
-        author.legislatives.each do |legislative|
-          probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
-          risk_list << risk_table[[probability, impact]].to_i
+
+        probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
+        risk = risk_table[[probability, impact]].to_i
+
+        if @authors.keys.include? (author.name)
+          @authors[author.name] = {
+            legislatives: @authors[author.name][:legislatives] += 1,
+            risk_sum: @authors[author.name][:risk_sum] += risk,
+            risk_count: @authors[author.name][:risk_count] += 1
+          }
+        else
+          @authors[author.name] = {
+            legislatives: 1,
+            risk_sum: risk,
+            risk_count: 1
+          }
         end
-        risk = ((risk_list.sum / risk_list.count) * 1.25).ceil
-        @authors << {
-          legislatives: author.legislatives.count,
-          name: author.name,
-          risk: risk
-        }
-      end
-    end
-    @authors = @authors.sort_by { |author| -author[:risk] }.take(10)
 
-    @authors.each do |author|
-      name = author[:name]
-      if @list_authors.keys.include? (name)
-        @list_authors[name][:legislatives] += 1
-      else
-        @list_authors[name] = { legislatives: 1, risk: author[:risk] }
       end
-    end
 
-    @speakers = []
-    @list_speakers = {}
+    end
+    @authors = @authors.sort_by { |key, author| -((author[:risk_sum] / author[:risk_count]) * 1.25) }.take(10)
+
+    @speakers = {}
     legislatives.as_speaker.each do |legislative|
-      legislative.stakeholders.speakers.each do |speaker|
-        risk_list = []
-        speaker.legislatives.each do |legislative|
-          probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
-          risk_list << risk_table[[probability, impact]].to_i
-        end
-        risk = ((risk_list.sum / risk_list.count) * 1.25).ceil
-        @speakers << {
-          legislatives: speaker.legislatives.count,
-          name: speaker.name,
-          risk: risk
-        }
-      end
-    end
-    @speakers = @speakers.sort_by { |speaker| -speaker[:risk] }.take(10)
 
-    @speakers.each do |speaker|
-      name = speaker[:name]
-      if @list_speakers.keys.include? (name)
-        @list_speakers[name][:legislatives] += 1
-      else
-        @list_speakers[name] = { legislatives: 1, risk: speaker[:risk] }
+      legislative.stakeholders.speakers.each do |speaker|
+
+        risk_list = []
+        
+        probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
+        risk = risk_table[[probability, impact]].to_i
+        
+        if @speakers.keys.include? (speaker.name)
+          @speakers[speaker.name] = {
+            legislatives: @speakers[speaker.name][:legislatives] += 1,
+            risk_sum: @speakers[speaker.name][:risk_sum] += risk,
+            risk_count: @speakers[speaker.name][:risk_count] += 1
+          }
+        else
+          @speakers[speaker.name] = {
+            legislatives: 1,
+            risk_sum: risk,
+            risk_count: 1
+          }
+        end
+
       end
+
     end
+    @speakers = @speakers.sort_by { |key, speaker| -((speaker[:risk_sum] / speaker[:risk_count]) * 1.25) }.take(10)
 
     respond_to do |format|
       format.html

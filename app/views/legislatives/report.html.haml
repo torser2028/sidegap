@@ -354,11 +354,11 @@
                 %th Nombre
                 %th Riesgo Promedio
             %tbody
-              - @list_authors.each do |name, stakeholder|
+              - @authors.each do |name, stakeholder|
                 %tr
                   %td= stakeholder[:legislatives]
                   %td= name
-                  %td= stakeholder[:risk]
+                  %td= ((stakeholder[:risk_sum] / stakeholder[:risk_count]) * 1.25).ceil
 
         .small-6.columns
           %h3 Ponentes
@@ -373,8 +373,8 @@
                 %th Nombre
                 %th Riesgo Promedio
             %tbody
-              - @list_speakers.each do |name, stakeholder|
+              - @speakers.each do |name, stakeholder|
                 %tr
                   %td= stakeholder[:legislatives]
                   %td= name
-                  %td= stakeholder[:risk]
+                  %td= ((stakeholder[:risk_sum] / stakeholder[:risk_count]) * 1.25).ceil
