@@ -4,7 +4,7 @@
   .person
     -if @councillor.avatar_url
       %figure
-        = wicked_pdf_image_tag @councillor.avatar_url(:thumb)
+        = wicked_pdf_image_tag @councillor.avatar_url
         %p
           = @councillor.name
     %dl

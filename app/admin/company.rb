@@ -5,7 +5,7 @@ ActiveAdmin.register Company do
 
   index title: "Empresas" do
     column "Logo" do |company|
-      image_tag company.avatar_url(:thumb)
+      image_tag company.avatar_url
     end
     column :name
     actions
@@ -14,7 +14,7 @@ ActiveAdmin.register Company do
     panel "Detalles" do
       attributes_table_for company do
         row "Logo" do
-          image_tag company.avatar_url(:thumb)
+          image_tag company.avatar_url
         end
         row "Nombre" do
           company.name
@@ -28,7 +28,7 @@ ActiveAdmin.register Company do
     f.inputs do
       f.input :name, label: "Nombre"
       f.input :avatar, hint: f.object.avatar.present? \
-        ? image_tag(f.object.avatar_url(:thumb))
+        ? image_tag(f.object.avatar_url)
         : content_tag(:span, "no tiene image")
       f.input :avatar_cache, as: :hidden
     end

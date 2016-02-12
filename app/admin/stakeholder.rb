@@ -22,7 +22,7 @@ ActiveAdmin.register Stakeholder do
     panel "Detalles" do
       attributes_table_for stakeholder do
         row "Imagen" do
-          image_tag stakeholder.avatar_url(:thumb)
+          image_tag stakeholder.avatar_url
         end
         row "Nombre" do
           stakeholder.name
@@ -74,7 +74,7 @@ ActiveAdmin.register Stakeholder do
       f.input :info, label: "Pérfil"
       f.input :source, label: "Fuente de Información"
       f.input :avatar, hint: f.object.avatar.present? \
-        ? image_tag(f.object.avatar_url(:thumb))
+        ? image_tag(f.object.avatar_url)
         : content_tag(:span, "no tiene image")
       f.input :avatar_cache, as: :hidden
     end

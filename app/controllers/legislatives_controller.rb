@@ -237,6 +237,7 @@ class LegislativesController < ApplicationController
     if params.has_key? 'user_id'
       user = User.find params[:user_id]
       @report_date = session[:report_date]
+      @report_logo = session[:report_logo]
     end
 
     risk_table = get_risk_table
@@ -263,7 +264,7 @@ class LegislativesController < ApplicationController
       end
     end
 
-    @events = user.following_events.active.order(event_at: :desc)
+    @events = user.following_events.active_less_today.order(event_at: :desc)
 
     # Risk and projects
     risk_list = []
@@ -385,6 +386,10 @@ class LegislativesController < ApplicationController
     @users.prepend(['', 0])
     @user_id = @users[0][1]
 
+    @companies = Company.all.map{|c| ["#{c.name}", c.id] }
+    @companies.prepend(['', 0])
+    @company_id = @companies[0][1]
+
     @agendas = []
     @events = []
     @legislatives = []
@@ -394,6 +399,9 @@ class LegislativesController < ApplicationController
       if params[:client] != '0'
         @date = params[:date]
         session[:report_date] = params[:date]
+
+        @company_id = params[:logo]
+        session[:report_logo] = Company.find(params[:logo]).avatar_url
         
         @user_id = params[:client]
         user = User.find(@user_id)

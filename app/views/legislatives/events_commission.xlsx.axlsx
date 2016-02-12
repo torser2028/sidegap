@@ -74,8 +74,8 @@ wb.add_worksheet(name: "Agenda") do |sheet|
       sheet.add_row [
         (ldate event.event_at),
         (l event.time, format: :simple),
-        event.event_type,
         senate_number,
+        event.event_type,
         event.place
       ], style: normal_cell, height: 50
     

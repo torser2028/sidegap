@@ -22,7 +22,7 @@ ActiveAdmin.register Official do
     panel "Detalles" do
       attributes_table_for official do
         row "Imagen" do
-          image_tag official.avatar_url(:thumb)
+          image_tag official.avatar_url
         end
         row "Nombre" do
           official.name
@@ -66,7 +66,7 @@ ActiveAdmin.register Official do
       f.input :info, label: "Pérfil"
       f.input :source, label: "Fuente de Información"
       f.input :avatar, hint: f.object.avatar.present? \
-        ? image_tag(f.object.avatar_url(:thumb))
+        ? image_tag(f.object.avatar_url)
         : content_tag(:span, "no tiene image")
       f.input :avatar_cache, as: :hidden
     end

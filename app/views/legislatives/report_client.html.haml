@@ -30,6 +30,11 @@
       .large-3.medium-5.small-9.columns
         = text_field_tag :date, '', placeholder: 'DD/MM/AAAA', value: @date, class: 'datepicker'
       .large-6.columns
+    .row
+      .large-2.medium-1.small-3.columns
+        = label_tag :logo, 'Seleccionar Logo'
+      = select_tag :logo, options_for_select(@companies, @company_id), class: 'large-5 medium-5 small-9 columns'
+      .large-5.columns
     = submit_tag 'Buscar', class: 'button success fullwidth search'
 
   .row

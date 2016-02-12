@@ -19,7 +19,7 @@ ActiveAdmin.register Councillor do
     panel "Detalles" do
       attributes_table_for councillor do
         row "Imagen" do
-          image_tag councillor.avatar_url(:thumb)
+          image_tag councillor.avatar_url
         end
         row "Nombre" do
           councillor.name
@@ -67,7 +67,7 @@ ActiveAdmin.register Councillor do
       f.input :info, label: "Perfil"
       f.input :source, label: "Fuente de Información"
       f.input :avatar, hint: f.object.avatar.present? \
-        ? image_tag(f.object.avatar_url(:thumb))
+        ? image_tag(f.object.avatar_url)
         : content_tag(:span, "no tiene imagen")
       f.input :avatar_cache, as: :hidden
     end
