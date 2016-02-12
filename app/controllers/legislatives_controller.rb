@@ -323,7 +323,11 @@ class LegislativesController < ApplicationController
       legislative.stakeholders.authors.each do |author|
 
         probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
-        risk = risk_table[[probability, impact]].to_i
+        if impact
+          risk = risk_table[[probability, impact]].to_i
+        else
+          risk = 0
+        end
 
         if @authors.keys.include? (author.name)
           @authors[author.name] = {
@@ -352,7 +356,11 @@ class LegislativesController < ApplicationController
         risk_list = []
         
         probability, impact = legislative.probability, legislative.comments.average(:impact).to_i
-        risk = risk_table[[probability, impact]].to_i
+        if impact
+          risk = risk_table[[probability, impact]].to_i
+        else
+          risk = 0
+        end
         
         if @speakers.keys.include? (speaker.name)
           @speakers[speaker.name] = {
