@@ -265,6 +265,7 @@ class LegislativesController < ApplicationController
     end
 
     @events = user.following_events.past_week.order(event_at: :desc)
+    @events_next_week = user.following_events.next_week.order(event_at: :desc)
 
     # Risk and projects
     risk_list = []

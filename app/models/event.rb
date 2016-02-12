@@ -6,5 +6,5 @@ class Event < ActiveRecord::Base
   scope :inactive, -> { where("event_at < ?", Date.today) }
   scope :active_and_past_week, -> { where("event_at >= ?", Date.today - 1.week) }
   scope :past_week, -> { where("event_at > ? AND event_at <= ?", (Date.today - 1.week), Date.today) }
-  scope :active_less_today, -> { where("event_at > ?", Date.today) }
+  scope :next_week, -> { where("event_at > ? AND event_at <= ?", Date.today, (Date.today + 1.week)) }
 end
