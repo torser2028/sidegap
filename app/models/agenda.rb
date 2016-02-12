@@ -4,5 +4,5 @@ class Agenda < ActiveRecord::Base
 
   scope :active, -> { where("event_at >= ?", Date.today) }
   scope :inactive, -> { where("event_at < ?", Date.today) }
-  scope :past_week, -> { where("event_at > ? AND event_at <= ?", (Date.today - 1.week), Date.midnight.today) }
+  scope :past_week, -> { where("event_at > ? AND event_at <= ?", (Date.today - 1.week), Date.today) }
 end
