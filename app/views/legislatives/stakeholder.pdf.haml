@@ -3,7 +3,7 @@
     Perfil Congresista
   .person
     - if @stakeholder.avatar_url
-      %figure
+      %figure.avatar
         - if !@stakeholder.avatar_url.nil?
           = image_tag embed_remote_image(@stakeholder.avatar_url, 'image/png')
         %p

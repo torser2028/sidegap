@@ -22,7 +22,7 @@ ActiveAdmin.register Stakeholder do
     panel "Detalles" do
       attributes_table_for stakeholder do
         row "Imagen" do
-          image_tag stakeholder.avatar_url
+          image_tag stakeholder.avatar_url, class: 'avatar'
         end
         row "Nombre" do
           stakeholder.name
