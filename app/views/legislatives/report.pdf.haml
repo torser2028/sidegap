@@ -88,7 +88,8 @@
 
     %h1.report-title Informe legislativo
     .right= @report_date
-    %img{src: @report_logo, alt: "Logo"}/
+
+    .logo= image_tag embed_remote_image(@report_logo, 'image/png')
 
     .panels-view.report
       .row.section
