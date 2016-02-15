@@ -4,7 +4,8 @@
   .person
     - if @stakeholder.avatar_url
       %figure
-        = wicked_pdf_image_tag @stakeholder.avatar_url
+        - if !@stakeholder.avatar_url.nil?
+          = image_tag embed_remote_image(@stakeholder.avatar_url, 'image/png')
         %p
           = @stakeholder.name
     %dl
