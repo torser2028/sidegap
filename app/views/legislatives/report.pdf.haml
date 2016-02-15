@@ -90,7 +90,8 @@
     .right= @report_date
 
     - if current_user.has_role? :admin
-      .logo= image_tag embed_remote_image(@report_logo, 'image/png')
+      - if !@report_logo.nil?
+        .logo= image_tag embed_remote_image(@report_logo, 'image/png')
 
     .panels-view.report
       .row.section
