@@ -31,7 +31,9 @@ class Legislative < ActiveRecord::Base
   ]
   
   scope :actual, -> { where(created_at: time_range) }
-  scope :approved, -> { where(status: status_approved) }
+  scope :actual_archived, -> { where(final_status: 'Archivado', created_at: time_range) }
+  scope :actual_retired, -> { where(final_status: 'Retirado', created_at: time_range) }
+  scope :actual_approved, -> { where(status: status_approved, final_status: '', created_at: time_range) }
 
   validates :source, :title, :status, :type_law, :filing_at, presence: true
 

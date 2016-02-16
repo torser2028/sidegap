@@ -114,9 +114,9 @@ class UserMailer < ApplicationMailer
     @topics = following_legislatives.actual.group(:topic).count
 
     @actual_projects = following_legislatives.actual
-    @approved_projects = following_legislatives.approved
-    @archived_projects = following_legislatives.archived
-    @retired_projects = following_legislatives.retired
+    @approved_projects = following_legislatives.actual_approved
+    @archived_projects = following_legislatives.actual_archived
+    @retired_projects = following_legislatives.actual_retired
 
     mail(to: recipient.email, subject: "Estado semanal de su cuenta")
   end
