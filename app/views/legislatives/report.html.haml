@@ -383,7 +383,10 @@
                 %tr
                   %td= stakeholder[:legislatives]
                   %td= name
-                  %td= ((stakeholder[:risk_sum] / stakeholder[:risk_count]) * 1.25).ceil
+                  - if stakeholder[:legislatives] == 1
+                    %td= ((stakeholder[:risk_sum] / stakeholder[:risk_count]) * 0.75).ceil
+                  - else
+                    %td= (stakeholder[:risk_sum] / stakeholder[:risk_count]).ceil
 
         .small-6.columns
           %h3 Ponentes
@@ -402,4 +405,7 @@
                 %tr
                   %td= stakeholder[:legislatives]
                   %td= name
-                  %td= ((stakeholder[:risk_sum] / stakeholder[:risk_count]) * 1.25).ceil
+                  - if stakeholder[:legislatives] == 1
+                    %td= ((stakeholder[:risk_sum] / stakeholder[:risk_count]) * 0.75).ceil
+                  - else
+                    %td= (stakeholder[:risk_sum] / stakeholder[:risk_count]).ceil

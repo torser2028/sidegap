@@ -42,9 +42,6 @@
                     %td{:style => "color: CornflowerBlue;"}
                       = "(#{@user_changed_status}) Han cambiado de estado"
                   %tr
-                    %td{:style => "color: CornflowerBlue;"}
-                      = "(#{@user_with_agenda}) Están en agenda de discusión para la próxima semana"
-                  %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td Los temas de interés de sus Proyectos de Ley son:
@@ -52,6 +49,12 @@
                       - @user_topics.each do |topic, count|
                         = "(#{count}) " + topic
                         %br/
+                  %tr
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                  %tr
+                    %td{:width => "50%"} Están en agenda de discusión para la próxima semana:
+                    %td{:style => "color: CornflowerBlue;"}
+                      = "(#{@user_with_agenda}) Proyectos de Ley"
               %p{style: 'text-align: center;'}
                 %strong
                   Para consultar la agenda legislativa de sus proyectos en seguimiento, de los próximos días haga click
@@ -159,7 +162,7 @@
                   %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
-                    %td{:width => "30%"} Proyectos aprobados en primer debate:
+                    %td{:width => "30%"} Proyectos aprobados:
                     %td
                       - if !@approved_projects.size.zero?
                         %table{:cellpadding => "5", :width => "80%"}
@@ -191,7 +194,7 @@
                               %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                       - else
                         %p{:style => "color: CornflowerBlue;"}
-                          No hay proyectos aprobados en primer debate
+                          No hay proyectos aprobados
                   %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
