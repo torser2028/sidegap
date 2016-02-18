@@ -24,16 +24,16 @@ class Legislative < ActiveRecord::Base
   scope :archived, -> { where(final_status: 'Archivado') }
   scope :retired, -> { where(final_status: 'Retirado') }
 
-  time_range = (Time.now - 7.day)..(Time.now.midnight - 2.day)
+  time_range = ((Time.now - 7.day)..Time.now.midnight + 1.day)
   status_approved = [
     '1er Debate', '2do Debate', '3er Debate', '4to Debate', 
     '5to Debate', '6to Debate', '7mo Debate', '8vo Debate'
   ]
   
-  scope :actual, -> { where(created_at: time_range, updated_at: time_range) }
-  scope :actual_archived, -> { where(final_status: 'Archivado', created_at: time_range, updated_at: time_range) }
-  scope :actual_retired, -> { where(final_status: 'Retirado', created_at: time_range, updated_at: time_range) }
-  scope :actual_approved, -> { where(status: status_approved, final_status: '', created_at: time_range, updated_at: time_range) }
+  scope :actual, -> { where(created_at: time_range) }
+  scope :actual_archived, -> { where(final_status: 'Archivado', updated_at: time_range) }
+  scope :actual_retired, -> { where(final_status: 'Retirado') }
+  scope :actual_approved, -> { where(status: status_approved, final_status: ['', nil], updated_at: time_range) }
 
   validates :source, :title, :status, :type_law, :filing_at, presence: true
 
