@@ -107,16 +107,16 @@ class UserMailer < ApplicationMailer
     @user_with_agenda = following_legislatives.with_agenda.count
     @user_topics = following_legislatives.group(:topic).count
 
-    @actual = following_legislatives.actual.count
-    @archived = following_legislatives.actual_archived.count
-    @retired = following_legislatives.actual_retired.count
-    @with_agenda = following_legislatives.with_agenda.count
-    @topics = following_legislatives.actual.group(:topic).count
+    @actual = Legislative.actual.count
+    @archived = Legislative.actual_archived.count
+    @retired = Legislative.actual_retired.count
+    @with_agenda = Legislative.with_agenda.count
+    @topics = Legislative.actual.group(:topic).count
 
-    @actual_projects = following_legislatives.actual
-    @approved_projects = following_legislatives.actual_approved
-    @archived_projects = following_legislatives.actual_archived
-    @retired_projects = following_legislatives.actual_retired
+    @actual_projects = Legislative.actual
+    @approved_projects = Legislative.actual_approved
+    @archived_projects = Legislative.actual_archived
+    @retired_projects = Legislative.actual_retired
 
     mail(to: recipient.email, subject: "Estado semanal de su cuenta")
   end

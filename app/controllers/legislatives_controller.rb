@@ -346,7 +346,17 @@ class LegislativesController < ApplicationController
       end
 
     end
-    @authors = @authors.sort_by { |key, author| -((author[:risk_sum] / author[:risk_count]) * 1.25) }.take(10)
+
+    @authors.each do |key, author|
+      if author[:legislatives] == 1
+        risk = ((author[:risk_sum] / author[:risk_count]) * 0.75).ceil
+      else
+        risk = (author[:risk_sum] / author[:risk_count]).ceil
+      end
+      author[:risk] = risk
+    end
+
+    @authors = @authors.sort_by { |key, author| -author[:risk] }.take(10)
 
     @speakers = {}
     legislatives.as_speaker.each do |legislative|
@@ -379,7 +389,17 @@ class LegislativesController < ApplicationController
       end
 
     end
-    @speakers = @speakers.sort_by { |key, speaker| -((speaker[:risk_sum] / speaker[:risk_count]) * 1.25) }.take(10)
+
+    @speakers.each do |key, speaker|
+      if speaker[:legislatives] == 1
+        risk = ((speaker[:risk_sum] / speaker[:risk_count]) * 0.75).ceil
+      else
+        risk = (speaker[:risk_sum] / speaker[:risk_count]).ceil
+      end
+      speaker[:risk] = risk
+    end
+
+    @speakers = @speakers.sort_by { |key, speaker| -speaker[:risk] }.take(10)
 
     respond_to do |format|
       format.html
