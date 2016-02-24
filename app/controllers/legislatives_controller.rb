@@ -238,6 +238,8 @@ class LegislativesController < ApplicationController
       user = User.find params[:user_id]
       @report_date = session[:report_date]
       @report_logo = session[:report_logo]
+    else
+      @report_logo = Company.find(user.company_id).avatar_url
     end
 
     risk_table = get_risk_table
