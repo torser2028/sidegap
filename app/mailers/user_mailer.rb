@@ -108,6 +108,7 @@ class UserMailer < ApplicationMailer
     @user_topics = following_legislatives.group(:topic).count
 
     @actual = Legislative.actual.count
+    @approved = Legislative.actual_approved.count
     @archived = Legislative.actual_archived.count
     @retired = Legislative.actual_retired.count
     @with_agenda = Legislative.with_agenda.count
