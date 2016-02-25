@@ -1,8 +1,8 @@
 %tr
-  %td.num= ldate agenda.event_at
-  %td.num= l agenda.time, format: :simple
-  %td.num= agenda.legislative.chamber_number
-  %td.num= agenda.legislative.senate_number
+  %td= ldate agenda.event_at
+  %td= l agenda.time, format: :simple
+  %td= agenda.legislative.chamber_number
+  %td= agenda.legislative.senate_number
   %td.desc= simple_format agenda.legislative.title
-  %td.num= agenda.plenary_commission
+  %td= agenda.plenary_commission
   %td.desc= simple_format agenda.body

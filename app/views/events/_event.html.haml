@@ -1,6 +1,6 @@
 %tr
-  %td.num= ldate event.event_at
-  %td.num= l event.time, format: :simple
+  %td= ldate event.event_at
+  %td= l event.time, format: :simple
   %td.desc= simple_format event.body
   %td= event.event_type
   %td
