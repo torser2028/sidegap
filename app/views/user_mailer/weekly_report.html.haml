@@ -135,7 +135,7 @@
                             %tr
                               %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Número:
                               %td{:style => "color: CornflowerBlue;"}
-                                = project.chamber_number ? project.chamber_number : project.senate_number
+                                = project.chamber_number.present? ? project.chamber_number : project.senate_number
                             %tr
                               %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Título:
                               %td{:style => "color: CornflowerBlue;"}
@@ -171,7 +171,7 @@
                             %tr
                               %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Número:
                               %td{:style => "color: CornflowerBlue;"}
-                                = project.chamber_number ? project.chamber_number : project.senate_number
+                                = project.chamber_number.present? ? project.chamber_number : project.senate_number
                             %tr
                               %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Título:
                               %td{:style => "color: CornflowerBlue;"}
@@ -207,7 +207,7 @@
                             %tr
                               %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Número:
                               %td{:style => "color: CornflowerBlue;"}
-                                = project.chamber_number ? project.chamber_number : project.senate_number
+                                = project.chamber_number.present? ? project.chamber_number : project.senate_number
                             %tr
                               %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Título:
                               %td{:style => "color: CornflowerBlue;"}
@@ -243,7 +243,7 @@
                             %tr
                               %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Número:
                               %td{:style => "color: CornflowerBlue;"}
-                                = project.chamber_number ? project.chamber_number : project.senate_number
+                                = project.chamber_number.present? ? project.chamber_number : project.senate_number
                             %tr
                               %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Título:
                               %td{:style => "color: CornflowerBlue;"}
