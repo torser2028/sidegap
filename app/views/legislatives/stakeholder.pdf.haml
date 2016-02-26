@@ -4,8 +4,9 @@
   .person
     - if @stakeholder.avatar_url
       %figure.avatar
-        - if !@stakeholder.avatar_url.nil? && @stakeholder.avatar_url.present?
-          = image_tag embed_remote_image(@stakeholder.avatar_url, 'image/png')
+        - if !@stakeholder.avatar_url.nil?
+          - if embed_remote_image(@stakeholder.avatar_url, 'image/png')
+            = image_tag embed_remote_image(@stakeholder.avatar_url, 'image/png')
         %p
           = @stakeholder.name
     %dl
