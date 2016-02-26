@@ -245,7 +245,7 @@ class LegislativesController < ApplicationController
     risk_table = get_risk_table
 
     # Summary Week
-    @summary_week = Notice.where(user_id: user.id)
+    @summary_week = Notice.actual.where(user_id: user.id)
 
     # Events
     @today = Date.today
