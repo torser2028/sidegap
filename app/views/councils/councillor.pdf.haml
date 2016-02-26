@@ -3,11 +3,12 @@
     Perfil Concejal
   .person
     - if @councillor.avatar_url
-      %figure.avatar
-        - if !@councillor.avatar_url.nil?
-          = image_tag embed_remote_image(@councillor.avatar_url, 'image/png')
-        %p
-          = @councillor.name
+      - if !@councillor.avatar_url.nil?
+        - if embed_remote_image(@councillor.avatar_url, 'image/png')
+          %figure.avatar
+            = image_tag embed_remote_image(@councillor.avatar_url, 'image/png')
+            %p
+              = @councillor.name
     %dl
       %dt
         %label Nombre

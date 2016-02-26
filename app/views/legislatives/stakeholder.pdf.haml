@@ -3,12 +3,12 @@
     Perfil Congresista
   .person
     - if @stakeholder.avatar_url
-      %figure.avatar
-        - if !@stakeholder.avatar_url.nil?
-          - if embed_remote_image(@stakeholder.avatar_url, 'image/png')
+      - if !@stakeholder.avatar_url.nil?
+        - if embed_remote_image(@stakeholder.avatar_url, 'image/png')
+          %figure.avatar
             = image_tag embed_remote_image(@stakeholder.avatar_url, 'image/png')
-        %p
-          = @stakeholder.name
+            %p
+              = @stakeholder.name
     %dl
       %dt
         %label Nombre
