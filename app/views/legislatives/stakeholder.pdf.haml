@@ -57,8 +57,9 @@
       %dt
         %label Perfil
       %dd
-        %p
-          = simple_format @stakeholder.info
+        .columns{:align => "justify"}
+          %p
+            = simple_format @stakeholder.info
 .div
   - if @legislatives_as_author.present?
     .tray.autors

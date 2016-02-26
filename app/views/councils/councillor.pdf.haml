@@ -53,8 +53,9 @@
       %dt
         %label Perfil
       %dd
-        %p
-          = simple_format @councillor.info
+        .columns{:align => "justify"}
+          %p
+            = simple_format @councillor.info
 .div
   .tray.autors
     %h2
