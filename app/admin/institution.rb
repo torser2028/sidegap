@@ -1,15 +1,20 @@
 ActiveAdmin.register Institution do
   menu label: "Instituciones", parent: "Normas en Proceso de Consulta", priority: 1
 
-  permit_params :sector_id, :name, :rule
+  permit_params :sector_id, :name, :rule, :active
 
   filter :sector
   filter :name, label: "Nombre"
+
+  scope "Todas", :all, default: true
+  scope "Activas", :active
+  scope "Inactivas", :inactive
 
   index title: "Instituciones" do
     selectable_column
     column :sector
     column "Nombre", :name
+    column "Activa", :active
     actions
   end
 
@@ -19,6 +24,9 @@ ActiveAdmin.register Institution do
         row :sector
         row "Nombre" do
           institution.name
+        end
+        row "Activa" do
+          institution.active ? 'Sí' : 'No'
         end
       end
     end
@@ -30,6 +38,7 @@ ActiveAdmin.register Institution do
       f.input :sector
       f.input :name, label: "Nombre"
       f.input :rule, as: :hidden, input_html: { value: true }
+      f.input :active, label: "Activa"
     end
     f.actions do
       f.action :submit, label: "Guardar Institución"
