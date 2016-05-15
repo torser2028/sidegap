@@ -1,0 +1,58 @@
+.external-login
+  = form_for(@resource, as: resource_name, url: session_path(resource_name)) do |f|
+    .container
+      %span.label Usuario
+      %span= f.email_field :email, size: 40
+    .container
+      %span.label Contraseña
+      %span= f.password_field :password
+    .container
+      %span.label
+      %span= f.submit "Iniciar Sesión"
+
+%link{:href => "https://fonts.googleapis.com/css?family=Lato:400,100", :rel => "stylesheet", :type => "text/css"}/
+%link{:href => "https://fonts.googleapis.com/css?family=Economica", :rel => "stylesheet", :type => "text/css"}/
+
+:css
+  .external-login {
+    background: #505961;
+    color: #FFFFFF;
+    display: block;
+    height: 216px;
+    padding: 0 20px;
+    padding-top: 60px;
+    width: 382px;
+  }
+  .external-login .container {
+    margin-bottom: .5em;
+  }
+  .external-login span {
+    display: inline-block;
+    padding: .5em 0;
+    width: 65%;
+  }
+  .external-login span.label {
+    font-family: 'Lato', Arial, Helvetica;
+    width: 30%;
+  }
+  .external-login input {
+    border: 1px solid;
+    border-color: #9B9B9B;
+    background-color: transparent;
+    font-family: 'Economica', Arial, Helvetica;
+    color: #c9c9c9;
+    font-size: 1em;
+    padding: .2em;
+    width: 100%;
+  }
+  .external-login input[type="submit"] {
+    border: 1px solid;
+    border-color: #FFF;
+    border-radius: 50px;
+    color: #FFF !important;
+    font-size: 22px;
+    margin-top: 1em;
+    padding: 5px 10px;
+    text-align: center;
+    width: 186px;
+  }
