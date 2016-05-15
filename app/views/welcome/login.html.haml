@@ -8,7 +8,7 @@
       %span= f.password_field :password
     .container
       %span.label
-      %span= f.submit "Iniciar Sesión", class: 'login-submit'
+      %span= f.submit "Iniciar Sesión", id: 'login-submit'
 
 %link{:href => "https://fonts.googleapis.com/css?family=Lato:400,100", :rel => "stylesheet", :type => "text/css"}/
 %link{:href => "https://fonts.googleapis.com/css?family=Economica", :rel => "stylesheet", :type => "text/css"}/
@@ -19,7 +19,7 @@
     color: #FFFFFF;
     display: block;
     padding: 0 20px;
-    width: 256px;
+    width: 250px;
   }
   .external-login form {
     margin-bottom: 0;
@@ -27,7 +27,7 @@
   .external-login span {
     display: inline-block;
     padding: .5em 0;
-    width: 150px;
+    width: 145px;
   }
   .external-login span.label {
     font-family: 'Lato', Arial, Helvetica;
@@ -51,8 +51,8 @@
     font-size: 1.2em;
     padding: 5px 10px;
     text-align: center;
-    width: 150px;
+    width: 145px;
   }
 
 :javascript
-  
+  var submit = document.getElementById("login-submit");
