@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     #   get 'products/:id' => 'catalog#view'
 
     get 'stories/:id' => 'stories#show', as: :story
+    get 'login' => 'welcome#login', as: :login
 
     concern :followable do
         member do

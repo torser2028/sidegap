@@ -50,6 +50,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry-rails'
   gem 'letter_opener'
+  # gem 'sqlite3'
 end
 
 group :production do

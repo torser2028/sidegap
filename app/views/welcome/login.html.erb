@@ -1,0 +1,19 @@
+<div>
+  <%= form_for(@resource, as: resource_name, url: session_path(resource_name), class: 'wpcf7-form sent') do |f| %>
+    <p class="form_footer_p">
+      Usuario 
+      <span class="campos_login">
+        <%= f.email_field :email, size: 40 %>
+      </span> 
+    </p>
+    <p class="form_footer_p">
+      Contraseña 
+      <span class="campos_login">
+        <%= f.password_field :password %>
+      </span> 
+    </p>
+    <p>
+      <%= f.submit "Iniciar Sesión", class: "btn_login"%>
+    </p>
+  <% end %>
+</div>
