@@ -8,7 +8,7 @@
       %span= f.password_field :password
     .container
       %span.label
-      %span= f.submit "Iniciar Sesión", id: 'login-submit'
+      %span= f.submit "Iniciar Sesión", class: 'login-submit'
 
 %link{:href => "https://fonts.googleapis.com/css?family=Lato:400,100", :rel => "stylesheet", :type => "text/css"}/
 %link{:href => "https://fonts.googleapis.com/css?family=Economica", :rel => "stylesheet", :type => "text/css"}/
@@ -53,6 +53,3 @@
     text-align: center;
     width: 145px;
   }
-
-:javascript
-  var submit = document.getElementById("login-submit");

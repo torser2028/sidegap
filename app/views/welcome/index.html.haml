@@ -76,3 +76,8 @@
       %p= story.body
       .more{role: "button"}
         = link_to "Ver", story.project_rule == '' ? "#" : story.project_rule
+
+:javascript
+  if(window!=window.top) {
+    top.window.location.href = 'http://app.sidegap.com/users/sign_in';
+  }

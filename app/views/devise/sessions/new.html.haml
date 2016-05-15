@@ -34,3 +34,8 @@
       .medium-3.small-4.columns
       .medium-9.small-8.columns.actions
         = render "devise/shared/links"
+
+:javascript
+  if(window!=window.top) {
+    top.window.location.href = 'http://app.sidegap.com/users/sign_in';
+  }
