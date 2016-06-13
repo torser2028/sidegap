@@ -107,15 +107,20 @@ class UserMailer < ApplicationMailer
     @user_with_agenda = following_legislatives.with_agenda.count
     @user_topics = following_legislatives.group(:topic).count
 
+    actual_approved = []
+    Legislative.actual_approved.each do |legislative|
+      actual_approved << legislative if legislative.last_status != legislative.status
+    end
+
     @actual = Legislative.actual.count
-    @approved = Legislative.actual_approved.count
+    @approved = actual_approved.count
     @archived = Legislative.actual_archived.count
     @retired = Legislative.actual_retired.count
     @with_agenda = Legislative.with_agenda.count
     @topics = Legislative.actual.group(:topic).count
 
     @actual_projects = Legislative.actual
-    @approved_projects = Legislative.actual_approved
+    @approved_projects = actual_approved
     @archived_projects = Legislative.actual_archived
     @retired_projects = Legislative.actual_retired
 
