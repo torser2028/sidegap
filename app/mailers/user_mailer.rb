@@ -109,7 +109,7 @@ class UserMailer < ApplicationMailer
 
     actual_approved = []
     Legislative.actual_approved.each do |legislative|
-      actual_approved << legislative if legislative.last_status != legislative.status
+      actual_approved << legislative if legislative.status != legislative.last_status
     end
 
     @actual = Legislative.actual.count
