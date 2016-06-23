@@ -24,7 +24,7 @@ class Legislative < ActiveRecord::Base
   scope :archived, -> { where(final_status: 'Archivado') }
   scope :retired, -> { where(final_status: 'Retirado') }
 
-  time_range = ((Time.now - 10.day)..(Time.now - 1.day))
+  time_range = ((Time.now - 12.day)..(Time.now - 3.day))
   # time_range = ((Time.now - 7.day)..Time.now.midnight + 1.day)
   status_approved = [
     '1er Debate', '2do Debate', '3er Debate', '4to Debate', 
@@ -39,7 +39,7 @@ class Legislative < ActiveRecord::Base
   scope :actual_archived, -> { where(final_status: 'Archivado', updated_at: time_range) }
   scope :actual_retired, -> { where(final_status: 'Retirado', updated_at: time_range) }
   # scope :actual_approved, -> { where(status: status_approved, final_status: ['', nil], updated_at: time_range) }
-  scope :actual_approved, -> { where(final_status: ['', nil], updated_at: time_range) }
+  scope :actual_approved, -> { where(final_status: ['', nil], status_updated_at: time_range) }
 
   validates :source, :title, :status, :type_law, :filing_at, presence: true
 
@@ -78,5 +78,6 @@ class Legislative < ActiveRecord::Base
 
     def update_last_status
       self.last_status = self.status_was
+      self.status_updated_at = Time.now
     end
 end
