@@ -78,6 +78,8 @@ class Legislative < ActiveRecord::Base
 
     def update_last_status
       self.last_status = self.status_was
-      self.status_updated_at = Time.now
+      if self.status_was != self.last_status
+        self.status_updated_at = Time.now
+      end
     end
 end
