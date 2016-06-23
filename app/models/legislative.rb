@@ -36,8 +36,8 @@ class Legislative < ActiveRecord::Base
   ]
 
   scope :actual, -> { where(created_at: time_range) }
-  scope :actual_archived, -> { where(final_status: 'Archivado', updated_at: time_range) }
-  scope :actual_retired, -> { where(final_status: 'Retirado', updated_at: time_range) }
+  scope :actual_archived, -> { where(final_status: 'Archivado', status_updated_at: time_range) }
+  scope :actual_retired, -> { where(final_status: 'Retirado', status_updated_at: time_range) }
   # scope :actual_approved, -> { where(status: status_approved, final_status: ['', nil], updated_at: time_range) }
   scope :actual_approved, -> { where(final_status: ['', nil], status_updated_at: time_range) }
 
@@ -78,7 +78,7 @@ class Legislative < ActiveRecord::Base
 
     def update_last_status
       self.last_status = self.status_was
-      if self.status_was != self.last_status
+      if self.status != self.status_was or self.final_status != ''
         self.status_updated_at = Time.now
       end
     end
