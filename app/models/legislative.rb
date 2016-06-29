@@ -24,7 +24,7 @@ class Legislative < ActiveRecord::Base
   scope :archived, -> { where(final_status: 'Archivado') }
   scope :retired, -> { where(final_status: 'Retirado') }
 
-  time_range = ((Time.now - 2.day)..(Time.now + 2.day))
+  time_range = ((Time.now - 3.day)..(Time.now + 3.day))
   # time_range = ((Time.now - 7.day)..Time.now.midnight + 1.day)
   # status_approved = [
   #   '1er Debate', '2do Debate', '3er Debate', '4to Debate', 
