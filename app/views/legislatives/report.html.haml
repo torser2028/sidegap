@@ -1,53 +1,62 @@
 - content_for :head do
 
-  / Load the AJAX API
-  %script{:src => "https://www.google.com/jsapi", :type => "text/javascript"}
+  %script{:src => "https://www.gstatic.com/charts/loader.js", :type => "text/javascript"}
   :javascript
-    google.load("visualization", "1", {packages:["corechart"]});
-    google.setOnLoadCallback(drawChart);
-
-    var values_status = #{@legislatives_by_status.to_a};
-    console.log(values_status);
-    values_status.unshift(['Estado', 'Cantidad']);
-
-    var values_topic = #{@legislatives_by_topic.to_a};
-    console.log(values_topic);
-    values_topic.unshift(['Tema de interés', 'Cantidad']);
-
-    var values_risk = #{@legislatives_by_risk.to_a};
-    console.log(values_risk);
-    values_risk.unshift(['Riesgo', 'Cantidad', { role: 'style' }]);
+    google.charts.load('current', {packages: ['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
 
     function drawChart() {
-      var data_status = google.visualization.arrayToDataTable(values_status);
-      var data_topic = google.visualization.arrayToDataTable(values_topic);
-      
-      var data_risk = google.visualization.arrayToDataTable(values_risk);
-      var data_risk = new google.visualization.DataView(data_risk);
-      data_risk.setColumns([0, 1, {
-        calc: "stringify", sourceColumn: 1, type: "string", role: "annotation"
-      }, 2]);
-      
-      var options = {
+      // Set chart options
+      var options = { 
         width: 600,
         height: 350,
         is3D: true
       };
+
       var options_risk = {
         width: 600,
         height: 350,
         legend: { position: "none" }
       };
 
+      // Status chart
+      var values_status = #{@legislatives_by_status.to_a};
+
+      var data_status = new google.visualization.DataTable();
+      data_status.addColumn('string', 'Tema de interés');
+      data_status.addColumn('number', 'Cantidad');
+      data_status.addRows(values_status);
+      
       var chart_status = new google.visualization.PieChart(document.getElementById('legislative_by_status'));
       chart_status.draw(data_status, options);
+
+      // Topic chart
+      var values_topic = #{@legislatives_by_topic.to_a};
+
+      var data_topic = new google.visualization.DataTable();
+      data_topic.addColumn('string', 'Tema de interés');
+      data_topic.addColumn('number', 'Cantidad');
+      data_topic.addRows(values_topic);
+      
       var chart_topic = new google.visualization.PieChart(document.getElementById('legislative_by_topic'));
       chart_topic.draw(data_topic, options);
+
+      // Risk chart
+      var values_risk = #{@legislatives_by_risk.to_a};
+      values_risk.unshift(['Riesgo', 'Cantidad', {role: 'style'}]);
+      
+      var data_risk = google.visualization.arrayToDataTable(values_risk);
+      var data_risk = new google.visualization.DataView(data_risk);
+      data_risk.setColumns([0, 1, {
+        calc: "stringify", sourceColumn: 1, type: "string", role: "annotation"
+      }, 2]);
+
       var chart_risk = new google.visualization.ColumnChart(document.getElementById('legislative_by_risk'));
       chart_risk.draw(data_risk, options_risk);
     }
 
-    $(document).ready(function() {
+  :javascript
+    $(document).on('ready', function() {
       drawChart();
     });
 

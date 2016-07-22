@@ -5,66 +5,27 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title Sidegap
     / Load the AJAX API
-    %script{:src => "https://www.gstatic.com/charts/loader.js", :type => "text/javascript"}
+    %script{:src => "https://www.google.com/jsapi", :type => "text/javascript"}
     :javascript
-      google.charts.load('current', {packages: ['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+
+      var values_status = #{@legislatives_by_status.to_a};
+      values_status.unshift(['Estado', 'Cantidad']);
+
+      var values_topic = #{@legislatives_by_topic.to_a};
+      values_topic.unshift(['Tema de interés', 'Cantidad']);
+
+      var values_risk = #{@legislatives_by_risk.to_a};
+      values_risk.unshift(['Cantidad', 'Riesgo', { role: 'style' }]);
 
       function errorHandler(errorMessage) {
         google.visualization.errors.removeError(errorMessage.id);
       }
 
       function drawChart() {
-        // Set chart options
-        var options = { 
-          width: 600,
-          height: 350
-        };
-
-        var options_risk = {
-          width: 600,
-          height: 350,
-          legend: { position: "none" }
-        };
-
-        // Status chart
-        var values_status = #{@legislatives_by_status.to_a};
-
-        var data_status = new google.visualization.DataTable();
-        data_status.addColumn('string', 'Tema de interés');
-        data_status.addColumn('number', 'Cantidad');
-        data_status.addRows(values_status);
-
-        var chart_status = new google.visualization.PieChart(legislative_by_status);
-        var legislative_by_status = document.getElementById('legislative_by_status');
-
-        google.visualization.events.addListener(chart_status, 'error', errorHandler);
-        google.visualization.events.addListener(chart_status, 'ready', function() {
-          legislative_by_status.innerHTML = '<img src="' + chart_status.getImageURI() + '">';
-        });
-        chart_status.draw(data_status, options);
-
-        
-        // Topic chart
-        var values_topic = #{@legislatives_by_topic.to_a};
-
-        var data_topic = new google.visualization.DataTable();
-        data_topic.addColumn('string', 'Tema de interés');
-        data_topic.addColumn('number', 'Cantidad');
-        data_topic.addRows(values_status);
-
-        var chart_topic = new google.visualization.PieChart(legislative_by_topic);
-        var legislative_by_topic = document.getElementById('legislative_by_topic');
-
-        google.visualization.events.addListener(chart_topic, 'error', errorHandler);
-        google.visualization.events.addListener(chart_topic, 'ready', function() {
-          legislative_by_topic.innerHTML = '<img src="' + chart_topic.getImageURI() + '">';
-        });
-        chart_topic.draw(data_topic, options);
       
-        // Risk chart
-        var values_risk = #{@legislatives_by_risk.to_a};
-        values_risk.unshift(['Cantidad', 'Riesgo', { role: 'style' }]);
+        // Risk
 
         var data_risk = google.visualization.arrayToDataTable(values_risk);
         var data_risk = new google.visualization.DataView(data_risk);
@@ -72,15 +33,55 @@
           calc: "stringify", sourceColumn: 1, type: "string", role: "annotation"
         }, 2]);
         
-        var data_risk = google.visualization.arrayToDataTable(values_risk);
-        var chart_risk = new google.visualization.ColumnChart(legislative_by_risk);
-        var legislative_by_risk = document.getElementById('legislative_by_risk');
+        var options_risk = {
+          width: 500,
+          height: 350,
+          legend: { position: "none" }
+        };
         
-        google.visualization.events.addListener(chart_risk, 'error', errorHandler);
-        google.visualization.events.addListener(chart_risk, 'ready', function() {
+        var data_risk = google.visualization.arrayToDataTable(values_risk);
+        var legislative_by_risk = document.getElementById('legislative_by_risk');
+        var chart_risk = new google.visualization.ColumnChart(legislative_by_risk);
+        
+        google.visualization.events.addListener(chart_risk, 'ready', function () {
           legislative_by_risk.innerHTML = '<img src="' + chart_risk.getImageURI() + '">';
         });
         chart_risk.draw(data_risk, options_risk);
+
+
+        var options = {
+          width: 600,
+          height: 350
+        };
+
+        // Status
+        
+        var legislative_by_topic_2 = document.getElementById('legislative_by_topic_2');
+
+        var data_status_2 = google.visualization.arrayToDataTable(values_status);
+        var legislative_by_status_2 = document.getElementById('legislative_by_status_2');
+        var chart_status_2 = new google.visualization.PieChart(legislative_by_status_2);
+
+        google.visualization.events.addListener(chart_status_2, 'error', errorHandler);
+        google.visualization.events.addListener(chart_status_2, 'ready', function () {
+          legislative_by_topic.innerHTML = '<img src="' + chart_status_2.getImageURI() + '">';
+        });
+        chart_status_2.draw(data_status_2, options);
+        
+
+        // Topic
+
+        var legislative_by_status = document.getElementById('legislative_by_status');
+
+        var data_topic = google.visualization.arrayToDataTable(values_topic);
+        var legislative_by_topic = document.getElementById('legislative_by_topic');
+        var chart_topic = new google.visualization.PieChart(legislative_by_topic);
+
+        google.visualization.events.addListener(chart_topic, 'ready', function () {
+          legislative_by_status.innerHTML = '<img src="' + chart_topic.getImageURI() + '">';
+        });
+        chart_topic.draw(data_topic, options);
+
       }
 
   %body
@@ -364,12 +365,14 @@
                   %td= @total_by_status
                   %td 100%
           .small-6.columns
-            #legislative_by_status
+            #legislative_by_topic_2.hide
+            #legislative_by_status_2
 
       .row.section
         %h3 Proyectos por Tema
         .row
           .small-6.columns
+            #legislative_by_status.hide
             #legislative_by_topic
           .small-6.columns
             %table.table-report
