@@ -7,12 +7,15 @@
     google.setOnLoadCallback(drawChart);
 
     var values_status = #{@legislatives_by_status.to_a};
+    console.log(values_status);
     values_status.unshift(['Estado', 'Cantidad']);
 
     var values_topic = #{@legislatives_by_topic.to_a};
+    console.log(values_topic);
     values_topic.unshift(['Tema de interés', 'Cantidad']);
 
     var values_risk = #{@legislatives_by_risk.to_a};
+    console.log(values_risk);
     values_risk.unshift(['Riesgo', 'Cantidad', { role: 'style' }]);
 
     function drawChart() {
@@ -46,7 +49,8 @@
 
     $(document).ready(function() {
       drawChart();
-      });
+    });
+
 
 %h1.report-title Informe legislativo
 
