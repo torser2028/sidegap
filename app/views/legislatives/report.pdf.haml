@@ -1,439 +1,359 @@
-!!!
-%html
-  %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
-    %title Sidegap
-    / Load the AJAX API
-    %script{:src => "https://www.gstatic.com/charts/loader.js", :type => "text/javascript"}
-    :javascript
-      google.charts.load('current', {packages: ['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+- content_for :head do
+  = javascript_include_tag "https://www.google.com/jsapi"
+  = wicked_pdf_javascript_include_tag "chartkick"
 
-      function errorHandler(errorMessage) {
-        google.visualization.errors.removeError(errorMessage.id);
-      }
+%h1.report-title Informe legislativo
+.right= @report_date
 
-      function drawChart() {
-        // Set chart options
-        var options = { 
-          width: 600,
-          height: 350
-        };
+- if !@report_logo.nil?
+  .logo= image_tag embed_remote_image(@report_logo, 'image/png')
 
-        var options_risk = {
-          width: 600,
-          height: 350,
-          legend: { position: "none" }
-        };
-
-        // Status chart
-        var values_status = #{@legislatives_by_status.to_a};
-
-        var data_status = new google.visualization.DataTable();
-        data_status.addColumn('string', 'Tema de interés');
-        data_status.addColumn('number', 'Cantidad');
-        data_status.addRows(values_status);
-
-        var chart_status = new google.visualization.PieChart(legislative_by_status);
-        var legislative_by_status = document.getElementById('legislative_by_status');
-
-        google.visualization.events.addListener(chart_status, 'error', errorHandler);
-        google.visualization.events.addListener(chart_status, 'ready', function() {
-          legislative_by_status.innerHTML = '<img src="' + chart_status.getImageURI() + '">';
-        });
-        chart_status.draw(data_status, options);
-
-        
-        // Topic chart
-        var values_topic = #{@legislatives_by_topic.to_a};
-
-        var data_topic = new google.visualization.DataTable();
-        data_topic.addColumn('string', 'Tema de interés');
-        data_topic.addColumn('number', 'Cantidad');
-        data_topic.addRows(values_status);
-
-        var chart_topic = new google.visualization.PieChart(legislative_by_topic);
-        var legislative_by_topic = document.getElementById('legislative_by_topic');
-
-        google.visualization.events.addListener(chart_topic, 'error', errorHandler);
-        google.visualization.events.addListener(chart_topic, 'ready', function() {
-          legislative_by_topic.innerHTML = '<img src="' + chart_topic.getImageURI() + '">';
-        });
-        chart_topic.draw(data_topic, options);
+.panels-view.report.row.nobreak
+  .row.section
+    .small-12.columns
+      %h2
+        = fa_icon "tasks"
+        Resumen Semana - Monitoreo Normativo
       
-        // Risk chart
-        var values_risk = #{@legislatives_by_risk.to_a};
-        values_risk.unshift(['Cantidad', 'Riesgo', { role: 'style' }]);
+      %table.table-border
+        %colgroup
+          %col
+          %col
+        %tbody
+          - @summary_week.each_with_index do |notice, index|
+            %tr
+              %td= (index + 1).to_s + '.'
+              %td= simple_format notice.body
+  
+  .row.section
+    .small-12.columns
+      %h2
+        = fa_icon "calendar"
+        Resumen Semana – Agenda
 
-        var data_risk = google.visualization.arrayToDataTable(values_risk);
-        var data_risk = new google.visualization.DataView(data_risk);
-        data_risk.setColumns([0, 1, {
-          calc: "stringify", sourceColumn: 1, type: "string", role: "annotation"
-        }, 2]);
-        
-        var data_risk = google.visualization.arrayToDataTable(values_risk);
-        var chart_risk = new google.visualization.ColumnChart(legislative_by_risk);
-        var legislative_by_risk = document.getElementById('legislative_by_risk');
-        
-        google.visualization.events.addListener(chart_risk, 'error', errorHandler);
-        google.visualization.events.addListener(chart_risk, 'ready', function() {
-          legislative_by_risk.innerHTML = '<img src="' + chart_risk.getImageURI() + '">';
-        });
-        chart_risk.draw(data_risk, options_risk);
-      }
+      %h3= 'Semana del ' + @last_week.to_s + ' al ' + @today.to_s + ' (semana anterior)'
+      %table.table-report
+        %colgroup
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+        %thead
+          %tr
+            %th Fecha
+            %th Título Proyecto
+            %th Plenaria / Comisión
+            %th Núm. Cámara
+            %th Núm. Senado
+            %th Evento
+            %th Asunto
+            %th Observaciones
+        %tbody
+          - @last_agendas.each do |agenda|
+            %tr
+              %td= agenda.event_at
+              %td= simple_format agenda.legislative.title
+              %td= agenda.plenary_commission
+              %td= agenda.legislative.chamber_number
+              %td= agenda.legislative.senate_number
+              %td= agenda.event_type
+              %td= agenda.body
+              %td= agenda.observation
 
-  %body
+      %h2
+        = fa_icon "calendar"
+        Otros eventos
 
-    %h1.report-title Informe legislativo
-    .right= @report_date
+      %table.table-report
+        %colgroup
+          %col{width: "12.5%"}
+          %col{width: "20%"}
+          %col{width: "20%"}
+          %col{width: "27.5%"}
+          %col{width: "20%"}
+        %thead
+          %tr
+            %th Fecha
+            %th Plenaria / Comisión
+            %th Evento
+            %th Asunto
+            %th Observaciones
+        %tbody
+          - @events.each do |event|
+            %tr
+              %td= event.event_at
+              %td= event.commission ? event.commission : event.plenary
+              %td= event.event_type
+              %td= simple_format event.body
+              %td= event.observation
 
-    - if !@report_logo.nil?
-      .logo= image_tag embed_remote_image(@report_logo, 'image/png')
+  .row.section
+    .small-12.columns
+      %h3= 'Semana del ' + @today.to_s + ' al ' + @next_week.to_s + ' (semana siguiente)'
+      %table.table-report
+        %colgroup
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+          %col{width: "12.5%"}
+        %thead
+          %tr
+            %th Fecha
+            %th Título Proyecto
+            %th Plenaria / Comisión
+            %th Núm. Cámara
+            %th Núm. Senado
+            %th Evento
+            %th Asunto
+            %th Observaciones
+        %tbody
+          - @next_agendas.each do |agenda|
+            %tr
+              %td= agenda.event_at
+              %td= simple_format agenda.legislative.title
+              %td= agenda.plenary_commission
+              %td= agenda.legislative.chamber_number
+              %td= agenda.legislative.senate_number
+              %td= agenda.event_type
+              %td= agenda.body
+              %td= agenda.observation
 
-    .panels-view.report.row.nobreak
-      .row.section
-        .small-12.columns
-          %h2
-            = fa_icon "tasks"
-            Resumen Semana - Monitoreo Normativo
-          
-          %table.table-border
-            %colgroup
-              %col
-              %col
-            %tbody
-              - @summary_week.each_with_index do |notice, index|
-                %tr
-                  %td= (index + 1).to_s + '.'
-                  %td= simple_format notice.body
-      
-      .row.section
-        .small-12.columns
-          %h2
-            = fa_icon "calendar"
-            Resumen Semana – Agenda
+      %h2
+        = fa_icon "calendar"
+        Otros eventos
 
-          %h3= 'Semana del ' + @last_week.to_s + ' al ' + @today.to_s + ' (semana anterior)'
-          %table.table-report
-            %colgroup
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-            %thead
-              %tr
-                %th Fecha
-                %th Título Proyecto
-                %th Plenaria / Comisión
-                %th Núm. Cámara
-                %th Núm. Senado
-                %th Evento
-                %th Asunto
-                %th Observaciones
-            %tbody
-              - @last_agendas.each do |agenda|
-                %tr
-                  %td= agenda.event_at
-                  %td= simple_format agenda.legislative.title
-                  %td= agenda.plenary_commission
-                  %td= agenda.legislative.chamber_number
-                  %td= agenda.legislative.senate_number
-                  %td= agenda.event_type
-                  %td= agenda.body
-                  %td= agenda.observation
+      %table.table-report
+        %colgroup
+          %col{width: "12.5%"}
+          %col{width: "20%"}
+          %col{width: "20%"}
+          %col{width: "27.5%"}
+          %col{width: "20%"}
+        %thead
+          %tr
+            %th Fecha
+            %th Plenaria / Comisión
+            %th Evento
+            %th Asunto
+            %th Observaciones
+        %tbody
+          - @events_next_week.each do |event|
+            %tr
+              %td= event.event_at
+              %td= event.commission ? event.commission : event.plenary
+              %td= event.event_type
+              %td= simple_format event.body
+              %td= event.observation
 
-          %h2
-            = fa_icon "calendar"
-            Otros eventos
+  .row.section
+    .small-12.columns
+      %h2
+        = fa_icon "folder-open"
+        Proyectos de Ley en Seguimiento
 
-          %table.table-report
-            %colgroup
-              %col{width: "12.5%"}
-              %col{width: "20%"}
-              %col{width: "20%"}
-              %col{width: "27.5%"}
-              %col{width: "20%"}
-            %thead
-              %tr
-                %th Fecha
-                %th Plenaria / Comisión
-                %th Evento
-                %th Asunto
-                %th Observaciones
-            %tbody
-              - @events.each do |event|
-                %tr
-                  %td= event.event_at
-                  %td= event.commission ? event.commission : event.plenary
-                  %td= event.event_type
-                  %td= simple_format event.body
-                  %td= event.observation
-
-      .row.section
-        .small-12.columns
-          %h3= 'Semana del ' + @today.to_s + ' al ' + @next_week.to_s + ' (semana siguiente)'
-          %table.table-report
-            %colgroup
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-              %col{width: "12.5%"}
-            %thead
-              %tr
-                %th Fecha
-                %th Título Proyecto
-                %th Plenaria / Comisión
-                %th Núm. Cámara
-                %th Núm. Senado
-                %th Evento
-                %th Asunto
-                %th Observaciones
-            %tbody
-              - @next_agendas.each do |agenda|
-                %tr
-                  %td= agenda.event_at
-                  %td= simple_format agenda.legislative.title
-                  %td= agenda.plenary_commission
-                  %td= agenda.legislative.chamber_number
-                  %td= agenda.legislative.senate_number
-                  %td= agenda.event_type
-                  %td= agenda.body
-                  %td= agenda.observation
-
-          %h2
-            = fa_icon "calendar"
-            Otros eventos
-
-          %table.table-report
-            %colgroup
-              %col{width: "12.5%"}
-              %col{width: "20%"}
-              %col{width: "20%"}
-              %col{width: "27.5%"}
-              %col{width: "20%"}
-            %thead
-              %tr
-                %th Fecha
-                %th Plenaria / Comisión
-                %th Evento
-                %th Asunto
-                %th Observaciones
-            %tbody
-              - @events_next_week.each do |event|
-                %tr
-                  %td= event.event_at
-                  %td= event.commission ? event.commission : event.plenary
-                  %td= event.event_type
-                  %td= simple_format event.body
-                  %td= event.observation
-
-      .row.section
-        .small-12.columns
-          %h2
-            = fa_icon "folder-open"
-            Proyectos de Ley en Seguimiento
-
-          %h3 Riesgo Regulatorio
-          .row
-            .small-4.columns
-              %table.table-report
-                %colgroup
-                  %col
-                  %col
-                  %col{width: "33%"}
-                %thead
-                  %tr
-                    %th Riesgo
-                    %th Cantidad
-                    %th Acumulado
-                %tbody
-                  - count = 0
-                  - @legislatives_by_risk.each do |risk|
-                    - count += risk[1]
-                    %tr
-                      %td= risk[0]
-                      %td= risk[1]
-                      %td= count
-            .small-2.columns
-              = wicked_pdf_image_tag 'risk.png'
-            .small-6.columns
-              #legislative_by_risk
-
-      .row.section
-        .small-12.columns
-          .row
-            .small-8.columns
-              %h3 Riesgo Regulatorio Alto / Tema
-              %table.table-report
-                %colgroup
-                  %col{width: "70%"}
-                  %col{width: "10%"}
-                  %col{width: "20%"}
-                %thead
-                  %tr
-                    %th Tema de Interés
-                    %th Cantidad
-                    %th %
-                %tbody
-                  - @legislatives_by_topic_with_risk.each do |topic, amount|
-                    %tr
-                      %td= topic
-                      %td= amount
-                      %td= number_with_precision((amount / @total_by_topic_with_risk.to_f * 100), precision: 2) + '%'
-                  %tr
-                    %td Total
-                    %td= @total_by_topic_with_risk
-                    %td 100%
-
-      .row.section
-        .small-12.columns
-          %h3 Riesgo Regulatorio Alto / Tema / Definición
+      %h3 Riesgo Regulatorio
+      .row
+        .small-4.columns
           %table.table-report
             %colgroup
               %col
               %col
-              %col{width: "50%"}
+              %col{width: "33%"}
             %thead
               %tr
                 %th Riesgo
-                %th Tema de interés
-                %th Descripción
+                %th Cantidad
+                %th Acumulado
             %tbody
-              - @legislatives.each do |legislative|
-                - if legislative[:risk] >= 31
-                  %tr
-                    %td= legislative[:risk]
-                    %td= legislative[:topic]
-                    %td= legislative[:title]
+              - count = 0
+              - @legislatives_by_risk.each do |risk|
+                - count += risk[1]
+                %tr
+                  %td= risk[0]
+                  %td= risk[1]
+                  %td= count
+        .small-2.columns
+          = wicked_pdf_image_tag 'risk.png'
+        .small-6.columns
+          #legislative_by_risk
+            = column_chart @legislatives_by_risk
 
-      .row.section
-        .row
-          .small-6.columns
-            %h3 Proyectos por Cámara de Entrada
-            %table.table-report
-              %colgroup
-                %col
-                %col
-                %col{width: "33%"}
-              %thead
+  .row.section
+    .small-12.columns
+      .row
+        .small-8.columns
+          %h3 Riesgo Regulatorio Alto / Tema
+          %table.table-report
+            %colgroup
+              %col{width: "70%"}
+              %col{width: "10%"}
+              %col{width: "20%"}
+            %thead
+              %tr
+                %th Tema de Interés
+                %th Cantidad
+                %th %
+            %tbody
+              - @legislatives_by_topic_with_risk.each do |topic, amount|
                 %tr
-                  %th Origen
-                  %th Cantidad
-                  %th Total
-              %tbody
-                - @legislatives_by_source.each do |source, amount|
-                  %tr
-                    %td= source
-                    %td= amount
-                    %td= number_with_precision((amount / @total_by_source.to_f * 100), precision: 2) + '%'
-                %tr
-                  %td Total
-                  %td= @total_by_source
-                  %td 100%
-        
-        %h3 Proyectos por Estado
-        .row
-          .small-6.columns
-            %table.table-report
-              %colgroup
-                %col{width: "60%"}
-                %col
-                %col{width: "20%"}
-              %thead
-                %tr
-                  %th Estado
-                  %th Cantidad
-                  %th %
-              %tbody
-                - @legislatives_by_status.each do |status, amount|
-                  %tr
-                    %td= status
-                    %td= amount
-                    %td= number_with_precision((amount / @total_by_status.to_f * 100), precision: 2) + '%'
-                %tr
-                  %td Total
-                  %td= @total_by_status
-                  %td 100%
-          .small-6.columns
-            #legislative_by_status
+                  %td= topic
+                  %td= amount
+                  %td= number_with_precision((amount / @total_by_topic_with_risk.to_f * 100), precision: 2) + '%'
+              %tr
+                %td Total
+                %td= @total_by_topic_with_risk
+                %td 100%
 
-      .row.section
-        %h3 Proyectos por Tema
-        .row
-          .small-6.columns
-            #legislative_by_topic
-          .small-6.columns
-            %table.table-report
-              %colgroup
-                %col{width: "60%"}
-                %col
-                %col{width: "20%"}
-              %thead
-                %tr
-                  %th Tema de Interés
-                  %th Cantidad
-                  %th %
-              %tbody
-                - @legislatives_by_topic.each do |topic, amount|
-                  %tr
-                    %td= topic
-                    %td= amount
-                    %td= number_with_precision((amount / @total_by_topic.to_f * 100), precision: 2) + '%'
-                %tr
-                  %td Total
-                  %td= @total_by_topic
-                  %td 100%
-  
-      .row.section
-        .small-12.columns
-          %h2
-            = fa_icon "users"
-            Stakeholders de Mayor Riesgo
+  .row.section
+    .small-12.columns
+      %h3 Riesgo Regulatorio Alto / Tema / Definición
+      %table.table-report
+        %colgroup
+          %col
+          %col
+          %col{width: "50%"}
+        %thead
+          %tr
+            %th Riesgo
+            %th Tema de interés
+            %th Descripción
+        %tbody
+          - @legislatives.each do |legislative|
+            - if legislative[:risk] >= 31
+              %tr
+                %td= legislative[:risk]
+                %td= legislative[:topic]
+                %td= legislative[:title]
 
-          .row
-            .small-6.columns
-              %h3 Autores
-              %table.table-report.table-simple
-                %colgroup
-                  %col{width: "20%"}
-                  %col
-                  %col{width: "20%"}
-                %thead
-                  %tr
-                    %th Proyectos
-                    %th Nombre
-                    %th Riesgo Promedio
-                %tbody
-                  - @authors.each do |name, stakeholder|
-                    %tr
-                      %td= stakeholder[:legislatives]
-                      %td= name
-                      %td= stakeholder[:risk]
+  .row.section
+    .row
+      .small-6.columns
+        %h3 Proyectos por Cámara de Entrada
+        %table.table-report
+          %colgroup
+            %col
+            %col
+            %col{width: "33%"}
+          %thead
+            %tr
+              %th Origen
+              %th Cantidad
+              %th Total
+          %tbody
+            - @legislatives_by_source.each do |source, amount|
+              %tr
+                %td= source
+                %td= amount
+                %td= number_with_precision((amount / @total_by_source.to_f * 100), precision: 2) + '%'
+            %tr
+              %td Total
+              %td= @total_by_source
+              %td 100%
+    
+    %h3 Proyectos por Estado
+    .row
+      .small-6.columns
+        %table.table-report
+          %colgroup
+            %col{width: "60%"}
+            %col
+            %col{width: "20%"}
+          %thead
+            %tr
+              %th Estado
+              %th Cantidad
+              %th %
+          %tbody
+            - @legislatives_by_status.each do |status, amount|
+              %tr
+                %td= status
+                %td= amount
+                %td= number_with_precision((amount / @total_by_status.to_f * 100), precision: 2) + '%'
+            %tr
+              %td Total
+              %td= @total_by_status
+              %td 100%
+      .small-6.columns
+        #legislative_by_status
+          = pie_chart(@legislatives_by_status, width: "600px")
 
-            .small-6.columns
-              %h3 Ponentes
-              %table.table-report.table-simple
-                %colgroup
-                  %col{width: "20%"}
-                  %col
-                  %col{width: "20%"}
-                %thead
-                  %tr
-                    %th Proyectos
-                    %th Nombre
-                    %th Riesgo Promedio
-                %tbody
-                  - @speakers.each do |name, stakeholder|
-                    %tr
-                      %td= stakeholder[:legislatives]
-                      %td= name
-                      %td= stakeholder[:risk]
+  .row.section
+    %h3 Proyectos por Tema
+    .row
+      .small-6.columns
+        #legislative_by_topic
+          = pie_chart(@legislatives_by_topic, width: "600px")
+      .small-6.columns
+        %table.table-report
+          %colgroup
+            %col{width: "60%"}
+            %col
+            %col{width: "20%"}
+          %thead
+            %tr
+              %th Tema de Interés
+              %th Cantidad
+              %th %
+          %tbody
+            - @legislatives_by_topic.each do |topic, amount|
+              %tr
+                %td= topic
+                %td= amount
+                %td= number_with_precision((amount / @total_by_topic.to_f * 100), precision: 2) + '%'
+            %tr
+              %td Total
+              %td= @total_by_topic
+              %td 100%
+
+  .row.section
+    .small-12.columns
+      %h2
+        = fa_icon "users"
+        Stakeholders de Mayor Riesgo
+
+      .row
+        .small-6.columns
+          %h3 Autores
+          %table.table-report.table-simple
+            %colgroup
+              %col{width: "20%"}
+              %col
+              %col{width: "20%"}
+            %thead
+              %tr
+                %th Proyectos
+                %th Nombre
+                %th Riesgo Promedio
+            %tbody
+              - @authors.each do |name, stakeholder|
+                %tr
+                  %td= stakeholder[:legislatives]
+                  %td= name
+                  %td= stakeholder[:risk]
+
+        .small-6.columns
+          %h3 Ponentes
+          %table.table-report.table-simple
+            %colgroup
+              %col{width: "20%"}
+              %col
+              %col{width: "20%"}
+            %thead
+              %tr
+                %th Proyectos
+                %th Nombre
+                %th Riesgo Promedio
+            %tbody
+              - @speakers.each do |name, stakeholder|
+                %tr
+                  %td= stakeholder[:legislatives]
+                  %td= name
+                  %td= stakeholder[:risk]

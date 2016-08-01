@@ -14,7 +14,8 @@ gem 'ransack'
 gem 'acts_as_follower', '~> 0.2.0'
 gem 'acts_as_votable', '~> 0.10.0'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary'
+gem 'wkhtmltopdf-binary-edge', '~> 0.12.3.0'
+gem 'chartkick'
 gem 'puma'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes

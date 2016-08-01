@@ -1,6 +1,7 @@
 - content_for :head do
+  = javascript_include_tag 'application', 'data-turbolinks-track' => false
+  = javascript_include_tag "https://www.gstatic.com/charts/loader.js"
 
-  %script{:src => "https://www.gstatic.com/charts/loader.js", :type => "text/javascript"}
   :javascript
     google.charts.load('current', {packages: ['corechart']});
     google.charts.setOnLoadCallback(drawChart);
