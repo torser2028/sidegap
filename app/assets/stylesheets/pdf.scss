@@ -3,7 +3,9 @@
 .alwaysbreak { page-break-before: always; }
 .nobreak:before { clear:both; }
 .nobreak{ page-break-inside: avoid;}
-
+table, tr, td, th, tbody, thead, tfoot {
+  page-break-inside: avoid !important;
+}
 header{
   img{
     width: 50mm;
