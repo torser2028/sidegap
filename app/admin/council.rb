@@ -66,11 +66,12 @@ ActiveAdmin.register Council do
         end
 
         row "Archivos Adjuntos" do
-          ul do
-            council.attachments.each do |a|
-              li do
-                link_to a.title, a.attachment.url
-              end
+          table_for council.attachments do
+            column "Nombre", :title do |a|
+              link_to a.title, a.attachment.url
+            end
+            column "Fecha", :published_at do |a|
+              ldate a.published_at
             end
           end
         end

@@ -48,11 +48,12 @@ ActiveAdmin.register Rule do
           rule.for_comments
         end
         row "Archivos Adjuntos" do
-          ul do
-            rule.attachments.each do |a|
-              li do
-                link_to a.title, a.attachment.url
-              end
+          table_for rule.attachments do
+            column "Nombre", :title do |a|
+              link_to a.title, a.attachment.url
+            end
+            column "Fecha", :published_at do |a|
+              ldate a.published_at
             end
           end
         end
