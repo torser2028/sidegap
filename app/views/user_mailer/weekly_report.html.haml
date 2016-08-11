@@ -89,7 +89,7 @@
                   %tr
                     %td{:width => "50%"} Han cambiado de estado
                     %td{:style => "color: green;"}
-                      = "(#{@approved}) Proyectos de Ley"
+                      = "(#{@status_changed}) Proyectos de Ley"
                   %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
@@ -164,10 +164,10 @@
                   %tr
                     %td{:width => "30%"} Cambio de estado:
                     %td
-                      - if !@approved_projects.size.zero?
+                      - if !@status_changed_projects.size.zero?
                         %table{:cellpadding => "5", :width => "80%"}
                           %tbody
-                          - @approved_projects.each do |project|
+                          - @status_changed_projects.each do |project|
                             %tr
                               %td{:width => "20% ", style: "color: CornflowerBlue; font-weight: bold;"} Número:
                               %td{:style => "color: CornflowerBlue;"}

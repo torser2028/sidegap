@@ -17,7 +17,6 @@ namespace :scheduler do
     time = Time.now
     if time.monday? && time.hour == 12
       if UserMailer.set_recipients_weekly
-        Legislative.new_projects.each { |legislative| legislative.update_attribute(:new_project, false) }
         puts 'Weekly report sent.'
       else
         puts 'Weekly report not sent.'
