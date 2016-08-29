@@ -24,7 +24,7 @@ class Legislative < ActiveRecord::Base
   scope :archived, -> { where(final_status: 'Archivado') }
   scope :retired, -> { where(final_status: 'Retirado') }
 
-  time_range = ((Time.now - 7.day)..Time.now.midnight + 1.day)
+  time_range = ((Time.now.midnight - 7.day)..Time.now.end_of_day - 1.day)
 
   scope :actual, -> { where(created_at: time_range) }
   scope :actual_archived, -> { where(final_status: 'Archivado', status_updated_at: time_range) }
