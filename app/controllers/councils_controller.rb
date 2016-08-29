@@ -156,7 +156,6 @@ class CouncilsController < ApplicationController
         number: council.number,
         commission: council.commission,
         status: council.status,
-        title: council.title,
         topic: council.topic,
         aval: council.aval ? 'SÍ' : 'NO',
         warning: council.warning ? 'SÍ' : 'NO',
