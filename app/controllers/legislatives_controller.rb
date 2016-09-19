@@ -413,7 +413,7 @@ class LegislativesController < ApplicationController
   end
 
   def report_client
-    @users = User.all.map{|u| ["#{u.name}", u.id] if u.role_ids.include?(2)}.compact
+    @users = User.all.map{|u| ["#{u.name}", u.id] if u.has_role? :client}.compact
     @users.prepend(['', 0])
     @user_id = @users[0][1]
 
