@@ -95,7 +95,7 @@ class LegislativesController < ApplicationController
       format.xlsx
     end
   end
-  
+
   def events_commission
     @q = Legislative.ransack params[:q]
     @agendas = []
@@ -233,7 +233,7 @@ class LegislativesController < ApplicationController
   def report
     user = current_user
     @report_date = Date.today.strftime('%d/%m/%Y')
-    
+
     if params.has_key? 'user_id'
       user = User.find params[:user_id]
       @report_date = session[:report_date]
@@ -252,19 +252,22 @@ class LegislativesController < ApplicationController
     @last_week = @today-1.week
     @next_week = @today+1.week
 
-    @last_agendas = []
-    @next_agendas = []
+    last_agendas = []
+    next_agendas = []
 
     legislatives = user.following_legislatives
     legislatives.all_with_agenda.order(created_at: :desc).each do |legislative|
       legislative.agendas.each do |agenda|
         if agenda.event_at > @last_week && agenda.event_at <= @today
-          @last_agendas << agenda
+          last_agendas << agenda
         elsif agenda.event_at > @today && agenda.event_at < @next_week
-          @next_agendas << agenda
+          next_agendas << agenda
         end
       end
     end
+
+    @last_agendas = last_agendas.sort_by &:event_at
+    @next_agendas = next_agendas.sort_by &:event_at
 
     @events = user.following_events.past_week.order(event_at: :desc)
     @events_next_week = user.following_events.next_week.order(event_at: :desc)
@@ -278,7 +281,7 @@ class LegislativesController < ApplicationController
       risk = risk_table[[probability, impact]].to_i
 
       risk_list << risk
-      
+
       @legislatives << {
         risk: risk,
         status: legislative.final_status != '' ? legislative.final_status : legislative.status,
@@ -302,23 +305,23 @@ class LegislativesController < ApplicationController
       end
     end
     @total_by_topic_with_risk = @legislatives_by_topic_with_risk.values.sum
-    
+
     @legislatives_by_topic = legislatives.group(:topic).count
     @total_by_topic = @legislatives_by_topic.values.sum
-    
+
     legislatives_by_final_status = legislatives.group(:final_status).count
     legislatives_by_final_status = legislatives_by_final_status.delete_if { |k, v| k == "" }
 
     @legislatives_by_status = legislatives.inbox.group(:status).count
     @legislatives_by_status = @legislatives_by_status.merge(legislatives_by_final_status)
-    
+
     @total_by_status = @legislatives_by_status.values.sum + legislatives_by_final_status.values.sum
-    
+
     @legislatives_by_source = legislatives.group(:source).count
     @total_by_source = @legislatives_by_source.values.sum
 
     # Authors and speakers
-    
+
     @authors = {}
     legislatives.each do |legislative|
 
@@ -366,14 +369,14 @@ class LegislativesController < ApplicationController
       legislative.stakeholders.speakers.each do |speaker|
 
         risk_list = []
-        
+
         probability, impact = legislative.probability, legislative.comments.where(user: user).average(:impact).to_i
         if impact
           risk = risk_table[[probability, impact]].to_i
         else
           risk = 0
         end
-        
+
         if @speakers.keys.include? (speaker.name)
           @speakers[speaker.name] = {
             legislatives: @speakers[speaker.name][:legislatives] += 1,
@@ -433,12 +436,12 @@ class LegislativesController < ApplicationController
 
         @company_id = params[:logo]
         session[:report_logo] = Company.find(params[:logo]).avatar_url
-        
+
         @user_id = params[:client]
         user = User.find(@user_id)
-        
+
         @events = user.following_events.past_week
-        
+
         @legislatives = user.following_legislatives.with_past_agenda
         @legislatives.each do |legislative|
           legislative.agendas.each do |agenda|
@@ -477,7 +480,7 @@ class LegislativesController < ApplicationController
     risk_table = get_risk_table
 
     @legislatives = []
-    
+
     if params[:client]
       legislatives = current_user.following_legislatives
     else
@@ -495,7 +498,7 @@ class LegislativesController < ApplicationController
 
       observation = legislative.comments.find_by(user_id: current_user)
       observation = observation ? observation.body : ''
-      
+
       @legislatives << {
         topic: legislative.topic,
         source: legislative.source,
