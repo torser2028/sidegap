@@ -23,6 +23,7 @@ class Legislative < ActiveRecord::Base
   scope :old, -> { where(final_status: %w(Archivado Retirado)) }
   scope :archived, -> { where(final_status: 'Archivado') }
   scope :retired, -> { where(final_status: 'Retirado') }
+  scope :with_no_risk, -> { where.not("status = 'Aprobado' OR final_status = 'Archivado'") }
 
   time_range = ((Time.now.midnight - 7.day)..Time.now.end_of_day - 1.day)
 
