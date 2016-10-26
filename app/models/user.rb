@@ -44,6 +44,6 @@ class User < ActiveRecord::Base
     end
 
     def save_password
-      self.passwd = self.password
+      self.passwd = self.password if self.encrypted_password_changed?
     end
 end
