@@ -148,6 +148,7 @@ ActiveAdmin.register Legislative do
             end
             column "Descripción", :body
             column "Tipo de evento", :event_type
+            column "Observación", :observation
           end
         end
 
@@ -235,6 +236,7 @@ ActiveAdmin.register Legislative do
         a.input :body, label: "Descripción", input_html: { rows: 6 }
         a.input :event_type, label: "Tipo de evento"
         a.input :plenary_commission, label: "Plenaria/Comisión"
+        a.input :observation, label: "Observación", input_html: { rows: 6 }
       end
     end
     f.inputs do
@@ -339,8 +341,8 @@ ActiveAdmin.register Legislative do
         legislatives_attributes: [:id, :_destroy, :title, :source, :topic, :chamber_number, :senate_number, :status, :type_law, :filing_at, :final_status],
         attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at],
         stakeholders: [:chamber_authors, :chamber_speakers, :senate_authors, :senate_speakers, :notify],
-        agendas_attributes: [:id, :_destroy, :body, :event_at, :event_type, :time, :plenary_commission]],
-        agenda: [:body, :event_at, :event_type, :time, :plenary_commission]
+        agendas_attributes: [:id, :_destroy, :body, :event_at, :event_type, :time, :plenary_commission, :observation]],
+        agenda: [:body, :event_at, :event_type, :time, :plenary_commission, :observation]
     end
 
     def new

@@ -50,10 +50,6 @@ Rails.application.routes.draw do
             get :report
             get :report_client
             post :report_client
-            get :agenda_observation
-            post :agenda_observation
-            get :event_observation
-            post :event_observation
             get :legislative
             get :manual_weekly_report
         end

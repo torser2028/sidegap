@@ -452,28 +452,6 @@ class LegislativesController < ApplicationController
     end
   end
 
-  def agenda_observation
-    @agenda = Agenda.find params[:agenda_id]
-
-    if request.post?
-      @agenda.observation = params[:observation]
-      @agenda.save
-
-      redirect_to report_client_legislatives_path
-    end
-  end
-
-  def event_observation
-    @event = Event.find params[:event_id]
-
-    if request.post?
-      @event.observation = params[:observation]
-      @event.save
-
-      redirect_to report_client_legislatives_path
-    end
-  end
-
   # Export legislatives to Excel
   def legislative
     risk_list = []

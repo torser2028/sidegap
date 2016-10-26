@@ -8,15 +8,13 @@
       %span
         Exportar Proyectos a Excel
 
-  %hr/
-
-  .options.hide
+  .options.left.hide
     %a{ href: report_legislatives_path(user_id: @user_id, format: :pdf), target: "_blank"}
       = fa_icon "file-pdf-o"
       %span
         Exportar a PDF
 
-    %hr/
+  %hr/
 
   = form_tag '#', controller: 'legislatives', action: 'report_client', method: :post, html: { class: 'filter' } do
     .row
@@ -25,84 +23,11 @@
       = select_tag :client, options_for_select(@users, @user_id), class: 'large-5 medium-5 small-9 columns'
       .large-5.columns
     .row
-      .large-3.medium-5.small-3.columns
-        = label_tag :date, 'Fecha Reporte (DD/MM/AAAA)'
-      .large-3.medium-5.small-9.columns
-        = text_field_tag :date, '', placeholder: 'DD/MM/AAAA', value: @date, class: 'datepicker'
-      .large-6.columns
-    .row
       .large-2.medium-1.small-3.columns
         = label_tag :logo, 'Seleccionar Logo'
       = select_tag :logo, options_for_select(@companies, @company_id), class: 'large-5 medium-5 small-9 columns'
       .large-5.columns
     = submit_tag 'Buscar', class: 'button success fullwidth search'
-
-  .row
-    .small-12.columns
-      %h2
-        = fa_icon "calendar"
-        Agenda de Plenarias y Comisiones
-      .tray.agendas
-        %table
-          %colgroup
-            %col{width: "15%"}
-            %col{width: "15%"}
-            %col{width: "30%"}
-            %col{width: "30%"}
-            %col{width: "20%"}
-            %col{width: "20%"}
-          %thead
-            %tr
-              %th Fecha
-              %th Hora
-              %th Proyecto
-              %th Evento
-              %th Tipo de Evento
-              %th Observación
-          %tbody
-            - @agendas.each do |agenda|
-              %tr
-                %td.num= ldate agenda.event_at
-                %td.num= l agenda.time, format: :simple
-                %td.desc= simple_format agenda.legislative.title
-                %td.desc= simple_format agenda.body
-                %td= agenda.event_type
-                - if agenda.observation.nil? or agenda.observation == ''
-                  %td= link_to 'Añadir observación', agenda_observation_legislatives_path(agenda_id: agenda.id)
-                - else
-                  %td= agenda.observation
-
-  .row
-    .small-12.columns
-      %h2
-        = fa_icon "check-square-o"
-        Otros Eventos
-      .tray.events
-        %table
-          %colgroup
-            %col
-            %col
-            %col{width: "60%"}
-            %col{width: "10%"}
-            %col{width: "10%"}
-          %thead
-            %tr
-              %th Fecha
-              %th Hora
-              %th Evento
-              %th Tipo de Evento
-              %th Observación
-          %tbody
-            - @events.each do |event|
-              %tr
-                %td.num= ldate event.event_at
-                %td.num= l event.time, format: :simple
-                %td.desc= simple_format event.body
-                %td= event.event_type
-                - if event.observation.nil? or event.observation == ''
-                  %td= link_to 'Añadir observación', event_observation_legislatives_path(event_id: event.id)
-                - else
-                  %td= event.observation
 
 :javascript
   var client = $('#client').val();
