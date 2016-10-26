@@ -48,6 +48,9 @@ ActiveAdmin.register Event do
         row "Lugar" do
           event.place
         end
+        row "Observación" do
+          event.observation
+        end
       end
     end
     active_admin_comments
@@ -62,6 +65,7 @@ ActiveAdmin.register Event do
       f.input :commission, label: "Comisión"
       f.input :plenary, label: "Plenaria"
       f.input :place, label: "Lugar"
+      f.input :observation, label: "Observación", input_html: { rows: 6 }
     end
     f.actions do
       f.action :submit, label: "Guardar Evento"
