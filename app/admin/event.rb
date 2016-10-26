@@ -1,7 +1,7 @@
 ActiveAdmin.register Event do
   menu label: "Eventos", parent: "Rama Legislativa"
 
-  permit_params :body, :event_at, :event_type, :time, :commission, :plenary, :place
+  permit_params :body, :event_at, :event_type, :time, :commission, :plenary, :place, :observation
 
   filter :body, label: "Evento"
   filter :event_type, label: "Tipo de Evento"
