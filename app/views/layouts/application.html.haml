@@ -5,6 +5,7 @@
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
     %title Sidegap
     = stylesheet_link_tag    'application', media: 'all'
+    = stylesheet_link_tag    'pdf', media: 'print'
     = javascript_include_tag 'vendor/modernizr'
     = javascript_include_tag 'application'
     = csrf_meta_tags
@@ -16,7 +17,7 @@
       .inner-wrap
         - if user_signed_in?
           = render 'layouts/sidebar'
-        %header
+        %header.hidden-pdf
           .row
             .large-12.columns
               .logo

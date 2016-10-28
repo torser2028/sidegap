@@ -1,6 +1,9 @@
 @import "variables";
 //Rama Legislativa
 .legislatives{
+  .visible-pdf{
+    display: none;
+  }
   header{
     h1{
       border-bottom: $D-padGlb/4 solid $C-matiz1;

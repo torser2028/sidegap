@@ -1,5 +1,7 @@
 @import "foundation_and_overrides";
 
+.hidden-pdf { display: none; }
+.visible-pdf { display: inline-block !important; }
 .alwaysbreak { page-break-before: always; }
 .nobreak:before { clear:both; }
 .nobreak{ page-break-inside: avoid;}
@@ -17,6 +19,9 @@ body{
   h2{
     color: #224484;
     font-weight: normal;
+    i{
+      color: #F49027 !important;
+    }
   }
   figure{
     float: right;
@@ -153,5 +158,17 @@ h1.report-title {
   }
   .section {
     page-break-after: always;
+  }
+  .w20 { 
+    width: 16%;
+    overflow: hidden;
+  }
+  .w40 { 
+    width: 33%;
+    overflow: hidden;
+  }
+  .w60 { 
+    width: 50%;
+    overflow: hidden;
   }
 }

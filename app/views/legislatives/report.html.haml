@@ -9,13 +9,13 @@
     function drawChart() {
       // Set chart options
       var options = { 
-        width: 600,
+        width: 500,
         height: 350,
         is3D: true
       };
 
       var options_risk = {
-        width: 600,
+        width: 500,
         height: 350,
         legend: { position: "none" }
       };
@@ -58,24 +58,29 @@
 
 
 %h1.report-title Informe legislativo
+.right.visible-pdf= @report_date
 
-%a{ href: report_legislatives_path(format: :pdf), target: "_blank"}
-  = fa_icon "file-pdf-o"
-  %span
-    Exportar a PDF
+.row
+  .small-12.columns
+    .row
+      %a{ class: 'hidden-pdf', href: 'javascript:window.print()' }
+        = fa_icon "file-pdf-o"
+        %span
+          Exportar a PDF
 
-|
+      %span.hidden-pdf
+        |
 
-%a{ href: legislative_legislatives_path(format: :xlsx, client: true), target: "_blank"}
-  = fa_icon "file-pdf-o"
-  %span
-    Exportar a Excel
+      %a{ class: 'hidden-pdf', href: legislative_legislatives_path(format: :xlsx, client: true), target: "_blank"}
+        = fa_icon "file-pdf-o"
+        %span
+          Exportar a Excel
 
-%br/
-%br/
+      %br/
+      %br/
 
 .panels-view.report
-  .row
+  .row.section.nobreak
     .small-12.columns
       %h2
         = fa_icon "tasks"
@@ -91,7 +96,7 @@
               %td= (index + 1).to_s + '.'
               %td= simple_format notice.body
   
-  .row
+  .row.section.nobreak
     .small-12.columns
       %h2
         = fa_icon "calendar"
@@ -130,33 +135,34 @@
               %td= agenda.body
               %td= agenda.observation
 
-      .row.section
-        .small-12.columns
-          %h2 Otros eventos
+  .row.section.nobreak
+    .small-12.columns
+      %h2 Otros eventos
 
-          %table.table-report
-            %colgroup
-              %col{width: "12.5%"}
-              %col{width: "20%"}
-              %col{width: "20%"}
-              %col{width: "27.5%"}
-              %col{width: "20%"}
-            %thead
-              %tr
-                %th Fecha
-                %th Plenaria / Comisión
-                %th Evento
-                %th Asunto
-                %th Observaciones
-            %tbody
-              - @events.each do |event|
-                %tr
-                  %td= event.event_at
-                  %td= event.commission ? event.commission : event.plenary
-                  %td= event.event_type
-                  %td= simple_format event.body
-                  %td= event.observation
-
+      %table.table-report
+        %colgroup
+          %col{width: "12.5%"}
+          %col{width: "20%"}
+          %col{width: "20%"}
+          %col{width: "27.5%"}
+          %col{width: "20%"}
+        %thead
+          %tr
+            %th Fecha
+            %th Plenaria / Comisión
+            %th Evento
+            %th Asunto
+            %th Observaciones
+        %tbody
+          - @events.each do |event|
+            %tr
+              %td= event.event_at
+              %td= event.commission ? event.commission : event.plenary
+              %td= event.event_type
+              %td= simple_format event.body
+              %td= event.observation
+  .row.section.nobreak
+    .small-12.columns
       %h3= 'Semana del ' + @today.to_s + ' al ' + @next_week.to_s + ' (semana siguiente)'
       %table.table-report
         %colgroup
@@ -190,7 +196,7 @@
               %td= agenda.body
               %td= agenda.observation
   
-  .row
+  .row.section.nobreak
     .small-12.columns
       %h2 Otros eventos
 
@@ -217,7 +223,7 @@
               %td= simple_format event.body
               %td= event.observation
 
-  .row
+  .row.section.nobreak
     .small-12.columns
       %h2
         = fa_icon "folder-open"
@@ -225,7 +231,7 @@
 
       %h3 Riesgo Regulatorio
       .row
-        .small-4.columns
+        .small-4.columns.w40
           %table.table-report
             %colgroup
               %col
@@ -244,35 +250,37 @@
                   %td= risk[0]
                   %td= risk[1]
                   %td= count
-        .small-2.columns
+        .small-2.columns.w20
           = image_tag 'risk.png'
-        .small-6.columns
+        .small-6.columns.w60
           #legislative_by_risk
 
-      .row
-        .small-6.columns
-          %h3 Riesgo Regulatorio Alto / Tema
-          %table.table-report
-            %colgroup
-              %col{width: "60%"}
-              %col
-              %col{width: "20%"}
-            %thead
-              %tr
-                %th Tema de Interés
-                %th Cantidad
-                %th %
-            %tbody
-              - @legislatives_by_topic_with_risk.each do |topic, amount|
-                %tr
-                  %td= topic
-                  %td= amount
-                  %td= number_with_precision((amount / @total_by_topic_with_risk.to_f * 100), precision: 2) + '%'
-              %tr
-                %td Total
-                %td= @total_by_topic_with_risk
-                %td 100%
+  .row.section.nobreak
+    .small-12.columns
+      %h3 Riesgo Regulatorio Alto / Tema
+      %table.table-report
+        %colgroup
+          %col{width: "60%"}
+          %col
+          %col{width: "20%"}
+        %thead
+          %tr
+            %th Tema de Interés
+            %th Cantidad
+            %th %
+        %tbody
+          - @legislatives_by_topic_with_risk.each do |topic, amount|
+            %tr
+              %td= topic
+              %td= amount
+              %td= number_with_precision((amount / @total_by_topic_with_risk.to_f * 100), precision: 2) + '%'
+          %tr
+            %td Total
+            %td= @total_by_topic_with_risk
+            %td 100%
 
+  .row.section.nobreak
+    .small-12.columns
       %h3 Riesgo Regulatorio Alto / Tema / Definición
       %table.table-report
         %colgroup
@@ -292,33 +300,35 @@
                 %td= legislative[:topic]
                 %td= legislative[:title]
 
-      .row
-        .large-6.columns
-          %h3 Proyectos por Cámara de Entrada
-          %table.table-report
-            %colgroup
-              %col
-              %col
-              %col{width: "33%"}
-            %thead
-              %tr
-                %th Origen
-                %th Cantidad
-                %th Total
-            %tbody
-              - @legislatives_by_source.each do |source, amount|
-                %tr
-                  %td= source
-                  %td= amount
-                  %td= number_with_precision((amount / @total_by_source.to_f * 100), precision: 2) + '%'
-              %tr
-                %td Total
-                %td= @total_by_source
-                %td 100%
-      
+  .row.section.nobreak
+    .large-6.columns
+      %h3 Proyectos por Cámara de Entrada
+      %table.table-report
+        %colgroup
+          %col
+          %col
+          %col{width: "33%"}
+        %thead
+          %tr
+            %th Origen
+            %th Cantidad
+            %th Total
+        %tbody
+          - @legislatives_by_source.each do |source, amount|
+            %tr
+              %td= source
+              %td= amount
+              %td= number_with_precision((amount / @total_by_source.to_f * 100), precision: 2) + '%'
+          %tr
+            %td Total
+            %td= @total_by_source
+            %td 100%
+ 
+  .row.section.nobreak
+    .small-12.columns
       %h3 Proyectos por Estado
       .row
-        .small-6.columns
+        .small-6.columns.w60
           %table.table-report
             %colgroup
               %col{width: "60%"}
@@ -339,14 +349,14 @@
                 %td Total
                 %td= @total_by_topic
                 %td 100%
-        .small-6.columns
+        .small-6.columns.w60
           #legislative_by_status
-
+    
+  .row.secition.nobreak
+    .small-12.columns
       %h3 Proyectos por Tema
       .row
-        .small-6.columns
-          #legislative_by_topic
-        .small-6.columns
+        .small-6.columns.w60
           %table.table-report
             %colgroup
               %col{width: "60%"}
@@ -367,8 +377,10 @@
                 %td Total
                 %td= @total_by_source
                 %td 100%
+        .small-6.columns.w60
+          #legislative_by_topic
   
-  .row
+  .row.section.nobreak
     .small-12.columns
       %h2
         = fa_icon "users"
