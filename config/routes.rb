@@ -48,8 +48,6 @@ Rails.application.routes.draw do
             get :stakeholders
             get 'stakeholder/:id', action: :stakeholder, as: :stakeholder
             get :report
-            get :report_client
-            post :report_client
             get :legislative
             get :manual_weekly_report
         end

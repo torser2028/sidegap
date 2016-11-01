@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
   has_many :user_notifications, dependent: :destroy
   has_many :roles, through: :assignments
 
+  scope :clients, -> { includes(:roles).where(roles: { name: 'client' }) }
+
   validates :name, :email, :company, :area, :job, presence: true
 
   # after_create :send_welcome_email

@@ -60,24 +60,43 @@
 %h1.report-title Informe legislativo
 .right.visible-pdf= @report_date
 
+- if current_user.has_role? :admin
+  .panels-view.hidden-pdf
+    .tray.projects
+      .row
+        .small-12.columns
+          .tabs-content
+            %section#bscPanel.content.active
+              .row
+                = form_tag url_for, method: :get do
+                  .medium-2.small-12.columns
+                    %label
+                      Seleccionar Cliente
+                  .medium-4.small-12.columns
+                    = select_tag 'user_id', options_from_collection_for_select(@users, 'id', 'name', params[:user_id]), include_blank: true, required: true
+                  .medium-offset-0.medium-4.small-12.columns
+                    %input.button.success.search{type: "submit", value: "Buscar"}
+                    .button.secondary.quit
+                      %a{href: url_for}
+                        Quitar Filtro
+                  .medium-2.columns
 .row
   .small-12.columns
-    .row
-      %a{ class: 'hidden-pdf', href: 'javascript:window.print()' }
-        = fa_icon "file-pdf-o"
-        %span
-          Exportar a PDF
+    %a{ class: 'hidden-pdf', href: 'javascript:window.print()' }
+      = fa_icon "file-pdf-o"
+      %span
+        Exportar a PDF
 
-      %span.hidden-pdf
-        |
+    %span.hidden-pdf
+      |
 
-      %a{ class: 'hidden-pdf', href: legislative_legislatives_path(format: :xlsx, client: true), target: "_blank"}
-        = fa_icon "file-pdf-o"
-        %span
-          Exportar a Excel
+    %a{ class: 'hidden-pdf', href: legislative_legislatives_path(format: :xlsx, client: current_user.has_role?(:client) ? true : false), target: "_blank"}
+      = fa_icon "file-pdf-o"
+      %span
+        Exportar a Excel
 
-      %br/
-      %br/
+    %br/
+    %br/
 
 .panels-view.report
   .row.section.nobreak

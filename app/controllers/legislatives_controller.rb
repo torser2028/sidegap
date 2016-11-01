@@ -406,49 +406,11 @@ class LegislativesController < ApplicationController
 
     @speakers = @speakers.sort_by { |key, speaker| -speaker[:risk] }.take(10)
 
+    @users = User.clients
+
     respond_to do |format|
       format.html
-      format.pdf do
-        render pdf: "informe-legislativo", orientation: 'Landscape'
-      end
       format.xlsx
-    end
-  end
-
-  def report_client
-    @users = User.all.map{|u| ["#{u.name}", u.id] if u.has_role? :client}.compact
-    @users.prepend(['', 0])
-    @user_id = @users[0][1]
-
-    @companies = Company.all.map{|c| ["#{c.name}", c.id] }
-    @companies.prepend(['', 0])
-    @company_id = @companies[0][1]
-
-    @agendas = []
-    @events = []
-    @legislatives = []
-    @date = ''
-
-    if request.post?
-      if params[:client] != '0'
-        @date = params[:date]
-        session[:report_date] = params[:date]
-
-        @company_id = params[:logo]
-        session[:report_logo] = Company.find(params[:logo]).avatar_url
-
-        @user_id = params[:client]
-        user = User.find(@user_id)
-
-        @events = user.following_events.past_week
-
-        @legislatives = user.following_legislatives.with_past_agenda
-        @legislatives.each do |legislative|
-          legislative.agendas.each do |agenda|
-            @agendas << agenda
-          end
-        end
-      end
     end
   end
 
@@ -459,7 +421,7 @@ class LegislativesController < ApplicationController
 
     @legislatives = []
 
-    if params[:client]
+    if params[:client] === 'true'
       legislatives = current_user.following_legislatives
     else
       legislatives = Legislative.all

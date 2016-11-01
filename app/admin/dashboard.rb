@@ -7,7 +7,7 @@ ActiveAdmin.register_page "Dashboard" do
   end
   
   action_item :dashboard do
-    link_to "Informe", report_client_legislatives_path
+    link_to "Informe", report_legislatives_path
   end
   
   action_item :dashboard do
