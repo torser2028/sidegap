@@ -6,7 +6,7 @@ ActiveAdmin.register Notice do
   index title: "Noticias Cliente" do
     column "Contenido", :body
     column "Cliente" do |notice|
-      User.find(notice.user_id).name
+      notice.user.name
     end
     actions()
   end
@@ -18,7 +18,7 @@ ActiveAdmin.register Notice do
           notice.body
         end
         row "Cliente" do
-          User.find(notice.user_id).name
+          notice.user
         end
       end
     end
@@ -28,8 +28,7 @@ ActiveAdmin.register Notice do
   form do |f|
     f.inputs do
       f.input :body, label: "Contenido", as: :text
-      f.input :user_id, label: 'Cliente', as: :select, \
-        collection: User.all.map{|u| ["#{u.name}", u.id] if u.has_role? :client}.compact
+      f.input :user, collection: User.clients
     end
     f.actions do
       f.action :submit, label: "Guardar Noticia"

@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :user_notifications, dependent: :destroy
   has_many :roles, through: :assignments
+  has_many :notices
 
   scope :clients, -> { includes(:roles).where(roles: { name: 'client' }) }
 
