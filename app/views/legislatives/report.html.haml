@@ -123,33 +123,27 @@
 
       %h3= 'Semana del ' + @last_week.to_s + ' al ' + @today.to_s + ' (semana anterior)'
       %table.table-report
-        %colgroup
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
         %thead
           %tr
             %th Fecha
             %th Título Proyecto
             %th Plenaria / Comisión
-            %th Núm. Cámara
-            %th Núm. Senado
             %th Evento
             %th Asunto
             %th Observaciones
         %tbody
           - @last_agendas.each do |agenda|
             %tr
-              %td= agenda.event_at
-              %td= simple_format agenda.legislative.title
+              %td=l agenda.event_at, format: :custom
+              %td
+                %p
+                  %b Núm. Cámara:
+                  = agenda.legislative.chamber_number
+                %p
+                  %b Núm. Senado:
+                  = agenda.legislative.senate_number
+                = simple_format agenda.legislative.title
               %td= agenda.plenary_commission
-              %td= agenda.legislative.chamber_number
-              %td= agenda.legislative.senate_number
               %td= agenda.event_type
               %td= agenda.body
               %td= agenda.observation
@@ -184,33 +178,27 @@
     .small-12.columns
       %h3= 'Semana del ' + @today.to_s + ' al ' + @next_week.to_s + ' (semana siguiente)'
       %table.table-report
-        %colgroup
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
-          %col{width: "12.5%"}
         %thead
           %tr
             %th Fecha
             %th Título Proyecto
             %th Plenaria / Comisión
-            %th Núm. Cámara
-            %th Núm. Senado
             %th Evento
             %th Asunto
             %th Observaciones
         %tbody
           - @next_agendas.each do |agenda|
             %tr
-              %td= agenda.event_at
-              %td= simple_format agenda.legislative.title
+              %td=l agenda.event_at, format: :custom
+              %td
+                %p
+                  %b Núm. Cámara:
+                  = agenda.legislative.chamber_number
+                %p
+                  %b Núm. Senado:
+                  = agenda.legislative.senate_number
+                = simple_format agenda.legislative.title
               %td= agenda.plenary_commission
-              %td= agenda.legislative.chamber_number
-              %td= agenda.legislative.senate_number
               %td= agenda.event_type
               %td= agenda.body
               %td= agenda.observation
