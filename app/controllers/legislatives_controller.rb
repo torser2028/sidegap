@@ -1,3 +1,4 @@
+# coding: utf-8
 class LegislativesController < ApplicationController
   add_breadcrumb "Rama Legislativa", :legislatives_path
 
@@ -466,6 +467,12 @@ class LegislativesController < ApplicationController
         risk: risk,
         observations: observation
       }
+    end
+    # File.write("tmp/#{Time.now.strftime("legislative-%d_%m_%y-%H:%M:%S")}.json", @legislatives.to_json)
+
+    respond_to do |format|
+      format.json { render json: @legislatives }
+      format.xlsx { render xlsx: 'legislative' }
     end
   end
 
