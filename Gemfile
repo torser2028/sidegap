@@ -56,3 +56,5 @@ group :production do
   gem 'wkhtmltopdf-heroku'
   gem 'rails_12factor', group: :production
 end
+
+gem 'rack-timeout', '0.4.2'
