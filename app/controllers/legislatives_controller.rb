@@ -428,16 +428,34 @@ class LegislativesController < ApplicationController
       legislatives = Legislative.all
     end
 
-    legislatives.each do |legislative|
-      probability, impact = legislative.probability, legislative.comments.where(user: current_user).average(:impact).to_i
-      risk = risk_table[[probability, impact]].to_i
+    ## Get all comments/stakeholders eagle for better database performance
+    ls = LegislativeStakeholder.arel_table
+    stakeholder = Stakeholder.joins(:legislative_stakeholders)
+      .select('stakeholders.*, legislative_stakeholders.legislative_id')
+      .where(legislative_stakeholders: {legislative_id: legislatives.ids})
 
+    legislatives_comments = Comment.where(legislative_id: legislatives.ids, user_id: current_user)
+
+    stakeholders_authors = stakeholder.where(
+      ls[:author].eq(true).or(ls[:senate].eq(true).or(ls[:chamber].eq(true))))
+    stakeholders_speakers = stakeholder.where(
+      ls[:speaker].eq(true).and(ls[:senate].eq(true).or(ls[:chamber].eq(true))))
+
+    # Build response
+    legislatives.each do |legislative|
+      comments = legislatives_comments.select{ |c| c.legislative_id == legislative.id }
+      impacts = comments.collect{ |c| c.impact }
+
+      probability = legislative.probability
+      impact_avg = (impacts ? impacts.inject{ |sum, el| (sum ||=0) + el }.to_i / (impacts.size.nonzero? || 1) : 0)
+
+      risk = risk_table[[probability, impact_avg]].to_i
       risk_list << risk
 
-      authors = legislative.stakeholders.authors + legislative.stakeholders.chamber_authors + legislative.stakeholders.senate_authors
-      speakers = legislative.stakeholders.chamber_speakers + legislative.stakeholders.senate_speakers
+      authors = stakeholders_authors.select{ |sa| sa.legislative_id == legislative.id }
+      speakers = stakeholders_speakers.select{ |ss| ss.legislative_id == legislative.id }
 
-      observation = legislative.comments.find_by(user_id: current_user)
+      observation = comments.first
       observation = observation ? observation.body : ''
 
       @legislatives << {
@@ -462,13 +480,12 @@ class LegislativesController < ApplicationController
         chamber_settlement_at: legislative.chamber_settlement_at ? legislative.chamber_settlement_at.strftime('%d %b %Y') : '',
         senate_settlement_at: legislative.senate_settlement_at ? legislative.senate_settlement_at.strftime('%d %b %Y') : '',
         status: (legislative.final_status && legislative.final_status != '') ? legislative.final_status : legislative.status,
-        impact: impact,
+        impact: impact_avg,
         probability: probability,
         risk: risk,
         observations: observation
       }
     end
-    # File.write("tmp/#{Time.now.strftime("legislative-%d_%m_%y-%H:%M:%S")}.json", @legislatives.to_json)
 
     respond_to do |format|
       format.json { render json: @legislatives }
