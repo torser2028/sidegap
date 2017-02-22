@@ -434,12 +434,12 @@ class LegislativesController < ApplicationController
       .select('stakeholders.*, legislative_stakeholders.legislative_id')
       .where(legislative_stakeholders: {legislative_id: legislatives.ids})
 
-    legislatives_comments = Comment.where(legislative_id: legislatives.ids, user_id: current_user)
+    legislatives_comments = Comment.where(legislative_id: legislatives.ids, user_id: current_user).to_a
 
     stakeholders_authors = stakeholder.where(
-      ls[:author].eq(true).or(ls[:senate].eq(true).or(ls[:chamber].eq(true))))
+      ls[:author].eq(true).or(ls[:senate].eq(true).or(ls[:chamber].eq(true)))).to_a
     stakeholders_speakers = stakeholder.where(
-      ls[:speaker].eq(true).and(ls[:senate].eq(true).or(ls[:chamber].eq(true))))
+      ls[:speaker].eq(true).and(ls[:senate].eq(true).or(ls[:chamber].eq(true)))).to_a
 
     # Build response
     legislatives.each do |legislative|
@@ -452,8 +452,20 @@ class LegislativesController < ApplicationController
       risk = risk_table[[probability, impact_avg]].to_i
       risk_list << risk
 
-      authors = stakeholders_authors.select{ |sa| sa.legislative_id == legislative.id }
-      speakers = stakeholders_speakers.select{ |ss| ss.legislative_id == legislative.id }
+      authors = stakeholders_authors.reduce([]){ |vals, sa|
+        if sa.legislative_id == legislative.id
+          vals.push(sa.name)
+          stakeholders_authors.delete(sa)
+        end
+        vals
+      }
+      speakers = stakeholders_speakers.reduce([]){ |vals, ss|
+        if ss.legislative_id == legislative.id
+          vals.push(ss.name)
+          stakeholders_speakers.delete(ss)
+        end
+        vals
+      }
 
       observation = comments.first
       observation = observation ? observation.body : ''
@@ -467,8 +479,8 @@ class LegislativesController < ApplicationController
         title: legislative.title,
         created_at: legislative.created_at.strftime('%d %b %Y'),
         filing_at: legislative.filing_at.strftime('%d %b %Y'),
-        authors: authors.map { |author| author.name }.join(', '),
-        speakers: speakers.map { |speaker| speaker.name }.join(', '),
+        authors: authors.join(', '),
+        speakers: speakers.join(', '),
         chamber_commission_at: legislative.chamber_commission_at ? legislative.chamber_commission_at.strftime('%d %b %Y') : '',
         chamber_plenary_at: legislative.chamber_plenary_at ? legislative.chamber_plenary_at.strftime('%d %b %Y') : '',
         senate_commission_at: legislative.senate_commission_at ? legislative.senate_commission_at.strftime('%d %b %Y') : '',
