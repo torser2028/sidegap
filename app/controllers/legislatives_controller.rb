@@ -429,10 +429,6 @@ class LegislativesController < ApplicationController
                        .group('legislatives.id')
     end
 
-      #stakeholder = Stakeholder.joins(:legislative_stakeholders)
-    #  .select('stakeholders.*, legislative_stakeholders.legislative_id')
-    # .where(legislative_stakeholders: {legislative_id: legislatives.ids})
-
     # Get all comments/stakeholders eagle for better database performance
     legislatives_comments = Comment.where(legislative_id: legislatives.ids, user_id: current_user).to_a
 
@@ -454,6 +450,7 @@ class LegislativesController < ApplicationController
         if sa.id == legislative.id
           vals.push(sa.author_name)
           stakeholders_authors.delete_at(stakeholders_authors.index(sa))
+          break vals
         end
         vals
       }
@@ -461,6 +458,7 @@ class LegislativesController < ApplicationController
         if ss.id == legislative.id
           vals.push(ss.speaker_name)
           stakeholders_speakers.delete_at(stakeholders_speakers.index(ss))
+          break vals
         end
         vals
       }
