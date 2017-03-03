@@ -99,10 +99,9 @@ class LegislativesController < ApplicationController
 
   def events_commission
     @q = Legislative.ransack params[:q]
-    @agendas = []
-    @q.result.order(created_at: :desc).each do |item|
-      item.agendas.active.each { |agenda| @agendas << agenda  }
-    end
+    legislative = @q.result.order(created_at: :desc)
+    @agendas = Agenda.where(legislative_id: legislative.map(&:id)).active.to_a
+
     @events = []
     events = current_user.following_events
     Event.active.order(event_at: :desc).each do |event|
@@ -429,17 +428,14 @@ class LegislativesController < ApplicationController
     end
 
     ## Get all comments/stakeholders eagle for better database performance
-    ls = LegislativeStakeholder.arel_table
     stakeholder = Stakeholder.joins(:legislative_stakeholders)
       .select('stakeholders.*, legislative_stakeholders.legislative_id')
       .where(legislative_stakeholders: {legislative_id: legislatives.ids})
 
     legislatives_comments = Comment.where(legislative_id: legislatives.ids, user_id: current_user).to_a
 
-    stakeholders_authors = stakeholder.where(
-      ls[:author].eq(true).or(ls[:senate].eq(true).or(ls[:chamber].eq(true)))).to_a
-    stakeholders_speakers = stakeholder.where(
-      ls[:speaker].eq(true).and(ls[:senate].eq(true).or(ls[:chamber].eq(true)))).to_a
+    stakeholders_authors = stakeholder.where(legislative_stakeholders: {author: true}).to_a
+    stakeholders_speakers = stakeholder.where(legislative_stakeholders: {speaker: true}).to_a
 
     # Build response
     legislatives.each do |legislative|
@@ -455,14 +451,14 @@ class LegislativesController < ApplicationController
       authors = stakeholders_authors.reduce([]){ |vals, sa|
         if sa.legislative_id == legislative.id
           vals.push(sa.name)
-          stakeholders_authors.delete(sa)
+          ##stakeholders_authors.delete_at(stakeholders_authors.index(sa))
         end
         vals
       }
       speakers = stakeholders_speakers.reduce([]){ |vals, ss|
         if ss.legislative_id == legislative.id
           vals.push(ss.name)
-          stakeholders_speakers.delete(ss)
+          ##stakeholders_speakers.delete_at(stakeholders_speakers.index(ss))
         end
         vals
       }
@@ -500,8 +496,7 @@ class LegislativesController < ApplicationController
     end
 
     respond_to do |format|
-      format.json { render json: @legislatives }
-      format.xlsx { render xlsx: 'legislative' }
+      format.xlsx { render xlsx: 'legislative', filename: "legislative_#{Time.now.strftime("%d-%m-%Y-%H-%M")}.xlsx" }
     end
   end
 

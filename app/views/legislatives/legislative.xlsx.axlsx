@@ -13,25 +13,25 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
     orange_cell = s.add_style bg_color: "FF9F5D", fg_color: "00", sz: 11, alignment: { horizontal: :center, vertical: :center }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
 
     main_header = [
-      'TEMA', 
-      'ENTRADA DE PROYECTOS', '', '', '', 
-      'TÍTULO', 
-      'RADICACIÓN DE PROYECTOS', '', '', 
-      'FECHA DE APROBACIÓN / INSTANCIAS', '', '', '', 
-      'FECHA DE APROBACIÓN / INSTANCIAS ACTOS LEGISLATIVOS', '', '', '', 
+      'TEMA',
+      'ENTRADA DE PROYECTOS', '', '', '',
+      'TÍTULO',
+      'RADICACIÓN DE PROYECTOS', '', '',
+      'FECHA DE APROBACIÓN / INSTANCIAS', '', '', '',
+      'FECHA DE APROBACIÓN / INSTANCIAS ACTOS LEGISLATIVOS', '', '', '',
       'FECHA DE APROBACIÓN / INSTANCIAS', '', '', '', '',
       'ESTADOS',
       'OBSERVACIONES USUARIO', '', '', ''
     ]
 
     header = [
-      '', 
+      '',
       'Origen', 'Número Cámara', 'Número Senado', 'Comisión',
-      '', 
-      'Fecha', 'Autores', 'Ponentes', 
-      'Aprobación Comisión Cámara', 'Aprobación Plenaria Cámara', 'Aprobación Comisión Senado', 'Aprobación Plenaria Senado', 
-      'Aprobación Comisión Cámara Segunda Vuelta', 'Aprobación Plenaria Cámara Segunda Vuelta', 'Aprobación Comisión Senado Segunda Vuelta', 'Aprobación Plenaria Senado Segunda Vuelta', 
-      'Fecha Conciliación Cámara', 'Fecha Conciliación Senado', 'Aprobación en Comisiones Conjuntas', 'Proyecto aprobado', 'Sancionado', 
+      '',
+      'Fecha', 'Autores', 'Ponentes',
+      'Aprobación Comisión Cámara', 'Aprobación Plenaria Cámara', 'Aprobación Comisión Senado', 'Aprobación Plenaria Senado',
+      'Aprobación Comisión Cámara Segunda Vuelta', 'Aprobación Plenaria Cámara Segunda Vuelta', 'Aprobación Comisión Senado Segunda Vuelta', 'Aprobación Plenaria Senado Segunda Vuelta',
+      'Fecha Conciliación Cámara', 'Fecha Conciliación Senado', 'Aprobación en Comisiones Conjuntas', 'Proyecto aprobado', 'Sancionado',
       '',
       'Impacto'.upcase, 'Probabilidad'.upcase, 'Riesgo'.upcase, 'Observaciones'.upcase
     ]
@@ -51,24 +51,24 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
     sheet.add_row header, style: [gray_cell, purple_cell, purple_cell, purple_cell, purple_cell, green_cell, pink_cell, pink_cell, pink_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, red_cell, orange_cell, orange_cell, orange_cell, orange_cell], height: 70
 
     @legislatives.each do |legislative|
-    
+
     normal_cell = s.add_style sz: 11, alignment: { horizontal: :center, vertical: :center, wrap_text: true }, border: Axlsx::STYLE_THIN_BORDER, font_name: 'Calibri'
 
       sheet.add_row [
-        legislative[:topic], 
+        legislative[:topic],
         legislative[:source], legislative[:chamber_number], legislative[:senate_number], legislative[:commission],
         legislative[:title],
         legislative[:filing_at], legislative[:authors], legislative[:speakers],
-        
+
         legislative[:chamber_commission_at], legislative[:chamber_plenary_at], legislative[:senate_commission_at], legislative[:senate_plenary_at],
 
-        legislative[:second_senate_commission_at], legislative[:second_senate_plenary_at], legislative[:second_chamber_commission_at], legislative[:second_chamber_plenary_at],
-        
-        legislative[:senate_settlement_at], legislative[:chamber_settlement_at], '', '', '',
+        legislative[:second_chamber_commission_at], legislative[:second_chamber_plenary_at], legislative[:second_senate_commission_at], legislative[:second_senate_plenary_at],
+
+        legislative[:chamber_settlement_at], legislative[:senate_settlement_at], '', '', '',
         legislative[:status],
         legislative[:impact], legislative[:probability], legislative[:risk], legislative[:observations]
       ], style: normal_cell, height: 50
-    
+
     end
 
     sheet.column_widths 30, 12, 15, 15, 12, 50, 12, 30, 30, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 12, 12, 15, 12, 30
