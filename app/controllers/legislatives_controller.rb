@@ -424,18 +424,20 @@ class LegislativesController < ApplicationController
     if params[:client] === 'true'
       legislatives = current_user.following_legislatives
     else
-      legislatives = Legislative.all
+      legislatives = Legislative.joins(:stakeholders)
+                       .select('legislatives.*')
+                       .group('legislatives.id')
     end
 
-    ## Get all comments/stakeholders eagle for better database performance
-    stakeholder = Stakeholder.joins(:legislative_stakeholders)
-      .select('stakeholders.*, legislative_stakeholders.legislative_id')
-      .where(legislative_stakeholders: {legislative_id: legislatives.ids})
+      #stakeholder = Stakeholder.joins(:legislative_stakeholders)
+    #  .select('stakeholders.*, legislative_stakeholders.legislative_id')
+    # .where(legislative_stakeholders: {legislative_id: legislatives.ids})
 
+    # Get all comments/stakeholders eagle for better database performance
     legislatives_comments = Comment.where(legislative_id: legislatives.ids, user_id: current_user).to_a
 
-    stakeholders_authors = stakeholder.where(legislative_stakeholders: {author: true}).to_a
-    stakeholders_speakers = stakeholder.where(legislative_stakeholders: {speaker: true}).to_a
+    stakeholders_authors = legislatives.select('array_agg(stakeholders.name) as author_name').where(legislative_stakeholders: {author: true}).to_a
+    stakeholders_speakers = legislatives.select('array_agg(stakeholders.name) as speaker_name').where(legislative_stakeholders: {speaker: true}).to_a
 
     # Build response
     legislatives.each do |legislative|
@@ -449,16 +451,16 @@ class LegislativesController < ApplicationController
       risk_list << risk
 
       authors = stakeholders_authors.reduce([]){ |vals, sa|
-        if sa.legislative_id == legislative.id
-          vals.push(sa.name)
-          ##stakeholders_authors.delete_at(stakeholders_authors.index(sa))
+        if sa.id == legislative.id
+          vals.push(sa.author_name)
+          stakeholders_authors.delete_at(stakeholders_authors.index(sa))
         end
         vals
       }
       speakers = stakeholders_speakers.reduce([]){ |vals, ss|
-        if ss.legislative_id == legislative.id
-          vals.push(ss.name)
-          ##stakeholders_speakers.delete_at(stakeholders_speakers.index(ss))
+        if ss.id == legislative.id
+          vals.push(ss.speaker_name)
+          stakeholders_speakers.delete_at(stakeholders_speakers.index(ss))
         end
         vals
       }
