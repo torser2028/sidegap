@@ -418,15 +418,17 @@ class LegislativesController < ApplicationController
   def legislative
     risk_list = []
     risk_table = get_risk_table
+    type = 'general'
 
     @legislatives = []
 
+    legislatives = Legislative.joins(:stakeholders)
+                     .select('legislatives.*')
+                     .group('legislatives.id')
+
     if params[:client] === 'true'
-      legislatives = current_user.following_legislatives
-    else
-      legislatives = Legislative.joins(:stakeholders)
-                       .select('legislatives.*')
-                       .group('legislatives.id')
+      legislatives = legislatives.where(legislative_id: current_user.following_legislatives.ids)
+      type = 'user_' + current_user.name.parameterize.underscore
     end
 
     # Get all comments/stakeholders eagle for better database performance
@@ -496,7 +498,7 @@ class LegislativesController < ApplicationController
     end
 
     respond_to do |format|
-      format.xlsx { render xlsx: 'legislative', filename: "legislative_#{Time.now.strftime("%d-%m-%Y-%H-%M")}.xlsx" }
+      format.xlsx { render xlsx: 'legislative', filename: "legislative_#{type}_#{Time.now.strftime("%d-%m-%Y-%H-%M")}.xlsx" }
     end
   end
 
@@ -506,7 +508,7 @@ class LegislativesController < ApplicationController
   end
 
   private
-    def get_legislative(id)
-      Legislative.find id
-    end
+  def get_legislative(id)
+    Legislative.find id
+  end
 end
