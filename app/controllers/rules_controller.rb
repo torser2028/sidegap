@@ -21,7 +21,8 @@ class RulesController < InheritedResources::Base
   def favorites
     add_breadcrumb "Mis Normas Favoritas", :favorites_rules_path
 
-    @q = current_user.following_rules.active.ransack params[:q]
+    @q = current_user.following_rules.where("deadline_comments < ?", Date.today).ransack params[:q]
+
     @rules = []
     @q.result.order(created_at: :desc).each do |item|
       @rules << item unless current_user.find_disliked_items.include? item
