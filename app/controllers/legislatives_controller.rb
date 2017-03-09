@@ -418,7 +418,7 @@ class LegislativesController < ApplicationController
   def legislative
     risk_list = []
     risk_table = get_risk_table
-    type = 'general'
+    type = ''
 
     @legislatives = []
 
@@ -426,9 +426,15 @@ class LegislativesController < ApplicationController
                      .select('legislatives.*')
                      .group('legislatives.id')
 
-    if params[:client] === 'true'
-      legislatives = legislatives.where(legislative_id: current_user.following_legislatives.ids)
-      type = 'user_' + current_user.name.parameterize.underscore
+    if /\A\d+\z/.match(params[:client]) && current_user.has_role?(:admin)
+      client_user = User.find(params[:client])
+      legislatives = legislatives.where(id: client_user.following_legislatives.all.ids)
+      type = 'client_' + client_user.name.parameterize.underscore
+    elsif params[:client] === 'false' && current_user.has_role?(:admin)
+      type = 'admin_general'
+    else
+      legislatives = legislatives.where(id: current_user.following_legislatives.all.ids)
+      type = 'client_' + current_user.name.parameterize.underscore
     end
 
     # Get all comments/stakeholders eagle for better database performance

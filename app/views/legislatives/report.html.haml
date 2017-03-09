@@ -8,7 +8,7 @@
 
     function drawChart() {
       // Set chart options
-      var options = { 
+      var options = {
         width: 500,
         height: 350,
         is3D: true
@@ -27,7 +27,7 @@
       data_status.addColumn('string', 'Tema de interés');
       data_status.addColumn('number', 'Cantidad');
       data_status.addRows(values_status);
-      
+
       var chart_status = new google.visualization.PieChart(document.getElementById('legislative_by_status'));
       chart_status.draw(data_status, options);
 
@@ -38,14 +38,14 @@
       data_topic.addColumn('string', 'Tema de interés');
       data_topic.addColumn('number', 'Cantidad');
       data_topic.addRows(values_topic);
-      
+
       var chart_topic = new google.visualization.PieChart(document.getElementById('legislative_by_topic'));
       chart_topic.draw(data_topic, options);
 
       // Risk chart
       var values_risk = #{@legislatives_by_risk.to_a};
       values_risk.unshift(['Riesgo', 'Cantidad', {role: 'style'}]);
-      
+
       var data_risk = google.visualization.arrayToDataTable(values_risk);
       var data_risk = new google.visualization.DataView(data_risk);
       data_risk.setColumns([0, 1, {
@@ -90,7 +90,7 @@
     %span.hidden-pdf
       |
 
-    %a{ class: 'hidden-pdf', href: legislative_legislatives_path(format: :xlsx, client: current_user.has_role?(:client) ? true : false), target: "_blank"}
+    %a{ class: 'hidden-pdf', href: legislative_legislatives_path(format: :xlsx, client: current_user.has_role?(:admin) ? (params[:user_id] ? params[:user_id] : false) : true), target: "_blank"}
       = fa_icon "file-pdf-o"
       %span
         Exportar a Excel
@@ -104,7 +104,7 @@
       %h2
         = fa_icon "tasks"
         Resumen Semana - Monitoreo Normativo
-      
+
       %table.table-border
         %colgroup
           %col
@@ -114,7 +114,7 @@
             %tr
               %td= (index + 1).to_s + '.'
               %td= simple_format notice.body
-  
+
   .row.section.nobreak
     .small-12.columns
       %h2
@@ -202,7 +202,7 @@
               %td= agenda.event_type
               %td= agenda.body
               %td= agenda.observation
-  
+
   .row.section.nobreak
     .small-12.columns
       %h2 Otros eventos
@@ -330,7 +330,7 @@
             %td Total
             %td= @total_by_source
             %td 100%
- 
+
   .row.section.nobreak
     .small-12.columns
       %h3 Proyectos por Estado
@@ -358,7 +358,7 @@
                 %td 100%
         .small-6.columns.w60
           #legislative_by_status
-    
+
   .row.secition.nobreak
     .small-12.columns
       %h3 Proyectos por Tema
@@ -386,7 +386,7 @@
                 %td 100%
         .small-6.columns.w60
           #legislative_by_topic
-  
+
   .row.section.nobreak
     .small-12.columns
       %h2
