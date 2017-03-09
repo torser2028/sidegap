@@ -55,6 +55,10 @@
       var chart_risk = new google.visualization.ColumnChart(document.getElementById('legislative_by_risk'));
       chart_risk.draw(data_risk, options_risk);
     }
+    function onChangeClient (e) {
+      var link = $("a.hidden-excel").attr("href");
+      $("a.hidden-excel").attr("href", link.replace(/(client=)[^\&]+/, '$1' + e.options[e.selectedIndex].value));
+    }
 
 
 %h1.report-title Informe legislativo
@@ -73,7 +77,7 @@
                     %label
                       Seleccionar Cliente
                   .medium-4.small-12.columns
-                    = select_tag 'user_id', options_from_collection_for_select(@users, 'id', 'name', params[:user_id]), include_blank: true, required: true
+                    = select_tag 'user_id', options_from_collection_for_select(@users, 'id', 'name', params[:user_id]), include_blank: true, required: true, onChange: "onChangeClient(this);"
                   .medium-offset-0.medium-4.small-12.columns
                     %input.button.success.search{type: "submit", value: "Buscar"}
                     .button.secondary.quit
@@ -90,8 +94,8 @@
     %span.hidden-pdf
       |
 
-    %a{ class: 'hidden-pdf', href: legislative_legislatives_path(format: :xlsx, client: current_user.has_role?(:admin) ? (params[:user_id] ? params[:user_id] : false) : true), target: "_blank"}
-      = fa_icon "file-pdf-o"
+    %a{ class: 'hidden-excel', href: legislative_legislatives_path(format: :xlsx, client: current_user.has_role?(:admin) ? (params[:user_id] ? params[:user_id] : false) : true), target: "_blank"}
+      = fa_icon "file-excel-o"
       %span
         Exportar a Excel
 
