@@ -20,6 +20,11 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  active_admin:
+    powered_by: ""
+    dashboard_welcome:
+      welcome: "Welcome to the Sidegap admin panel."
+      call_to_action: ""
   date:
     abbr_day_names:
     - Sun
@@ -30,7 +35,7 @@ en:
     - Fri
     - Sat
     abbr_month_names:
-    - 
+    -
     - Jan
     - Feb
     - Mar
@@ -57,7 +62,7 @@ en:
       short: "%b %d"
       custom: "%Y %m-%d"
     month_names:
-    - 
+    -
     - January
     - February
     - March
@@ -226,3 +231,6 @@ en:
       db: "%d-%m-%Y"
       simple: "%I:%M %p"
     pm: pm
+  legislatives:
+    manual_weekly_report:
+      notice: "Weekly report sent with success"

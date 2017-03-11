@@ -1,4 +1,9 @@
 es:
+  active_admin:
+    powered_by: ""
+    dashboard_welcome:
+      welcome: "Bienvenido al panel de administración de Sidegap."
+      call_to_action: ""
   date:
     abbr_day_names:
     - dom
@@ -193,3 +198,6 @@ es:
       db: "%Y-%m-%d"
       simple: "%I:%M %P"
     pm: pm
+  legislatives:
+    manual_weekly_report:
+      notice: "Reporte semanal enviado con exíto"
