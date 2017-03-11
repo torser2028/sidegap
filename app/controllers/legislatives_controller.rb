@@ -510,7 +510,7 @@ class LegislativesController < ApplicationController
 
   def manual_weekly_report
     UserMailer.set_recipients_weekly
-    redirect_to :back
+    redirect_to :back, :notice => t('.notice')
   end
 
   private

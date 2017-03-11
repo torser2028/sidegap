@@ -58,3 +58,4 @@ group :production do
 end
 
 gem 'rack-timeout', '0.4.2'
+gem 'rack-canonical-host', '0.2.2'

@@ -41,14 +41,14 @@ class UserMailer < ApplicationMailer
   def stakeholder_notification(recipient, project, authors, chamber_speakers, senate_speakers)
     @project = project
     @name = recipient.name
-    
+
     @authors = []
     @chamber_speakers = []
     @senate_speakers = []
     authors.each { |author| @authors << Stakeholder.find(author) }
     chamber_speakers.each { |chamber_speaker| @chamber_speakers << Stakeholder.find(chamber_speaker) }
     senate_speakers.each { |senate_speaker| @senate_speakers << Stakeholder.find(senate_speaker) }
-    
+
     mail(to: recipient.email, subject: "Cambios en mis proyectos favoritos")
   end
 
@@ -86,16 +86,20 @@ class UserMailer < ApplicationMailer
   end
 
   def self.set_recipients_weekly
-    User.all.each do |recipient|
-      weekly_report(recipient).deliver_now
+    Thread.new do
+      # send in backgound thead
+      User.all.each do |recipient|
+        weekly_report(recipient).deliver_now
+      end
+      ActiveRecord::Base.connection.close
     end
   end
 
   def weekly_report(recipient)
     @name = recipient.name
-    
+
     following_legislatives = recipient.following_legislatives
-    following_councils = recipient.following_councils
+    # following_councils = recipient.following_councils
 
     changed = []
     following_legislatives.each do |legislative|
