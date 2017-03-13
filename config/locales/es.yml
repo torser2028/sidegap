@@ -4,6 +4,9 @@ es:
     dashboard_welcome:
       welcome: "Bienvenido al panel de administración de Sidegap."
       call_to_action: ""
+    resources:
+      rule:
+        new_model: "Añadir norma"
   date:
     abbr_day_names:
     - dom

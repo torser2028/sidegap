@@ -5,10 +5,14 @@ class UserMailer < ApplicationMailer
   end
 
   def self.set_recipients_new_rule(rule)
-    institution = rule.institution.name
-    recipients = UserNotification.includes(:user, :institution).where(institutions: { name: institution }).map(&:user)
-    recipients.each do |recipient|
-      new_rule(recipient, institution, rule).deliver_now
+    Thread.new do
+      # send in backgound thead
+      institution = rule.institution.name
+      recipients = UserNotification.includes(:user, :institution).where(institutions: { name: institution }).map(&:user).to_a
+      recipients.each do |recipient|
+        new_rule(recipient, institution, rule).deliver_now
+      end
+      ActiveRecord::Base.connection.close
     end
   end
 
