@@ -99,7 +99,7 @@ class UserMailer < ApplicationMailer
     @name = recipient.name
 
     following_legislatives = recipient.following_legislatives
-    # following_councils = recipient.following_councils
+    following_councils = recipient.following_councils
 
     changed = []
     following_legislatives.each do |legislative|
