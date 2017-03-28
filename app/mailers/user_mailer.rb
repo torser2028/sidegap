@@ -24,8 +24,12 @@ class UserMailer < ApplicationMailer
   end
 
   def self.set_recipients_project_notification(project, change_type)
-    project.followers.each do |recipient|
-      project_notification(recipient, project, change_type).deliver_now
+    Thread.new do
+      # send in backgound thead
+      project.followers.each do |recipient|
+        project_notification(recipient, project, change_type).deliver_now
+      end
+      ActiveRecord::Base.connection.close
     end
   end
 
@@ -37,8 +41,12 @@ class UserMailer < ApplicationMailer
   end
 
   def self.set_recipients_stakeholder_notification(project, authors, chamber_speakers, senate_speakers)
-    project.followers.each do |recipient|
-      stakeholder_notification(recipient, project, authors, chamber_speakers, senate_speakers).deliver_now
+    Thread.new do
+      # send in backgound thead
+      project.followers.each do |recipient|
+        stakeholder_notification(recipient, project, authors, chamber_speakers, senate_speakers).deliver_now
+      end
+      ActiveRecord::Base.connection.close
     end
   end
 
@@ -57,8 +65,12 @@ class UserMailer < ApplicationMailer
   end
 
   def self.set_recipients_alert(alert)
-    User.all.each do |recipient|
-      regulatory_alert(recipient, alert).deliver_now
+    Thread.new do
+      # send in backgound thead
+      User.all.each do |recipient|
+        regulatory_alert(recipient, alert).deliver_now
+      end
+      ActiveRecord::Base.connection.close
     end
   end
 
@@ -69,14 +81,18 @@ class UserMailer < ApplicationMailer
   end
 
   def self.set_recipients_regulatory
-    legislatives_stories = Story.not_sent.legislatives
-    councils_stories = Story.not_sent.councils
-    rules_stories = Story.not_sent.rules
+    Thread.new do
+      # send in backgound thead
+      legislatives_stories = Story.not_sent.legislatives
+      councils_stories = Story.not_sent.councils
+      rules_stories = Story.not_sent.rules
 
-    if legislatives_stories.present? || councils_stories.present? || rules_stories.present?
-      User.all.each do |recipient|
-        regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories).deliver_now
+      if legislatives_stories.present? || councils_stories.present? || rules_stories.present?
+        User.all.each do |recipient|
+          regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories).deliver_now
+        end
       end
+      ActiveRecord::Base.connection.close
     end
   end
 
