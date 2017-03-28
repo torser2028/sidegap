@@ -26,10 +26,10 @@ namespace :scheduler do
 
   desc 'Test task'
   task :test => :environment do
-    time = Time.now
-    puts time
-    puts time.strftime("%A, %d/%m/%Y")
-    puts time.tuesday?
-    puts time.hour
+    if UserMailer.set_recipients_weekly
+      puts 'Weekly report sent.'
+    else
+      puts 'Weekly report not sent.'
+    end
   end
 end
