@@ -26,10 +26,11 @@ namespace :scheduler do
 
   desc 'Test task'
   task :test => :environment do
-    if UserMailer.set_recipients_weekly
-      puts 'Weekly report sent.'
+    if UserMailer.set_recipients_regulatory
+      Story.not_sent.each { |story| story.update_attribute(:sent, true) }
+      puts 'Regulatory report sent.'
     else
-      puts 'Weekly report not sent.'
+      puts 'There is no stories available.'
     end
   end
 end
