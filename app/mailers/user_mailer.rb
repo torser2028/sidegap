@@ -127,6 +127,12 @@ class UserMailer < ApplicationMailer
     end
   end
 
+  def self.set_recipients_weekly_fg
+    User.all.each do |recipient|
+      weekly_report(recipient).deliver_now
+    end
+  end
+
   def weekly_report(recipient)
     @name = recipient.name
 

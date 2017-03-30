@@ -39,7 +39,7 @@ namespace :scheduler do
   desc 'Test task'
   task :test_week => :environment do
     Thread.new do
-      if UserMailer.set_recipients_weekly
+      if UserMailer.set_recipients_weekly_fg
         puts 'Weekly report sent.'
       else
         puts 'Weekly report not sent.'
