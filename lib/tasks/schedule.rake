@@ -27,7 +27,7 @@ namespace :scheduler do
   desc 'Test task'
   task :test_regulatory => :environment do
     Thread.new do
-      if UserMailer.set_recipients_regulatory
+      if UserMailer.set_recipients_regulatory_fg
         Story.not_sent.each { |story| story.update_attribute(:sent, true) }
         puts 'Regulatory report sent.'
       else
