@@ -26,24 +26,24 @@ namespace :scheduler do
 
   desc 'Test task'
   task :test_regulatory => :environment do
-    4.times do
-      Thread.new do
-        if UserMailer.set_recipients_regulatory_fg
-          Story.not_sent.each { |story| story.update_attribute(:sent, true) }
-          puts 'Regulatory report sent.'
-        else
-          puts 'There is no stories available.'
-        end
+    Thread.new do
+      if UserMailer.set_recipients_regulatory
+        Story.not_sent.each { |story| story.update_attribute(:sent, true) }
+        puts 'Regulatory report sent.'
+      else
+        puts 'There is no stories available.'
       end
-    end
+    end.join
   end
 
   desc 'Test task'
   task :test_week => :environment do
-    if UserMailer.set_recipients_weekly
-      puts 'Weekly report sent.'
-    else
-      puts 'Weekly report not sent.'
-    end
+    Thread.new do
+      if UserMailer.set_recipients_weekly
+        puts 'Weekly report sent.'
+      else
+        puts 'Weekly report not sent.'
+      end
+    end.join
   end
 end
