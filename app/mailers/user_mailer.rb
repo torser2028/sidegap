@@ -139,7 +139,7 @@ class UserMailer < ApplicationMailer
       @user_approved = following_legislatives.law.count
       @user_changed_status = changed.count
       @user_with_agenda = following_legislatives.with_agenda.count
-      @user_topics = following_legislatives_current.group(:topic).count
+      @user_topics = following_legislatives.group(:topic).count
 
       # All current legislatives
       legislatives_current = Legislative.actual
