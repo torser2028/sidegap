@@ -126,20 +126,21 @@ class UserMailer < ApplicationMailer
   def weekly_report(recipient)
     @name = recipient.name
 
-    following_legislatives = recipient.following_legislatives.where(
-      "legislatives.created_at >= ?", Time.now.midnight - 7.days
-    )
+    time_range = ((Time.now.midnight - 7.day)..Time.now.end_of_day - 1.day)
+    
+    following_legislatives = recipient.following_legislatives
+    following_legislatives_current = following_legislatives.where(created_at: time_range)
     # following_councils = recipient.following_councils
 
     changed = []
-    following_legislatives.each do |legislative|
+    following_legislatives_current.each do |legislative|
       changed << legislative if legislative.last_status != legislative.status
     end
-    @user_following = following_legislatives.count
-    @user_approved = following_legislatives.law.count
+    @user_following = following_legislatives_current.count
+    @user_approved = following_legislatives_current.law.count
     @user_changed_status = changed.count
-    @user_with_agenda = following_legislatives.with_agenda.count
-    @user_topics = following_legislatives.group(:topic).count
+    @user_with_agenda = following_legislatives_current.with_agenda.count
+    @user_topics = following_legislatives_current.group(:topic).count
 
     @actual = Legislative.actual.count
     @status_changed = Legislative.actual_status_changed.count
