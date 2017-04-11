@@ -13,7 +13,7 @@ class UserMailer < ApplicationMailer
         new_rule(recipient, institution, rule).deliver_now
       end
       ActiveRecord::Base.connection.close
-    end.join
+    end
   end
 
   def new_rule(recipient, institution, rule)
@@ -30,7 +30,7 @@ class UserMailer < ApplicationMailer
         project_notification(recipient, project, change_type).deliver_now
       end
       ActiveRecord::Base.connection.close
-    end.join
+    end
   end
 
   def project_notification(recipient, project, change_type)
@@ -47,7 +47,7 @@ class UserMailer < ApplicationMailer
         stakeholder_notification(recipient, project, authors, chamber_speakers, senate_speakers).deliver_now
       end
       ActiveRecord::Base.connection.close
-    end.join
+    end
   end
 
   def stakeholder_notification(recipient, project, authors, chamber_speakers, senate_speakers)
@@ -71,7 +71,7 @@ class UserMailer < ApplicationMailer
         regulatory_alert(recipient, alert).deliver_now
       end
       ActiveRecord::Base.connection.close
-    end.join
+    end
   end
 
   def regulatory_alert(recipient, alert)
@@ -83,17 +83,21 @@ class UserMailer < ApplicationMailer
   def self.set_recipients_regulatory
     Thread.new do
       # send in backgound thead
-      legislatives_stories = Story.not_sent.legislatives
-      councils_stories = Story.not_sent.councils
-      rules_stories = Story.not_sent.rules
-
-      if legislatives_stories.present? || councils_stories.present? || rules_stories.present?
-        User.all.each do |recipient|
-          regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories).deliver_now
-        end
-      end
+      self.set_recipients_regulatory_fg()
       ActiveRecord::Base.connection.close
-    end.join
+    end
+  end
+
+  def self.set_recipients_regulatory_fg
+    legislatives_stories = Story.not_sent.legislatives
+    councils_stories = Story.not_sent.councils
+    rules_stories = Story.not_sent.rules
+
+    if legislatives_stories.present? || councils_stories.present? || rules_stories.present?
+      User.all.each do |recipient|
+        regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories).deliver_now
+      end
+    end 
   end
 
   def regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories)
@@ -108,13 +112,17 @@ class UserMailer < ApplicationMailer
   def self.set_recipients_weekly
     Thread.new do
       # send in backgound thead
-      User.all.each do |recipient|
-        weekly_report(recipient).deliver_now
-      end
+      self.set_recipients_weekly_fg()
       ActiveRecord::Base.connection.close
-    end.join
+    end
   end
-
+  
+  def self.set_recipients_weekly_fg
+    User.all.each do |recipient|
+      weekly_report(recipient).deliver_now
+    end
+  end
+  
   def weekly_report(recipient)
     @name = recipient.name
 
