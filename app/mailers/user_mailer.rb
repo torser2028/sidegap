@@ -126,7 +126,7 @@ class UserMailer < ApplicationMailer
   def weekly_report(recipient)
     @name = recipient.name
 
-    if recipient.email == "camiloquimbayo@gmx.com" || recipient.email == "juanacifuestes08@hotmail.com"
+    if recipient.email == "camiloquimbayo@gmx.com" || recipient.email == "juanacifuentes08@hotmail.com"
       # Get Last week
       time_range = ((Time.now.midnight - 7.day)..Time.now.end_of_day - 1.day)
 
