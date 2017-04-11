@@ -146,7 +146,7 @@ class UserMailer < ApplicationMailer
       @user_topics = following_legislatives_current.group(:topic).count
 
       # All current legislatives
-      legislatives_current = Legislative.actual.where(created_at: time_range)
+      legislatives_current = Legislative.actual
       
       @actual_projects = legislatives_current.to_a
       @status_changed_projects = legislatives_current.actual_status_changed.to_a
