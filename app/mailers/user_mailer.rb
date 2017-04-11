@@ -97,7 +97,7 @@ class UserMailer < ApplicationMailer
       User.all.each do |recipient|
         regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories).deliver_now
       end
-    end 
+    end
   end
 
   def regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories)
@@ -116,17 +116,17 @@ class UserMailer < ApplicationMailer
       ActiveRecord::Base.connection.close
     end
   end
-  
+
   def self.set_recipients_weekly_fg
     User.all.each do |recipient|
       weekly_report(recipient).deliver_now
     end
   end
-  
+
   def weekly_report(recipient)
     @name = recipient.name
 
-    if recipient.email == "camiloquimbayo@gmx.com"
+    if recipient.email == "camiloquimbayo@gmx.com" || recipient.email == "juanacifuestes08@hotmail.com"
       # Get Last week
       time_range = ((Time.now.midnight - 7.day)..Time.now.end_of_day - 1.day)
 
@@ -147,12 +147,12 @@ class UserMailer < ApplicationMailer
 
       # All current legislatives
       legislatives_current = Legislative.actual
-      
+
       @actual_projects = legislatives_current.to_a
       @status_changed_projects = legislatives_current.actual_status_changed.to_a
       @archived_projects = legislatives_current.actual_archived.to_a
       @retired_projects = legislatives_current.actual_retired.to_a
-      
+
       @actual = @actual_projects.count
       @status_changed = @status_changed_projects.count
       @archived = @archived_projects.count
