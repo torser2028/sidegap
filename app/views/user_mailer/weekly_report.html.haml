@@ -154,12 +154,12 @@
                                   %ul
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
-                            %tr{:style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
-                              %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                            %tr
+                              %td{:colspan => "2", :style => "border: 1px solid gray; font-size: 2pt; padding: 0;"}
                       - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay proyectos presentados
-                  %tr{:style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                  %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "30%"} Cambio de estado:
@@ -190,7 +190,7 @@
                                   %ul
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
-                            %tr{:style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                            %tr
                               %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                       - else
                         %p{:style => "color: CornflowerBlue;"}
