@@ -155,12 +155,12 @@
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
                             %tr
-                              %td{:colspan => "2", :style => "border: 1px solid gray; font-size: 2pt; padding: 0;"}
+                              %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
                       - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay proyectos presentados
                   %tr
-                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "30%"} Cambio de estado:
                     %td
@@ -191,12 +191,12 @@
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
                             %tr
-                              %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                              %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
                       - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay cambio de estado
                   %tr
-                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "30%"} Proyectos archivados:
                     %td
@@ -227,12 +227,12 @@
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
                           %tr
-                            %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                            %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
                         - else
                           %p{:style => "color: CornflowerBlue;"}
                             No hay proyectos archivados
                   %tr
-                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "30%"} Proyectos retirados:
                     %td
@@ -263,7 +263,7 @@
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
                             %tr
-                              %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                              %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
                       - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay proyectos retirados
