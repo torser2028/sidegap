@@ -26,14 +26,14 @@
                   %tr
                     %th{:colspan => "2", :style => "color: royalblue;"} PROYECTOS EN SEGUIMIENTO
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                 %tbody
                   %tr
                     %td{:width => "35%"} Actualmente está siguiendo:
                     %td{:style => "color: CornflowerBlue;"}
                       = "(#{@user_following}) Proyectos de Ley"
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:rowspan => "3"} Sus proyectos en seguimiento:
                     %td{:style => "color: CornflowerBlue;"}
@@ -42,7 +42,7 @@
                     %td{:style => "color: CornflowerBlue;"}
                       = "(#{@user_changed_status}) Han cambiado de estado"
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td Los temas de interés de sus Proyectos de Ley son:
                     %td{:style => "color: CornflowerBlue;"}
@@ -50,7 +50,7 @@
                         = "(#{count}) " + topic
                         %br/
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "50%"} Están en agenda de discusión para la próxima semana:
                     %td{:style => "color: CornflowerBlue;"}
@@ -67,13 +67,13 @@
                     %th{:colspan => "2", :style => "color: #45C051;"} NUEVOS PROYECTOS EN EL CONGRESO
                 %tbody
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "35%"} Radicados:
                     %td{:style => "color: green;"}
                       = "(#{@actual}) Nuevos Proyectos de Ley"
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "50%"} Con los siguientes temas:
                     %td{:style => "color: green;"}
@@ -85,25 +85,25 @@
                     %th{:colspan => "2", :style => "color: #45C051;"} ESTADO GENERAL DE PROYECTOS
                 %tbody
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "50%"} Han cambiado de estado
                     %td{:style => "color: green;"}
                       = "(#{@status_changed}) Proyectos de Ley"
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "50%"} Se retiraron
                     %td{:style => "color: green;"}
                       = "(#{@retired}) Proyectos de Ley"
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "50%"} Se archivaron
                     %td{:style => "color: green;"}
                       = "(#{@archived}) Proyectos de Ley"
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "50%"} Están en agenda de discusión para la próxima semana:
                     %td{:style => "color: green;"}
@@ -123,7 +123,7 @@
                   %tr
                     %th{:colspan => "2", :style => "color: royalblue;"} PROYECTOS EN EL CONGRESO
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                 %tbody
                   %tr
                     %td{:width => "30%"} Proyectos presentados:
@@ -154,13 +154,13 @@
                                   %ul
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
-                            %tr
-                              %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                            %tr{:style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                              %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                       - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay proyectos presentados
-                  %tr
-                    %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                  %tr{:style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "30%"} Cambio de estado:
                     %td
@@ -190,13 +190,13 @@
                                   %ul
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
-                            %tr
-                              %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                            %tr{:style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                              %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                       - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay cambio de estado
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "30%"} Proyectos archivados:
                     %td
@@ -227,12 +227,12 @@
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
                           %tr
-                            %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                            %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                         - else
                           %p{:style => "color: CornflowerBlue;"}
                             No hay proyectos archivados
                   %tr
-                    %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                    %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                   %tr
                     %td{:width => "30%"} Proyectos retirados:
                     %td
@@ -263,7 +263,7 @@
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
                             %tr
-                              %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
+                              %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
                       - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay proyectos retirados
