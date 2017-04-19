@@ -126,7 +126,7 @@ class UserMailer < ApplicationMailer
   def weekly_report(recipient)
     @name = recipient.name
 
-    if recipient.email == "camiloquimbayo@gmx.com" || recipient.email == "juanacifuentes08@hotmail.com"
+    if recipient.email == "camiloquimbayo@gmx.com" || recipient.email == "juanacifuentes08@hotmail.comdd"
       # User following
       following_legislatives = recipient.following_legislatives
       # following_councils = recipient.following_councils
@@ -155,6 +155,8 @@ class UserMailer < ApplicationMailer
       @retired = @retired_projects.count
       @with_agenda = legislatives_current.with_agenda.count
       @topics = legislatives_current.group(:topic).count
+      puts legislatives_current.count
+      puts Legislative.actual.count
       puts @actual_projects.count
       puts @actual_projects.size
 
