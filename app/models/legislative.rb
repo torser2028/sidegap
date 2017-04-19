@@ -1,3 +1,4 @@
+# coding: utf-8
 class Legislative < ActiveRecord::Base
   acts_as_followable
   acts_as_votable
@@ -30,7 +31,7 @@ class Legislative < ActiveRecord::Base
   scope :actual, -> { where(created_at: time_range) }
   scope :actual_archived, -> { where(final_status: 'Archivado', status_updated_at: time_range) }
   scope :actual_retired, -> { where(final_status: 'Retirado', status_updated_at: time_range) }
-  scope :actual_status_changed, -> { where.not('status = last_status').where(final_status: ['', nil], status_updated_at: time_range) }
+  scope :actual_status_changed, -> { where('status != last_status').where(final_status: ['', nil], status_updated_at: time_range) }
 
   validates :source, :title, :status, :type_law, :filing_at, presence: true
 
