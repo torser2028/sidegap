@@ -154,8 +154,9 @@
                                   %ul
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
-                            %tr
-                              %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
+                            - if project != @actual_projects[-1]
+                              %tr
+                                %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
                       - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay proyectos presentados
@@ -190,8 +191,9 @@
                                   %ul
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
-                            %tr
-                              %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
+                            - if project != @status_changed_projects[-1]
+                              %tr
+                                %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}                                
                       - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay cambio de estado
@@ -226,8 +228,9 @@
                                   %ul
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
-                          %tr
-                            %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
+                            - if project != @archived_projects[-1]
+                              %tr
+                                %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}  
                         - else
                           %p{:style => "color: CornflowerBlue;"}
                             No hay proyectos archivados
@@ -262,8 +265,9 @@
                                   %ul
                                     - project.stakeholders.speakers.each do |speaker|
                                       %li= speaker.name
-                            %tr
-                              %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"}
+                            - if project != @retired_projects[-1]
+                              %tr
+                                %td{:colspan => "2", :style => "border-bottom: 1px solid gray; font-size: 2pt; padding: 0;"} 
                       - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay proyectos retirados
