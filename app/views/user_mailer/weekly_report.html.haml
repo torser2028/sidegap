@@ -68,13 +68,13 @@
                 %tbody
                   %tr
                     %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
-                      %tr
+                  %tr
                     %td{:width => "35%"} Radicados:
                     %td{:style => "color: green;"}
                       = "(#{@actual}) Nuevos Proyectos de Ley"
                   %tr
                     %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
-                      %tr
+                  %tr
                     %td{:width => "50%"} Con los siguientes temas:
                     %td{:style => "color: green;"}
                       - @topics.each do |topic, count|
@@ -86,25 +86,25 @@
                 %tbody
                   %tr
                     %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
-                      %tr
+                  %tr
                     %td{:width => "50%"} Han cambiado de estado
                     %td{:style => "color: green;"}
                       = "(#{@status_changed}) Proyectos de Ley"
                   %tr
                     %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
-                      %tr
+                  %tr
                     %td{:width => "50%"} Se retiraron
                     %td{:style => "color: green;"}
                       = "(#{@retired}) Proyectos de Ley"
                   %tr
                     %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
-                      %tr
+                  %tr
                     %td{:width => "50%"} Se archivaron
                     %td{:style => "color: green;"}
                       = "(#{@archived}) Proyectos de Ley"
                   %tr
                     %td{:colspan => "2", :style => "border: 1px solid #c0e6c0; font-size: 2pt; padding: 0;"}
-                      %tr
+                  %tr
                     %td{:width => "50%"} Están en agenda de discusión para la próxima semana:
                     %td{:style => "color: green;"}
                       = "(#{@with_agenda}) Proyectos de Ley"
@@ -192,12 +192,12 @@
                                       %li= speaker.name
                             %tr
                               %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
-                                - else
+                      - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay cambio de estado
                   %tr
                     %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
-                      %tr
+                  %tr
                     %td{:width => "30%"} Proyectos archivados:
                     %td
                       %table{:cellpadding => "5", :width => "80%"}
@@ -228,12 +228,12 @@
                                       %li= speaker.name
                           %tr
                             %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
-                              - else
+                        - else
                           %p{:style => "color: CornflowerBlue;"}
                             No hay proyectos archivados
                   %tr
                     %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
-                      %tr
+                  %tr
                     %td{:width => "30%"} Proyectos retirados:
                     %td
                       - if !@retired_projects.size.zero?
@@ -264,7 +264,7 @@
                                       %li= speaker.name
                             %tr
                               %td{:colspan => "2", :style => "border: 1px solid lightgray; font-size: 2pt; padding: 0;"}
-                                - else
+                      - else
                         %p{:style => "color: CornflowerBlue;"}
                           No hay proyectos retirados
       
