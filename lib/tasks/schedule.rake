@@ -21,7 +21,7 @@ namespace :scheduler do
     time = Time.now
     if time.monday?
       Thread.new do
-        if UserMailer.set_recipients_weekly_fg
+        if UserMailer.set_recipients_weekly_test
           ActiveRecord::Base.connection.close
           puts 'Weekly report sent.'
         else

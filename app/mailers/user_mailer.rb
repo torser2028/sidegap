@@ -123,40 +123,46 @@ class UserMailer < ApplicationMailer
     end
   end
 
+  def self.set_recipients_weekly_test
+    User.all.each do |recipient|
+      if recipient.email == "camiloquimbayo@gmx.com" || recipient.email == "juanacifuentes08@hotmail.com"
+        weekly_report(recipient).deliver_now
+      end
+    end
+  end
+
   def weekly_report(recipient)
     @name = recipient.name
 
-    if recipient.email == "camiloquimbayo@gmx.com" || recipient.email == "juanacifuentes08@hotmail.comdd"
-      # User following
-      following_legislatives = recipient.following_legislatives
-      # following_councils = recipient.following_councils
+    # User following
+    following_legislatives = recipient.following_legislatives
+    # following_councils = recipient.following_councils
 
-      changed = []
-      following_legislatives.each do |legislative|
-        changed << legislative if legislative.last_status != legislative.status
-      end
-      @user_following = following_legislatives.count
-      @user_approved = following_legislatives.law.count
-      @user_changed_status = changed.count
-      @user_with_agenda = following_legislatives.with_agenda.count
-      @user_topics = following_legislatives.group(:topic).count
-
-      # All current legislatives
-      legislatives_current = Legislative.actual
-
-      @actual_projects = legislatives_current.to_a
-      @status_changed_projects = Legislative.actual_status_changed.to_a
-      @archived_projects = legislatives_current.actual_archived.to_a
-      @retired_projects = legislatives_current.actual_retired.to_a
-
-      @actual = @actual_projects.count
-      @status_changed = @status_changed_projects.count
-      @archived = @archived_projects.count
-      @retired = @retired_projects.count
-      @with_agenda = legislatives_current.with_agenda.count
-      @topics = legislatives_current.group(:topic).count
-
-      mail(to: recipient.email, subject: "Estado semanal de su cuenta")
+    changed = []
+    following_legislatives.each do |legislative|
+      changed << legislative if legislative.last_status != legislative.status
     end
+    @user_following = following_legislatives.count
+    @user_approved = following_legislatives.law.count
+    @user_changed_status = changed.count
+    @user_with_agenda = following_legislatives.with_agenda.count
+    @user_topics = following_legislatives.group(:topic).count
+
+    # All current legislatives
+    legislatives_current = Legislative.actual
+
+    @actual_projects = legislatives_current.to_a
+    @status_changed_projects = Legislative.actual_status_changed.to_a
+    @archived_projects = legislatives_current.actual_archived.to_a
+    @retired_projects = legislatives_current.actual_retired.to_a
+
+    @actual = @actual_projects.count
+    @status_changed = @status_changed_projects.count
+    @archived = @archived_projects.count
+    @retired = @retired_projects.count
+    @with_agenda = legislatives_current.with_agenda.count
+    @topics = legislatives_current.group(:topic).count
+
+    mail(to: recipient.email, subject: "Estado semanal de su cuenta")
   end
 end
