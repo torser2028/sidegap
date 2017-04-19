@@ -155,10 +155,6 @@ class UserMailer < ApplicationMailer
       @retired = @retired_projects.count
       @with_agenda = legislatives_current.with_agenda.count
       @topics = legislatives_current.group(:topic).count
-      puts legislatives_current.count
-      puts Legislative.actual.count
-      puts @actual_projects.count
-      puts @actual_projects.size
 
       mail(to: recipient.email, subject: "Estado semanal de su cuenta")
     end
