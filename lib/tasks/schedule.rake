@@ -21,7 +21,7 @@ namespace :scheduler do
     time = Time.now
     if time.monday?
       Thread.new do
-        if UserMailer.set_recipients_weekly_test
+        if UserMailer.set_recipients_weekly_fg
           ActiveRecord::Base.connection.close
           puts 'Weekly report sent.'
         else
@@ -49,7 +49,7 @@ namespace :scheduler do
   desc 'Test Weekly Report'
   task :test_week => :environment do
     Thread.new do
-      if UserMailer.set_recipients_weekly_fg
+      if UserMailer.set_recipients_weekly_test
         ActiveRecord::Base.connection.close
         puts 'Weekly report sent.'
       else
