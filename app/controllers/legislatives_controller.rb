@@ -41,9 +41,11 @@ class LegislativesController < ApplicationController
   def trash
     add_breadcrumb "Papelera", :trash_legislatives_path
 
-    @q = Legislative.ransack params[:q]
     @legislatives = []
-    @q.result.each do |item|
+    @q = Legislative.ransack params[:q]
+    result = @q.result.to_a
+    
+    result.each do |item|
       @legislatives << item if current_user.find_disliked_items.include? item
     end
   end
