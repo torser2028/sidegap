@@ -44,9 +44,10 @@ class LegislativesController < ApplicationController
     @legislatives = []
     @q = Legislative.ransack params[:q]
     result = @q.result.to_a
+    disliked_items = current_user.find_disliked_items.to_a
     
     result.each do |item|
-      @legislatives << item if current_user.find_disliked_items.include? item
+      @legislatives << item if disliked_items.include? item
     end
   end
 
