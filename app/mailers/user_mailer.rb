@@ -158,7 +158,7 @@ class UserMailer < ApplicationMailer
       puts @actual_projects.group_by(&:topic).inspect
       
       @actual = @actual_projects.count
-      @topics = @actual_projects.group_by(&:topic).count
+      @topics = @actual_projects.group_by(&:topic)
       @status_changed = @status_changed_projects.count
       @archived = @archived_projects.count
       @retired = @retired_projects.count

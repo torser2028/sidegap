@@ -77,8 +77,8 @@
                   %tr
                     %td{:width => "50%"} Con los siguientes temas:
                     %td{:style => "color: green;"}
-                      - @topics.each do |topic, count|
-                        = "(#{count}) " + topic
+                      - @topics.each do |topic, data|
+                        = "(#{data.size}) " + topic
                         %br/
                 %thead
                   %tr
