@@ -137,17 +137,18 @@ class UserMailer < ApplicationMailer
     if recipient.email == "camiloquimbayo@gmx.com" 
       # User following
       following_legislatives = recipient.following_legislatives
+      user_following = following_legislatives.to_a
       # following_councils = recipient.following_councils
 
       changed = []
-      following_legislatives.each do |legislative|
+      user_following.each do |legislative|
         changed << legislative if legislative.last_status != legislative.status
       end
-      @user_following = following_legislatives.count
-      @user_approved = following_legislatives.law.count
+      @user_following = user_following.count
+      @user_topics = user_following.group_by(&:topic)
       @user_changed_status = changed.count
+      @user_approved = following_legislatives.law.count
       @user_with_agenda = following_legislatives.with_agenda.count
-      @user_topics = following_legislatives.group(:topic).count
 
       # General chnages
       @actual_projects = Legislative.actual.to_a

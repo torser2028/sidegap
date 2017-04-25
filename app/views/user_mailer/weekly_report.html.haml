@@ -46,8 +46,8 @@
                   %tr
                     %td Los temas de interés de sus Proyectos de Ley son:
                     %td{:style => "color: CornflowerBlue;"}
-                      - @user_topics.each do |topic, count|
-                        = "(#{count}) " + topic
+                      - @user_topics.each do |topic, data|
+                        = "(#{data.size}) " + topic
                         %br/
                   %tr
                     %td{:colspan => "2", :style => "border-bottom: 1px solid lightgray; font-size: 2pt; padding: 0;"}
