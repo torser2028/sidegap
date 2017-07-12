@@ -10,7 +10,6 @@ class UserMailer < ApplicationMailer
       institution = rule.institution.name
       recipients = UserNotification.includes(:user, :institution).where(institutions: { name: institution }).map(&:user).to_a
       recipients.each do |recipient|
-        puts "nueva norma julian " + recipient.email
         new_rule(recipient, institution, rule).deliver_now
       end
       ActiveRecord::Base.connection.close
@@ -21,6 +20,7 @@ class UserMailer < ApplicationMailer
     @rule = rule
     @institution = institution
     @name = recipient.name
+    puts "nueva norma julian " + recipient.email
     mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
   end
 
