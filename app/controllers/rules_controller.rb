@@ -7,7 +7,8 @@ class RulesController < InheritedResources::Base
     @q = Rule.active.ransack params[:q]
     @rules = []
     @q.result.order(created_at: :desc).each do |item|
-      @rules << item unless current_user.following_rules.include? item
+      #@rules << item unless current_user.following_rules.include? item
+      @rules << item unless current_user.find_disliked_items.include? item
     end
   end
 
