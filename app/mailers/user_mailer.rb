@@ -10,6 +10,7 @@ class UserMailer < ApplicationMailer
       institution = rule.institution.name
       recipients = UserNotification.includes(:user, :institution).where(institutions: { name: institution }).map(&:user).to_a
       recipients.each do |recipient|
+        puts "Julian " + recipient.email
         new_rule(recipient, institution, rule).deliver_now
       end
       ActiveRecord::Base.connection.close
