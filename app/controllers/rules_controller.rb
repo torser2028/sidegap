@@ -9,7 +9,6 @@ class RulesController < InheritedResources::Base
     @q.result.order(created_at: :desc).each do |item|
       @rules << item unless current_user.following_rules.include? item
     end
-    puts "emma " + @rules
   end
 
   def inactive
