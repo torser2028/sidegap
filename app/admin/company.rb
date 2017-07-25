@@ -28,10 +28,6 @@ ActiveAdmin.register Company do
     f.inputs do
       f.input :name, label: "Nombre"
       f.input :email_1, label: "Primer correo"
-      f.input :email_2, label: "Segundo correo"
-      f.input :email_3, label: "Tercer correo"
-      f.input :email_4, label: "Cuarto correo"
-      f.input :email_5, label: "Quinto correo"
       f.input :avatar, hint: f.object.avatar.present? \
         ? image_tag(f.object.avatar_url)
         : content_tag(:span, "no tiene image")
