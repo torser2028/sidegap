@@ -1,10 +1,10 @@
 ActiveAdmin.register Company do
   menu label: "Empresas", parent: "Sistema", priority: 1
 
-  permit_params :name, :avatar, :email_1, :email_2, :email_3, :email_4, :email_5
+  permit_params :name, :avatar
 
   index title: "Empresas" do
-    column "Logo" do |commpany|
+    column "Logo" do |company|
       image_tag company.avatar_url
     end
     column :name
@@ -27,11 +27,6 @@ ActiveAdmin.register Company do
   form do |f|
     f.inputs do
       f.input :name, label: "Nombre"
-      f.input :email_1, label: "Primer Correo"
-      f.input :email_2, label: "Segundo Correo"
-      f.input :email_3, label: "Tercer Correo"
-      f.input :email_4, label: "Cuarto Correo"
-      f.input :email_5, label: "Quinto Correo"
       f.input :avatar, hint: f.object.avatar.present? \
         ? image_tag(f.object.avatar_url)
         : content_tag(:span, "no tiene image")

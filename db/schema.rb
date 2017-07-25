@@ -109,11 +109,6 @@ ActiveRecord::Schema.define(version: 20160623183313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "avatar"
-    t.string   "email_1"
-    t.string   "email_2"
-    t.string   "email_3"
-    t.string   "email_4"
-    t.string   "email_5"
   end
 
   create_table "councillor_assignments", force: :cascade do |t|
