@@ -19,9 +19,6 @@ ActiveAdmin.register Company do
         row "Nombre" do
           company.name
         end
-        row "Primer correo" do
-          company.email_1
-        end
       end
     end
     active_admin_comments
