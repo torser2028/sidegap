@@ -1,4 +1,4 @@
-class AddFieldsToCompanies < ActiveRecord::Migration
+class AddEmailsToCompanies < ActiveRecord::Migration
   def change
     add_column :companies, :email_1, :string
     add_column :companies, :email_2, :string
