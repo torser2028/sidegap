@@ -27,6 +27,7 @@ ActiveAdmin.register Company do
   form do |f|
     f.inputs do
       f.input :name, label: "Nombre"
+      f.input :email_1, label: "Primer correo"
       f.input :avatar, hint: f.object.avatar.present? \
         ? image_tag(f.object.avatar_url)
         : content_tag(:span, "no tiene image")
