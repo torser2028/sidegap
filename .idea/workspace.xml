@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="12c4616e-1155-4268-9f9c-adefbf2d7cb0" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/company.rb" afterPath="$PROJECT_DIR$/app/admin/company.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/company.rb" afterPath="$PROJECT_DIR$/app/models/company.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -21,8 +22,8 @@
       <file leaf-file-name="company.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/admin/company.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="46" lean-forward="false" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
+            <state relative-caret-position="51">
+              <caret line="3" column="30" lean-forward="false" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
               <folding />
             </state>
           </provider>
@@ -31,8 +32,8 @@
       <file leaf-file-name="company.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models/company.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+            <state relative-caret-position="17">
+              <caret line="1" column="38" lean-forward="false" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -460,7 +461,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60238000" />
+    <option name="totallyTimeSpent" value="60947000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -876,16 +877,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/company.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="19" />
+        <state relative-caret-position="17">
+          <caret line="1" column="38" lean-forward="false" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/admin/company.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="46" lean-forward="false" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="46" />
+        <state relative-caret-position="51">
+          <caret line="3" column="30" lean-forward="false" selection-start-line="3" selection-start-column="30" selection-end-line="3" selection-end-column="30" />
           <folding />
         </state>
       </provider>
