@@ -1,7 +1,7 @@
 ActiveAdmin.register Company do
   menu label: "Empresas", parent: "Sistema", priority: 1
 
-  permit_params :name, :avatar
+  permit_params :name, :avatar, :email_1, :email_2, :email_3, :email_4, :email_5
 
   index title: "Empresas" do
     column "Logo" do |company|
