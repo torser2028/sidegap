@@ -23,7 +23,8 @@ class UserMailer < ApplicationMailer
     mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
     #en este espacio validar correos de la empresa
     puts "julian"
-    puts Company.find(recipient.company_id)
+    empresa = Company.find(recipient.company_id)
+    puts empresa
   end
 
   def self.set_recipients_project_notification(project, change_type)
