@@ -22,24 +22,7 @@ class UserMailer < ApplicationMailer
     @name = recipient.name
     mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
     #en este espacio validar correos de la empresa
-    puts empresa.email_1
-    empresa = Company.find(recipient.company_id)
-    if empresa.email_1.length > 0
-      mail(to: empresa.email_1, subject: "Nueva norma en proceso de consulta")
-    end
-    if empresa.email_2.length > 0
-      mail(to: empresa.email_2, subject: "Nueva norma en proceso de consulta")
-    end
-    if empresa.email_3.length > 0
-      mail(to: empresa.email_3, subject: "Nueva norma en proceso de consulta")
-    end
-    if empresa.email_4.length > 0
-      mail(to: empresa.email_4, subject: "Nueva norma en proceso de consulta")
-    end
-    if empresa.email_5.length > 0
-      mail(to: empresa.email_5, subject: "Nueva norma en proceso de consulta")
-    end
-    #puts empresa.name
+
   end
 
   def self.set_recipients_project_notification(project, change_type)
