@@ -24,7 +24,7 @@ class UserMailer < ApplicationMailer
     #en este espacio validar correos de la empresa
     puts "julian"
     empresa = Company.find(recipient.company_id)
-    puts empresa
+    puts empresa.name
   end
 
   def self.set_recipients_project_notification(project, change_type)
