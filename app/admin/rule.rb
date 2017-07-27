@@ -20,7 +20,7 @@ ActiveAdmin.register Rule do
     column "Fecha de Creación" do |rule|
       ldate rule.filing_at
     end
-    actions
+    #actions
   end
 
   show title: "Detalle de la Norma" do |rule|
