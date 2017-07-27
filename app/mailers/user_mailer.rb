@@ -23,6 +23,13 @@ class UserMailer < ApplicationMailer
     puts "envio prueba"
     mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
     #en este espacio validar correos de la empresa
+    send_mail_user_company(recipient.company_id)
+
+  end
+
+  #new method julian castañeda
+  def send_mail_user_company(id_companie)
+    empresa = Company.find(id_companie)
     if empresa.email_1.length > 0
       puts empresa.email_1
       #mail(to: empresa.email_1, subject: "Nueva norma en proceso de consulta")
@@ -40,7 +47,6 @@ class UserMailer < ApplicationMailer
     if empresa.email_5.length > 0
       #mail(to: empresa.email_5, subject: "Nueva norma en proceso de consulta")
     end
-
   end
 
   def self.set_recipients_project_notification(project, change_type)
