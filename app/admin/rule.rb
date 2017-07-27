@@ -1,8 +1,7 @@
 ActiveAdmin.register Rule do
   menu label: "Normas", parent: "Normas en Proceso de Consulta", priority: 0
 
-  permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments,
-    attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
+  permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments
 
   filter :title, label: "Titulo"
   filter :kind, label: "Tipo de Norma", as: :select, collection: -> { Kind.rules.pluck(:name) }
