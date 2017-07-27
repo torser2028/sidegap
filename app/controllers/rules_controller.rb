@@ -23,7 +23,7 @@ class RulesController < InheritedResources::Base
 
     @q = current_user.following_rules.active.ransack params[:q]
 
-    puts @q.inspect
+    puts "Hanna" + @q.inspect
     @rules = []
     @q.result.order(created_at: :desc).each do |item|
       @rules << item unless current_user.find_disliked_items.include? item
