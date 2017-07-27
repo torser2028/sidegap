@@ -12,7 +12,7 @@ ActiveAdmin.register Rule do
   scope "Próximas Normas", :active
   scope "Normas Pasadas", :inactive
 
-  index title: "Normas" do
+  index title: "Normass" do
     selectable_column
     column "Titulo", :title
     column "Tipo de Norma", :kind
