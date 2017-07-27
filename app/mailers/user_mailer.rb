@@ -23,7 +23,7 @@ class UserMailer < ApplicationMailer
     puts "envio prueba"
     #en este espacio validar correos de la empresa
     send_mail_user_company(recipient.company_id)
-    #mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
+    mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
   end
 
   #new method julian castañeda
