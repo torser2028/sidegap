@@ -3,7 +3,7 @@ class RulesController < InheritedResources::Base
 
   def index
     add_breadcrumb "Bandeja de Normas", :rules_path
-
+    puts "Hanna1"
     @q = Rule.active.ransack params[:q]
     @rules = []
     @q.result.order(created_at: :desc).each do |item|
@@ -32,7 +32,7 @@ class RulesController < InheritedResources::Base
 
   def show
     add_breadcrumb "Detalle de la Norma", :rule_path
-
+    puts "Hanna3"
     @rule = get_rule params[:id]
     @comment = Comment.where(user: current_user, rule: @rule).first_or_initialize
   end
