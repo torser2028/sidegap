@@ -1,8 +1,6 @@
 class Rule < ActiveRecord::Base
   acts_as_followable
 
-  permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments, attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
-
   belongs_to :institution
   has_many :attachments, dependent: :destroy
   has_many :comments, dependent: :destroy
