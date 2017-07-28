@@ -170,7 +170,7 @@ ActiveAdmin.setup do |config|
   #
   # Set the CSV builder separator
   config.csv_options = { col_sep: ';' }
-  config.encoding = "utf-8"
+
   #
   # Force the use of quotes
   # config.csv_options = { force_quotes: true }
