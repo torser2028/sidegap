@@ -13,12 +13,6 @@ class Rule < ActiveRecord::Base
 
   after_create :new_rule_notification
 
-  controller do
-    def permitted_params
-      params.permit admin_user: [:title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments]
-    end
-  end
-
   private
     def new_rule_notification
       UserMailer.set_recipients_new_rule(self)
