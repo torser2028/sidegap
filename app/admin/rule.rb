@@ -4,11 +4,11 @@ ActiveAdmin.register Rule do
   csv do
     column :title
     column :kind
-    column :institution_id
+    column(:institution_id) { |rule| rule.institution.name }
     column :filing_at
     column :deadline_comments
     column :for_comments
-    column("Ruta") { "https://app.sidegap.com/admin/rules/" + (:id).to_s }
+    column("Ruta") { "https://app.sidegap.com/admin/rules/" }
   end
 
   permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments,
