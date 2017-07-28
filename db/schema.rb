@@ -355,12 +355,10 @@ ActiveRecord::Schema.define(version: 20160623183313) do
 
   create_table "rules", force: :cascade do |t|
     t.text     "title"
-    t.string   "number"
     t.string   "kind"
     t.date     "filing_at"
     t.integer  "institution_id"
     t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
     t.date     "deadline_comments"
     t.string   "for_comments"
   end
