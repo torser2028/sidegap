@@ -235,11 +235,9 @@ ActiveAdmin.setup do |config|
   # You can enable or disable them for all resources here.
   #
   # config.filters = true
-  RailsAdmin.config do |config|
-    config.model 'Rule' do
-      list do
-        exclude_fields :id, :number
-      end
+  config.model "Rule" do
+    list do
+      exclude_fields :id, :number
     end
   end
 
