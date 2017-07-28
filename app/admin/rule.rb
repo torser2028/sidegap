@@ -1,6 +1,10 @@
 ActiveAdmin.register Rule do
   menu label: "Normas", parent: "Normas en Proceso de Consulta", priority: 0
 
+  csv do
+    column :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments
+  end
+
   permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments,
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
 
