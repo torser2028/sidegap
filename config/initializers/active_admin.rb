@@ -1,5 +1,5 @@
 ActiveAdmin.setup do |config|
-  config.model 'rule' do
+  config.model 'Rule' do
     # ...
   end
 
