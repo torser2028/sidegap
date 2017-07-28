@@ -20,8 +20,8 @@ class UserMailer < ApplicationMailer
     @rule = rule
     @institution = institution
     @name = recipient.name
-    empresa = Company.find(recipient.company_id)
-    puts "hanna" + empresa
+    #empresa = Company.find(recipient.company_id)
+    #puts "hanna" + empresa
     mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
   end
 
