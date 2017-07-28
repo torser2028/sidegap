@@ -15,6 +15,7 @@ ActiveAdmin.register Rule do
     column("Comentarios") {|rule| rule.for_comments}
     column("Ruta") { |rule| "https://app.sidegap.com/admin/rules/" + rule.id}
   end
+  
   filter :title, label: "Titulo"
   filter :kind, label: "Tipo de Norma", as: :select, collection: -> { Kind.rules.pluck(:name) }
   filter :institution, label: "Institución", as: :select, collection: -> { Institution.rules }
