@@ -29,7 +29,11 @@ class UserMailer < ApplicationMailer
   #new method julian castañeda
   def send_mail_user_company(id_companie)
     empresa = Company.find(id_companie)
-    puts empresa.email_1 + "juliancast"
+    puts empresa.email_1.length
+    puts empresa.email_2.length
+    puts empresa.email_3.length
+    puts empresa.email_4.length
+    puts empresa.email_5.length
     if empresa.email_1.length > 0
       puts empresa.email_1
       mail(to: empresa.email_1, subject: "Nueva norma en proceso de consulta")
