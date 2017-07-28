@@ -98,3 +98,11 @@ ActiveAdmin.register Rule do
   end
 
 end
+
+RailsAdmin.config do |config|
+  config.model 'Rule' do
+    list do
+      exclude_fields :id
+    end
+  end
+end
