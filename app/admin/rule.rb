@@ -8,11 +8,11 @@ ActiveAdmin.register Rule do
 
   csv do
     column("Titulo"){|rule| rule.title}
-    column("Tipo de norma") {:kind}
-    column("Institución") {:institution_id}
-    column("Fecha de creación") {:filing_at}
-    column("Fecha limite para comentarios") {:deadline_comments}
-    column("Comentarios") {:for_comments}
+    column("Tipo de norma"){|rule| rule.kind}
+    column("Institución") {|rule| rule.institution_id}
+    column("Fecha de creación") {|rule| rule.filing_at}
+    column("Fecha limite para comentarios") {|rule| rule.deadline_comments}
+    column("Comentarios") {|rule| rule.for_comments}
     column("Ruta") { "https://app.sidegap.com/admin/rules/" }
   end
   filter :title, label: "Titulo"
