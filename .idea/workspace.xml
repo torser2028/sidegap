@@ -22,11 +22,11 @@
         <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="62" />
+              <caret line="9" column="65" lean-forward="false" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
               <folding>
-                <element signature="e#1360#2303#0" expanded="false" />
-                <element signature="e#1426#2263#0" expanded="false" />
-                <element signature="e#2312#3286#0" expanded="false" />
+                <element signature="e#1365#2308#0" expanded="false" />
+                <element signature="e#1431#2268#0" expanded="false" />
+                <element signature="e#2317#3291#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -137,7 +137,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="177" />
     <option name="width" value="1746" />
     <option name="height" value="1040" />
@@ -496,15 +496,15 @@
       <workItem from="1501079377259" duration="13475000" />
       <workItem from="1501161618930" duration="285000" />
       <workItem from="1501164170403" duration="24549000" />
-      <workItem from="1501248562145" duration="15653000" />
+      <workItem from="1501248562145" duration="15928000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125335000" />
+    <option name="totallyTimeSpent" value="125610000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="177" y="0" width="1746" height="1040" extended-state="0" />
+    <frame x="177" y="0" width="1746" height="1040" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19276394" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -944,11 +944,11 @@
     <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="38" lean-forward="true" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="62" />
+          <caret line="9" column="65" lean-forward="false" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
           <folding>
-            <element signature="e#1360#2303#0" expanded="false" />
-            <element signature="e#1426#2263#0" expanded="false" />
-            <element signature="e#2312#3286#0" expanded="false" />
+            <element signature="e#1365#2308#0" expanded="false" />
+            <element signature="e#1431#2268#0" expanded="false" />
+            <element signature="e#2317#3291#0" expanded="false" />
           </folding>
         </state>
       </provider>
