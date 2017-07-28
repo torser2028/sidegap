@@ -1,6 +1,10 @@
 class Rule < ActiveRecord::Base
   acts_as_followable
 
+  rails_admin do
+    # ...
+  end
+
   belongs_to :institution
   has_many :attachments, dependent: :destroy
   has_many :comments, dependent: :destroy
