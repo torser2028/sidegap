@@ -236,8 +236,8 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
-  config.model 'Rule' do
+  #config.model 'Rule' do
     # ...
-  end
+  #end
 
 end
