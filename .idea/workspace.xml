@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12c4616e-1155-4268-9f9c-adefbf2d7cb0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/active_admin.rb" afterPath="$PROJECT_DIR$/config/initializers/active_admin.rb" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/initializers/rails_admin.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -42,7 +43,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="active_admin.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="active_admin.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/initializers/active_admin.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
@@ -50,6 +51,16 @@
               <folding>
                 <element signature="e#18#7612#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rails_admin.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/initializers/rails_admin.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -129,6 +140,7 @@
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/models/rule.rb" />
         <option value="$PROJECT_DIR$/config/initializers/active_admin.rb" />
+        <option value="$PROJECT_DIR$/config/initializers/rails_admin.rb" />
       </list>
     </option>
   </component>
@@ -228,6 +240,11 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jcastaneda\Documents\sidegap\config\initializers" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -517,12 +534,12 @@
       <workItem from="1501079377259" duration="13475000" />
       <workItem from="1501161618930" duration="285000" />
       <workItem from="1501164170403" duration="24549000" />
-      <workItem from="1501248562145" duration="6387000" />
+      <workItem from="1501248562145" duration="6438000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="116069000" />
+    <option name="totallyTimeSpent" value="116120000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="177" y="0" width="1746" height="1040" extended-state="0" />
@@ -581,14 +598,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/rules/index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="33" column="0" lean-forward="true" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/rules/_search.html.haml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -971,6 +980,14 @@
           <folding>
             <element signature="e#18#7612#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/initializers/rails_admin.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="20" lean-forward="false" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+          <folding />
         </state>
       </provider>
     </entry>
