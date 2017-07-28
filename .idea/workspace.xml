@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12c4616e-1155-4268-9f9c-adefbf2d7cb0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/rule.rb" afterPath="$PROJECT_DIR$/app/admin/rule.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/application.rb" afterPath="$PROJECT_DIR$/config/application.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -23,12 +23,22 @@
         <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="60" lean-forward="false" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
+              <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
               <folding>
-                <element signature="e#1360#2303#0" expanded="false" />
-                <element signature="e#1426#2263#0" expanded="false" />
-                <element signature="e#2312#3286#0" expanded="false" />
+                <element signature="e#1336#2279#0" expanded="false" />
+                <element signature="e#1402#2239#0" expanded="false" />
+                <element signature="e#2288#3262#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="application.rb" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/application.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="29" column="29" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -110,6 +120,7 @@
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/models/rule.rb" />
         <option value="$PROJECT_DIR$/config/initializers/active_admin.rb" />
+        <option value="$PROJECT_DIR$/config/application.rb" />
         <option value="$PROJECT_DIR$/app/admin/rule.rb" />
       </list>
     </option>
@@ -166,6 +177,11 @@
               <item name="sidegap" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="inputs" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="sidegap" type="b2602c69:ProjectViewProjectNode" />
+              <item name="sidegap" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="sidegap" type="b2602c69:ProjectViewProjectNode" />
@@ -481,12 +497,12 @@
       <workItem from="1501079377259" duration="13475000" />
       <workItem from="1501161618930" duration="285000" />
       <workItem from="1501164170403" duration="24549000" />
-      <workItem from="1501248562145" duration="15442000" />
+      <workItem from="1501248562145" duration="15550000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125124000" />
+    <option name="totallyTimeSpent" value="125232000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="177" y="0" width="1746" height="1040" extended-state="0" />
@@ -822,14 +838,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/application.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/rules_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -910,10 +918,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/initializers/active_admin.rb">
+    <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="171" column="2" lean-forward="false" selection-start-line="171" selection-start-column="2" selection-end-line="171" selection-end-column="20" />
+        <state relative-caret-position="493">
+          <caret line="29" column="29" lean-forward="false" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -926,14 +934,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/initializers/active_admin.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="171" column="2" lean-forward="false" selection-start-line="171" selection-start-column="2" selection-end-line="171" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="60" lean-forward="false" selection-start-line="9" selection-start-column="60" selection-end-line="9" selection-end-column="60" />
+          <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
           <folding>
-            <element signature="e#1360#2303#0" expanded="false" />
-            <element signature="e#1426#2263#0" expanded="false" />
-            <element signature="e#2312#3286#0" expanded="false" />
+            <element signature="e#1336#2279#0" expanded="false" />
+            <element signature="e#1402#2239#0" expanded="false" />
+            <element signature="e#2288#3262#0" expanded="false" />
           </folding>
         </state>
       </provider>
