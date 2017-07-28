@@ -239,8 +239,3 @@ ActiveAdmin.setup do |config|
 
 
 end
-RailsAdmin.config do |config|
-  config.model 'rule' do
-    # ...
-  end
-end
