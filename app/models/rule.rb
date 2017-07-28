@@ -5,8 +5,6 @@ class Rule < ActiveRecord::Base
   has_many :attachments, dependent: :destroy
   has_many :comments, dependent: :destroy
 
-  exclude_fields :id
-
   accepts_nested_attributes_for :attachments, allow_destroy: true
   #accepts_nested_attributes_for :tags, :attachments, allow_destroy: true
 
