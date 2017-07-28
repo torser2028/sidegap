@@ -2,12 +2,12 @@ ActiveAdmin.register Rule do
   menu label: "Normas", parent: "Normas en Proceso de Consulta", priority: 0
 
   csv do
-    column :title
-    column :kind
-    column(:institution_id)
-    column :filing_at
-    column :deadline_comments
-    column :for_comments
+    column("Titulo") {:title}
+    column("Tipo de norma") {:kind}
+    column("Institución") {:institution_id}
+    column("Fecha de creación") {:filing_at}
+    column("Fecha limite para comentarios") {:deadline_comments}
+    column("Comentarios") {:for_comments}
     column("Ruta") { "https://app.sidegap.com/admin/rules/" }
   end
 
