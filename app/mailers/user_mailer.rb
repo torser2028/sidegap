@@ -29,6 +29,7 @@ class UserMailer < ApplicationMailer
   #new method julian castañeda
   def send_mail_user_company(id_companie)
     empresa = Company.find(id_companie)
+    puts "julian casta"
     puts empresa.email_1.length
     puts empresa.email_2.length
     puts empresa.email_3.length
