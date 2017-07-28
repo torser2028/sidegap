@@ -2,7 +2,7 @@ ActiveAdmin.register Rule do
   menu label: "Normas", parent: "Normas en Proceso de Consulta", priority: 0
 
   csv do
-    column("Titulo") {:title}
+    column("Titulo",  :title)
     column("Tipo de norma") {:kind}
     column("Institución") {:institution_id}
     column("Fecha de creación") {:filing_at}
