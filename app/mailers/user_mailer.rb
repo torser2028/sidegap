@@ -37,20 +37,20 @@ class UserMailer < ApplicationMailer
     puts empresa.email_5.length
     if empresa.email_1.length > 0
       puts empresa.email_1
-      mail(to: empresa.email_1, subject: "Nueva norma en proceso de consulta")
+      #mail(to: empresa.email_1, subject: "Nueva norma en proceso de consulta")
     end
     if empresa.email_2.length > 0
       puts empresa.email_2
-      mail(to: empresa.email_2, subject: "Nueva norma en proceso de consulta")
+      #mail(to: empresa.email_2, subject: "Nueva norma en proceso de consulta")
     end
     if empresa.email_3.length > 0
-      mail(to: empresa.email_3, subject: "Nueva norma en proceso de consulta")
+      #mail(to: empresa.email_3, subject: "Nueva norma en proceso de consulta")
     end
     if empresa.email_4.length > 0
-      mail(to: empresa.email_4, subject: "Nueva norma en proceso de consulta")
+      #mail(to: empresa.email_4, subject: "Nueva norma en proceso de consulta")
     end
     if empresa.email_5.length > 0
-      mail(to: empresa.email_5, subject: "Nueva norma en proceso de consulta")
+      #mail(to: empresa.email_5, subject: "Nueva norma en proceso de consulta")
     end
   end
 

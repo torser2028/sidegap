@@ -7,15 +7,15 @@ ActiveAdmin.register Rule do
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
 
 
- # csv do
-  #    column("Titulo"){|rule| rule.title}
-  #  column("Tipo de norma"){|rule| rule.kind}
-  #  column("Institución") {|rule| rule.institution_id}
-  #  column("Fecha de creación") {|rule| rule.filing_at}
-  #  column("Fecha limite para comentarios") {|rule| rule.deadline_comments}
-  #  column("Comentarios") {|rule| rule.for_comments}
-  #  column("Ruta") {|rule| "https://app.sidegap.com/admin/rules/" + rule.id.to_s}
- # end
+  csv do
+    column("Titulo"){|rule| rule.title}
+    column("Tipo de norma"){|rule| rule.kind}
+    column("Institución") {|rule| rule.institution_id}
+    column("Fecha de creación") {|rule| rule.filing_at}
+    column("Fecha limite para comentarios") {|rule| rule.deadline_comments}
+    column("Comentarios") {|rule| rule.for_comments}
+    column("Ruta") {|rule| "https://app.sidegap.com/admin/rules/" + rule.id.to_s}
+  end
 
   filter :title, label: "Titulo"
   filter :kind, label: "Tipo de Norma", as: :select, collection: -> { Kind.rules.pluck(:name) }
