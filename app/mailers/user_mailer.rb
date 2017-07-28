@@ -20,8 +20,7 @@ class UserMailer < ApplicationMailer
     @rule = rule
     @institution = institution
     @name = recipient.name
-    #mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
-    puts "Hanna" + recipient.company_id
+    mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
   end
 
   #new method julian castañeda
