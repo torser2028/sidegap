@@ -20,7 +20,7 @@ class UserMailer < ApplicationMailer
     @rule = rule
     @institution = institution
     @name = recipient.name
-    puts "envio prueba"
+    puts "envio prueba" + recipient.company_id
     #en este espacio validar correos de la empresa
     #send_mail_user_company(recipient.company_id)
     mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
