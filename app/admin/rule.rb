@@ -4,7 +4,7 @@ ActiveAdmin.register Rule do
   csv do
     column :title
     column :kind
-    column(:institution_id) { |rule| rule.institution_id.name }
+    column("institution") { |rule| rule.institution_id.name }
     column :filing_at
     column :deadline_comments
     column :for_comments
