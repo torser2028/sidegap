@@ -22,11 +22,11 @@
         <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
-              <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+              <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
               <folding>
-                <element signature="e#1162#2105#0" expanded="false" />
-                <element signature="e#1228#2065#0" expanded="false" />
-                <element signature="e#2114#3088#0" expanded="false" />
+                <element signature="e#1128#2071#0" expanded="false" />
+                <element signature="e#1194#2031#0" expanded="false" />
+                <element signature="e#2080#3054#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -491,12 +491,12 @@
       <workItem from="1501079377259" duration="13475000" />
       <workItem from="1501161618930" duration="285000" />
       <workItem from="1501164170403" duration="24549000" />
-      <workItem from="1501248562145" duration="9500000" />
+      <workItem from="1501248562145" duration="9634000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119182000" />
+    <option name="totallyTimeSpent" value="119316000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="177" y="0" width="1746" height="1040" extended-state="0" />
@@ -939,11 +939,11 @@
     <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
-          <caret line="6" column="12" lean-forward="false" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
           <folding>
-            <element signature="e#1162#2105#0" expanded="false" />
-            <element signature="e#1228#2065#0" expanded="false" />
-            <element signature="e#2114#3088#0" expanded="false" />
+            <element signature="e#1128#2071#0" expanded="false" />
+            <element signature="e#1194#2031#0" expanded="false" />
+            <element signature="e#2080#3054#0" expanded="false" />
           </folding>
         </state>
       </provider>
