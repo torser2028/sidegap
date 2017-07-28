@@ -7,7 +7,7 @@ ActiveAdmin.register Rule do
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
 
   csv do
-    column('Titulo', humanize_name: false) {:title}
+    column(:title) {"Titulo"}
     column("Tipo de norma") {:kind}
     column("Institución") {:institution_id}
     column("Fecha de creación") {:filing_at}
