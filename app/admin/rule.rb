@@ -13,7 +13,7 @@ ActiveAdmin.register Rule do
     column("Fecha de creación") {|rule| rule.filing_at}
     column("Fecha limite para comentarios") {|rule| rule.deadline_comments}
     column("Comentarios") {|rule| rule.for_comments}
-    column("Ruta") { "https://app.sidegap.com/admin/rules/" }
+    column("Ruta") { |rule| "https://app.sidegap.com/admin/rules/" + rule.id}
   end
   filter :title, label: "Titulo"
   filter :kind, label: "Tipo de Norma", as: :select, collection: -> { Kind.rules.pluck(:name) }
