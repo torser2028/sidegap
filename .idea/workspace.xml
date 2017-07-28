@@ -21,12 +21,12 @@
       <file leaf-file-name="rule.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+            <state relative-caret-position="68">
+              <caret line="4" column="80" lean-forward="true" selection-start-line="4" selection-start-column="80" selection-end-line="4" selection-end-column="80" />
               <folding>
-                <element signature="e#950#1893#0" expanded="false" />
-                <element signature="e#1016#1853#0" expanded="false" />
-                <element signature="e#1902#2876#0" expanded="false" />
+                <element signature="e#910#1853#0" expanded="false" />
+                <element signature="e#976#1813#0" expanded="false" />
+                <element signature="e#1862#2836#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -507,12 +507,12 @@
       <workItem from="1501079377259" duration="13475000" />
       <workItem from="1501161618930" duration="285000" />
       <workItem from="1501164170403" duration="24549000" />
-      <workItem from="1501248562145" duration="3999000" />
+      <workItem from="1501248562145" duration="4072000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113681000" />
+    <option name="totallyTimeSpent" value="113754000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="177" y="0" width="1746" height="1040" extended-state="0" />
@@ -952,12 +952,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
+        <state relative-caret-position="68">
+          <caret line="4" column="80" lean-forward="true" selection-start-line="4" selection-start-column="80" selection-end-line="4" selection-end-column="80" />
           <folding>
-            <element signature="e#950#1893#0" expanded="false" />
-            <element signature="e#1016#1853#0" expanded="false" />
-            <element signature="e#1902#2876#0" expanded="false" />
+            <element signature="e#910#1853#0" expanded="false" />
+            <element signature="e#976#1813#0" expanded="false" />
+            <element signature="e#1862#2836#0" expanded="false" />
           </folding>
         </state>
       </provider>

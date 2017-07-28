@@ -4,10 +4,6 @@ ActiveAdmin.register Rule do
   permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments,
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
 
-  list do
-    exclude_fields :id
-  end
-
   filter :title, label: "Titulo"
   filter :kind, label: "Tipo de Norma", as: :select, collection: -> { Kind.rules.pluck(:name) }
   filter :institution, label: "Institución", as: :select, collection: -> { Institution.rules }
