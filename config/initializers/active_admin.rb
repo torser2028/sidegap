@@ -1,4 +1,8 @@
 ActiveAdmin.setup do |config|
+  config.model 'rule' do
+    # ...
+  end
+
   # == Site Title
   #
   # Set the title that is displayed on the main layout
@@ -236,6 +240,6 @@ ActiveAdmin.setup do |config|
   #
   # config.filters = true
 
-  
+
 
 end
