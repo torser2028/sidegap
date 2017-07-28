@@ -7,10 +7,10 @@ ActiveAdmin.register Rule do
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
 
   csv do
-    column("Titulo"){|rule| rule.title.encode!( 'UTF-8', 'Windows-1252' )}
+    column("Titulo"){|rule| rule.title.encode("ISO-8859-1")}
     column("Tipo de norma"){|rule| rule.kind}
-    column("Institución") {|rule| rule.institution_id}
-    column("Fecha de creación") {|rule| rule.filing_at}
+    column("Institucion") {|rule| rule.institution_id}
+    column("Fecha de creacion") {|rule| rule.filing_at}
     column("Fecha limite para comentarios") {|rule| rule.deadline_comments}
     column("Comentarios") {|rule| rule.for_comments}
     column("Ruta") {|rule| "https://app.sidegap.com/admin/rules/" + rule.id.to_s}
