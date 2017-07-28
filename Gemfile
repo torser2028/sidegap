@@ -32,7 +32,7 @@ gem 'chosen-rails'
 gem 'axlsx_rails'
 gem 'aws-sdk', '~> 2'
 gem 'carrierwave_direct', :git => "git://github.com/dwilkie/carrierwave_direct.git"
-gem "rails_admin_import", "~> 1.2"
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
