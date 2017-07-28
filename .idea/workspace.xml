@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12c4616e-1155-4268-9f9c-adefbf2d7cb0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/active_admin.rb" afterPath="$PROJECT_DIR$/config/initializers/active_admin.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/rule.rb" afterPath="$PROJECT_DIR$/app/admin/rule.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -18,15 +18,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="rule.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="rule.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+              <caret line="9" column="50" lean-forward="false" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
               <folding>
-                <element signature="e#1336#2279#0" expanded="false" />
-                <element signature="e#1402#2239#0" expanded="false" />
-                <element signature="e#2288#3262#0" expanded="false" />
+                <element signature="e#1352#2295#0" expanded="false" />
+                <element signature="e#1418#2255#0" expanded="false" />
+                <element signature="e#2304#3278#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -42,11 +42,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="active_admin.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="active_admin.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/initializers/active_admin.rb">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="765">
-              <caret line="171" column="19" lean-forward="true" selection-start-line="171" selection-start-column="19" selection-end-line="171" selection-end-column="19" />
+              <caret line="171" column="2" lean-forward="false" selection-start-line="171" selection-start-column="2" selection-end-line="171" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -108,8 +108,8 @@
         <option value="$PROJECT_DIR$/config/initializers/rails_admin.rb" />
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/app/models/rule.rb" />
-        <option value="$PROJECT_DIR$/app/admin/rule.rb" />
         <option value="$PROJECT_DIR$/config/initializers/active_admin.rb" />
+        <option value="$PROJECT_DIR$/app/admin/rule.rb" />
       </list>
     </option>
   </component>
@@ -480,12 +480,12 @@
       <workItem from="1501079377259" duration="13475000" />
       <workItem from="1501161618930" duration="285000" />
       <workItem from="1501164170403" duration="24549000" />
-      <workItem from="1501248562145" duration="14326000" />
+      <workItem from="1501248562145" duration="14547000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124008000" />
+    <option name="totallyTimeSpent" value="124229000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="177" y="0" width="1746" height="1040" extended-state="0" />
@@ -909,6 +909,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/config/initializers/active_admin.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="171" column="2" lean-forward="false" selection-start-line="171" selection-start-column="2" selection-end-line="171" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/rule.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -920,20 +928,12 @@
     <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="9" column="38" lean-forward="false" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+          <caret line="9" column="50" lean-forward="false" selection-start-line="9" selection-start-column="50" selection-end-line="9" selection-end-column="50" />
           <folding>
-            <element signature="e#1336#2279#0" expanded="false" />
-            <element signature="e#1402#2239#0" expanded="false" />
-            <element signature="e#2288#3262#0" expanded="false" />
+            <element signature="e#1352#2295#0" expanded="false" />
+            <element signature="e#1418#2255#0" expanded="false" />
+            <element signature="e#2304#3278#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/initializers/active_admin.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="171" column="19" lean-forward="true" selection-start-line="171" selection-start-column="19" selection-end-line="171" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
