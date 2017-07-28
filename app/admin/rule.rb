@@ -8,7 +8,7 @@ ActiveAdmin.register Rule do
     column :filing_at
     column :deadline_comments
     column :for_comments
-    column("Ruta") { "https://app.sidegap.com/admin/rules/" + :id }
+    column("Ruta") { "https://app.sidegap.com/admin/rules/" + :id.to_s }
   end
 
   permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments,
