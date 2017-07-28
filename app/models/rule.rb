@@ -2,7 +2,9 @@ class Rule < ActiveRecord::Base
   acts_as_followable
 
   rails_admin do
-    # ...
+    list do
+      exclude_fields :id, :number
+    end
   end
 
   belongs_to :institution
