@@ -3,6 +3,11 @@ ActiveAdmin.register Rule do
 
   csv do
     column :title
+    column :kind
+    column :institution_id
+    column :filing_at
+    column :deadline_comments
+    column :for_comments
   end
 
   permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments,

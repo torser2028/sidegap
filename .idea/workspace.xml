@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12c4616e-1155-4268-9f9c-adefbf2d7cb0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/admin/rule.rb" afterPath="$PROJECT_DIR$/app/admin/rule.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
@@ -22,12 +21,12 @@
       <file leaf-file-name="rule.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+            <state relative-caret-position="153">
+              <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
               <folding>
-                <element signature="e#944#1887#0" expanded="false" />
-                <element signature="e#1010#1847#0" expanded="false" />
-                <element signature="e#1896#2870#0" expanded="false" />
+                <element signature="e#1065#2008#0" expanded="false" />
+                <element signature="e#1131#1968#0" expanded="false" />
+                <element signature="e#2017#2991#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -502,12 +501,12 @@
       <workItem from="1501079377259" duration="13475000" />
       <workItem from="1501161618930" duration="285000" />
       <workItem from="1501164170403" duration="24549000" />
-      <workItem from="1501248562145" duration="7753000" />
+      <workItem from="1501248562145" duration="7937000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="117435000" />
+    <option name="totallyTimeSpent" value="117619000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="177" y="0" width="1746" height="1040" extended-state="0" />
@@ -950,12 +949,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/admin/rule.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+        <state relative-caret-position="153">
+          <caret line="9" column="24" lean-forward="false" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
           <folding>
-            <element signature="e#944#1887#0" expanded="false" />
-            <element signature="e#1010#1847#0" expanded="false" />
-            <element signature="e#1896#2870#0" expanded="false" />
+            <element signature="e#1065#2008#0" expanded="false" />
+            <element signature="e#1131#1968#0" expanded="false" />
+            <element signature="e#2017#2991#0" expanded="false" />
           </folding>
         </state>
       </provider>
