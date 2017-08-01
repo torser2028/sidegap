@@ -21,35 +21,27 @@ class UserMailer < ApplicationMailer
     @institution = institution
     @name = recipient.name
     #empresa = Company.find(recipient.company_id)
-    #puts "hanna" + empresa
+    puts "hanna " + recipient.company_id
     mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
   end
 
   #new method julian castañeda
   def send_mail_user_company(id_companie)
     empresa = Company.find(id_companie)
-    puts "julian casta"
-    puts empresa.email_1.length
-    puts empresa.email_2.length
-    puts empresa.email_3.length
-    puts empresa.email_4.length
-    puts empresa.email_5.length
     if empresa.email_1.length > 0
-      puts empresa.email_1
-      #mail(to: empresa.email_1, subject: "Nueva norma en proceso de consulta")
+      mail(to: empresa.email_1, subject: "Nueva norma en proceso de consulta")
     end
     if empresa.email_2.length > 0
-      puts empresa.email_2
-      #mail(to: empresa.email_2, subject: "Nueva norma en proceso de consulta")
+      mail(to: empresa.email_2, subject: "Nueva norma en proceso de consulta")
     end
     if empresa.email_3.length > 0
-      #mail(to: empresa.email_3, subject: "Nueva norma en proceso de consulta")
+      mail(to: empresa.email_3, subject: "Nueva norma en proceso de consulta")
     end
     if empresa.email_4.length > 0
-      #mail(to: empresa.email_4, subject: "Nueva norma en proceso de consulta")
+      mail(to: empresa.email_4, subject: "Nueva norma en proceso de consulta")
     end
     if empresa.email_5.length > 0
-      #mail(to: empresa.email_5, subject: "Nueva norma en proceso de consulta")
+      mail(to: empresa.email_5, subject: "Nueva norma en proceso de consulta")
     end
   end
 
