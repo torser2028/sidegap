@@ -61,6 +61,7 @@ Rails.application.routes.draw do
         collection do
           get :notifications
           get :inactive
+          get :export_xls
         end
     end
 

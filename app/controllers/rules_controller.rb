@@ -53,6 +53,16 @@ class RulesController < InheritedResources::Base
     @notifications = current_user.user_notifications
   end
 
+  def export_xls
+    @rules = Rule.active
+    filename = "#{Date.today.strftime('%Y-%m-%d')}-Normas.xlsx"
+    respond_to do |format|
+      format.xlsx {
+        response.headers['Content-Disposition'] = 'attachment; filename='+filename
+      }
+    end
+  end
+
   private
     def get_rule(id)
       Rule.find id

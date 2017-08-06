@@ -1,0 +1,57 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Normas") do |sheet|
+
+  wb.styles do |s|
+
+    blue_cell = s.add_style bg_color: "548DD4", fg_color: "00", sz: 11, alignment: { horizontal: :center, vertical: :center }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
+
+    black_cell = s.add_style bg_color: "000000", fg_color: "ff", sz: 11, alignment: { horizontal: :center, vertical: :center }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
+
+    gray_cell = s.add_style bg_color: "CCCCCC", fg_color: "00", sz: 11, alignment: { horizontal: :center, vertical: :center }, border: Axlsx::STYLE_THIN_BORDER, b: true, font_name: 'Trebuchet MS', locked: true
+
+    title_cell = s.add_style sz: 14, alignment: { horizontal: :center, vertical: :center, wrap_text: true }, border: Axlsx::STYLE_THIN_BORDER, font_name: 'Calibri', b: true
+    
+    normal_cell = s.add_style sz: 11, alignment: { horizontal: :center, vertical: :center, wrap_text: true }, border: Axlsx::STYLE_THIN_BORDER, font_name: 'Calibri'
+
+    sheet.add_row ['NORMAS EN PROCESO DE CONSULTA', '', '', '', '', '', ''], style: blue_cell, height: 40
+    sheet.merge_cells('A1:H1')
+
+    sheet.add_row [(ldate Date.today, format: :long), '', '', '', '', '', ''], style: gray_cell, height: 20
+    sheet.merge_cells('A2:H2')
+
+    main_header = [
+      'No',
+      'TÍTULO',
+      'TIPO DE NORMA',
+      'FECHA DE CREACIÓN',
+      'FECHA LÍMITE PARA COMENTARIOS',
+      'INSTITUCIÓN',
+      'COMENTARIOS',
+      'RUTA SIDEGAP'
+    ]
+
+    sheet.add_row main_header, style: [blue_cell, blue_cell, blue_cell, blue_cell, blue_cell, blue_cell, blue_cell, blue_cell], height: 20
+
+    @rules.each_with_index do |rule, i|
+
+      sheet.add_row [
+        (i+1),
+        rule.try(:title),
+        rule.try(:kind),
+        (rule.created_at.present? ? (rule.try(:created_at).strftime("%Y-%m-%d")) : ""),
+        (rule.deadline_comments.present? ? (ldate rule.try(:deadline_comments), format: :default) : ""),
+        rule.try(:institution).try(:name),
+        "",
+        rule_url(rule)
+      ], style: normal_cell
+      sheet.add_hyperlink location: url_for(action: "show", id: rule.id, only_path: false),
+                      ref: sheet.rows.last.cells.last
+    end
+
+    sheet.column_widths 5, 50, 15, 15, 30, 20, 20, 20
+
+    sheet.add_row
+    sheet.add_row
+  end
+end
