@@ -15,6 +15,10 @@ ActiveAdmin.register_page "Dashboard" do
   end
   
   action_item :dashboard do
+    link_to "Informe Normas", export_xls_rules_path(format: :xlsx)
+  end
+  
+  action_item :dashboard do
     link_to "Reporte Semanal Manual", manual_weekly_report_legislatives_path
   end
 

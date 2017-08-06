@@ -7,7 +7,7 @@ ActiveAdmin.register Rule do
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
 
 
-  csv do
+  csv force_quotes: true, col_sep: ',', column_names: true do
     column("Titulo"){|rule| rule.title}
     column("Tipo de norma"){|rule| rule.kind}
     column("Institución") {|rule| rule.institution_id}
