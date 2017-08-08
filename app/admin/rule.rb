@@ -1,11 +1,20 @@
 ActiveAdmin.register Rule do
   menu label: "Normas", parent: "Normas en Proceso de Consulta", priority: 0
 
+  action_item only: %i(index) do
+    link_to 'Exportar Normas de Hoy', export_xls_rules_path(format: :xlsx, type: 'daily')
+  end
 
+  action_item only: %i(index) do
+    link_to 'Exportar Normas Activas', export_xls_rules_path(format: :xlsx, type: 'active')
+  end
+
+  action_item only: %i(index) do
+    link_to 'Exportar Todas', export_xls_rules_path(format: :xlsx, type: 'all')
+  end
 
   permit_params :title, :kind, :institution_id, :filing_at, :deadline_comments, :for_comments,
     attachments_attributes: [:id, :_destroy, :attachment, :title, :published_at]
-
 
   csv force_quotes: true, col_sep: ',', column_names: true do
     column("Titulo"){|rule| rule.title}

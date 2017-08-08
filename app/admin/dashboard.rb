@@ -1,33 +1,28 @@
-ActiveAdmin.register_page "Dashboard" do
+ActiveAdmin.register_page 'Dashboard' do
 
-  menu priority: 1, label: proc{ I18n.t("active_admin.dashboard") }
-  
+  menu priority: 1, label: proc{ I18n.t('active_admin.dashboard') }
+
   action_item :dashboard do
-    link_to "Ir a vista cliente", root_path
-  end
-  
-  action_item :dashboard do
-    link_to "Informe", report_legislatives_path
-  end
-  
-  action_item :dashboard do
-    link_to "Informe Concejo", report_councils_path
-  end
-  
-  action_item :dashboard do
-    link_to "Informe Normas", export_xls_rules_path(format: :xlsx)
-  end
-  
-  action_item :dashboard do
-    link_to "Reporte Semanal Manual", manual_weekly_report_legislatives_path
+    link_to 'Ir a vista cliente', root_path
   end
 
-  content title: proc{ I18n.t("active_admin.dashboard") } do
+  action_item :dashboard do
+    link_to 'Informe', report_legislatives_path
+  end
 
-    div class: "blank_slate_container", id: "dashboard_default_message" do
-      span class: "blank_slate" do
-        span I18n.t("active_admin.dashboard_welcome.welcome")
-        small I18n.t("active_admin.dashboard_welcome.call_to_action")
+  action_item :dashboard do
+    link_to 'Informe Concejo', report_councils_path
+  end
+
+  action_item :dashboard do
+    link_to 'Reporte Semanal Manual', manual_weekly_report_legislatives_path
+  end
+
+  content title: proc { I18n.t('active_admin.dashboard') } do
+    div class: 'blank_slate_container', id: 'dashboard_default_message' do
+      span class: 'blank_slate' do
+        span I18n.t('active_admin.dashboard_welcome.welcome')
+        small I18n.t('active_admin.dashboard_welcome.call_to_action')
       end
     end
 

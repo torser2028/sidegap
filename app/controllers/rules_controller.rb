@@ -54,8 +54,18 @@ class RulesController < InheritedResources::Base
   end
 
   def export_xls
-    @rules = Rule.active
-    filename = "#{Date.today.strftime('%Y-%m-%d')}-Normas.xlsx"
+    case params[:type]
+    when 'daily'
+      @rules = Rule.where(filing_at: Date.today).all
+      filename = "#{Date.today.strftime('%Y-%m-%d')}-Normas-Diario.xlsx"
+    when 'active'
+      @rules = Rule.active
+      filename = "#{Date.today.strftime('%Y-%m-%d')}-Normas-Activas.xlsx"
+    when 'all'
+      @rules = Rule.all
+      filename = "#{Date.today.strftime('%Y-%m-%d')}-Normas-Todas.xlsx"
+    end
+
     respond_to do |format|
       format.xlsx {
         response.headers['Content-Disposition'] = 'attachment; filename='+filename

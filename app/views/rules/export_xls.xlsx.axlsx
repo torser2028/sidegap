@@ -39,12 +39,12 @@ wb.add_worksheet(name: "Normas") do |sheet|
         (i+1),
         rule.try(:title),
         rule.try(:kind),
-        (rule.created_at.present? ? (rule.try(:created_at).strftime("%Y-%m-%d")) : ""),
-        (rule.deadline_comments.present? ? (ldate rule.try(:deadline_comments), format: :default) : ""),
+        (rule.filing_at.present? ? (rule.try(:filing_at).strftime("%Y-%m-%d")) : ""),
+        (rule.deadline_comments.present? ? (ldate rule.try(:deadline_comments), format: :default) : 'No hay fecha de vencimiento'),
         rule.try(:institution).try(:name),
-        "",
+        rule.try(:for_comments),
         rule_url(rule)
-      ], style: normal_cell
+      ], style: [black_cell, normal_cell, normal_cell, normal_cell, normal_cell, normal_cell, normal_cell, normal_cell]
       sheet.add_hyperlink location: url_for(action: "show", id: rule.id, only_path: false),
                       ref: sheet.rows.last.cells.last
     end
