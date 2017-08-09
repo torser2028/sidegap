@@ -1,6 +1,8 @@
 class RulesController < InheritedResources::Base
   add_breadcrumb "Normas en Proceso de Consulta", :rules_path
 
+  skip_before_filter :authenticate_user!, only: :show
+
   def index
     add_breadcrumb "Bandeja de Normas", :rules_path
     @q = Rule.active.ransack params[:q]
@@ -30,7 +32,7 @@ class RulesController < InheritedResources::Base
   end
 
   def show
-    add_breadcrumb "Detalle de la Norma", :rule_path
+    add_breadcrumb 'Detalle de la Norma', :rule_path
     @rule = get_rule params[:id]
     @comment = Comment.where(user: current_user, rule: @rule).first_or_initialize
   end
