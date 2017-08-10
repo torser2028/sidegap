@@ -1,4 +1,6 @@
 class UserMailer < ApplicationMailer
+  default from: 'SIDEGAP <sidegap@valure.com.co>'
+
   def welcome(user)
     @user = user
     mail(to: @user.email, subject: 'Welcome to Sidegap!')
@@ -28,7 +30,7 @@ class UserMailer < ApplicationMailer
     @institution = institution
     @name = recipient[:name]
     #empresa = Company.find(recipient.company_id)
-    puts "hanna " + recipient[:company_id]
+    puts "hanna #{recipient[:company_id]}"
     mail(to: recipient[:email], subject: "Nueva norma en proceso de consulta")
   end
 
