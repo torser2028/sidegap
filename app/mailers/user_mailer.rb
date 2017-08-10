@@ -13,10 +13,7 @@ class UserMailer < ApplicationMailer
       mutex.synchronize do
         institution = rule.institution.name
         recipients = []
-        # recipients = UserNotification.includes(:user, :institution).where(institutions: { name: institution }).map(&:user).to_a
-        (1..100).map do |i|
-          recipients.push({name: "Name #{i}", company_id: 1, email: "altose87+#{i}@gmail.com"})
-        end
+        recipients = UserNotification.includes(:user, :institution).where(institutions: { name: institution }).map(&:user).to_a
         recipients.each do |recipient|
           new_rule(recipient, institution, rule).deliver_now
         end
@@ -29,12 +26,9 @@ class UserMailer < ApplicationMailer
     @rule = rule
     @institution = institution
     @name = recipient[:name]
-    #empresa = Company.find(recipient.company_id)
-    puts "hanna #{recipient[:company_id]}"
     mail(to: recipient[:email], subject: "Nueva norma en proceso de consulta")
   end
 
-  #new method julian castañeda
   def send_mail_user_company(id_companie)
     empresa = Company.find(id_companie)
     if empresa.email_1.length > 0
