@@ -40,7 +40,7 @@ wb.add_worksheet(name: "Normas") do |sheet|
         rule.try(:title),
         rule.try(:kind),
         (rule.filing_at.present? ? (rule.try(:filing_at).strftime("%Y-%m-%d")) : ""),
-        (rule.deadline_comments.present? ? (ldate rule.try(:deadline_comments), format: :default) : 'No hay fecha de vencimiento'),
+        (rule.deadline_comments.present? ? (ldate rule.try(:deadline_comments), format: :default) : 'No se registra fecha límite'),
         rule.try(:institution).try(:name),
         rule.try(:for_comments),
         rule_url(rule)

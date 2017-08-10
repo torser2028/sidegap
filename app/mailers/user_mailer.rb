@@ -5,12 +5,19 @@ class UserMailer < ApplicationMailer
   end
 
   def self.set_recipients_new_rule(rule)
+    mutex = Mutex.new
     Thread.new do
-      # send in backgound thead
-      institution = rule.institution.name
-      recipients = UserNotification.includes(:user, :institution).where(institutions: { name: institution }).map(&:user).to_a
-      recipients.each do |recipient|
-        new_rule(recipient, institution, rule).deliver_now
+      # send in backgound trhead
+      mutex.synchronize do
+        institution = rule.institution.name
+        recipients = []
+        # recipients = UserNotification.includes(:user, :institution).where(institutions: { name: institution }).map(&:user).to_a
+        (1..100).map do |i|
+          recipients.push({name: "Name #{i}", company_id: 1, email: "altose87+#{i}@gmail.com"})
+        end
+        recipients.each do |recipient|
+          new_rule(recipient, institution, rule).deliver_now
+        end
       end
       ActiveRecord::Base.connection.close
     end
@@ -19,10 +26,10 @@ class UserMailer < ApplicationMailer
   def new_rule(recipient, institution, rule)
     @rule = rule
     @institution = institution
-    @name = recipient.name
+    @name = recipient[:name]
     #empresa = Company.find(recipient.company_id)
-    puts "hanna " + recipient.company_id
-    mail(to: recipient.email, subject: "Nueva norma en proceso de consulta")
+    puts "hanna " + recipient[:company_id]
+    mail(to: recipient[:email], subject: "Nueva norma en proceso de consulta")
   end
 
   #new method julian castañeda
