@@ -1046,4 +1046,43 @@ h1.report-title {
   .section {
     page-break-after: always;
   }
+
+  .rTable { display: table; }
+  .rTableRow { display: table-row; }
+  .rTableHeading { display: table-header-group; }
+  .rTableBody { display: table-row-group; }
+  .rTableFoot { display: table-footer-group; }
+  .rTableCell, .rTableHead { display: table-cell; }
+
+  .summary {
+    .rTable {
+      border: 1px solid #2d59ac;
+      display: block;
+      width: 100%;
+    }
+    .rTableHeading, .rTableBody, .rTableFoot, .rTableRow{
+      clear: both;
+    }
+    .rTableHead, .rTableFoot{
+      background-color: #DDD;
+      font-weight: bold;
+    }
+    .rTableCell, .rTableHead {
+      border: 1px solid #2D59AC;
+      overflow: hidden;
+      padding: 0px 3%;
+    }
+    .rTable:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+    p {
+      margin: 0;
+      padding: 0;
+    }
+  }
 }

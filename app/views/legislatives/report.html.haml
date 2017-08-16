@@ -86,7 +86,7 @@
                   .medium-2.columns
 .row
   .small-12.columns
-    %a{ class: 'hidden-pdf', href: 'javascript:window.print()' }
+    %a{ class: 'hidden-pdf hidden-excel', href: 'javascript:window.print()' }
       = fa_icon "file-pdf-o"
       %span
         Exportar a PDF
@@ -94,7 +94,7 @@
     %span.hidden-pdf
       |
 
-    %a{ class: 'hidden-excel', href: legislative_legislatives_path(format: :xlsx, client: current_user.has_role?(:admin) ? (params[:user_id] ? params[:user_id] : false) : true), target: "_blank"}
+    %a{ class: 'hidden-excel hidden-pdf', href: legislative_legislatives_path(format: :xlsx, client: current_user.has_role?(:admin) ? (params[:user_id] ? params[:user_id] : false) : true), target: "_blank"}
       = fa_icon "file-excel-o"
       %span
         Exportar a Excel
@@ -103,23 +103,27 @@
     %br/
 
 .panels-view.report
-  .row.section.nobreak
+  .row.section.summary
     .small-12.columns
       %h2
         = fa_icon "tasks"
         Resumen Semana - Monitoreo Normativo
 
-      %table.table-border
-        %colgroup
-          %col
-          %col
-        %tbody
-          - @summary_week.each_with_index do |notice, index|
-            %tr
-              %td= (index + 1).to_s + '.'
-              %td= simple_format notice.body
+      / .summary
+      /   - @summary_week.each_with_index do |notice, index|
+      /     .each-notice.columns
+      /       .cell.small-1.columns= (index + 1).to_s + '.'
+      /       .cell.small-11.columns= simple_format notice.body
 
-  .row.section.nobreak
+      .rTable
+        .rTableBody
+          - @summary_week.each_with_index do |notice, index|
+            .rTableRow
+              .rTableCell.small-1= (index + 1).to_s + '.'
+              .rTableCell.small-11
+                %p= simple_format notice.body
+
+  .row.section
     .small-12.columns
       %h2
         = fa_icon "calendar"
@@ -152,7 +156,7 @@
               %td= agenda.body
               %td= agenda.observation
 
-  .row.section.nobreak
+  .row.section
     .small-12.columns
       %h2 Otros eventos
 
@@ -178,7 +182,7 @@
               %td= event.event_type
               %td= simple_format event.body
               %td= event.observation
-  .row.section.nobreak
+  .row.section
     .small-12.columns
       %h3= 'Semana del ' + @today.to_s + ' al ' + @next_week.to_s + ' (semana siguiente)'
       %table.table-report
@@ -207,7 +211,7 @@
               %td= agenda.body
               %td= agenda.observation
 
-  .row.section.nobreak
+  .row.section
     .small-12.columns
       %h2 Otros eventos
 
@@ -234,7 +238,7 @@
               %td= simple_format event.body
               %td= event.observation
 
-  .row.section.nobreak
+  .row.section
     .small-12.columns
       %h2
         = fa_icon "folder-open"
@@ -266,7 +270,7 @@
         .small-6.columns.w60
           #legislative_by_risk
 
-  .row.section.nobreak
+  .row.section
     .small-12.columns
       %h3 Riesgo Regulatorio Alto / Tema
       %table.table-report
@@ -290,7 +294,7 @@
             %td= @total_by_topic_with_risk
             %td 100%
 
-  .row.section.nobreak
+  .row.section
     .small-12.columns
       %h3 Riesgo Regulatorio Alto / Tema / Definición
       %table.table-report
@@ -311,7 +315,7 @@
                 %td= legislative[:topic]
                 %td= legislative[:title]
 
-  .row.section.nobreak
+  .row.section
     .large-6.columns
       %h3 Proyectos por Cámara de Entrada
       %table.table-report
@@ -335,7 +339,7 @@
             %td= @total_by_source
             %td 100%
 
-  .row.section.nobreak
+  .row.section
     .small-12.columns
       %h3 Proyectos por Estado
       .row
@@ -363,7 +367,7 @@
         .small-6.columns.w60
           #legislative_by_status
 
-  .row.secition.nobreak
+  .row.secition
     .small-12.columns
       %h3 Proyectos por Tema
       .row
@@ -391,7 +395,7 @@
         .small-6.columns.w60
           #legislative_by_topic
 
-  .row.section.nobreak
+  .row.section
     .small-12.columns
       %h2
         = fa_icon "users"
