@@ -108,20 +108,7 @@
       %h2
         = fa_icon "tasks"
         Resumen Semana - Monitoreo Normativo
-
-      / .summary
-      /   - @summary_week.each_with_index do |notice, index|
-      /     .each-notice.columns
-      /       .cell.small-1.columns= (index + 1).to_s + '.'
-      /       .cell.small-11.columns= simple_format notice.body
-
-      .rTable
-        .rTableBody
-          - @summary_week.each_with_index do |notice, index|
-            .rTableRow
-              .rTableCell.small-1= (index + 1).to_s + '.'
-              .rTableCell.small-11
-                %p= simple_format notice.body
+      = render partial: 'legislatives/notices', locals: {notices: @summary_week}
 
   .row.section
     .small-12.columns
@@ -130,31 +117,7 @@
         Resumen Semana – Agenda
 
       %h3= 'Semana del ' + @last_week.to_s + ' al ' + @today.to_s + ' (semana anterior)'
-      %table.table-report
-        %thead
-          %tr
-            %th Fecha
-            %th Título Proyecto
-            %th Plenaria / Comisión
-            %th Evento
-            %th Asunto
-            %th Observaciones
-        %tbody
-          - @last_agendas.each do |agenda|
-            %tr
-              %td=l agenda.event_at, format: :custom
-              %td
-                %p
-                  %b Núm. Cámara:
-                  = agenda.legislative.chamber_number
-                %p
-                  %b Núm. Senado:
-                  = agenda.legislative.senate_number
-                = simple_format agenda.legislative.title
-              %td= agenda.plenary_commission
-              %td= agenda.event_type
-              %td= agenda.body
-              %td= agenda.observation
+      = render partial: 'legislatives/agendas', locals: {agendas: @last_agendas}
 
   .row.section
     .small-12.columns

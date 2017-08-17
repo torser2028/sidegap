@@ -1,0 +1,7 @@
+.rTable
+  .rTableBody
+    - notices.each_with_index do |notice, index|
+      .rTableRow
+        .rTableCell.small-1= (index + 1).to_s + '.'
+        .rTableCell.small-11
+          %p= simple_format notice.body

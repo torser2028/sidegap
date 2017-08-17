@@ -1085,4 +1085,55 @@ h1.report-title {
       padding: 0;
     }
   }
+
+  .agendas {
+    border: 2px solid #FFFFFF;
+    background: #FFFFFF;
+    margin-bottom: 1.25rem;
+    table-layout: auto;
+    width: 100%;
+
+    .rTableHeading {
+      background: #F5F5F5;
+      .rTableRow {
+        background: #5B9BD5 !important;
+        .rTableHead {
+          border-bottom: 2px solid #fff;
+          border-left: 2px solid #FFF;
+          color: #FFFFFF;
+          display: table-cell;
+          font-size: 0.875rem;
+          font-weight: bold;
+          line-height: 1.125rem;
+          padding: 0.5rem 0.625rem;
+          text-align: left;
+          vertical-align: middle;
+        }
+      }
+    }
+    .rTableBody {
+      .rTableRow {
+        &.even, &.alt, &:nth-of-type(even) {
+          background: #EAEFF7;
+        }
+        &:nth-of-type(odd) {
+          background: #D2DEEF;
+        }
+        .rTableCell {
+          border-bottom: 2px solid #fff;
+          border-left: 2px solid #FFF;
+          display: table-cell;
+          font-size: 0.875rem;
+          line-height: 1.125rem;
+          padding: 0.5rem 0.625rem;
+          text-align: left;
+          vertical-align: middle;
+        }
+        .rTableCell:first-child {
+          background: #5B9BD5 !important;
+          color: #FFFFFF;
+        }
+      }
+    }
+  }
 }
