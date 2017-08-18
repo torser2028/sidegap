@@ -452,7 +452,7 @@ class LegislativesController < ApplicationController
       impacts = comments.collect{ |c| c.impact }
 
       probability = legislative.probability
-      impact_avg = (impacts ? impacts.inject{ |sum, el| (sum ||=0) + el }.to_i / (impacts.size.nonzero? || 1) : 0)
+      impact_avg = (impacts ? impacts.inject{ |sum, el| (sum ||=0) + (el ||= 0) }.to_i / (impacts.size.nonzero? || 1) : 0)
 
       risk = risk_table[[probability, impact_avg]].to_i
       risk_list << risk
