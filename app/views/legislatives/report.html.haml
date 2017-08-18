@@ -103,14 +103,14 @@
     %br/
 
 .panels-view.report
-  .row.section.summary
+  .row.section.summary.nobreak
     .small-12.columns
       %h2
         = fa_icon "tasks"
         Resumen Semana - Monitoreo Normativo
       = render partial: 'legislatives/notices', locals: {notices: @summary_week}
 
-  .row.section
+  .row.section.nobreak
     .small-12.columns
       %h2
         = fa_icon "calendar"
@@ -119,7 +119,7 @@
       %h3= 'Semana del ' + @last_week.to_s + ' al ' + @today.to_s + ' (semana anterior)'
       = render partial: 'legislatives/agendas', locals: {agendas: @last_agendas}
 
-  .row.section
+  .row.section.nobreak
     .small-12.columns
       %h2 Otros eventos
 
@@ -145,36 +145,13 @@
               %td= event.event_type
               %td= simple_format event.body
               %td= event.observation
-  .row.section
+              
+  .row.section.nobreak
     .small-12.columns
       %h3= 'Semana del ' + @today.to_s + ' al ' + @next_week.to_s + ' (semana siguiente)'
-      %table.table-report
-        %thead
-          %tr
-            %th Fecha
-            %th Título Proyecto
-            %th Plenaria / Comisión
-            %th Evento
-            %th Asunto
-            %th Observaciones
-        %tbody
-          - @next_agendas.each do |agenda|
-            %tr
-              %td=l agenda.event_at, format: :custom
-              %td
-                %p
-                  %b Núm. Cámara:
-                  = agenda.legislative.chamber_number
-                %p
-                  %b Núm. Senado:
-                  = agenda.legislative.senate_number
-                = simple_format agenda.legislative.title
-              %td= agenda.plenary_commission
-              %td= agenda.event_type
-              %td= agenda.body
-              %td= agenda.observation
+      = render partial: 'legislatives/agendas', locals: {agendas: @next_agendas}
 
-  .row.section
+  .row.section.nobreak
     .small-12.columns
       %h2 Otros eventos
 
@@ -201,7 +178,7 @@
               %td= simple_format event.body
               %td= event.observation
 
-  .row.section
+  .row.section.nobreak
     .small-12.columns
       %h2
         = fa_icon "folder-open"
@@ -233,7 +210,7 @@
         .small-6.columns.w60
           #legislative_by_risk
 
-  .row.section
+  .row.section.nobreak
     .small-12.columns
       %h3 Riesgo Regulatorio Alto / Tema
       %table.table-report
@@ -257,7 +234,7 @@
             %td= @total_by_topic_with_risk
             %td 100%
 
-  .row.section
+  .row.section.nobreak
     .small-12.columns
       %h3 Riesgo Regulatorio Alto / Tema / Definición
       %table.table-report
@@ -278,7 +255,7 @@
                 %td= legislative[:topic]
                 %td= legislative[:title]
 
-  .row.section
+  .row.section.nobreak
     .large-6.columns
       %h3 Proyectos por Cámara de Entrada
       %table.table-report
@@ -302,7 +279,7 @@
             %td= @total_by_source
             %td 100%
 
-  .row.section
+  .row.section.nobreak
     .small-12.columns
       %h3 Proyectos por Estado
       .row
@@ -330,7 +307,7 @@
         .small-6.columns.w60
           #legislative_by_status
 
-  .row.secition
+  .row.secition.nobreak
     .small-12.columns
       %h3 Proyectos por Tema
       .row
@@ -358,7 +335,7 @@
         .small-6.columns.w60
           #legislative_by_topic
 
-  .row.section
+  .row.section.nobreak
     .small-12.columns
       %h2
         = fa_icon "users"

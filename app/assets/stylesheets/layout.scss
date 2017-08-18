@@ -1069,8 +1069,12 @@ h1.report-title {
     }
     .rTableCell, .rTableHead {
       border: 1px solid #2D59AC;
+      font-size: 0.875rem;
+      line-height: 1.125rem;
       overflow: hidden;
-      padding: 0px 3%;
+      padding: 0.5rem 1.2rem;
+      text-align: center;
+      vertical-align: middle;
     }
     .rTable:after {
       visibility: hidden;
@@ -1083,6 +1087,12 @@ h1.report-title {
     p {
       margin: 0;
       padding: 0;
+      text-align: left;
+    }
+    .rTableRow {
+      &.even, &.alt, &:nth-of-type(even) {
+        background: #F9F9F9;
+      }
     }
   }
 
