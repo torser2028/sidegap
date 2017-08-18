@@ -1002,48 +1002,120 @@ h1.report-title {
 }
 
 .report {
-  table {
-    width: 100%;
-    &.table-border {
-      border: 2px solid #2D59AC;
-      border-collapse: collapse;
-      th, td {
-        border: 2px solid #2D59AC;
+  .section {
+    page-break-after: avoid;
+  }
+
+  .rTable { display: table; }
+  .rTableRow { display: table-row; }
+  .rTableHeading { display: table-header-group; }
+  .rTableBody { display: table-row-group; }
+  .rTableFoot { display: table-footer-group; }
+  .rTableCell, .rTableHead { display: table-cell; }
+
+  .summary {
+    .rTable {
+      border: 1px solid #2d59ac;
+      display: block;
+      width: 100%;
+    }
+    .rTableHeading, .rTableBody, .rTableFoot, .rTableRow{
+      clear: both;
+    }
+    .rTableHead, .rTableFoot{
+      background-color: #DDD;
+      font-weight: bold;
+    }
+    .rTableCell, .rTableHead {
+      border: 1px solid #2D59AC;
+      font-size: 0.875rem;
+      line-height: 1.125rem;
+      overflow: hidden;
+      padding: 0.5rem 1.2rem;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .rTable:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+    p {
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+    .rTableRow {
+      &.even, &.alt, &:nth-of-type(even) {
+        background: #F9F9F9;
       }
     }
-    &.table-report {
-      border: 2px solid #FFFFFF;
-      tr {
+  }
+
+  .table-row, .table-simple {
+    border: 2px solid #FFFFFF;
+    background: #FFFFFF;
+    margin-bottom: 1.25rem;
+    table-layout: auto;
+    width: 100%;
+
+    .rTableHeading {
+      background: #F5F5F5;
+      .rTableRow {
+        background: #5B9BD5 !important;
+        .rTableHead {
+          border-bottom: 2px solid #fff;
+          border-left: 2px solid #FFF;
+          color: #FFFFFF;
+          display: table-cell;
+          font-size: 0.875rem;
+          font-weight: bold;
+          line-height: 1.125rem;
+          padding: 0.5rem 0.625rem;
+          text-align: left;
+          vertical-align: middle;
+        }
+      }
+    }
+    .rTableBody {
+      .rTableRow {
         &.even, &.alt, &:nth-of-type(even) {
           background: #EAEFF7;
         }
         &:nth-of-type(odd) {
           background: #D2DEEF;
         }
-        td:first-child {
+        .rTableCell {
+          border-bottom: 2px solid #fff;
+          border-left: 2px solid #FFF;
+          display: table-cell;
+          font-size: 0.875rem;
+          line-height: 1.125rem;
+          padding: 0.5rem 0.625rem;
+          text-align: left;
+          vertical-align: middle;
+        }
+        .rTableCell:first-child {
           background: #5B9BD5 !important;
           color: #FFFFFF;
         }
       }
-      thead {
-        tr {
-          background: #5B9BD5 !important;
-          th {
-            color: #FFFFFF;
-          }
-        }
-      }
     }
-    &.table-simple {
-      tr {
-        td:first-child {
-          background: transparent !important;
-          color: #000000;
+  }
+  .table-simple {
+    .rTableBody {
+      .rTableRow {
+        .rTableCell:first-child {
+          background: none !important;
+          color: #000;
         }
       }
     }
   }
-  .section {
+  .break {
     page-break-after: always;
   }
 }

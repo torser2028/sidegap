@@ -1,0 +1,19 @@
+.small-12.columns
+  %h3 Riesgo Regulatorio Alto / Tema
+
+  .rTable.table-row
+    .rTableHeading
+      .rTableRow
+        .rTableHead Tema de Interés
+        .rTableHead Cantidad
+        .rTableHead %
+    .rTableBody
+      - @legislatives_by_topic_with_risk.each do |topic, amount|
+        .rTableRow
+          .rTableCell= topic
+          .rTableCell= amount
+          .rTableCell= number_with_precision((amount / @total_by_topic_with_risk.to_f * 100), precision: 2) + '%'
+      .rTableRow
+        .rTableCell Total
+        .rTableCell= @total_by_topic_with_risk
+        .rTableCell 100%

@@ -1,0 +1,16 @@
+.rTable.table-row
+  .rTableHeading
+    .rTableRow
+      .rTableHead Fecha
+      .rTableHead Plenaria / Comisión
+      .rTableHead Evento
+      .rTableHead Asunto
+      .rTableHead Observaciones
+  .rTableBody
+    - events.each do |event|
+      .rTableRow
+        .rTableCell=l event.event_at, format: :custom
+        .rTableCell= event.commission ? event.commission : event.plenary
+        .rTableCell= event.event_type
+        .rTableCell= simple_format event.body
+        .rTableCell= event.observation

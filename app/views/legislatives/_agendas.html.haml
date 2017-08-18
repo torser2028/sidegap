@@ -1,0 +1,25 @@
+.rTable.table-row
+  .rTableHeading
+    .rTableRow
+      .rTableHead Fecha
+      .rTableHead Título Proyecto
+      .rTableHead Plenaria / Comisión
+      .rTableHead Evento
+      .rTableHead Asunto
+      .rTableHead Observaciones
+  .rTableBody
+    - agendas.each do |agenda|
+      .rTableRow
+        .rTableCell=l agenda.event_at, format: :custom
+        .rTableCell
+          %p
+            %strong Núm. Cámara:
+            = agenda.legislative.chamber_number
+          %p
+            %strong Núm. Senado:
+            = agenda.legislative.senate_number
+          = simple_format agenda.legislative.title
+        .rTableCell= agenda.plenary_commission
+        .rTableCell= agenda.event_type
+        .rTableCell= agenda.body
+        .rTableCell= agenda.observation
