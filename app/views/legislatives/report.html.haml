@@ -115,36 +115,13 @@
       %h2
         = fa_icon "calendar"
         Resumen Semana – Agenda
-
       %h3= 'Semana del ' + @last_week.to_s + ' al ' + @today.to_s + ' (semana anterior)'
       = render partial: 'legislatives/agendas', locals: {agendas: @last_agendas}
 
   .row.section.nobreak
     .small-12.columns
       %h2 Otros eventos
-
-      %table.table-report
-        %colgroup
-          %col{width: "12.5%"}
-          %col{width: "20%"}
-          %col{width: "20%"}
-          %col{width: "27.5%"}
-          %col{width: "20%"}
-        %thead
-          %tr
-            %th Fecha
-            %th Plenaria / Comisión
-            %th Evento
-            %th Asunto
-            %th Observaciones
-        %tbody
-          - @events.each do |event|
-            %tr
-              %td= event.event_at
-              %td= event.commission ? event.commission : event.plenary
-              %td= event.event_type
-              %td= simple_format event.body
-              %td= event.observation
+      = render partial: 'legislatives/events', locals: {events: @events}
               
   .row.section.nobreak
     .small-12.columns
@@ -154,29 +131,7 @@
   .row.section.nobreak
     .small-12.columns
       %h2 Otros eventos
-
-      %table.table-report
-        %colgroup
-          %col{width: "12.5%"}
-          %col{width: "20%"}
-          %col{width: "20%"}
-          %col{width: "27.5%"}
-          %col{width: "20%"}
-        %thead
-          %tr
-            %th Fecha
-            %th Plenaria / Comisión
-            %th Evento
-            %th Asunto
-            %th Observaciones
-        %tbody
-          - @events_next_week.each do |event|
-            %tr
-              %td= event.event_at
-              %td= event.commission ? event.commission : event.plenary
-              %td= event.event_type
-              %td= simple_format event.body
-              %td= event.observation
+      = render partial: 'legislatives/events', locals: {events: @events_next_week}
 
   .row.section.nobreak
     .small-12.columns
