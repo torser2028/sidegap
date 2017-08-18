@@ -1,7 +1,11 @@
-.rTable
-  .rTableBody
-    - notices.each_with_index do |notice, index|
-      .rTableRow
-        .rTableCell= (index + 1).to_s + '.'
-        .rTableCell
-          %p= simple_format notice.body
+.small-12.columns
+  %h2
+    = fa_icon "tasks"
+    Resumen Semana - Monitoreo Normativo
+  .rTable
+    .rTableBody
+      - notices.each_with_index do |notice, index|
+        .rTableRow
+          .rTableCell= (index + 1).to_s + '.'
+          .rTableCell
+            %p= simple_format notice.body

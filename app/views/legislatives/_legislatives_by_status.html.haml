@@ -1,0 +1,21 @@
+.small-12.columns
+  %h3 Proyectos por Estado
+  .small-6.columns.w60
+    .rTable.table-row
+      .rTableHeading
+        .rTableRow
+          .rTableHead Estado
+          .rTableHead Cantidad
+          .rTableHead %
+      .rTableBody
+        - @legislatives_by_status.each do |status, amount|
+          .rTableRow
+            .rTableCell= status
+            .rTableCell= amount
+            .rTableCell= number_with_precision((amount / @total_by_topic.to_f * 100), precision: 2) + '%'
+        .rTableRow
+          .rTableCell Total
+          .rTableCell= @total_by_topic
+          .rTableCell 100%
+  .small-6.columns.w60
+    #legislative_by_status

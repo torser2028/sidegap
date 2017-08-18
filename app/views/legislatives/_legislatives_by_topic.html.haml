@@ -1,0 +1,21 @@
+.small-12.columns
+  %h3 Proyectos por Tema
+  .small-6.columns.w60
+    .rTable.table-row
+      .rTableHeading
+        .rTableRow
+          .rTableHead Tema de Interés
+          .rTableHead Cantidad
+          .rTableHead %
+      .rTableBody
+        - @legislatives_by_topic.each do |topic, amount|
+          .rTableRow
+            .rTableCell= topic
+            .rTableCell= amount
+            .rTableCell= number_with_precision((amount / @total_by_source.to_f * 100), precision: 2) + '%'
+        .rTableRow
+          .rTableCell Total
+          .rTableCell= @total_by_source
+          .rTableCell 100%
+  .small-6.columns.w60
+    #legislative_by_topic

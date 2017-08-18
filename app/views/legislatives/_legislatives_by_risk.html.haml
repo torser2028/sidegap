@@ -1,0 +1,26 @@
+.small-12.columns
+  %h2
+    = fa_icon "folder-open"
+    Proyectos de Ley en Seguimiento
+
+  %h3 Riesgo Regulatorio
+  .small-4.columns.w40
+    .rTable.table-row
+      .rTableHeading
+        .rTableRow
+          .rTableHead Riesgo
+          .rTableHead Cantidad
+          .rTableHead Acumulado
+      .rTableBody
+        - count = 0
+        - @legislatives_by_risk.each do |risk|
+          - count += risk[1]
+          .rTableRow
+            .rTableCell= risk[0]
+            .rTableCell= risk[1]
+            .rTableCell= count
+
+  .small-2.columns.w20
+    = image_tag 'risk.png'
+  .small-6.columns.w60
+    #legislative_by_risk

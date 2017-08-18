@@ -1055,7 +1055,7 @@ h1.report-title {
     }
   }
 
-  .agendas, .events {
+  .table-row, .table-simple {
     border: 2px solid #FFFFFF;
     background: #FFFFFF;
     margin-bottom: 1.25rem;
@@ -1104,5 +1104,18 @@ h1.report-title {
         }
       }
     }
+  }
+  .table-simple {
+    .rTableBody {
+      .rTableRow {
+        .rTableCell:first-child {
+          background: none !important;
+          color: #000;
+        }
+      }
+    }
+  }
+  .break {
+    page-break-after: always;
   }
 }

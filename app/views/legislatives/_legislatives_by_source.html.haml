@@ -1,0 +1,20 @@
+.large-6.columns
+  %h3 Proyectos por Cámara de Entrada
+
+  .rTable.table-row
+    .rTableHeading
+      .rTableRow
+        .rTableHead Origen
+        .rTableHead Cantidad
+        .rTableHead Total
+    .rTableBody
+      - @legislatives_by_source.each do |source, amount|
+        .rTableRow
+          .rTableCell= source
+          .rTableCell= amount
+          .rTableCell= number_with_precision((amount / @total_by_source.to_f * 100), precision: 2) + '%'
+      .rTableRow
+        .rTableCell Total
+        .rTableCell= @total_by_source
+        .rTableCell 100%
+        

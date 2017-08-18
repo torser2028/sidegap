@@ -1,0 +1,37 @@
+.small-12.columns
+  %h2
+    = fa_icon "users"
+    Stakeholders de Mayor Riesgo
+
+  .small-6.columns
+    %h3 Autores
+
+    .rTable.table-simple
+      .rTableHeading
+        .rTableRow
+          .rTableHead Proyectos
+          .rTableHead Nombre
+          .rTableHead Riesgo Promedio
+      .rTableBody
+        - @authors.each do |name, stakeholder|
+          .rTableRow
+            .rTableCell= stakeholder[:legislatives]
+            .rTableCell= name
+            .rTableCell= stakeholder[:risk]
+
+  .small-6.columns
+    %h3 Ponentes
+
+    .rTable.table-simple
+      .rTableHeading
+        .rTableRow
+          .rTableHead Proyectos
+          .rTableHead Nombre
+          .rTableHead Riesgo Promedio
+      .rTableBody
+        - @speakers.each do |name, stakeholder|
+          .rTableRow
+            .rTableCell= stakeholder[:legislatives]
+            .rTableCell= name
+            .rTableCell= stakeholder[:risk]
+            

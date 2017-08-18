@@ -1,0 +1,16 @@
+.small-12.columns
+  %h3 Riesgo Regulatorio Alto / Tema / Definición
+
+  .rTable.table-row
+    .rTableHeading
+      .rTableRow
+        .rTableHead Riesgo
+        .rTableHead Tema de Interés
+        .rTableHead Descripción
+    .rTableBody
+      - @legislatives.each do |legislative|
+        - if legislative[:risk] >= 31
+          .rTableRow
+            .rTableCell= legislative[:risk]
+            .rTableCell= legislative[:topic]
+            .rTableCell= legislative[:title]
