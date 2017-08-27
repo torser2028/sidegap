@@ -19,7 +19,6 @@ namespace :scheduler do
   desc 'Send Weekly Report'
   task :weekly_report => :environment do
     time = Time.now
-    binding.pry
     if time.monday?
       Thread.new do
         if UserMailer.set_recipients_weekly_fg
