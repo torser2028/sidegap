@@ -1,36 +1,34 @@
-.rTable{style: "margin: 0 auto; border: 1px solid lightgray; font-family: 'Arial', sans-serif; font-size: 10pt; color: dimgray; line-height: 16pt; width: 960px;"}
-  .rTableHeading
-    .rTableRow{style: "width: 100%; text-align: center;"}
-      .rTableCell{style: "display: inline-block; width: 33%;"}
+%table{:cellpadding => "10", :style => "margin: 0 auto;border: 1px solid lightgray; font-family: 'Arial', sans-serif; font-size: 10pt; color: dimgray; line-height: 16pt;", :width => "960px"}
+  %thead
+    %tr
+      %td{:width => "203"}
         = image_tag("logo_sm.jpg")
-      .rTableCell{style: "text-align: left; font-family: 'verdana',sans-serif; font-size: 12pt; color: steelblue; padding-top: 15px; display: inline-block; width: 33%; vertical-align: top;"}
+      %td{:style => "text-align: left; font-family: 'verdana', sans-serif; font-size: 12pt; color: steelblue; padding-top: 15px; line-height: 16pt;"}
         Apreciado Usuario
         %span{:style => "color: DarkBlue; display: block; font-weight: bold; font-size: 1em; margin-bottom: 1em;"}
           = @name
-      .rTableCell{style: "position: relative; display: inline-block; float: right;"}
+      %td{:width => "203"}
         = image_tag("imagen.jpg")
-  .rTableBody
-    .rTableRow{style: "padding-bottom: 15px;"}
-      .rTableCell{style: "text-align: center; margin-top: 30px;"}
-        %span{:style => "background: DeepSkyBlue; color: white; font-family: 'Arial', sans-serif; font-size: 10pt; padding: 5px 20px; border-radius: 12px;"}
+  %tbody
+    %tr
+      %td{:align => "center", :colspan => "3"}
+        %span{:style => "background: DeepSkyBlue; color: white; font-family: 'Arial', sans-serif; font-size: 10pt; padding: 5px 20px; border-radius: 12px; line-height: 16pt;"}
           %strong Estas son las noticias más importantes en SIDEGAP
-
     - if @legislatives_stories.present?
-      .rTableRow{:style => "text-align: left; font-family: 'Arial', sans-serif; border-top: 3px solid #F49027;  "}
-        .rTableCell{style: "padding: 0 15px;"}
+      %tr
+        %td{:align => "left", :colspan => "3", :style => " font-family: 'Arial', sans-serif; border-top: 3px solid #F49027;  "}
           %span{:style => "color: steelblue; font-size: 14pt; line-height: 24pt;"}
             %strong RAMA LEGISLATIVA
           - @legislatives_stories.each do |story|
             %br/
-            %span{:style => "color: steelblue;"}
+            %span{:style => "color: steelblue; line-height: 16pt;"}
               %strong= story.title
-            %p{:align => "justify"}
+            %p{:align => "justify", style: "line-height: 16pt;"}
               = story.body
-              %a{:href => story.project_rule, :style => "color: steelblue; text-decoration:none;"} Ver Proyecto
-
+              %a{:href => story.project_rule, :style => "color: steelblue; text-decoration:none; line-height: 16pt;"} Ver Proyecto
     - if @councils_stories.present?
-      .rTableRow{:style => "text-align: left; font-family: 'Arial', sans-serif; border-top: 3px solid #365DB9;  "}
-        .rTableCell{style: "padding: 0 15px;"}
+      %tr
+        %td{:align => "left", :colspan => "3", :style => " font-family: 'Arial', sans-serif; border-top: 3px solid #365DB9;  "}
           %span{:style => "color: steelblue; font-size: 14pt; line-height: 24pt;"}
             %strong CONCEJO DE BOGOTÁ
           - @councils_stories.each do |story|
@@ -40,10 +38,9 @@
             %p{:align => "justify"}
               = story.body
               %a{:href => story.project_rule, :style => "color: steelblue; text-decoration:none;"} Ver Proyecto
-
     - if @rules_stories.present?
-      .rTableRow{:style => "text-align: left; font-family: 'Arial', sans-serif; border-top: 3px solid #45C051; "}
-        .rTableCell{style: "padding: 0 15px;"}
+      %tr
+        %td{:align => "left", :colspan => "3", :style => " font-family: 'Arial', sans-serif; border-top: 3px solid #45C051; "}
           %span{:style => "color: steelblue; font-size: 14pt; line-height: 24pt;"}
             %strong NORMAS EN PROCESO DE CONSULTA CIUDADANA DE LA RAMA EJECUTIVA DEL PODER PUBLICO
 
@@ -54,26 +51,24 @@
             %p{:align => "justify"}
               = story.body
               %a{:href => story.project_rule, :style => "color: steelblue; text-decoration:none;"} Ver Proyecto
-
-    .rTableRow
-      .rTableCell{:style => "text-align: center; font-family: 'Arial', sans-serif;"}
+    %tr
+      %td{:align => "center", :colspan => "3", :style => " font-family: 'Arial', sans-serif;  "}
         %span{:style => "color: steelblue; "} Apreciado usuario para conocer las normas más recientes haga click sobre la rama del poder sobre la cual quisiera obtener la información.
         %br/
-        .rTable{:style => "margin-top: 25px; width: 100%; text-align: center;"}
-          .rTableBody
-            .rTableRow
-              .rTableCell{style: "display:inline-block; margin-right:20px;"}
-                %a{:href => legislatives_url}
-                  = image_tag("legislativa.jpg")
-              .rTableCell{style: "display:inline-block; margin-right:20px;"}
-                %a{:href => rules_url}
-                  = image_tag("normas.jpg")
-              .rTableCell{style: "display:inline-block"}
-                %a{:href => councils_url}
-                  = image_tag("concejos.jpg")
-
-    .rTableRow
-      .rTableCell{:style => "text-align: center; font-family: 'Arial', sans-serif; line-height: 12pt;"}
+        %table{:style => "margin-top: 25px;"}
+          %tr
+            %td
+              %a{:href => legislatives_url}
+                = image_tag("legislativa.jpg")
+            %td
+              %a{:href => rules_url}
+                = image_tag("normas.jpg")
+            %td
+              %a{:href => councils_url}
+                = image_tag("concejos.jpg")
+        %br/
+    %tr
+      %td{:align => "center", :colspan => "3", :style => " font-family: 'Arial', sans-serif; line-height: 12pt;"}
         %hr/
         %span{:style => "color: gray; font-size: 8pt; font-family: verdana;"}
           Este es un informe automático generado SIDEGAP, por favor no responda este mensaje. Para obtener mas información visite nuestro sitio web
