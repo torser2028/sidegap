@@ -35,7 +35,7 @@ wb.add_worksheet(name: "Agenda") do |sheet|
         agenda.legislative.title,
         agenda.plenary_commission,
         agenda.body
-      ], style: normal_cell, height: 50
+      ], style: normal_cell
     
     end
 
@@ -66,9 +66,9 @@ wb.add_worksheet(name: "Agenda") do |sheet|
 
       senate_number = ''
       if event.commission.present?
-        senate_number = event.commission if event.commission.present?
+        senate_number = "#{event.commission} #{event.place}" if event.commission.present?
       elsif event.plenary.present?
-        senate_number = event.plenary
+        senate_number = "#{event.plenary} #{event.place}"
       end
 
       sheet.add_row [
@@ -77,7 +77,7 @@ wb.add_worksheet(name: "Agenda") do |sheet|
         event.body,
         event.event_type,
         senate_number
-      ], style: normal_cell, height: 50
+      ], style: normal_cell
     
     end
 
