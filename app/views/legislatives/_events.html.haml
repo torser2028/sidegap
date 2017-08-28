@@ -5,6 +5,7 @@
       .rTableHead Plenaria / Comisión
       .rTableHead Evento
       .rTableHead Asunto
+      .rTableHead Lugar
       .rTableHead Observaciones
   .rTableBody
     - events.each do |event|
@@ -13,4 +14,10 @@
         .rTableCell= event.commission ? event.commission : event.plenary
         .rTableCell= event.event_type
         .rTableCell= simple_format event.body
+        .rTableCell
+          - if event.commission.present?
+            = event.try(:commission)
+          - elsif event.plenary.present?
+            = event.try(:plenary)
+          %p= event.try(:place)
         .rTableCell= event.observation
