@@ -3,7 +3,7 @@
     %tr
       %td{:width => "203"}
         = image_tag("logo_sm.jpg")
-      %td{:style => "text-align: left; font-family: 'verdana', sans-serif; font-size: 12pt; color: steelblue; padding-top: 15px;"}
+      %td{:style => "text-align: left; font-family: 'verdana', sans-serif; font-size: 12pt; color: steelblue; padding-top: 15px; line-height: 16pt;"}
         Apreciado Usuario
         %span{:style => "color: DarkBlue; display: block; font-weight: bold; font-size: 1em; margin-bottom: 1em;"}
           = @name
@@ -12,7 +12,7 @@
   %tbody
     %tr
       %td{:align => "center", :colspan => "3"}
-        %span{:style => "background: DeepSkyBlue; color: white; font-family: 'Arial', sans-serif; font-size: 10pt; padding: 5px 20px; border-radius: 12px;"}
+        %span{:style => "background: DeepSkyBlue; color: white; font-family: 'Arial', sans-serif; font-size: 10pt; padding: 5px 20px; border-radius: 12px; line-height: 16pt;"}
           %strong Estas son las noticias más importantes en SIDEGAP
     - if @legislatives_stories.present?
       %tr
@@ -21,11 +21,11 @@
             %strong RAMA LEGISLATIVA
           - @legislatives_stories.each do |story|
             %br/
-            %span{:style => "color: steelblue;"}
+            %span{:style => "color: steelblue; line-height: 16pt;"}
               %strong= story.title
-            %p{:align => "justify"}
+            %p{:align => "justify", style: "line-height: 16pt;"}
               = story.body
-              %a{:href => story.project_rule, :style => "color: steelblue; text-decoration:none;"} Ver Proyecto
+              %a{:href => story.project_rule, :style => "color: steelblue; text-decoration:none; line-height: 16pt;"} Ver Proyecto
     - if @councils_stories.present?
       %tr
         %td{:align => "left", :colspan => "3", :style => " font-family: 'Arial', sans-serif; border-top: 3px solid #365DB9;  "}
