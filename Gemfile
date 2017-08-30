@@ -51,6 +51,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'letter_opener'
   # gem 'sqlite3'
+  gem 'better_errors'
 end
 
 group :production do
@@ -60,3 +61,6 @@ end
 
 gem 'rack-timeout', '0.4.2'
 gem 'rack-canonical-host', '0.2.2'
+
+# Monitor the app
+gem 'scout_apm'
