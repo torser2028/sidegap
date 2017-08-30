@@ -52,6 +52,9 @@ group :development, :test do
   gem 'letter_opener'
   # gem 'sqlite3'
   gem 'better_errors'
+  # this gem provides n+1 queries information
+  gem 'bullet'
+  gem 'uniform_notifier'
 end
 
 group :production do

@@ -14,7 +14,8 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -25,7 +26,7 @@ Rails.application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true
+  config.assets.debug = false
 
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
@@ -46,10 +47,28 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
     :port           => '587',
-    :authentication => :plain,
+    :authentication => 'plain',
     :user_name      => 'app35909504@heroku.com',
     :password       => '863jvpy58642',
     :domain         => 'sidegap.herokuapp.com',
     :enable_starttls_auto => true
   }
+  # Don't care if the mailer can't send.
+  # config.action_mailer.smtp_settings = {
+  #   address:              'smtp.gmail.com',
+  #   port:                 587,
+  #   domain:               'gmail.com',
+  #   user_name:            'altose87@gmail.com',
+  #   password:             'a3105979727A',
+  #   authentication:       'plain',
+  #   enable_starttls_auto: true
+  # }
+
+  # Configuration for bullet Gem
+  Bullet.enable = true
+  Bullet.bullet_logger = true
+  Bullet.console = true
+  Bullet.rails_logger = true
+  # rails logger
+  UniformNotifier.rails_logger = true
 end

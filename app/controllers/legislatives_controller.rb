@@ -5,7 +5,7 @@ class LegislativesController < ApplicationController
   def index
     add_breadcrumb "Bandeja de Proyectos", :legislatives_path
 
-    @q = Legislative.inbox.ransack params[:q]
+    @q = Legislative.inbox.includes(:legislative).ransack(params[:q])
     @legislatives = []
     not_available_legislatives = current_user.find_disliked_items + current_user.following_legislatives
     @q.result.order(created_at: :desc).each do |item|
