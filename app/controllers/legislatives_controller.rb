@@ -31,7 +31,7 @@ class LegislativesController < ApplicationController
     add_breadcrumb "Mis Favoritos", :favorites_legislatives_path
 
     @favorite = true
-    @q = current_user.following_legislatives.ransack params[:q]
+    @q = current_user.following_legislatives.includes(:legislative, :comments).ransack params[:q]
     @legislatives = []
     @q.result.each do |item|
       @legislatives << item unless current_user.find_disliked_items.include? item
