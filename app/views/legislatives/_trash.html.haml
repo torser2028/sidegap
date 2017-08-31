@@ -1,0 +1,31 @@
+- @legislatives.each do |legislative|
+  %tr
+    %td.num
+      = legislative.chamber_number
+    %td.num
+      = legislative.senate_number
+    %td.desc
+      %p
+        = simple_format legislative.title
+      - if legislative.warning
+        %span.round.label.linear.urgent
+          = fa_icon "exclamation-circle"
+          Mensaje de urgencia
+      - if legislative.legislative
+        %span.round.label.linear.urgent
+          = fa_icon "exclamation-circle"
+          Proyecto acumulado
+    %td.desc
+      - if %w(Archivado Retirado).include? legislative.final_status
+        = "Este proyecto fue #{legislative.final_status} en #{legislative.status}"
+      - elsif %w(Sancionado).include? legislative.final_status
+        = "Este proyecto fue #{legislative.final_status}"
+      - else
+        = legislative.status
+    %td
+      = legislative.type_law
+    %td.actions
+      %a.return{href: like_legislative_path(legislative)}
+        = fa_icon "reply"
+        %span
+          Reestablecer

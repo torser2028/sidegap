@@ -16,12 +16,12 @@ class Legislative < ActiveRecord::Base
   default_scope { where(active: true).uniq }
   scope :as_author, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.authors).uniq }
   scope :as_speaker, -> { joins(:legislative_stakeholders).merge(LegislativeStakeholder.speakers).uniq }
-  scope :with_agenda, -> { includes(:agendas).where.not(agendas: { legislative_id: nil }).merge(Agenda.active) }
+  scope :with_agenda, -> { includes(:agendas, :legislative).where.not(agendas: { legislative_id: nil }).merge(Agenda.active) }
   scope :with_past_agenda, -> { includes(:agendas).where.not(agendas: { legislative_id: nil }).merge(Agenda.past_week) }
   scope :all_with_agenda, -> { includes(:agendas).where.not(agendas: { legislative_id: nil }) }
-  scope :inbox, -> { where.not(final_status: %w(Archivado Retirado Sancionado)) }
-  scope :law, -> { where(final_status: 'Sancionado') }
-  scope :old, -> { where(final_status: %w(Archivado Retirado)) }
+  scope :inbox, -> { where.not(final_status: %w(Archivado Retirado Sancionado)).includes(:legislative) }
+  scope :law, -> { where(final_status: 'Sancionado').includes(:legislative) }
+  scope :old, -> { where(final_status: %w(Archivado Retirado)).includes(:legislative) }
   scope :archived, -> { where(final_status: 'Archivado') }
   scope :retired, -> { where(final_status: 'Retirado') }
   scope :with_no_risk, -> { where.not("status = 'Aprobado' OR final_status = 'Archivado'") }
