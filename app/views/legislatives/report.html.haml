@@ -106,7 +106,7 @@
   .section.summary
     = render partial: 'legislatives/notices', locals: {notices: @summary_week}
 
-  .section
+  .row.section.nobreak
     .small-12.columns
       %h2
         = fa_icon "calendar"
@@ -114,17 +114,17 @@
       %h3= 'Semana del ' + @last_week.to_s + ' al ' + @today.to_s + ' (semana anterior)'
       = render partial: 'legislatives/agendas', locals: {agendas: @last_agendas}
 
-  .section
+  .row.section.nobreak
     .small-12.columns
       %h2 Otros eventos
       = render partial: 'legislatives/events', locals: {events: @events}
               
-  .section
+  .row.section.nobreak
     .small-12.columns
       %h3= 'Semana del ' + @today.to_s + ' al ' + @next_week.to_s + ' (semana siguiente)'
       = render partial: 'legislatives/agendas', locals: {agendas: @next_agendas}
 
-  .section
+  .row.section.nobreak
     .small-12.columns
       %h2 Otros eventos
       = render partial: 'legislatives/events', locals: {events: @events_next_week}
@@ -135,17 +135,17 @@
   .section
     = render partial: 'legislatives/legislatives_by_topic_with_risk'
 
-  .section
+  .row.section.nobreak
     = render partial: 'legislatives/legislatives'
 
-  .section
+  .row.section.nobreak
     = render partial: 'legislatives/legislatives_by_source'
 
-  .row.section
+  .row.section.nobreak
     = render partial: 'legislatives/legislatives_by_status'
 
-  .row.secition
+  .row.section.nobreak
     = render partial: 'legislatives/legislatives_by_topic'
 
-  .section
+  .row.section.nobreak
     = render partial: 'legislatives/stakeholders'
