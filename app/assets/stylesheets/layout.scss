@@ -1076,12 +1076,13 @@ h1.report-title {
           line-height: 1.125rem;
           padding: 0.5rem 0.625rem;
           text-align: left;
-          vertical-align: middle;
+          vertical-align: top;
         }
       }
     }
     .rTableBody {
       .rTableRow {
+        page-break-inside: avoid;
         &.even, &.alt, &:nth-of-type(even) {
           background: #EAEFF7;
         }
@@ -1096,7 +1097,7 @@ h1.report-title {
           line-height: 1.125rem;
           padding: 0.5rem 0.625rem;
           text-align: left;
-          vertical-align: middle;
+          vertical-align: top;
         }
         .rTableCell:first-child {
           background: #5B9BD5 !important;
