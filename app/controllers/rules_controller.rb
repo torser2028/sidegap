@@ -6,29 +6,19 @@ class RulesController < InheritedResources::Base
   def index
     add_breadcrumb "Bandeja de Normas", :rules_path
     @q = Rule.active.ransack params[:q]
-    @rules = []
-    @q.result.order(created_at: :desc).each do |item|
-      @rules << item unless current_user.following_rules.include? item
-    end
+    @rules = @q.result.order(created_at: :desc).to_a - current_user.following_rules
   end
 
   def inactive
     add_breadcrumb "Bandeja de Normas Pasadas", :inactive_rules_path
-
     @q = Rule.inactive.ransack params[:q]
     @rules = @q.result.order(created_at: :desc)
   end
 
   def favorites
     add_breadcrumb "Mis Normas Favoritas", :favorites_rules_path
-
-    @q = current_user.following_rules.active.ransack params[:q]
-
-    puts "Hanna" + @q.inspect
-    @rules = []
-    @q.result.order(created_at: :desc).each do |item|
-      @rules << item unless current_user.find_disliked_items.include? item
-    end
+    @q = current_user.following_rules.active.includes(:institution).ransack params[:q]
+    @rules = @q.result.order(created_at: :desc).to_a - current_user.find_disliked_items
   end
 
   def show
