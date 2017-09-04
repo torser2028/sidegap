@@ -3,18 +3,13 @@ class CouncilsController < ApplicationController
 
   def index
     add_breadcrumb "Bandeja de Proyectos", :councils_path
-
     @q = Council.ransack params[:q]
-    @councils = []
     not_available_councils = current_user.find_disliked_items + current_user.following_councils
-    @q.result.order(created_at: :desc).each do |item|
-      @councils << item unless not_available_councils.include? item
-    end
+    @councils = @q.result.order(created_at: :desc).to_a - not_available_councils
   end
 
   def projects_approved
     add_breadcrumb "Proyectos - Aprobado", :projects_approved_councils_path
-
     @q = Council.approved.ransack params[:q]
     @councils = @q.result.order(created_at: :desc)
   end
@@ -28,22 +23,14 @@ class CouncilsController < ApplicationController
 
   def favorites
     add_breadcrumb "Mis Favoritos", :favorites_councils_path
-
     @q = current_user.following_councils.ransack params[:q]
-    @councils = []
-    @q.result.order(created_at: :desc).each do |item|
-      @councils << item unless current_user.find_disliked_items.include? item
-    end
+    @councils = @q.result.order(created_at: :desc).to_a - current_user.find_disliked_items
   end
 
   def trash
     add_breadcrumb "Papelera", :trash_councils_path
-
     @q = Council.ransack params[:q]
-    @councils = []
-    @q.result.each do |item|
-      @councils << item if current_user.find_disliked_items.include? item
-    end
+    @councils = current_user.get_down_voted(Council).to_a
   end
 
   def show
