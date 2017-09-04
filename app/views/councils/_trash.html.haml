@@ -1,0 +1,20 @@
+- @councils.each do |council|
+  %tr
+    %td.num
+      = council.number
+    %td.desc
+      %p
+        = council.title
+      - if council.warning
+        %span.round.label.linear.urgent
+          = fa_icon "exclamation-circle"
+          Mensaje de urgencia
+    %td.num
+      = ldate council.filing_at
+    %td.desc
+      = council.topic
+    %td.actions
+      %a.return{href: like_council_path(council)}
+        = fa_icon "reply"
+        %span
+          Reestablecer

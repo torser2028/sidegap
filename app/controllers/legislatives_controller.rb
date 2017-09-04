@@ -4,7 +4,6 @@ class LegislativesController < ApplicationController
 
   def index
     add_breadcrumb "Bandeja de Proyectos", :legislatives_path
-
     @q = Legislative.inbox.ransack(params[:q])
     @legislatives = []
     not_available_legislatives = current_user.find_disliked_items + current_user.following_legislatives
@@ -15,40 +14,28 @@ class LegislativesController < ApplicationController
 
   def projects_law
     add_breadcrumb "Proyectos - Ley", :projects_law_legislatives_path
-
     @q = Legislative.law.ransack params[:q]
     @legislatives = @q.result.order(created_at: :desc)
   end
 
   def projects_old
     add_breadcrumb "Proyectos - Archivado y Retirado", :projects_old_legislatives_path
-
     @q = Legislative.old.ransack params[:q]
     @legislatives = @q.result.order(created_at: :desc)
   end
 
   def favorites
     add_breadcrumb "Mis Favoritos", :favorites_legislatives_path
-
     @favorite = true
     @q = current_user.following_legislatives.includes(:legislative, :comments).ransack params[:q]
-    @legislatives = []
-    @q.result.each do |item|
-      @legislatives << item unless current_user.find_disliked_items.include? item
-    end
+    @legislatives = @q.result.to_a - current_user.find_disliked_items
   end
 
   def trash
     add_breadcrumb "Papelera", :trash_legislatives_path
-
     @legislatives = []
     @q = Legislative.ransack params[:q]
-    result = @q.result.to_a
-    disliked_items = current_user.find_disliked_items.to_a
-    
-    result.each do |item|
-      @legislatives << item if disliked_items.include? item
-    end
+    @legislatives = current_user.get_down_voted(Legislative).to_a
   end
 
   def show
