@@ -8,7 +8,7 @@ class Rule < ActiveRecord::Base
   accepts_nested_attributes_for :attachments, allow_destroy: true
   #accepts_nested_attributes_for :tags, :attachments, allow_destroy: true
 
-  scope :inactive, -> { where("deadline_comments < ?", Date.today) }
+  scope :inactive, -> { where("deadline_comments < ?", Date.today).includes(:institution) }
   scope :active, -> { where("deadline_comments >= ? OR deadline_comments IS NULL", Date.today) }
 
   after_create :new_rule_notification
