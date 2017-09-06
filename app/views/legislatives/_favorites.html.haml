@@ -26,8 +26,7 @@
       = legislative.type_law
     - if @favorite
       %td
-        - legislative.comments.each do |comment|
-          = comment.impact if comment.legislative_id == legislative.id and comment.user_id == current_user.id
+        = legislative.comments.where(user_id: current_user.id).try(:first).try(:impact)
     %td.actions
       %a.more{href: legislative_path(legislative)}
         = fa_icon "arrow-circle-right"
