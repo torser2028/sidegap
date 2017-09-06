@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :mail_logs
+
   ActiveAdmin.routes(self)
   scope '(:locale)', locale: /es|en/ do
     # You can have the root of your site routed with "root"

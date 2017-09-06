@@ -26,6 +26,10 @@ class UserMailer < ApplicationMailer
     @rule = rule
     @institution = institution
     @name = recipient[:name]
+
+    mail_log = MailLog.new(email: recipient.email, subject: "Nueva norma en proceso de consulta", options: {institution: @institution, rule: @rule.title, name: @name})
+    mail_log.save!
+
     mail(to: recipient[:email], subject: "Nueva norma en proceso de consulta")
   end
 
@@ -62,6 +66,10 @@ class UserMailer < ApplicationMailer
     @project = project
     @change_type = change_type
     @name = recipient.name
+
+    mail_log = MailLog.new(email: recipient.email, subject: "Cambios en mis proyectos favoritos", options: {project: @project.title, change_type: @change_type, name: @name})
+    mail_log.save!
+
     mail(to: recipient.email, subject: "Cambios en mis proyectos favoritos")
   end
 
@@ -86,6 +94,9 @@ class UserMailer < ApplicationMailer
     chamber_speakers.each { |chamber_speaker| @chamber_speakers << Stakeholder.find(chamber_speaker) }
     senate_speakers.each { |senate_speaker| @senate_speakers << Stakeholder.find(senate_speaker) }
 
+    mail_log = MailLog.new(email: recipient.email, subject: "Cambios en mis proyectos favoritos", options: {project: @project.title, name: @name})
+    mail_log.save!
+
     mail(to: recipient.email, subject: "Cambios en mis proyectos favoritos")
   end
 
@@ -102,6 +113,10 @@ class UserMailer < ApplicationMailer
   def regulatory_alert(recipient, alert)
     @alert = alert
     @name = recipient.name
+
+    mail_log = MailLog.new(email: recipient.email, subject: "Alerta regulatoria", options: {alert: @alert.title, name: @name})
+    mail_log.save!
+
     mail(to: recipient.email, subject: "Alerta regulatoria")
   end
 
@@ -130,6 +145,9 @@ class UserMailer < ApplicationMailer
     @councils_stories = councils_stories
     @rules_stories = rules_stories
     @name = recipient.name
+
+    mail_log = MailLog.new(email: recipient.email, subject: "Actualidad Regulatoria", options: nil)
+    mail_log.save!
 
     mail(to: recipient.email, subject: "Actualidad Regulatoria")
   end
@@ -186,6 +204,9 @@ class UserMailer < ApplicationMailer
     @archived = @archived_projects.count
     @retired = @retired_projects.count
     @with_agenda = Legislative.with_agenda.count
+
+    mail_log = MailLog.new(email: recipient.email, subject: "Estado semanal de su cuenta", options: nil)
+    mail_log.save!
 
     mail(to: recipient.email, subject: "Estado semanal de su cuenta")
   end
