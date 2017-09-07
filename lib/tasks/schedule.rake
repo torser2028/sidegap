@@ -5,7 +5,7 @@ namespace :scheduler do
     if time.monday? || time.wednesday? || time.friday?
       Thread.new do
         if UserMailer.set_recipients_regulatory_fg
-          Story.not_sent.each { |story| story.update_attribute(:sent, true) }
+          Story.not_sent.each { |story| story.update_attributes(sent: true, sent_at: Time.now) }
           ActiveRecord::Base.connection.close
           puts 'Regulatory report sent.'
         else

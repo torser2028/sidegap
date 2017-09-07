@@ -146,7 +146,11 @@ class UserMailer < ApplicationMailer
     @rules_stories = rules_stories
     @name = recipient.name
 
-    mail_log = MailLog.new(email: recipient.email, subject: "Actualidad Regulatoria", options: nil)
+    mail_log = MailLog.new(email: recipient.email, subject: "Actualidad Regulatoria", options: {
+      legislatives: @legislatives_stories.map(&:project_rule),
+      councils: @councils_stories.map(&:project_rule),
+      rules: @rules.map(&:project_rule)
+    })
     mail_log.save!
 
     mail(to: recipient.email, subject: "Actualidad Regulatoria")
