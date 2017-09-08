@@ -147,9 +147,9 @@ class UserMailer < ApplicationMailer
     @name = recipient.name
 
     mail_log = MailLog.new(email: recipient.email, subject: "Actualidad Regulatoria", options: {
-      legislatives: @legislatives_stories.map(&:project_rule),
-      councils: @councils_stories.map(&:project_rule),
-      rules: @rules.map(&:project_rule)
+      legislatives: (@legislatives_stories.present? ? @legislatives_stories.map(&:project_rule) : ""),
+      councils: (@councils_stories.present? ? @councils_stories.map(&:project_rule) : ""),
+      rules: (@rules_stories.present? ? @rules_stories.map(&:project_rule) : "")
     })
     mail_log.save!
 
