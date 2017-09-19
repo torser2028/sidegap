@@ -170,13 +170,13 @@ class UserMailer < ApplicationMailer
     end
   end
 
-  def self.set_recipients_weekly_test
-    User.all.each do |recipient|
-      if recipient.email == "camiloquimbayo@gmx.com" || recipient.email == "juanacifuentes08@hotmail.com"
-        weekly_report(recipient).deliver_now
-      end
-    end
-  end
+  # def self.set_recipients_weekly_test
+  #   User.all.each do |recipient|
+  #     if recipient.email == "camiloquimbayo@gmx.com" || recipient.email == "juanacifuentes08@hotmail.com"
+  #       weekly_report(recipient).deliver_now
+  #     end
+  #   end
+  # end
 
   def weekly_report(recipient)
     @name = recipient.name
@@ -188,7 +188,8 @@ class UserMailer < ApplicationMailer
 
     changed = []
     user_following.each do |legislative|
-      changed << legislative if legislative.last_status != legislative.status
+      last_monday = (Date.today - 7.days).beginning_of_week.beginning_of_day
+      changed << legislative if legislative.status_updated_at.present? && legislative.status_updated_at > last_monday
     end
     @user_following = user_following.count
     @user_topics = user_following.group_by(&:topic)
