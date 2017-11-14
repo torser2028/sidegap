@@ -162,6 +162,11 @@ class CouncilsController < ApplicationController
     end
   end
 
+  def projects_by_council
+    add_breadcrumb "Bandeja de Proyectos", :councils_path
+    @councillors = Councillor.includes(:councils).all
+  end
+
   private
     def get_council(id)
       Council.find id

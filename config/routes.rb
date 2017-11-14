@@ -80,6 +80,7 @@ Rails.application.routes.draw do
           get :observation
           post :observation
           get :council
+          get :projects_by_council
         end
     end
 

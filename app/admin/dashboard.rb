@@ -13,6 +13,10 @@ ActiveAdmin.register_page 'Dashboard' do
   action_item :dashboard do
     link_to 'Informe Concejo', report_councils_path
   end
+  
+  action_item :dashboard do
+    link_to 'Proyectos por Concejal', projects_by_council_councils_path
+  end
 
   action_item :dashboard do
     link_to 'Reporte Semanal Manual', manual_weekly_report_legislatives_path
