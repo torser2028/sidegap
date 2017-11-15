@@ -52,6 +52,7 @@ Rails.application.routes.draw do
             get :report
             get :legislative
             get :manual_weekly_report
+            get :legislatives_by_stakeholder
         end
     end
 
@@ -80,7 +81,6 @@ Rails.application.routes.draw do
           get :observation
           post :observation
           get :council
-          get :projects_by_council
         end
     end
 

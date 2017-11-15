@@ -1,0 +1,36 @@
+- @stakeholders.each do |register|
+  - stakeholders = Stakeholder.where(email: register.email).includes(:legislatives).all
+  %table.small-12
+    %tr
+      %th.small-8 Email Congresista
+      %th.small-4 Veces repetido
+    %tr
+      %td= register.email
+      %td= stakeholders.count
+    %tr
+      %td.small-12{colspan:"2"}
+        %table.small-12
+          %tr
+            %th.small-2 ID
+            %th.small-7 Nombre congresista
+            %th.small-3 Número de proyectos
+          - stakeholders.each do |stakeholder|
+            %tr
+              %td= stakeholder.id
+              %td= "||#{stakeholder.name}||"
+              %td= stakeholder.legislatives.count
+            -# %tr
+            -#   %td.small-12{colspan: "3"}
+            -#     %table.small-12
+            -#       %tr
+            -#         %th.small-2 ID
+            -#         %th.small-7 Título
+            -#         %th.small-2 Cámara/Senado
+            -#         %th.small-1 Número
+            -#       - stakeholder.legislatives.each do |legislative|
+            -#         %tr
+            -#           %td= legislative.id
+            -#           %td= legislative.title
+            -#           %td= legislative.source
+            -#           %td= legislative.chamber_number || legislative.senate_number
+              

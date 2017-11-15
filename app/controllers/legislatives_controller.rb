@@ -503,6 +503,11 @@ class LegislativesController < ApplicationController
     redirect_to :back, :notice => t('.notice')
   end
 
+  def legislatives_by_stakeholder
+    add_breadcrumb "Proyectos por Congresista", :councils_path
+    @stakeholders = Stakeholder.unscoped.select(:email).group(:email).having("count(*) > 1")
+  end
+
   private
   def get_legislative(id)
     Legislative.find id

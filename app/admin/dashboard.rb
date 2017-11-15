@@ -15,7 +15,7 @@ ActiveAdmin.register_page 'Dashboard' do
   end
   
   action_item :dashboard do
-    link_to 'Proyectos por Concejal', projects_by_council_councils_path
+    link_to 'Proyectos por Congresista', legislatives_by_stakeholder_legislatives_path
   end
 
   action_item :dashboard do
