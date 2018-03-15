@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160623183313) do
+ActiveRecord::Schema.define(version: 20180315025848) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -109,6 +110,11 @@ ActiveRecord::Schema.define(version: 20160623183313) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "avatar"
+    t.string   "email_1"
+    t.string   "email_2"
+    t.string   "email_3"
+    t.string   "email_4"
+    t.string   "email_5"
   end
 
   create_table "councillor_assignments", force: :cascade do |t|
@@ -246,6 +252,17 @@ ActiveRecord::Schema.define(version: 20160623183313) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "legislative_attachments", force: :cascade do |t|
+    t.string   "attachment"
+    t.integer  "legislative_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "title"
+    t.date     "published_at"
+  end
+
+  add_index "legislative_attachments", ["legislative_id"], name: "index_legislative_attachments_on_legislative_id", using: :btree
+
   create_table "legislative_stakeholders", force: :cascade do |t|
     t.integer  "legislative_id"
     t.integer  "stakeholder_id"
@@ -295,6 +312,14 @@ ActiveRecord::Schema.define(version: 20160623183313) do
   end
 
   add_index "legislatives", ["legislative_id"], name: "index_legislatives_on_legislative_id", using: :btree
+
+  create_table "mail_logs", force: :cascade do |t|
+    t.string   "email"
+    t.string   "subject"
+    t.text     "options"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "notices", force: :cascade do |t|
     t.text     "body"
@@ -394,6 +419,7 @@ ActiveRecord::Schema.define(version: 20160623183313) do
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
     t.string   "avatar"
+    t.boolean  "status",          default: true
   end
 
   create_table "statuses", force: :cascade do |t|
@@ -415,6 +441,7 @@ ActiveRecord::Schema.define(version: 20160623183313) do
     t.boolean  "legislative",  default: false
     t.boolean  "council",      default: false
     t.boolean  "rule",         default: false
+    t.datetime "sent_at"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -475,9 +502,6 @@ ActiveRecord::Schema.define(version: 20160623183313) do
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
-  add_foreign_key "agendas", "legislatives"
-  add_foreign_key "assignments", "roles"
-  add_foreign_key "assignments", "users"
   add_foreign_key "attachments", "councils"
   add_foreign_key "attachments", "executives"
   add_foreign_key "attachments", "judicials"
