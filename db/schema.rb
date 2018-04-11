@@ -324,8 +324,9 @@ ActiveRecord::Schema.define(version: 20180315025848) do
   create_table "notices", force: :cascade do |t|
     t.text     "body"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.datetime "publish_date"
   end
 
   create_table "officials", force: :cascade do |t|

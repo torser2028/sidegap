@@ -8,6 +8,7 @@ ActiveAdmin.register Notice do
     column "Cliente" do |notice|
       notice.user.name
     end
+    column 'Fecha de publicacion', :publish_date
     actions()
   end
 
@@ -20,6 +21,9 @@ ActiveAdmin.register Notice do
         row "Cliente" do
           notice.user
         end
+        row "Fecha de publicacion" do
+          notice.publish_date
+        end
       end
     end
     active_admin_comments
@@ -28,6 +32,7 @@ ActiveAdmin.register Notice do
   form do |f|
     f.inputs do
       f.input :body, label: "Contenido", as: :text
+      f.input :publish_date, label: "Fecha de publicacion", as: :datepicker
       f.input :user, collection: User.clients
     end
     f.actions do
@@ -40,7 +45,7 @@ ActiveAdmin.register Notice do
 
   controller do
     def permitted_params
-      params.permit notice: [:body, :user_id]
+      params.permit notice: [:body, :user_id, :publish_date]
     end
 
     def new
