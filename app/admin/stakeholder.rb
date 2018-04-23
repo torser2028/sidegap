@@ -1,7 +1,10 @@
 ActiveAdmin.register Stakeholder do
   menu label: "Congresistas", parent: "Rama Legislativa"
 
-  permit_params :name, :email, :phone, :address, :political_party, :job, :commission, :region, :office, :info, :source, :avatar
+  permit_params :name, :email, :phone, :address, :political_party, :job, :commission, :region, :office, :info, :source, :avatar, :status
+
+  scope :active, default: true
+  scope :inactive
 
   filter :name, label: "Nombre"
   filter :political_party, label: "Partido", as: :select, collection: -> { PoliticalParty.pluck(:name) }
@@ -15,6 +18,7 @@ ActiveAdmin.register Stakeholder do
     column "Cargo", :job
     column "Comisión", :commission
     column "Región", :region
+    column "Estado", :status
     actions
   end
 
@@ -55,6 +59,9 @@ ActiveAdmin.register Stakeholder do
         row "Fuente de Información" do
           link_to stakeholder.source, stakeholder.source
         end
+        row "Estado" do
+          stakeholder.status == true ? "Activo" : "Inactivo"
+        end
       end
     end
     active_admin_comments
@@ -77,6 +84,7 @@ ActiveAdmin.register Stakeholder do
         ? image_tag(f.object.avatar_url)
         : content_tag(:span, "no tiene image")
       f.input :avatar_cache, as: :hidden
+      f.input :status, label: "Activo?"
     end
     f.actions do
       f.action :submit, label: "Guardar Congresista"

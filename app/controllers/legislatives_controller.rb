@@ -151,7 +151,7 @@ class LegislativesController < ApplicationController
   def stakeholders
     add_breadcrumb "Congresistas", :stakeholders_legislatives_path
 
-    @q = Stakeholder.ransack params[:q]
+    @q = Stakeholder.active.ransack params[:q]
     @stakeholders = @q.result
   end
 
