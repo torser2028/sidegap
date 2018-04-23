@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   has_many :notices
 
   scope :clients, -> { includes(:roles).where(roles: { name: 'client' }) }
-
+  scope :active, -> { where(active: true) }
   validates :name, :email, :company, :area, :job, presence: true
 
   # after_create :send_welcome_email
