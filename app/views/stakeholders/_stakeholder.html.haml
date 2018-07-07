@@ -2,13 +2,13 @@
   %td
     = stakeholder.name
   %td
-    = stakeholder.job
+    = StakeholdersPeriod.active_period(stakeholder.id, @period.id).job
   %td
-    = stakeholder.political_party
+    = StakeholdersPeriod.active_period(stakeholder.id, @period.id).political_party
   %td
-    = stakeholder.commission
+    = StakeholdersPeriod.active_period(stakeholder.id, @period.id).commission
   %td
-    = stakeholder.region
+    = StakeholdersPeriod.active_period(stakeholder.id, @period.id).region
   %td.actions
     %a.more{href: stakeholder_legislatives_path(stakeholder)}
       = fa_icon "arrow-circle-right"

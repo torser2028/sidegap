@@ -3,15 +3,7 @@
     .small-12.columns
       %h2
         = fa_icon "users"
-        Consultar Congresistas
-      .tray.rep
-        .row
-          .small-12.columns
-            .button.success
-              - period = Period.find_by(name: '2014 - 2018')
-              %a.last-stakeholders{href: period_stakeholders_legislatives_path(id: period.id)}
-                Ver Congresistas del período 2014 - 2018
-
+        = "Consultar Congresistas #{@period.name}"
       .tray.rep
         .row
           .small-12.columns
@@ -23,7 +15,7 @@
             .tabs-content
               %section#basicPanel.content.active{"aria-hidden" => "false", :role => "tabpanel"}
                 .row
-                  = search_form_for @q, url: :stakeholders_legislatives, remote: true do |f|
+                  = search_form_for @q, url: period_stakeholders_legislatives_path(id: @period.id), remote: true do |f|
                     .large-4.medium-6.columns
                       %label
                         Nombre
@@ -46,7 +38,7 @@
                         %span.ghost
                           \_
                       .button.secondary.fullwidth.quit
-                        %a{href: stakeholders_legislatives_path}
+                        %a{href: period_stakeholders_legislatives_path(id: @period.id)}
                           Quitar Filtros
         %table
           %colgroup

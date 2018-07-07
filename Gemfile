@@ -70,3 +70,6 @@ gem 'rack-canonical-host', '0.2.2'
 gem 'scout_apm'
 
 gem 'seed_dump'
+
+# To import xls
+gem 'spreadsheet'

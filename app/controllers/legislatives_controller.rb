@@ -148,15 +148,23 @@ class LegislativesController < ApplicationController
     redirect_to :back
   end
 
-  def stakeholders
-    add_breadcrumb "Congresistas", :stakeholders_legislatives_path
+  def period_stakeholders
+    @period = Period.find(params[:id])
+    add_breadcrumb 'Congresistas', :stakeholders_legislatives_path
+    add_breadcrumb "Congresistas #{@period.name}"
+    @q = @period.stakeholders.active.ransack params[:q]
+    @stakeholders = @q.result
+  end
 
-    @q = Stakeholder.active.ransack params[:q]
+  def stakeholders
+    @period = Period.active
+    add_breadcrumb 'Congresistas', :stakeholders_legislatives_path
+    @q = Period.active.stakeholders.active.ransack params[:q]
     @stakeholders = @q.result
   end
 
   def stakeholder
-    add_breadcrumb "Pérfil Congresista", :stakeholder_legislatives_path
+    add_breadcrumb 'Perfil Congresista', :stakeholder_legislatives_path
 
     @stakeholder = Stakeholder.find params[:id]
     @legislatives_as_author = @stakeholder.legislatives.as_author

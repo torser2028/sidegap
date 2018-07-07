@@ -48,6 +48,7 @@ Rails.application.routes.draw do
             get :events
             get :events_commission
             get :stakeholders
+            get :period_stakeholders
             get 'stakeholder/:id', action: :stakeholder, as: :stakeholder
             get :report
             get :legislative
