@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315025848) do
+ActiveRecord::Schema.define(version: 20180707060100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -346,6 +346,11 @@ ActiveRecord::Schema.define(version: 20180315025848) do
 
   add_index "officials", ["institution_id"], name: "index_officials_on_institution_id", using: :btree
 
+  create_table "periods", force: :cascade do |t|
+    t.string  "name"
+    t.boolean "status"
+  end
+
   create_table "political_parties", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -422,6 +427,18 @@ ActiveRecord::Schema.define(version: 20180315025848) do
     t.string   "avatar"
     t.boolean  "status",          default: true
   end
+
+  create_table "stakeholders_periods", force: :cascade do |t|
+    t.integer "stakeholder_id"
+    t.integer "period_id"
+    t.string  "political_party"
+    t.string  "job"
+    t.string  "commission"
+    t.string  "region"
+  end
+
+  add_index "stakeholders_periods", ["period_id"], name: "index_stakeholders_periods_on_period_id", using: :btree
+  add_index "stakeholders_periods", ["stakeholder_id"], name: "index_stakeholders_periods_on_stakeholder_id", using: :btree
 
   create_table "statuses", force: :cascade do |t|
     t.string   "name"
@@ -503,25 +520,51 @@ ActiveRecord::Schema.define(version: 20180315025848) do
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
+  add_foreign_key "agendas", "legislatives"
+  add_foreign_key "assignments", "roles"
+  add_foreign_key "assignments", "users"
+  add_foreign_key "attachments", "councils"
   add_foreign_key "attachments", "councils"
   add_foreign_key "attachments", "executives"
+  add_foreign_key "attachments", "executives"
+  add_foreign_key "attachments", "judicials"
   add_foreign_key "attachments", "judicials"
   add_foreign_key "attachments", "legislatives"
+  add_foreign_key "attachments", "legislatives"
+  add_foreign_key "attachments", "rules"
   add_foreign_key "attachments", "rules"
   add_foreign_key "comments", "councils"
+  add_foreign_key "comments", "councils"
+  add_foreign_key "comments", "legislatives"
   add_foreign_key "comments", "legislatives"
   add_foreign_key "comments", "rules"
+  add_foreign_key "comments", "rules"
+  add_foreign_key "comments", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "councillor_assignments", "councillors"
+  add_foreign_key "councillor_assignments", "councillors"
+  add_foreign_key "councillor_assignments", "councils"
   add_foreign_key "councillor_assignments", "councils"
   add_foreign_key "executives", "institutions"
+  add_foreign_key "executives", "institutions"
+  add_foreign_key "institutions", "sectors"
   add_foreign_key "institutions", "sectors"
   add_foreign_key "legislative_stakeholders", "legislatives"
+  add_foreign_key "legislative_stakeholders", "legislatives"
+  add_foreign_key "legislative_stakeholders", "stakeholders"
   add_foreign_key "legislative_stakeholders", "stakeholders"
   add_foreign_key "legislatives", "legislatives"
+  add_foreign_key "legislatives", "legislatives"
+  add_foreign_key "officials", "institutions"
   add_foreign_key "officials", "institutions"
   add_foreign_key "rules", "institutions"
+  add_foreign_key "rules", "institutions"
+  add_foreign_key "stakeholders_periods", "periods"
+  add_foreign_key "stakeholders_periods", "stakeholders"
+  add_foreign_key "user_notifications", "institutions"
   add_foreign_key "user_notifications", "institutions"
   add_foreign_key "user_notifications", "users"
+  add_foreign_key "user_notifications", "users"
+  add_foreign_key "users", "companies"
   add_foreign_key "users", "companies"
 end

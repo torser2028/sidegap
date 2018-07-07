@@ -68,3 +68,5 @@ gem 'rack-canonical-host', '0.2.2'
 
 # Monitor the app
 gem 'scout_apm'
+
+gem 'seed_dump'
