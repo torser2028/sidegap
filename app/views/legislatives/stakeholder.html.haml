@@ -6,7 +6,8 @@
         Perfil Congresista
       .pryctDtl
         .button
-          %a{href: stakeholders_legislatives_path}
+          - url = @period.active? ? stakeholders_legislatives_path : period_stakeholders_legislatives_path(id: @period.id)
+          %a{href: url}
             = fa_icon "arrow-left"
             Consultar Congresistas
         .row.cntnr
@@ -27,7 +28,7 @@
                   = fa_icon "file"
                   %span
                     Ver en Ponentes
-                %a{ href: stakeholder_legislatives_path(@stakeholder, format: :pdf), target: "_blank"}
+                %a{ href: stakeholder_legislatives_path(@stakeholder, period_id: @period.id, format: :pdf), target: "_blank"}
                   = fa_icon "file-pdf-o"
                   %span
                     Exportar a PDF
@@ -51,20 +52,20 @@
                   Cargo
               .large-4.medium-9.columns
                 %span
-                  = @stakeholder.job
+                  = @stakeholder_period.job
             .row
               .large-2.medium-3.columns.labels
                 %label
                   Partido
               .large-4.medium-9.columns
                 %span
-                  = @stakeholder.political_party
+                  = @stakeholder_period.political_party
               .large-2.medium-3.columns.labels
                 %label
                   Comisión
               .large-4.medium-9.columns
                 %span
-                  = @stakeholder.commission
+                  = @stakeholder_period.commission
             .row
               .large-2.medium-3.columns.labels
                 %label
@@ -77,7 +78,7 @@
                   Región
               .large-4.medium-9.columns
                 %span
-                  = @stakeholder.region
+                  = @stakeholder_period.region
             .row
               .large-2.medium-3.columns.labels
                 %label

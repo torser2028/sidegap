@@ -1,6 +1,9 @@
 class Stakeholder < ActiveRecord::Base
   has_many :legislative_stakeholders, dependent: :destroy
   has_many :legislatives, through: :legislative_stakeholders
+  has_many :stakeholders_periods
+
+  accepts_nested_attributes_for :stakeholders_periods, allow_destroy: true
 
   mount_uploader :avatar, AvatarUploader
 
@@ -18,4 +21,8 @@ class Stakeholder < ActiveRecord::Base
     "Capitolio Nacional, Calle 10 N° 7-50",
     "Ed. Nuevo del Congreso, Carrera 7 N° 8 - 68"
   ]
+
+  def show_periods
+    stakeholders_periods.map(&:period).collect(&:name).join(' / ')
+  end
 end

@@ -7,6 +7,14 @@
       .tray.rep
         .row
           .small-12.columns
+            .button.success
+              - period = Period.find_by(name: '2014 - 2018')
+              %a.last-stakeholders{href: period_stakeholders_legislatives_path(id: period.id)}
+                Ver Congresistas del período 2014 - 2018
+
+      .tray.rep
+        .row
+          .small-12.columns
             %ul.tabs{"data-tab" => "", :role => "tablist"}
               %li.tab-title.active{:role => "presentational"}
                 %a{"aria-selected" => "true", :controls => "basicPanel", :href => "#basicPanel", :role => "tab", :tabindex => "0"}
