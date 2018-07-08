@@ -4,4 +4,8 @@ class Period < ActiveRecord::Base
   validates :name, presence: true
 
   scope :active, -> { where(status: true).last }
+
+  def active?
+    status
+  end
 end

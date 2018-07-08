@@ -164,12 +164,12 @@ class LegislativesController < ApplicationController
   end
 
   def stakeholder
+    @period = Period.find(params[:period_id])
     add_breadcrumb 'Perfil Congresista', :stakeholder_legislatives_path
-
     @stakeholder = Stakeholder.find params[:id]
     @legislatives_as_author = @stakeholder.legislatives.as_author
     @legislatives_as_speaker = @stakeholder.legislatives.as_speaker
-
+    @stakeholder_period = StakeholdersPeriod.where(period_id: @period.id, stakeholder_id: @stakeholder.id).last
     respond_to do |format|
       format.html
       format.pdf do

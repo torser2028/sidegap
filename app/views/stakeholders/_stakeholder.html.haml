@@ -10,7 +10,7 @@
   %td
     = StakeholdersPeriod.active_period(stakeholder.id, @period.id).region
   %td.actions
-    %a.more{href: stakeholder_legislatives_path(stakeholder)}
+    %a.more{href: stakeholder_legislatives_path(stakeholder, period_id: @period.id)}
       = fa_icon "arrow-circle-right"
       %span
         Ver
