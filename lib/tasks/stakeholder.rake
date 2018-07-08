@@ -159,7 +159,12 @@ namespace :stakeholder do
       stakeholder = Stakeholder.create!(name: name, political_party: political_party, job: job, region: region)
       puts "Se ha creado el stake holder ========================= #{stakeholder.name}"
     end
-    StakeholdersPeriod.create!(period: period, stakeholder: stakeholder, political_party: political_party, job: job, region: region)
+    stakeholder_period = StakeholdersPeriod.new(period: period, stakeholder: stakeholder, political_party: political_party, job: job, region: region)
+    if stakeholder_period.save
+      puts "Se creó el stakeholder satisfactoriamente"
+    else
+      puts "El stakeholder no se ha creado por los siguientes errores: #{stakeholder_period.errors.full_messages}"
+    end
     puts '======================================================================================='
   end
 end
