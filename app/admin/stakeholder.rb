@@ -35,14 +35,26 @@ ActiveAdmin.register Stakeholder do
           stakeholder.name
         end
         row :email
+        row 'Partido Político' do
+          stakeholder.stakeholders_periods.last.political_party
+        end
+        row 'Cargo' do
+          stakeholder.stakeholders_periods.last.job
+        end
+        row 'Regiçon' do
+          stakeholder.stakeholders_periods.last.region
+        end
+        row 'Comisión' do
+          simple_format stakeholder.stakeholders_periods.last.commission
+        end
         row 'Teléfono' do
-          stakeholder.phone
+          stakeholder.stakeholders_periods.last.phone
         end
         row 'Dirección' do
-          stakeholder.address
+          stakeholder.stakeholders_periods.last.address
         end
         row 'Oficina' do
-          stakeholder.office
+          stakeholder.stakeholders_periods.last.office
         end
         row 'Pérfil' do
           simple_format stakeholder.info
@@ -76,9 +88,6 @@ ActiveAdmin.register Stakeholder do
     f.inputs 'Detalles del congresista' do
       f.input :name, label: 'Nombre'
       f.input :email
-      f.input :phone, label: 'Teléfono', input_html: { value: f.object.phone || '382 30 00' }
-      f.input :address, label: 'Dirección', collection: Stakeholder::ADDRESSES
-      f.input :office, label: 'Oficina'
       f.input :info, label: 'Pérfil'
       f.input :source, label: 'Fuente de Información'
       f.input :avatar, hint: f.object.avatar.present? \
@@ -94,6 +103,9 @@ ActiveAdmin.register Stakeholder do
         a.input :job, label: 'Cargo', collection: Job.pluck(:name)
         a.input :commission, label: 'Comisión', collection: Commission.legislatives.pluck(:name)
         a.input :region, label: 'Región', collection: Region.pluck(:name)
+        a.input :phone, label: 'Teléfono', input_html: { value: f.object.phone || '382 30 00' }
+        a.input :address, label: 'Dirección', collection: Stakeholder::ADDRESSES
+        a.input :office, label: 'Oficina'
         a.input :_destroy, as: :boolean
       end
     end

@@ -3,6 +3,7 @@ require 'spreadsheet'
 namespace :stakeholder do
   desc 'Add the stakeholders to a period'
   task set_period: :environment do
+    period = Period.find_by(name: '2014 - 2018')
     Stakeholder.all.each do |stakeholder|
       puts '======================================================================================='
       puts "Evaluando el congresista #{stakeholder.name} del partido #{stakeholder.political_party}"
@@ -23,6 +24,25 @@ namespace :stakeholder do
       name = item[2].mb_chars.titleize
       region = format_region(item[4].try(:strip))
       configure_stakeholder(political_party, job, name, region)
+    end
+  end
+
+  task dedup_stakeholders_period: :environment do
+    puts "Initial count ================================ #{StakeholdersPeriod.all.count}"
+    ids = StakeholdersPeriod.select("MIN(id) as id").group(:stakeholder_id, :period_id).collect(&:id)
+    StakeholdersPeriod.where.not(id: ids).destroy_all
+    puts "Final count ================================ #{StakeholdersPeriod.all.count}"
+  end
+
+  task fill_missed_fields: :environment do
+    StakeholdersPeriod.all.each do |period|
+      puts "phone ========================== #{period.phone}"
+      puts "stakeholder phone ============== #{period.stakeholder.phone}"
+      puts "address ========================== #{period.address}"
+      puts "stakeholder address ============== #{period.stakeholder.address}"
+      puts "office ========================== #{period.office}"
+      puts "stakeholder office ============== #{period.stakeholder.office}"
+      period.update_attributes(phone: period.stakeholder.phone, address: period.stakeholder.address, office: period.stakeholder.office)
     end
   end
 

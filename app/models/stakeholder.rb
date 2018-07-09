@@ -2,6 +2,7 @@ class Stakeholder < ActiveRecord::Base
   has_many :legislative_stakeholders, dependent: :destroy
   has_many :legislatives, through: :legislative_stakeholders
   has_many :stakeholders_periods
+  has_many :periods, through: :stakeholders_periods
 
   accepts_nested_attributes_for :stakeholders_periods, allow_destroy: true
 
