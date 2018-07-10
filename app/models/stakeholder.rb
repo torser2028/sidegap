@@ -18,6 +18,8 @@ class Stakeholder < ActiveRecord::Base
   scope :active, -> { where(status: true) }
   scope :inactive, -> { where(status: false) }
 
+  before_destroy :destroy_stakeholders_periods
+
   ADDRESSES = [
     "Capitolio Nacional, Calle 10 N° 7-50",
     "Ed. Nuevo del Congreso, Carrera 7 N° 8 - 68"
@@ -25,5 +27,9 @@ class Stakeholder < ActiveRecord::Base
 
   def show_periods
     stakeholders_periods.map(&:period).collect(&:name).join(' / ')
+  end
+
+  def destroy_stakeholders_periods
+    stakeholders_periods.destroy_all
   end
 end
