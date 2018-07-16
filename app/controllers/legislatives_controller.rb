@@ -2,6 +2,8 @@
 class LegislativesController < ApplicationController
   add_breadcrumb "Rama Legislativa", :legislatives_path
 
+  before_action :get_institutions, only: [:period_stakeholders, :stakeholders]
+
   def index
     add_breadcrumb "Bandeja de Proyectos", :legislatives_path
     @q = Legislative.inbox.ransack(params[:q])
@@ -523,5 +525,9 @@ class LegislativesController < ApplicationController
   private
   def get_legislative(id)
     Legislative.find id
+  end
+
+  def get_institutions
+    @institutions = Institution.active.includes(:sector).all
   end
 end
