@@ -1,0 +1,79 @@
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "user"
+        Institución
+      .pryctDtl
+        .row.cntnr
+          .large-12.columns
+            .row.white.profileHdr
+              .large-2.medium-1.columns.fixHght.ghost
+              .large-7.medium-7.columns.fixHght.ghost.actions.prflActns
+                %a{"data-reveal-id" => "rulesPop"}
+                  = fa_icon "file"
+                  %span
+                    Ver reglas
+                -# %a{ href: stakeholder_legislatives_path(@stakeholder, period_id: @period.id, format: :pdf), target: "_blank"}
+                -#   = fa_icon "file-pdf-o"
+                -#   %span
+                -#     Exportar a PDF
+          .large-12.columns.panels#profilePan
+            .row
+              .large-2.medium-3.columns.labels
+                %label
+                  Nombre
+              .large-10.medium-9.columns
+                %span
+                  = @institution.name
+            .row
+              .large-2.medium-3.columns.labels
+                %label
+                  Sector
+              .large-4.medium-9.columns
+                %span
+                  = @institution.sector.name
+
+- content_for :modal do
+  .reveal-modal.modal-bigTbl.legislatives#rulesPop{"data-reveal" => "", "aria-labelledby"=>"modalTitle", "aria-hidden"=>"true", role: "dialog"}
+    %a.close-reveal-modal{"aria-label" => "Close"}
+      &#215;
+    .row.panels-view
+      .tray.autors
+        .row
+          .small-12.columns
+            %h2
+              = fa_icon "inbox"
+              Reglas
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Título
+              %th
+                Tipo
+              %th
+                Fecha de creación
+              %th
+                Fecha límite de comentarios
+              %th 
+                Comentarios y Sugerencias
+          %tbody
+            - @institution.rules.each do |rule|
+              %tr
+                %td
+                  = rule.kind
+                %td
+                  = rule.title
+                %td
+                  = ldate rule.filing_at
+                %td
+                  = ldate rule.deadline_comments
+                %td
+                  = rule.for_comments

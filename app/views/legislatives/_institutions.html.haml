@@ -1,0 +1,35 @@
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "users"
+        Instituciones
+      .tray.rep
+        .row
+
+          %table
+            %colgroup
+              %col
+              %col
+              %col{width: "120"}
+            %thead
+              %tr
+                %th
+                  Sector
+                %th
+                  Nombre
+                %th
+                  Opciones
+            %tbody.js_stakeholders
+              - @institutions.each do |institution|
+                %tr
+                  %td
+                    = institution.name
+                  %td
+                    = institution.sector.name
+                  %td.actions
+                    %a.more{href: institution_path(institution)}
+                      = fa_icon "arrow-circle-right"
+                      %span
+                        Ver
+                  
