@@ -14,10 +14,18 @@ ActiveAdmin.register Stakeholder do
   index title: 'Congresistas' do
     selectable_column
     column 'Nombre', :name
-    column 'Partido', :political_party
-    column 'Cargo', :job
-    column 'Comisión', :commission
-    column 'Región', :region
+    column 'Partido' do |stakeholder|
+      stakeholder.stakeholders_periods.last.political_party
+    end
+    column 'Cargo' do |stakeholder|
+      stakeholder.stakeholders_periods.last.job
+    end
+    column 'Comisión' do |stakeholder|
+      stakeholder.stakeholders_periods.last.commission
+    end
+    column 'Región' do |stakeholder|
+      stakeholder.stakeholders_periods.last.region
+    end
     column 'Periodos', :stakeholders_periods do |f|
       f.show_periods
     end
@@ -41,7 +49,7 @@ ActiveAdmin.register Stakeholder do
         row 'Cargo' do
           stakeholder.stakeholders_periods.last.job
         end
-        row 'Regiçon' do
+        row 'Región' do
           stakeholder.stakeholders_periods.last.region
         end
         row 'Comisión' do
