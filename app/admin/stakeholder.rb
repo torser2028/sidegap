@@ -15,16 +15,16 @@ ActiveAdmin.register Stakeholder do
     selectable_column
     column 'Nombre', :name
     column 'Partido' do |stakeholder|
-      stakeholder.stakeholders_periods.last.political_party
+      stakeholder.try(:stakeholders_periods).try(:last).try(:political_party)
     end
     column 'Cargo' do |stakeholder|
-      stakeholder.stakeholders_periods.last.job
+      stakeholder.try(:stakeholders_periods).try(:last).try(:job)
     end
     column 'Comisión' do |stakeholder|
-      stakeholder.stakeholders_periods.last.commission
+      stakeholder.try(:stakeholders_periods).try(:last).try(:commission)
     end
     column 'Región' do |stakeholder|
-      stakeholder.stakeholders_periods.last.region
+      stakeholder.try(:stakeholders_periods).try(:last).try(:region)
     end
     column 'Periodos', :stakeholders_periods do |f|
       f.show_periods
@@ -44,25 +44,25 @@ ActiveAdmin.register Stakeholder do
         end
         row :email
         row 'Partido Político' do
-          stakeholder.stakeholders_periods.last.political_party
+          stakeholder.try(:stakeholders_periods).try(:last).try(:political_party)
         end
         row 'Cargo' do
-          stakeholder.stakeholders_periods.last.job
+          stakeholder.try(:stakeholders_periods).try(:last).try(:job)
         end
         row 'Región' do
-          stakeholder.stakeholders_periods.last.region
+          stakeholder.try(:stakeholders_periods).try(:last).try(:region)
         end
         row 'Comisión' do
-          simple_format stakeholder.stakeholders_periods.last.commission
+          simple_format stakeholder.try(:stakeholders_periods).try(:last).try(:commission)
         end
         row 'Teléfono' do
-          stakeholder.stakeholders_periods.last.phone
+          stakeholder.try(:stakeholders_periods).try(:last).try(:phone)
         end
         row 'Dirección' do
-          stakeholder.stakeholders_periods.last.address
+          stakeholder.try(:stakeholders_periods).try(:last).try(:address)
         end
         row 'Oficina' do
-          stakeholder.stakeholders_periods.last.office
+          stakeholder.try(:stakeholders_periods).try(:last).try(:office)
         end
         row 'Pérfil' do
           simple_format stakeholder.info
