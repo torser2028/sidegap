@@ -21,12 +21,12 @@ class Stakeholder < ActiveRecord::Base
   before_destroy :destroy_stakeholders_periods
 
   ADDRESSES = [
-    "Capitolio Nacional, Calle 10 N° 7-50",
-    "Ed. Nuevo del Congreso, Carrera 7 N° 8 - 68"
+    'Capitolio Nacional, Calle 10 N° 7-50',
+    'Ed. Nuevo del Congreso, Carrera 7 N° 8 - 68'
   ]
 
   def show_periods
-    stakeholders_periods.map(&:period).collect(&:name).join(' / ')
+    stakeholders_periods.map(&:period).compact.collect(&:name).join(' / ')
   end
 
   def destroy_stakeholders_periods
