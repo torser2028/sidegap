@@ -82,7 +82,7 @@ ActiveAdmin.register Stakeholder do
       periods = stakeholder.stakeholders_periods
       table_for periods do
         column 'Periodo', :period do |p|
-          p.period.name
+          p.period.try(:name)
         end
         column 'Partido', :political_party
         column 'Cargo', :job
