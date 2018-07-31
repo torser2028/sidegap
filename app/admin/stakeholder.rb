@@ -1,7 +1,7 @@
 ActiveAdmin.register Stakeholder do
   menu label: 'Congresistas', parent: 'Rama Legislativa'
 
-  permit_params :name, :email, :phone, :address, :political_party, :job, :commission, :region, :office, :info, :source, :avatar, :status, stakeholders_periods_attributes: [:id, :period_id, :political_party, :job, :commission, :region, :_destroy]
+  permit_params :name, :email, :phone, :address, :political_party, :job, :commission, :region, :office, :info, :source, :avatar, :status, stakeholders_periods_attributes: [:id, :period_id, :political_party, :job, :commission, :region, :phone, :address, :office, :_destroy]
 
   scope :active, default: true
   scope :inactive
@@ -111,7 +111,7 @@ ActiveAdmin.register Stakeholder do
         a.input :job, label: 'Cargo', collection: Job.pluck(:name)
         a.input :commission, label: 'Comisión', collection: Commission.legislatives.pluck(:name)
         a.input :region, label: 'Región', collection: Region.pluck(:name)
-        a.input :phone, label: 'Teléfono', input_html: { value: f.object.phone || '382 30 00' }
+        a.input :phone, label: 'Teléfono', input_html: { value: a.object.phone || '382 30 00' }
         a.input :address, label: 'Dirección', collection: Stakeholder::ADDRESSES
         a.input :office, label: 'Oficina'
         a.input :_destroy, as: :boolean
