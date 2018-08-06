@@ -55,7 +55,7 @@ ActiveAdmin.register Rule do
           rule.kind
         end
         row "Sector" do
-          rule.institution.sector
+          rule.institution.try(:sector)
         end
         row "Institución" do
           rule.institution
