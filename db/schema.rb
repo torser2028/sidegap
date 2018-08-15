@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180709185309) do
+ActiveRecord::Schema.define(version: 20180815034807) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,14 +107,16 @@ ActiveRecord::Schema.define(version: 20180709185309) do
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
     t.string   "avatar"
     t.string   "email_1"
     t.string   "email_2"
     t.string   "email_3"
     t.string   "email_4"
     t.string   "email_5"
+    t.string   "main_email"
+    t.string   "extra_emails"
   end
 
   create_table "councillor_assignments", force: :cascade do |t|
@@ -523,51 +525,27 @@ ActiveRecord::Schema.define(version: 20180709185309) do
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
-  add_foreign_key "agendas", "legislatives"
-  add_foreign_key "assignments", "roles"
-  add_foreign_key "assignments", "users"
-  add_foreign_key "attachments", "councils"
   add_foreign_key "attachments", "councils"
   add_foreign_key "attachments", "executives"
-  add_foreign_key "attachments", "executives"
-  add_foreign_key "attachments", "judicials"
   add_foreign_key "attachments", "judicials"
   add_foreign_key "attachments", "legislatives"
-  add_foreign_key "attachments", "legislatives"
-  add_foreign_key "attachments", "rules"
   add_foreign_key "attachments", "rules"
   add_foreign_key "comments", "councils"
-  add_foreign_key "comments", "councils"
-  add_foreign_key "comments", "legislatives"
   add_foreign_key "comments", "legislatives"
   add_foreign_key "comments", "rules"
-  add_foreign_key "comments", "rules"
-  add_foreign_key "comments", "users"
   add_foreign_key "comments", "users"
   add_foreign_key "councillor_assignments", "councillors"
-  add_foreign_key "councillor_assignments", "councillors"
-  add_foreign_key "councillor_assignments", "councils"
   add_foreign_key "councillor_assignments", "councils"
   add_foreign_key "executives", "institutions"
-  add_foreign_key "executives", "institutions"
-  add_foreign_key "institutions", "sectors"
   add_foreign_key "institutions", "sectors"
   add_foreign_key "legislative_stakeholders", "legislatives"
-  add_foreign_key "legislative_stakeholders", "legislatives"
-  add_foreign_key "legislative_stakeholders", "stakeholders"
   add_foreign_key "legislative_stakeholders", "stakeholders"
   add_foreign_key "legislatives", "legislatives"
-  add_foreign_key "legislatives", "legislatives"
   add_foreign_key "officials", "institutions"
-  add_foreign_key "officials", "institutions"
-  add_foreign_key "rules", "institutions"
   add_foreign_key "rules", "institutions"
   add_foreign_key "stakeholders_periods", "periods"
   add_foreign_key "stakeholders_periods", "stakeholders"
   add_foreign_key "user_notifications", "institutions"
-  add_foreign_key "user_notifications", "institutions"
   add_foreign_key "user_notifications", "users"
-  add_foreign_key "user_notifications", "users"
-  add_foreign_key "users", "companies"
   add_foreign_key "users", "companies"
 end

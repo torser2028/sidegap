@@ -26,29 +26,26 @@ class UserMailer < ApplicationMailer
     @rule = rule
     @institution = institution
     @name = recipient[:name]
+    @to = recipient[:email]
 
-    mail_log = MailLog.new(email: recipient.email, subject: "Nueva norma en proceso de consulta", options: {institution: @institution, rule: @rule.title, name: @name})
+    company = Company.find(recipient.company_id)
+    if company.main_email
+      @to = "#{@to},#{company.main_email}"
+      @to = "#{@to},#{company.extra_emails}" if company.extra_emails.present?
+    end
+
+    mail_log = MailLog.new(email: recipient.email, subject: 'Nueva norma en proceso de consulta', options: {institution: @institution, rule: @rule.title, name: @name, company_emails: @to})
     mail_log.save!
 
-    mail(to: recipient[:email], subject: "Nueva norma en proceso de consulta")
+    mail(to: @to, subject: 'Nueva norma en proceso de consulta')
   end
 
-  def send_mail_user_company(id_companie)
-    empresa = Company.find(id_companie)
-    if empresa.email_1.length > 0
-      mail(to: empresa.email_1, subject: "Nueva norma en proceso de consulta")
-    end
-    if empresa.email_2.length > 0
-      mail(to: empresa.email_2, subject: "Nueva norma en proceso de consulta")
-    end
-    if empresa.email_3.length > 0
-      mail(to: empresa.email_3, subject: "Nueva norma en proceso de consulta")
-    end
-    if empresa.email_4.length > 0
-      mail(to: empresa.email_4, subject: "Nueva norma en proceso de consulta")
-    end
-    if empresa.email_5.length > 0
-      mail(to: empresa.email_5, subject: "Nueva norma en proceso de consulta")
+  def send_mail_user_company(id_company)
+    company = Company.find(id_company)
+    if company.main_email
+      to = company.main_email
+      to = "#{to},#{company.extra_emails}" if company.extra_emails.present?
+      mail(to: to, subject: 'Nueva norma en proceso de consulta')
     end
   end
 
