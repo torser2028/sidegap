@@ -73,3 +73,6 @@ gem 'seed_dump'
 
 # To import xls
 gem 'spreadsheet'
+
+# Geocoder
+gem 'geocoder'
