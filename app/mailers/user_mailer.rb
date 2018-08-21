@@ -26,27 +26,15 @@ class UserMailer < ApplicationMailer
     @rule = rule
     @institution = institution
     @name = recipient[:name]
-    @to = recipient[:email]
+    to = recipient[:email]
 
     company = Company.find(recipient.company_id)
-    if company.main_email
-      @to = "#{@to},#{company.main_email}"
-      @to = "#{@to},#{company.extra_emails}" if company.extra_emails.present?
-    end
+    @to = send_mail_user_company(to, company)
 
     mail_log = MailLog.new(email: recipient.email, subject: 'Nueva norma en proceso de consulta', options: {institution: @institution, rule: @rule.title, name: @name, company_emails: @to})
     mail_log.save!
 
     mail(to: @to, subject: 'Nueva norma en proceso de consulta')
-  end
-
-  def send_mail_user_company(id_company)
-    company = Company.find(id_company)
-    if company.main_email
-      to = company.main_email
-      to = "#{to},#{company.extra_emails}" if company.extra_emails.present?
-      mail(to: to, subject: 'Nueva norma en proceso de consulta')
-    end
   end
 
   def self.set_recipients_project_notification(project, change_type)
@@ -63,11 +51,15 @@ class UserMailer < ApplicationMailer
     @project = project
     @change_type = change_type
     @name = recipient.name
+    to = recipient.email
 
-    mail_log = MailLog.new(email: recipient.email, subject: "Cambios en mis proyectos favoritos", options: {project: @project.title, change_type: @change_type, name: @name})
+    company = Company.find(recipient.company_id)
+    @to = send_mail_user_company(to, company)
+
+    mail_log = MailLog.new(email: recipient.email, subject: 'Cambios en mis proyectos favoritos', options: {project: @project.title, change_type: @change_type, name: @name, company_emails: @to})
     mail_log.save!
 
-    mail(to: recipient.email, subject: "Cambios en mis proyectos favoritos")
+    mail(to: @to, subject: 'Cambios en mis proyectos favoritos')
   end
 
   def self.set_recipients_stakeholder_notification(project, authors, chamber_speakers, senate_speakers)
@@ -83,6 +75,10 @@ class UserMailer < ApplicationMailer
   def stakeholder_notification(recipient, project, authors, chamber_speakers, senate_speakers)
     @project = project
     @name = recipient.name
+    to = recipient.email
+
+    company = Company.find(recipient.company_id)
+    @to = send_mail_user_company(to, company)
 
     @authors = []
     @chamber_speakers = []
@@ -91,10 +87,10 @@ class UserMailer < ApplicationMailer
     chamber_speakers.each { |chamber_speaker| @chamber_speakers << Stakeholder.find(chamber_speaker) }
     senate_speakers.each { |senate_speaker| @senate_speakers << Stakeholder.find(senate_speaker) }
 
-    mail_log = MailLog.new(email: recipient.email, subject: "Cambios en mis proyectos favoritos", options: {project: @project.title, name: @name})
+    mail_log = MailLog.new(email: recipient.email, subject: 'Cambios en mis proyectos favoritos', options: {project: @project.title, name: @name, company_emails: @to})
     mail_log.save!
 
-    mail(to: recipient.email, subject: "Cambios en mis proyectos favoritos")
+    mail(to: @to, subject: 'Cambios en mis proyectos favoritos')
   end
 
   def self.set_recipients_alert(alert)
@@ -110,11 +106,15 @@ class UserMailer < ApplicationMailer
   def regulatory_alert(recipient, alert)
     @alert = alert
     @name = recipient.name
+    to = recipient.email
 
-    mail_log = MailLog.new(email: recipient.email, subject: "Alerta regulatoria", options: {alert: @alert.title, name: @name})
+    company = Company.find(recipient.company_id)
+    @to = send_mail_user_company(to, company)
+
+    mail_log = MailLog.new(email: recipient.email, subject: 'Alerta regulatoria', options: {alert: @alert.title, name: @name, company_emails: @to})
     mail_log.save!
 
-    mail(to: recipient.email, subject: "Alerta regulatoria")
+    mail(to: @to, subject: 'Alerta regulatoria')
   end
 
   def self.set_recipients_regulatory
@@ -142,15 +142,20 @@ class UserMailer < ApplicationMailer
     @councils_stories = councils_stories
     @rules_stories = rules_stories
     @name = recipient.name
+    to = recipient.email
 
-    mail_log = MailLog.new(email: recipient.email, subject: "Actualidad Regulatoria", options: {
-      legislatives: (@legislatives_stories.present? ? @legislatives_stories.map(&:project_rule) : ""),
-      councils: (@councils_stories.present? ? @councils_stories.map(&:project_rule) : ""),
-      rules: (@rules_stories.present? ? @rules_stories.map(&:project_rule) : "")
+    company = Company.find(recipient.company_id)
+    @to = send_mail_user_company(to, company)
+
+    mail_log = MailLog.new(email: recipient.email, subject: 'Actualidad Regulatoria', options: {
+      legislatives: (@legislatives_stories.present? ? @legislatives_stories.map(&:project_rule) : ''),
+      councils: (@councils_stories.present? ? @councils_stories.map(&:project_rule) : ''),
+      rules: (@rules_stories.present? ? @rules_stories.map(&:project_rule) : ''),
+      company_emails: @to
     })
     mail_log.save!
 
-    mail(to: recipient.email, subject: "Actualidad Regulatoria")
+    mail(to: @to, subject: 'Actualidad Regulatoria')
   end
 
   def self.set_recipients_weekly
@@ -207,9 +212,21 @@ class UserMailer < ApplicationMailer
     @retired = @retired_projects.count
     @with_agenda = Legislative.with_agenda.count
 
-    mail_log = MailLog.new(email: recipient.email, subject: "Estado semanal de su cuenta", options: nil)
+    to = recipient.email
+    company = Company.find(recipient.company_id)
+    @to = send_mail_user_company(to, company)
+
+    mail_log = MailLog.new(email: recipient.email, subject: 'Estado semanal de su cuenta', options: {company_emails: @to})
     mail_log.save!
 
-    mail(to: recipient.email, subject: "Estado semanal de su cuenta")
+    mail(to: @to, subject: 'Estado semanal de su cuenta')
+  end
+
+  def send_mail_user_company(to, company)
+    if company.main_email
+      to = "#{to},#{company.main_email}"
+      to = "#{to},#{company.extra_emails}" if company.extra_emails.present?
+      mail(to: to, subject: 'Nueva norma en proceso de consulta')
+    end
   end
 end
