@@ -76,7 +76,6 @@ class UserMailer < ApplicationMailer
     @project = project
     @name = recipient.name
     to = recipient.email
-
     company = Company.find(recipient.company_id)
     @to = send_mail_user_company(to, company)
 
@@ -226,7 +225,6 @@ class UserMailer < ApplicationMailer
     if company.main_email
       to = "#{to},#{company.main_email}"
       to = "#{to},#{company.extra_emails}" if company.extra_emails.present?
-      mail(to: to, subject: 'Nueva norma en proceso de consulta')
     end
   end
 end

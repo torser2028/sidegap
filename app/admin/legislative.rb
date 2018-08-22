@@ -267,7 +267,6 @@ ActiveAdmin.register Legislative do
       authors = params[:stakeholders][:authors].delete_if(&:blank?)
       chamber_speakers = params[:stakeholders][:chamber_speakers].delete_if(&:blank?)
       senate_speakers = params[:stakeholders][:senate_speakers].delete_if(&:blank?)
-
       if params[:stakeholders][:notify] == '1'
 
         list_authors = []
@@ -291,7 +290,6 @@ ActiveAdmin.register Legislative do
             list_senate_speakers << stakeholder_id
           end
         end
-
         UserMailer.set_recipients_stakeholder_notification(
           resource, list_authors, list_chamber_speakers, list_senate_speakers)
       end
