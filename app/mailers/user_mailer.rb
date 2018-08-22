@@ -226,5 +226,6 @@ class UserMailer < ApplicationMailer
       to = "#{to},#{company.main_email}"
       to = "#{to},#{company.extra_emails}" if company.extra_emails.present?
     end
+    return to
   end
 end
