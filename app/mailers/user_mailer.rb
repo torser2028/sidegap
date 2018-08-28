@@ -29,12 +29,12 @@ class UserMailer < ApplicationMailer
     to = recipient[:email]
 
     company = Company.find(recipient.company_id)
-    @to = send_mail_user_company(to, company)
+    @bcc = send_mail_user_company(to, company)
 
-    mail_log = MailLog.new(email: recipient.email, subject: 'Nueva norma en proceso de consulta', options: {institution: @institution, rule: @rule.title, name: @name, company_emails: @to})
+    mail_log = MailLog.new(email: recipient.email, subject: 'Nueva norma en proceso de consulta', options: {institution: @institution, rule: @rule.title, name: @name, company_emails: @bcc})
     mail_log.save!
 
-    mail(to: @to, subject: 'Nueva norma en proceso de consulta')
+    mail(to: to, subject: 'Nueva norma en proceso de consulta', bcc: @bcc)
   end
 
   def self.set_recipients_project_notification(project, change_type)
@@ -54,12 +54,12 @@ class UserMailer < ApplicationMailer
     to = recipient.email
 
     company = Company.find(recipient.company_id)
-    @to = send_mail_user_company(to, company)
+    @bcc = send_mail_user_company(to, company)
 
-    mail_log = MailLog.new(email: recipient.email, subject: 'Cambios en mis proyectos favoritos', options: {project: @project.title, change_type: @change_type, name: @name, company_emails: @to})
+    mail_log = MailLog.new(email: recipient.email, subject: 'Cambios en mis proyectos favoritos', options: {project: @project.title, change_type: @change_type, name: @name, company_emails: @bcc})
     mail_log.save!
 
-    mail(to: @to, subject: 'Cambios en mis proyectos favoritos')
+    mail(to: to, subject: 'Cambios en mis proyectos favoritos', bcc: @bcc)
   end
 
   def self.set_recipients_stakeholder_notification(project, authors, chamber_speakers, senate_speakers)
@@ -77,7 +77,7 @@ class UserMailer < ApplicationMailer
     @name = recipient.name
     to = recipient.email
     company = Company.find(recipient.company_id)
-    @to = send_mail_user_company(to, company)
+    @bcc = send_mail_user_company(to, company)
 
     @authors = []
     @chamber_speakers = []
@@ -86,10 +86,10 @@ class UserMailer < ApplicationMailer
     chamber_speakers.each { |chamber_speaker| @chamber_speakers << Stakeholder.find(chamber_speaker) }
     senate_speakers.each { |senate_speaker| @senate_speakers << Stakeholder.find(senate_speaker) }
 
-    mail_log = MailLog.new(email: recipient.email, subject: 'Cambios en mis proyectos favoritos', options: {project: @project.title, name: @name, company_emails: @to})
+    mail_log = MailLog.new(email: recipient.email, subject: 'Cambios en mis proyectos favoritos', options: {project: @project.title, name: @name, company_emails: @bcc})
     mail_log.save!
 
-    mail(to: @to, subject: 'Cambios en mis proyectos favoritos')
+    mail(to: to, subject: 'Cambios en mis proyectos favoritos', bcc: @bcc)
   end
 
   def self.set_recipients_alert(alert)
@@ -108,12 +108,12 @@ class UserMailer < ApplicationMailer
     to = recipient.email
 
     company = Company.find(recipient.company_id)
-    @to = send_mail_user_company(to, company)
+    @bcc = send_mail_user_company(to, company)
 
-    mail_log = MailLog.new(email: recipient.email, subject: 'Alerta regulatoria', options: {alert: @alert.title, name: @name, company_emails: @to})
+    mail_log = MailLog.new(email: recipient.email, subject: 'Alerta regulatoria', options: {alert: @alert.title, name: @name, company_emails: @bcc})
     mail_log.save!
 
-    mail(to: @to, subject: 'Alerta regulatoria')
+    mail(to: to, subject: 'Alerta regulatoria', bcc: @bcc)
   end
 
   def self.set_recipients_regulatory
@@ -143,18 +143,14 @@ class UserMailer < ApplicationMailer
     @name = recipient.name
     to = recipient.email
 
-    company = Company.find(recipient.company_id)
-    @to = send_mail_user_company(to, company)
-
     mail_log = MailLog.new(email: recipient.email, subject: 'Actualidad Regulatoria', options: {
       legislatives: (@legislatives_stories.present? ? @legislatives_stories.map(&:project_rule) : ''),
       councils: (@councils_stories.present? ? @councils_stories.map(&:project_rule) : ''),
-      rules: (@rules_stories.present? ? @rules_stories.map(&:project_rule) : ''),
-      company_emails: @to
+      rules: (@rules_stories.present? ? @rules_stories.map(&:project_rule) : '')
     })
     mail_log.save!
 
-    mail(to: @to, subject: 'Actualidad Regulatoria')
+    mail(to: to, subject: 'Actualidad Regulatoria')
   end
 
   def self.set_recipients_weekly
@@ -213,19 +209,18 @@ class UserMailer < ApplicationMailer
 
     to = recipient.email
     company = Company.find(recipient.company_id)
-    @to = send_mail_user_company(to, company)
+    @bcc = send_mail_user_company(to, company)
 
-    mail_log = MailLog.new(email: recipient.email, subject: 'Estado semanal de su cuenta', options: {company_emails: @to})
+    mail_log = MailLog.new(email: recipient.email, subject: 'Estado semanal de su cuenta', options: {company_emails: @bcc})
     mail_log.save!
 
-    mail(to: @to, subject: 'Estado semanal de su cuenta')
+    mail(to: to, subject: 'Estado semanal de su cuenta', bcc: @bcc)
   end
 
   def send_mail_user_company(to, company)
-    if company.main_email
-      to = "#{to},#{company.main_email}"
-      to = "#{to},#{company.extra_emails}" if company.extra_emails.present?
+    if company.main_email == to
+      bcc = company.extra_emails if company.extra_emails.present?
     end
-    return to
+    bcc
   end
 end
