@@ -505,6 +505,7 @@ class LegislativesController < ApplicationController
         risk: risk,
         observations: observation
       }
+      
     end
 
     respond_to do |format|
