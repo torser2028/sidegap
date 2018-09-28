@@ -56,6 +56,7 @@ Rails.application.routes.draw do
         get :legislative
         get :manual_weekly_report
         get :legislatives_by_stakeholder
+        get :show_changes
       end
     end
     resources :institutions, only: [:show]

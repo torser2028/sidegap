@@ -9,6 +9,7 @@ class Legislative < ActiveRecord::Base
   has_many :legislative_stakeholders, dependent: :destroy
   has_many :stakeholders, through: :legislative_stakeholders
   has_many :legislatives, dependent: :destroy
+  has_many :legislative_statuses, dependent: :destroy
   belongs_to :legislative
 
   accepts_nested_attributes_for :attachments, :legislative_stakeholders, :agendas, :legislatives, allow_destroy: true
@@ -46,6 +47,7 @@ class Legislative < ActiveRecord::Base
   before_create :set_last_status
   before_update :update_notification, if: :notify
   before_update :update_last_status
+  before_update :store_status_change, :if => :status_changed?
 
   private
     def update_notification
@@ -69,5 +71,9 @@ class Legislative < ActiveRecord::Base
       if self.status != self.status_was || self.final_status != self.final_status_was
         self.status_updated_at = Time.now
       end
+    end
+
+    def store_status_change
+      LegislativeStatus.create(legislative: self, last_week_status: status_was, current_status: status, date: DateTime.now)
     end
 end

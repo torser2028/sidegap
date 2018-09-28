@@ -1,0 +1,25 @@
+
+.panels-view.report
+  .row.section.nobreak
+    .small-12.columns
+      %h2
+        = fa_icon "tasks"
+        Cambios de estado en proyectos favoritos
+
+      .rTable.table-row
+        .rTableHeading
+          .rTableRow
+            .rTableHead Proyecto
+            .rTableHead Estado anterior
+            .rTableHead Estdo actual
+            .rTableHead Fecha del cambio
+            .rTableHead Ver
+        .rTableBody
+          - @change_by_status.each do |status|
+            .rTableRow
+              .rTableCell.small-6= status.legislative.title
+              .rTableCell= status.last_week_status
+              .rTableCell= status.current_status
+              .rTableCell= status.date.strftime('%d %b %Y')
+              .rTableCell
+                %a{href: legislative_path(status.legislative.id)} Ver
