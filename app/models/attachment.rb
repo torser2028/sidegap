@@ -5,6 +5,8 @@ class Attachment < ActiveRecord::Base
   belongs_to :judicial
   belongs_to :council
 
+  has_many :legislative_attachment_changes, dependent: :destroy
+
   mount_uploader :attachment, AttachmentUploader
 
   default_scope { order(published_at: :desc) }

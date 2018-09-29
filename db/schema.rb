@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180928030201) do
+ActiveRecord::Schema.define(version: 20180929171909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -253,6 +253,17 @@ ActiveRecord::Schema.define(version: 20180928030201) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "legislative_attachment_changes", force: :cascade do |t|
+    t.integer  "legislative_id"
+    t.integer  "attachment_id"
+    t.datetime "date"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "legislative_attachment_changes", ["attachment_id"], name: "index_legislative_attachment_changes_on_attachment_id", using: :btree
+  add_index "legislative_attachment_changes", ["legislative_id"], name: "index_legislative_attachment_changes_on_legislative_id", using: :btree
 
   create_table "legislative_attachments", force: :cascade do |t|
     t.string   "attachment"
@@ -575,6 +586,8 @@ ActiveRecord::Schema.define(version: 20180928030201) do
   add_foreign_key "executives", "institutions"
   add_foreign_key "institutions", "sectors"
   add_foreign_key "institutions", "sectors"
+  add_foreign_key "legislative_attachment_changes", "attachments"
+  add_foreign_key "legislative_attachment_changes", "legislatives"
   add_foreign_key "legislative_stakeholders", "legislatives"
   add_foreign_key "legislative_stakeholders", "legislatives"
   add_foreign_key "legislative_stakeholders", "stakeholders"

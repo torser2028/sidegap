@@ -1,4 +1,3 @@
-
 .panels-view.report
   .row.section.nobreak
     .small-12.columns
@@ -23,3 +22,26 @@
               .rTableCell= status.date.strftime('%d %b %Y')
               .rTableCell
                 %a{href: legislative_path(status.legislative.id)} Ver
+
+.panels-view.report
+  .row.section.nobreak
+    .small-12.columns
+      %h2
+        = fa_icon "tasks"
+        Adición de archivos en proyectos favoritos
+
+      .rTable.table-row
+        .rTableHeading
+          .rTableRow
+            .rTableHead Proyecto
+            .rTableHead Adjuntos
+            .rTableHead Fecha del cambio
+            .rTableHead Ver
+        .rTableBody
+          - @change_by_attachments.each do |change|
+            .rTableRow
+              .rTableCell.small-6= change.legislative.title
+              .rTableCell= link_to change.attachment.title, change.attachment.attachment.url, target: '_blank'
+              .rTableCell= change.date.strftime('%d %b %Y')
+              .rTableCell
+                %a{href: legislative_path(change.legislative.id)} Ver
