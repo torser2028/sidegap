@@ -48,7 +48,7 @@ class Legislative < ActiveRecord::Base
   before_create :set_last_status
   before_update :update_notification, if: :notify
   before_update :store_status_change, :if => :status_changed?
-  before_update :track_attachments_and_stakeholders_changes
+  before_update :track_attachments_changes
 
   private
     def update_notification
@@ -75,7 +75,7 @@ class Legislative < ActiveRecord::Base
       LegislativeStatus.create(legislative: self, last_week_status: status_was, current_status: status, date: DateTime.now)
     end
 
-    def track_attachments_and_stakeholders_changes
+    def track_attachments_changes
       attachments.each do |attachment|
         if attachment.changed?
           LegislativeAttachmentChange.create(legislative: self, attachment: attachment, date: DateTime.now)

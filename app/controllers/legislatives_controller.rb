@@ -44,14 +44,17 @@ class LegislativesController < ApplicationController
     add_breadcrumb "Cambios en proyecto", :favorites_legislatives_path
     # q = current_user.following_legislatives.includes(:legislative, :comments).ransack params[:q]
     # legislatives_ids = (q.result.to_a - current_user.find_disliked_items).map(&:id)
-    
+
     legislatives_ids = Legislative.all.map(&:id)
 
     start_date = Date.today.beginning_of_week.beginning_of_day
     end_date = Date.today.end_of_week.end_of_day
 
     @change_by_status = LegislativeStatus.where(legislative_id: legislatives_ids, date: start_date..end_date)
+
     @change_by_attachments = LegislativeAttachmentChange.where(legislative_id: legislatives_ids, date: start_date..end_date)
+
+    @change_by_stakeholders = LegislativeStakeholder.where(legislative_id: legislatives_ids, created_at: start_date..end_date)
   end
 
   def show

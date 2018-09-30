@@ -45,3 +45,32 @@
               .rTableCell= change.date.strftime('%d %b %Y')
               .rTableCell
                 %a{href: legislative_path(change.legislative.id)} Ver
+
+.panels-view.report
+  .row.section.nobreak
+    .small-12.columns
+      %h2
+        = fa_icon "tasks"
+        Adición de ponentes en proyectos favoritos
+
+      .rTable.table-row
+        .rTableHeading
+          .rTableRow
+            .rTableHead Proyecto
+            .rTableHead Ponente
+            .rTableHead Autor
+            .rTableHead Cámara
+            .rTableHead Senado
+            .rTableHead Fecha del cambio
+            .rTableHead Ver
+        .rTableBody
+          - @change_by_stakeholders.each do |change|
+            .rTableRow
+              .rTableCell.small-4= change.legislative.title
+              .rTableCell= change.stakeholder.name
+              .rTableCell= change.author.present? ? 'X' : '-'
+              .rTableCell= change.chamber.present? ? 'X' : '-'
+              .rTableCell= change.senate.present? ? 'X' : '-'
+              .rTableCell= change.created_at.strftime('%d %b %Y')
+              .rTableCell
+                %a{href: legislative_path(change.legislative.id)} Ver
