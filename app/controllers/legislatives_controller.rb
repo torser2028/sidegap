@@ -33,6 +33,11 @@ class LegislativesController < ApplicationController
     @legislatives = @q.result.to_a - current_user.find_disliked_items
   end
 
+  def current_week_favorites
+    add_breadcrumb "Favoritos adicionados última semana", :favorites_legislatives_path
+    @followed_legislatives = current_user.user_followed_legislatives.followed
+  end
+
   def trash
     add_breadcrumb "Papelera", :trash_legislatives_path
     @legislatives = []
@@ -124,6 +129,9 @@ class LegislativesController < ApplicationController
   def follow
     @legislative = get_legislative params[:id]
     current_user.follow @legislative
+
+    track_follow(current_user, @legislative)
+
     if @legislative.legislatives.present?
       @legislative.legislatives.each do |l|
         current_user.follow l
@@ -135,6 +143,9 @@ class LegislativesController < ApplicationController
   def unfollow
     @legislative = get_legislative params[:id]
     current_user.stop_following @legislative
+
+    track_unfollow(current_user, @legislative)
+
     if @legislative.legislatives.present?
       @legislative.legislatives.each do |l|
         current_user.stop_following l
@@ -545,5 +556,19 @@ class LegislativesController < ApplicationController
 
   def get_institutions
     @institutions = Institution.active.includes(:sector).all
+  end
+
+  def track_follow(user, legislative)
+    currently_followed = UserFollowedLegislative.where(user: user, legislative: legislative).last
+    unless currently_followed.present?
+      UserFollowedLegislative.create(user: user, legislative: legislative, followed: true, unfollowed: false, follow_date: Time.now)
+    end
+  end
+
+  def track_unfollow(user, legislative)
+    currently_unfollowed = UserFollowedLegislative.where(user: user, legislative: legislative).last
+    unless currently_unfollowed.present?
+      UserFollowedLegislative.create(user: user, legislative: legislative, followed: false, unfollowed: true, unfollow_date: Time.now)
+    end
   end
 end

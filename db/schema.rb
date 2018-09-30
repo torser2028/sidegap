@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180929171909) do
+ActiveRecord::Schema.define(version: 20180930174545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -507,6 +507,20 @@ ActiveRecord::Schema.define(version: 20180929171909) do
     t.boolean  "council",     default: false
   end
 
+  create_table "user_followed_legislatives", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "legislative_id"
+    t.datetime "follow_date"
+    t.datetime "unfollow_date"
+    t.boolean  "followed",       default: false
+    t.boolean  "unfollowed",     default: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
+
+  add_index "user_followed_legislatives", ["legislative_id"], name: "index_user_followed_legislatives_on_legislative_id", using: :btree
+  add_index "user_followed_legislatives", ["user_id"], name: "index_user_followed_legislatives_on_user_id", using: :btree
+
   create_table "user_notifications", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "institution_id"
@@ -601,6 +615,8 @@ ActiveRecord::Schema.define(version: 20180929171909) do
   add_foreign_key "rules", "institutions"
   add_foreign_key "stakeholders_periods", "periods"
   add_foreign_key "stakeholders_periods", "stakeholders"
+  add_foreign_key "user_followed_legislatives", "legislatives"
+  add_foreign_key "user_followed_legislatives", "users"
   add_foreign_key "user_notifications", "institutions"
   add_foreign_key "user_notifications", "institutions"
   add_foreign_key "user_notifications", "users"

@@ -1,0 +1,74 @@
+.panels-view
+  .row
+    .small-12.columns
+      %h2
+        = fa_icon "star"
+        Favoritos agregados la semana actual
+      .tray.projects
+        %table
+          %colgroup
+            %col
+            %col
+            %col
+            %col{width: "15%"}
+            %col{width: "10%"}
+            %col{width: "120"}
+          %thead
+            %tr
+              %th
+                Num Cámara
+              %th
+                Num Senado
+              %th
+                Título
+              %th
+                Estado
+              %th
+                Tipo de Ley
+              %th
+                Impacto
+              %th
+                Fecha de favorito
+              %th
+                Opciones
+          %tbody
+            - @followed_legislatives.each do |f_legislative|
+              %tr
+                %td.num
+                  = f_legislative.legislative.chamber_number
+                %td.num
+                  = f_legislative.legislative.senate_number
+                %td.desc
+                  %p
+                    = simple_format f_legislative.legislative.title
+                  - if f_legislative.legislative.warning
+                    %span.round.label.linear.urgent
+                      = fa_icon "exclamation-circle"
+                      Mensaje de urgencia
+                  - if f_legislative.legislative
+                    %span.round.label.linear.urgent
+                      = fa_icon "exclamation-circle"
+                      Proyecto acumulado
+                %td.desc
+                  - if %w(Archivado Retirado).include? f_legislative.legislative.final_status
+                    = "Este proyecto fue #{f_legislative.legislative.final_status} en #{f_legislative.legislative.status}"
+                  - elsif %w(Sancionado).include? f_legislative.legislative.final_status
+                    = "Este proyecto fue #{f_legislative.legislative.final_status}"
+                  - else
+                    = f_legislative.legislative.status
+                %td
+                  = f_legislative.legislative.type_law
+                %td
+                  - if @favorite
+                    = f_legislative.legislative.comments.where(user_id: current_user.id).try(:first).try(:impact)
+                %td
+                  = f_legislative.follow_date.strftime('%d/%m/%Y')
+                %td.actions
+                  %a.more{href: legislative_path(f_legislative.legislative)}
+                    = fa_icon "arrow-circle-right"
+                    %span
+                      Ver
+                  %a.follow{href: unfollow_legislative_path(f_legislative.legislative)}
+                    = fa_icon "eye-slash"
+                    %span
+                      Dejar de Seguir

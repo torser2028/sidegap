@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :user_notifications, dependent: :destroy
   has_many :roles, through: :assignments
   has_many :notices
+  has_many :user_followed_legislatives, dependent: :destroy
 
   scope :clients, -> { includes(:roles).where(roles: { name: 'client' }) }
   scope :active, -> { where(active: true) }

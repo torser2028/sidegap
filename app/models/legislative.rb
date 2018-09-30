@@ -11,6 +11,7 @@ class Legislative < ActiveRecord::Base
   has_many :legislatives, dependent: :destroy
   has_many :legislative_statuses, dependent: :destroy
   has_many :legislative_attachment_changes, dependent: :destroy
+  has_many :user_followed_legislatives, dependent: :destroy
   belongs_to :legislative
 
   accepts_nested_attributes_for :attachments, :legislative_stakeholders, :agendas, :legislatives, allow_destroy: true
