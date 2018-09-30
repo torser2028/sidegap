@@ -42,10 +42,8 @@ class LegislativesController < ApplicationController
 
   def show_changes
     add_breadcrumb "Cambios en proyecto", :favorites_legislatives_path
-    # q = current_user.following_legislatives.includes(:legislative, :comments).ransack params[:q]
-    # legislatives_ids = (q.result.to_a - current_user.find_disliked_items).map(&:id)
-
-    legislatives_ids = Legislative.all.map(&:id)
+    q = current_user.following_legislatives.includes(:legislative, :comments).ransack params[:q]
+    legislatives_ids = (q.result.to_a - current_user.find_disliked_items).map(&:id)
 
     start_date = Date.today.beginning_of_week.beginning_of_day
     end_date = Date.today.end_of_week.end_of_day
