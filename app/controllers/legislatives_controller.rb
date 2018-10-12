@@ -51,7 +51,7 @@ class LegislativesController < ApplicationController
     legislatives_ids = (q.result.to_a - current_user.find_disliked_items).map(&:id)
 
     start_date = Date.today.beginning_of_week.beginning_of_day
-    end_date = Date.today.end_of_week.end_of_day
+    end_date = Date.today.end_of_week.end_of_day + 12.hours
 
     @change_by_status = LegislativeStatus.where(legislative_id: legislatives_ids, date: start_date..end_date)
 
