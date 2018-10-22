@@ -50,8 +50,8 @@ class LegislativesController < ApplicationController
     q = current_user.following_legislatives.includes(:legislative, :comments).ransack params[:q]
     legislatives_ids = (q.result.to_a - current_user.find_disliked_items).map(&:id)
 
-    start_date = Date.today.beginning_of_week.beginning_of_day
-    end_date = Date.today.end_of_week.end_of_day + 12.hours
+    start_date = Time.now.in_time_zone('Bogota').beginning_of_week.beginning_of_day
+    end_date = Time.now.in_time_zone('Bogota').end_of_week.end_of_day + 13.hours
 
     @change_by_status = LegislativeStatus.where(legislative_id: legislatives_ids, date: start_date..end_date)
 
