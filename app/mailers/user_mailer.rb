@@ -31,10 +31,13 @@ class UserMailer < ApplicationMailer
     company = Company.find(recipient.company_id)
     @bcc = send_mail_user_company(to, company)
 
-    mail_log = MailLog.new(email: recipient.email, subject: 'Nueva norma en proceso de consulta', options: {institution: @institution, rule: @rule.title, name: @name, company_emails: @bcc})
-    mail_log.save!
-
-    mail(to: to, subject: 'Nueva norma en proceso de consulta', bcc: @bcc)
+    if mail(to: to, subject: 'Nueva norma en proceso de consulta', bcc: @bcc)
+      mail_log = MailLog.new(email: recipient.email, subject: 'Nueva norma en proceso de consulta', options: {institution: @institution, rule: @rule.title, name: @name, company_emails: @bcc})
+      mail_log.save!
+    else
+      mail_log = MailLog.new(email: recipient.email, subject: "Ha ocurrido un error enviando los correos de 'Nueva norma en proceso de consulta'", options: {institution: @institution, rule: @rule.title, name: @name, company_emails: @bcc})
+      mail_log.save!
+    end
   end
 
   def self.set_recipients_project_notification(project, change_type)
