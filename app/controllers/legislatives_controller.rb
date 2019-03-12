@@ -465,8 +465,8 @@ class LegislativesController < ApplicationController
       client_user = User.find(params[:client])
       legislatives = legislatives.where(id: client_user.following_legislatives.all.ids)
       type = 'client_' + client_user.name.parameterize.underscore
-    # elsif params[:client] === 'false' && current_user.has_role?(:admin)
-    #   type = 'admin_general'
+    elsif params[:client] === 'false' && current_user.has_role?(:admin)
+      type = 'admin_general'
     else
       legislatives = legislatives.where(id: current_user.following_legislatives.all.ids)
       type = 'client_' + current_user.name.parameterize.underscore
