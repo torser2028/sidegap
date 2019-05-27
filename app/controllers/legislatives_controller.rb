@@ -359,15 +359,14 @@ class LegislativesController < ApplicationController
 
     @authors = {}
     legislatives.each do |legislative|
-
       legislative.stakeholders.authors.each do |author|
-
         probability, impact = legislative.probability, legislative.comments.where(user: user).average(:impact).to_i
-        if impact
-          risk = risk_table[[probability, impact]].to_i
-        else
-          risk = 0
-        end
+        risk = impact ? risk_table[[probability, impact]].to_i : 0
+        # if impact
+        #   risk = risk_table[[probability, impact]].to_i
+        # else
+        #   risk = 0
+        # end
 
         if @authors.keys.include? (author.name)
           @authors[author.name] = {
@@ -382,9 +381,7 @@ class LegislativesController < ApplicationController
             risk_count: 1
           }
         end
-
       end
-
     end
 
     @authors.each do |key, author|
@@ -400,17 +397,16 @@ class LegislativesController < ApplicationController
 
     @speakers = {}
     legislatives.as_speaker.each do |legislative|
-
       legislative.stakeholders.speakers.each do |speaker|
-
         risk_list = []
 
         probability, impact = legislative.probability, legislative.comments.where(user: user).average(:impact).to_i
-        if impact
-          risk = risk_table[[probability, impact]].to_i
-        else
-          risk = 0
-        end
+        risk = impact ? risk_table[[probability, impact]].to_i : 0
+        # if impact
+        #   risk = risk_table[[probability, impact]].to_i
+        # else
+        #   risk = 0
+        # end
 
         if @speakers.keys.include? (speaker.name)
           @speakers[speaker.name] = {
@@ -425,9 +421,7 @@ class LegislativesController < ApplicationController
             risk_count: 1
           }
         end
-
       end
-
     end
 
     @speakers.each do |key, speaker|
@@ -457,9 +451,7 @@ class LegislativesController < ApplicationController
 
     @legislatives = []
 
-    legislatives = Legislative.joins(:stakeholders)
-                     .select('legislatives.*')
-                     .group('legislatives.id')
+    legislatives = Legislative.joins(:stakeholders).select('legislatives.*').group('legislatives.id')
 
     if /\A\d+\z/.match(params[:client]) && current_user.has_role?(:admin)
       client_user = User.find(params[:client])
@@ -468,7 +460,7 @@ class LegislativesController < ApplicationController
     elsif params[:client] === 'false' && current_user.has_role?(:admin)
       type = 'admin_general'
     else
-      legislatives = legislatives.where(id: current_user.following_legislatives.all.ids)
+      legislatives = legislatives.where(id: current_user.following_legislatives.all.ids).where.not('legislatives.status': 'Aprobado').where.not('legislatives.final_status': 'Archivado')
       type = 'client_' + current_user.name.parameterize.underscore
     end
 
