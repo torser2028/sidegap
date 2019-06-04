@@ -163,12 +163,32 @@ h1.report-title {
     width: 16%;
     overflow: hidden;
   }
+  .w25 { 
+    width: 25%;
+    overflow: hidden;
+  }
   .w40 { 
     width: 33%;
     overflow: hidden;
   }
+  .w45 { 
+    width: 45%;
+    overflow: hidden;
+  }
+  .w55 { 
+    width: 55%;
+    overflow: hidden;
+  }
   .w60 { 
     width: 50%;
+    overflow: hidden;
+  }
+  .w75 { 
+    width: 75%;
+    overflow: hidden;
+  }
+  .w100 { 
+    width: 100%;
     overflow: hidden;
   }
 }

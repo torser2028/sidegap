@@ -161,7 +161,7 @@
 
       %h3 Riesgo Regulatorio
       .row
-        .small-4.columns
+        .small-6.columns
           %table.table-report
             %colgroup
               %col
@@ -182,7 +182,7 @@
                   %td= count
         .small-2.columns
           = wicked_pdf_image_tag 'risk.png'
-        .small-6.columns
+        .small-12.columns
           #legislative_by_risk
             = column_chart @legislatives_by_risk
 
