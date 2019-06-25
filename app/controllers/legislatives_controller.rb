@@ -283,7 +283,7 @@ class LegislativesController < ApplicationController
     @summary_week = Notice.actual.where(user_id: user.id)
 
     # Events
-    @today = Date.today - 1.week
+    @today = Date.today
     @last_week = @today - 1.week
     @next_week = @today + 1.week
 
