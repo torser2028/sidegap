@@ -451,7 +451,7 @@ class LegislativesController < ApplicationController
 
     @legislatives = []
 
-    legislatives = Legislative.joins(:stakeholders).select('legislatives.*').group('legislatives.id')
+    legislatives = Legislative.joins(:stakeholders, :agendas).select('legislatives.*').group('legislatives.id')
 
     if /\A\d+\z/.match(params[:client]) && current_user.has_role?(:admin)
       client_user = User.find(params[:client])
@@ -501,7 +501,21 @@ class LegislativesController < ApplicationController
       observation = comments.first
       observation = observation ? observation.body : ''
 
+      date = Date.today
+      start_date = date.beginning_of_day
+      # start_date = date.beginning_of_week.beginning_of_day
+      end_date = date.end_of_week.end_of_day
+      legislative_agendas = legislative.agendas.where(event_at: start_date..end_date).all
+
+      event_at = legislative_agendas.present? ? legislative_agendas.first.event_at.strftime('%d/%m/%Y') : ''
+      event_hour = legislative_agendas.present? ? legislative_agendas.first.time.strftime('%H:%M %p') : ''
+      plenary_commission = legislative_agendas.present? ? legislative_agendas.first.plenary_commission : ''
+      day_order = legislative_agendas.present? ? legislative_agendas.first.body : ''
+
+      # event_at = legislative_agendas.present? ? legislative_agendas.each_with_index.map {|e, i| "#{i+1}. #{e.event_at.strftime('%d/%m/%Y')}"} : ''
+
       @legislatives << {
+        id: legislative.id,
         topic: legislative.topic,
         source: legislative.source,
         chamber_number: legislative.chamber_number,
@@ -523,12 +537,15 @@ class LegislativesController < ApplicationController
         chamber_settlement_at: legislative.chamber_settlement_at ? legislative.chamber_settlement_at.strftime('%d/%m/%Y') : '',
         senate_settlement_at: legislative.senate_settlement_at ? legislative.senate_settlement_at.strftime('%d/%m/%Y') : '',
         status: (legislative.final_status && legislative.final_status != '') ? legislative.final_status : legislative.status,
+        event_at: event_at,
+        event_hour: event_hour,
+        plenary_commission: plenary_commission,
+        day_order: day_order,
         impact: impact_avg,
         probability: probability,
         risk: risk,
         observations: observation
       }
-      
     end
 
     respond_to do |format|
