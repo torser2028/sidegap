@@ -451,7 +451,7 @@ class LegislativesController < ApplicationController
 
     @legislatives = []
 
-    legislatives = Legislative.joins(:stakeholders, :agendas).select('legislatives.*').group('legislatives.id')
+    legislatives = Legislative.joins(:stakeholders).select('legislatives.*').group('legislatives.id')
 
     if /\A\d+\z/.match(params[:client]) && current_user.has_role?(:admin)
       client_user = User.find(params[:client])
