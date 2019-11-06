@@ -452,7 +452,7 @@ class LegislativesController < ApplicationController
     @legislatives = []
 
     legislatives = Legislative.joins(:stakeholders).select('legislatives.*').group('legislatives.id')
-    legislatives_with_agendas = Legislative.includes(:agendas)
+    # legislatives_with_agendas = Legislative.includes(:agendas)
 
     if /\A\d+\z/.match(params[:client]) && current_user.has_role?(:admin)
       client_user = User.find(params[:client])
@@ -503,23 +503,23 @@ class LegislativesController < ApplicationController
       observation = observation ? observation.body : ''
 
       # Aggendas Stuff
-      date = Date.today
-      start_date = date.beginning_of_day
-      end_date = date.end_of_week.end_of_day
-      lwa = legislatives_with_agendas.find { |l| l.id == legislative.id && l.agendas.size > 0 }
-      event_at = ''
-      event_hour = ''
-      plenary_commission = ''
-      day_order = ''
-      if lwa
-        agenda = lwa.agendas.find { |agenda| agenda.event_at <= end_date && agenda.event_at >= start_date }.try(:first)
-        if agenda
-          event_at = agenda.event_at
-          event_hour = agenda.event_hour
-          plenary_commission = agenda.plenary_commission
-          day_order = agenda.day_order
-        end
-      end
+      # date = Date.today
+      # start_date = date.beginning_of_day
+      # end_date = date.end_of_week.end_of_day
+      # lwa = legislatives_with_agendas.find { |l| l.id == legislative.id && l.agendas.size > 0 }
+      # event_at = ''
+      # event_hour = ''
+      # plenary_commission = ''
+      # day_order = ''
+      # if lwa
+      #   agenda = lwa.agendas.find { |agenda| agenda.event_at <= end_date && agenda.event_at >= start_date }.try(:first)
+      #   if agenda
+      #     event_at = agenda.event_at
+      #     event_hour = agenda.event_hour
+      #     plenary_commission = agenda.plenary_commission
+      #     day_order = agenda.day_order
+      #   end
+      # end
       # End
 
       @legislatives << {
@@ -545,10 +545,10 @@ class LegislativesController < ApplicationController
         chamber_settlement_at: legislative.chamber_settlement_at ? legislative.chamber_settlement_at.strftime('%d/%m/%Y') : '',
         senate_settlement_at: legislative.senate_settlement_at ? legislative.senate_settlement_at.strftime('%d/%m/%Y') : '',
         status: (legislative.final_status && legislative.final_status != '') ? legislative.final_status : legislative.status,
-        event_at: event_at,
-        event_hour: event_hour,
-        plenary_commission: plenary_commission,
-        day_order: day_order,
+        # event_at: event_at,
+        # event_hour: event_hour,
+        # plenary_commission: plenary_commission,
+        # day_order: day_order,
         impact: impact_avg,
         probability: probability,
         risk: risk,
