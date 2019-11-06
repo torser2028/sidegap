@@ -64,6 +64,7 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
         legislative[:chamber_commission_at], legislative[:chamber_plenary_at], legislative[:senate_commission_at], legislative[:senate_plenary_at],
         legislative[:second_chamber_commission_at], legislative[:second_chamber_plenary_at], legislative[:second_senate_commission_at], legislative[:second_senate_plenary_at],
         legislative[:chamber_settlement_at], legislative[:senate_settlement_at], '', '', '',
+        legislative[:event_at], legislative[:event_hour], legislative[:plenary_commission], legislative[:day_order],
         legislative[:status],
         legislative[:impact], legislative[:probability], legislative[:risk], legislative[:observations]
       ], style: normal_cell, height: 50
