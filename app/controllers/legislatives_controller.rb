@@ -452,7 +452,6 @@ class LegislativesController < ApplicationController
     @legislatives = []
 
     legislatives = Legislative.joins(:stakeholders).select('legislatives.*').group('legislatives.id')
-    legislatives_with_agendas = Legislative.includes(:agendas)
 
     if /\A\d+\z/.match(params[:client]) && current_user.has_role?(:admin)
       client_user = User.find(params[:client])
@@ -472,9 +471,9 @@ class LegislativesController < ApplicationController
     stakeholders_speakers = legislatives.select('array_agg(stakeholders.name) as speaker_name').where(legislative_stakeholders: {speaker: true}).to_a
 
     # Build response
-    n = 0
+    legislatives_with_agendas = Legislative.includes(:agendas).where(id: legislatives.map(&:id)).all
+
     legislatives.each do |legislative|
-      puts "iteracion No: #{n+=1}"
       comments = legislatives_comments.select{ |c| c.legislative_id == legislative.id }
       impacts = comments.collect{ |c| c.impact }
 
@@ -513,9 +512,9 @@ class LegislativesController < ApplicationController
       event_hour = ''
       plenary_commission = ''
       day_order = ''
-      if lwa
+      if lwa.present?
         agenda = lwa.agendas.find { |a| a.event_at <= end_date && a.event_at >= start_date }
-        if agenda
+        if agenda.present?
           event_at = agenda.event_at.strftime('%d/%m/%Y')
           event_hour = agenda.time.strftime('%H:%M %p')
           plenary_commission = agenda.plenary_commission
