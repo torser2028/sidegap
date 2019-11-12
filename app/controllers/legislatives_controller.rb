@@ -471,7 +471,7 @@ class LegislativesController < ApplicationController
     stakeholders_speakers = legislatives.select('array_agg(stakeholders.name) as speaker_name').where(legislative_stakeholders: {speaker: true}).to_a
 
     # Build response
-    legislatives_with_agendas = Legislative.includes(:agendas).where(id: legislatives.map(&:id)).all
+    # legislatives_with_agendas = Legislative.includes(:agendas).where(id: legislatives.map(&:id)).all
 
     legislatives.each do |legislative|
       comments = legislatives_comments.select{ |c| c.legislative_id == legislative.id }
@@ -504,23 +504,23 @@ class LegislativesController < ApplicationController
       observation = observation ? observation.body : ''
 
       # Aggendas Stuff
-      date = Date.today
-      start_date = date.beginning_of_day
-      end_date = date.end_of_week.end_of_day
-      lwa = legislatives_with_agendas.find { |l| l.id == legislative.id && l.agendas.size > 0 }
-      event_at = ''
-      event_hour = ''
-      plenary_commission = ''
-      day_order = ''
-      if lwa.present?
-        agenda = lwa.agendas.find { |a| a.event_at <= end_date && a.event_at >= start_date }
-        if agenda.present?
-          event_at = agenda.event_at.strftime('%d/%m/%Y')
-          event_hour = agenda.time.strftime('%H:%M %p')
-          plenary_commission = agenda.plenary_commission
-          day_order = agenda.body
-        end
-      end
+      # date = Date.today
+      # start_date = date.beginning_of_day
+      # end_date = date.end_of_week.end_of_day
+      # lwa = legislatives_with_agendas.find { |l| l.id == legislative.id && l.agendas.size > 0 }
+      # event_at = ''
+      # event_hour = ''
+      # plenary_commission = ''
+      # day_order = ''
+      # if lwa.present?
+      #   agenda = lwa.agendas.find { |a| a.event_at <= end_date && a.event_at >= start_date }
+      #   if agenda.present?
+      #     event_at = agenda.event_at.strftime('%d/%m/%Y')
+      #     event_hour = agenda.time.strftime('%H:%M %p')
+      #     plenary_commission = agenda.plenary_commission
+      #     day_order = agenda.body
+      #   end
+      # end
       # End
 
       @legislatives << {
@@ -546,10 +546,10 @@ class LegislativesController < ApplicationController
         chamber_settlement_at: legislative.chamber_settlement_at ? legislative.chamber_settlement_at.strftime('%d/%m/%Y') : '',
         senate_settlement_at: legislative.senate_settlement_at ? legislative.senate_settlement_at.strftime('%d/%m/%Y') : '',
         status: (legislative.final_status && legislative.final_status != '') ? legislative.final_status : legislative.status,
-        event_at: event_at,
-        event_hour: event_hour,
-        plenary_commission: plenary_commission,
-        day_order: day_order,
+        # event_at: event_at,
+        # event_hour: event_hour,
+        # plenary_commission: plenary_commission,
+        # day_order: day_order,
         impact: impact_avg,
         probability: probability,
         risk: risk,
