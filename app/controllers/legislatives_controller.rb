@@ -453,15 +453,22 @@ class LegislativesController < ApplicationController
 
     legislatives = Legislative.joins(:stakeholders).select('legislatives.*').group('legislatives.id')
 
+    @q = Agenda.includes(:legislative).ransack params[:q]
+    agendas = []
+
+    legislatives_with_agendas = nil
     if /\A\d+\z/.match(params[:client]) && current_user.has_role?(:admin)
       client_user = User.find(params[:client])
       legislatives = legislatives.where(id: client_user.following_legislatives.all.ids)
       type = 'client_' + client_user.name.parameterize.underscore
+      legislatives_with_agendas = client_user.following_legislatives.with_agenda.order(created_at: :desc)
     elsif params[:client] === 'false' && current_user.has_role?(:admin)
       type = 'admin_general'
+      legislatives_with_agendas = current_user.following_legislatives.with_agenda.order(created_at: :desc)
     else
       legislatives = legislatives.where(id: current_user.following_legislatives.all.ids).where.not('legislatives.status': 'Aprobado').where.not('legislatives.final_status': 'Archivado')
       type = 'client_' + current_user.name.parameterize.underscore
+      legislatives_with_agendas = current_user.following_legislatives.with_agenda.order(created_at: :desc)
     end
 
     # Get all comments/stakeholders eagle for better database performance
@@ -470,9 +477,13 @@ class LegislativesController < ApplicationController
     stakeholders_authors = legislatives.select('array_agg(stakeholders.name) as author_name').where(legislative_stakeholders: {author: true}).to_a
     stakeholders_speakers = legislatives.select('array_agg(stakeholders.name) as speaker_name').where(legislative_stakeholders: {speaker: true}).to_a
 
-    # Build response
-    # legislatives_with_agendas = Legislative.includes(:agendas).where(id: legislatives.map(&:id)).all
+    @q.result.each do |item|
+      legislatives_with_agendas.each do |legislative|
+        agendas << item if legislative.agendas.include? item
+      end
+    end
 
+    # Build response
     legislatives.each do |legislative|
       comments = legislatives_comments.select{ |c| c.legislative_id == legislative.id }
       impacts = comments.collect{ |c| c.impact }
@@ -504,23 +515,17 @@ class LegislativesController < ApplicationController
       observation = observation ? observation.body : ''
 
       # Aggendas Stuff
-      # date = Date.today
-      # start_date = date.beginning_of_day
-      # end_date = date.end_of_week.end_of_day
-      # lwa = legislatives_with_agendas.find { |l| l.id == legislative.id && l.agendas.size > 0 }
-      # event_at = ''
-      # event_hour = ''
-      # plenary_commission = ''
-      # day_order = ''
-      # if lwa.present?
-      #   agenda = lwa.agendas.find { |a| a.event_at <= end_date && a.event_at >= start_date }
-      #   if agenda.present?
-      #     event_at = agenda.event_at.strftime('%d/%m/%Y')
-      #     event_hour = agenda.time.strftime('%H:%M %p')
-      #     plenary_commission = agenda.plenary_commission
-      #     day_order = agenda.body
-      #   end
-      # end
+      legislative_agenda = agendas.find { |agenda| agenda.legislative_id == legislative.id }
+      event_at = ''
+      event_hour = ''
+      plenary_commission = ''
+      day_order = ''
+      if legislative_agenda.present?
+        event_at = legislative_agenda.event_at.strftime('%d/%m/%Y')
+        event_hour = legislative_agenda.time.strftime('%H:%M %p')
+        plenary_commission = legislative_agenda.plenary_commission
+        day_order = legislative_agenda.body
+      end
       # End
 
       @legislatives << {
@@ -546,10 +551,10 @@ class LegislativesController < ApplicationController
         chamber_settlement_at: legislative.chamber_settlement_at ? legislative.chamber_settlement_at.strftime('%d/%m/%Y') : '',
         senate_settlement_at: legislative.senate_settlement_at ? legislative.senate_settlement_at.strftime('%d/%m/%Y') : '',
         status: (legislative.final_status && legislative.final_status != '') ? legislative.final_status : legislative.status,
-        # event_at: event_at,
-        # event_hour: event_hour,
-        # plenary_commission: plenary_commission,
-        # day_order: day_order,
+        event_at: event_at,
+        event_hour: event_hour,
+        plenary_commission: plenary_commission,
+        day_order: day_order,
         impact: impact_avg,
         probability: probability,
         risk: risk,
