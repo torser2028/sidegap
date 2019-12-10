@@ -67,6 +67,8 @@ GEM
     acts_as_follower (0.2.1)
     acts_as_votable (0.10.0)
     addressable (2.3.8)
+    airbrussh (1.4.0)
+      sshkit (>= 1.6.1, != 1.7.0)
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.0)
@@ -103,6 +105,25 @@ GEM
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
       slop (~> 3.6)
+    capistrano (3.11.2)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.6.0)
+      capistrano (~> 3.1)
+    capistrano-rails (1.4.0)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+    capistrano-ssh-doctor (1.0.0)
+      capistrano (>= 3.1)
+    capistrano3-puma (3.1.1)
+      capistrano (~> 3.7)
+      capistrano-bundler
+      puma (~> 3.4)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
@@ -333,6 +354,9 @@ GEM
     mini_portile (0.6.2)
     minitest (5.5.1)
     multi_json (1.11.0)
+    net-scp (2.0.0)
+      net-ssh (>= 2.6.5, < 6.0.0)
+    net-ssh (4.2.0)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
@@ -349,7 +373,7 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.3)
       pry (>= 0.9.10)
-    puma (2.15.3)
+    puma (3.12.2)
     rack (1.6.0)
     rack-canonical-host (0.2.2)
       addressable (> 0, < 3)
@@ -444,6 +468,9 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sshkit (1.20.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
@@ -482,6 +509,12 @@ DEPENDENCIES
   breadcrumbs_on_rails
   bullet
   byebug
+  capistrano
+  capistrano-bundler
+  capistrano-rails
+  capistrano-rvm
+  capistrano-ssh-doctor
+  capistrano3-puma (~> 3.0, >= 3.0.2)
   carrierwave
   carrierwave_direct!
   chartkick
@@ -497,9 +530,10 @@ DEPENDENCIES
   jquery-rails
   letter_opener
   mini_magick
-  pg (= 0.18.1)
+  net-ssh (~> 4.2)
+  pg (~> 0.18.1)
   pry-rails
-  puma
+  puma (~> 3.4)
   rack-canonical-host (= 0.2.2)
   rack-timeout (= 0.4.2)
   rails (= 4.2.0)
@@ -523,4 +557,4 @@ RUBY VERSION
    ruby 2.2.0p0
 
 BUNDLED WITH
-   1.16.1
+   1.17.1

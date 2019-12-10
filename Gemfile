@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.2.0'
 
 gem 'rails', '4.2.0'
-gem 'pg', '0.18.1'
+gem 'pg', '~> 0.18.1'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -16,7 +16,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary-edge', '~> 0.12.3.0'
 gem 'chartkick'
-gem 'puma'
+gem 'puma', '~> 3.4'
 gem 'rubocop'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -76,3 +76,14 @@ gem 'spreadsheet'
 
 # Geocoder
 gem 'geocoder'
+
+gem 'net-ssh', '~> 4.2'
+
+group :development do
+  gem 'capistrano',         require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma', '~> 3.0', '>= 3.0.2', require: false
+  gem 'capistrano-ssh-doctor'
+end
