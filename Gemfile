@@ -16,7 +16,7 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary-edge', '~> 0.12.3.0'
 gem 'chartkick'
-gem 'puma', '~> 3.4'
+# gem 'puma', '~> 3.4'
 gem 'rubocop'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -39,7 +39,7 @@ gem 'carrierwave_direct', :git => "git://github.com/dwilkie/carrierwave_direct.g
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use Unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
