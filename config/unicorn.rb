@@ -1,15 +1,24 @@
+# Define your root directory
 root = "/home/Administrador/apps/SIDEGAP/current"
+
+# Define worker directory for Unicorn
 working_directory root
+
+# Location of PID file
 pid "#{root}/tmp/pids/unicorn.pid"
+
+# Define Log paths
 stderr_path "#{root}/log/unicorn.log"
 stdout_path "#{root}/log/unicorn.log"
 
-listen "/tmp/unicorn.SIDEGAP.sock"
-worker_processes 2
-timeout 30
+# Listen on a UNIX data socket
+listen "/tmp/unicorn.gifroll.sock"
 
-# Force the bundler gemfile environment variable to
-# reference the capistrano "current" symlink
-before_exec do |_|
-  ENV["BUNDLE_GEMFILE"] = File.join(root, 'Gemfile')
-end
+# 16 worker processes for production environment
+worker_processes 16
+
+# Load rails before forking workers for better worker spawn time
+preload_app true
+
+# Restart workes hangin' out for more than 240 secs
+timeout 240
