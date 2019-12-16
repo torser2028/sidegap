@@ -172,7 +172,7 @@ GEM
       warden (~> 1.2.3)
     erubi (1.6.1)
     erubis (2.7.0)
-    excon (0.45.4)
+    excon (0.71.0)
     execjs (2.4.0)
     faker (1.4.3)
       i18n (~> 0.5)
