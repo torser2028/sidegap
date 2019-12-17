@@ -38,19 +38,16 @@ gem 'carrierwave_direct', :git => "git://github.com/dwilkie/carrierwave_direct.g
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-# Use Unicorn as the app server
-# gem 'unicorn'
-
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
   gem 'faker'
-  gem 'pry-rails'
   gem 'letter_opener'
+  gem 'pry-rails'
+  gem 'spring'
+  gem 'web-console', '~> 2.0'
   # gem 'sqlite3'
   gem 'better_errors'
   # this gem provides n+1 queries information
@@ -63,8 +60,8 @@ group :production do
   gem 'rails_12factor', group: :production
 end
 
-gem 'rack-timeout', '0.4.2'
 gem 'rack-canonical-host', '0.2.2'
+gem 'rack-timeout', '0.4.2'
 
 # Monitor the app
 gem 'scout_apm'
@@ -81,9 +78,9 @@ gem 'net-ssh', '~> 4.2'
 
 group :development do
   gem 'capistrano',         require: false
-  gem 'capistrano-rvm',     require: false
-  gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
-  gem 'capistrano3-puma', '~> 3.0', '>= 3.0.2', require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-rvm',     require: false
   gem 'capistrano-ssh-doctor'
+  gem 'capistrano3-puma', '~> 3.0', '>= 3.0.2', require: false
 end
