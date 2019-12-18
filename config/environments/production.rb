@@ -90,7 +90,7 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     address: 'smtp.office365.com',
-    port: '465',
+    port: '587',
     authentication: :login,
     user_name: ENV['MAILER_USERNAME'],
     password: ENV['MAILER_PASSWORD'],

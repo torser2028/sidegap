@@ -14,9 +14,7 @@ class UserMailer < ApplicationMailer
         institution_id = rule.institution.id
         recipients = []
         recipients = UserNotification.includes(:user, :institution).where(institution_id: institution_id).map(&:user).to_a
-        logger.debug "Recipients: #{recipients.map(&:email)}"
         recipients.each do |recipient|
-          logger.debug "================ Entra por el each ======================"
           new_rule(recipient, institution, rule).deliver_now
         end
       end
@@ -32,15 +30,6 @@ class UserMailer < ApplicationMailer
 
     company = Company.find(recipient.company_id)
     @bcc = send_mail_user_company(to, company)
-
-    logger.debug "Rule name: #{@rule.title}"
-    logger.debug "Intitution name: #{@institution.name}"
-    logger.debug "@name: #{@name}"
-    logger.debug "Recipient Name: #{recipient.name}"
-    logger.debug "Recipient Name with brackets: #{recipient[:name]}"
-    logger.debug "to: #{to}"
-    logger.debug "Recipient Email: #{recipient.email}"
-    logger.debug "Recipient Email with brackets: #{recipient[:email]}"
 
     if mail(to: to, subject: 'Nueva norma en proceso de consulta', bcc: @bcc)
       mail_log = MailLog.new(email: recipient.email, subject: 'Nueva norma en proceso de consulta', options: {institution: @institution, rule: @rule.title, name: @name, company_emails: @bcc})
