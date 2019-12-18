@@ -46,7 +46,17 @@ Rails.application.configure do
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
-  config.log_level = :debug
+  # config.log_level = :debug
+
+  config.log_level = :info
+  # Basic log config, for calls to Rails.logger.<level> { <message> }
+  config.logger = Logger.new('log/production.log')
+  # Formats log entries into: LEVEL MESSAGE
+  # Heroku adds to this timestamp and worker/dyno id, so datetime can be stripped
+  config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
+
+  # Lograge config, overrides default instrumentation for logging ActionController and ActionView logging
+  config.lograge.enabled = true
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
