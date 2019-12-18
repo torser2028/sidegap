@@ -55,9 +55,6 @@ Rails.application.configure do
   # Heroku adds to this timestamp and worker/dyno id, so datetime can be stripped
   config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
 
-  # Lograge config, overrides default instrumentation for logging ActionController and ActionView logging
-  config.lograge.enabled = true
-
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
