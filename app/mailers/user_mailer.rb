@@ -33,7 +33,7 @@ class UserMailer < ApplicationMailer
     company = Company.find(recipient.company_id)
     @bcc = send_mail_user_company(to, company)
 
-    logger.debug "Rule name: #{@rule.name}"
+    logger.debug "Rule name: #{@rule.title}"
     logger.debug "Intitution name: #{@institution.name}"
     logger.debug "@name: #{@name}"
     logger.debug "Recipient Name: #{recipient.name}"
