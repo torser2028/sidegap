@@ -98,7 +98,6 @@ Rails.application.configure do
     password: ENV['MAILER_PASSWORD'],
     domain: 'app.sidegap.com',
     enable_starttls_auto: true,
-    ssl: true,
     tls: true
   }
 end
