@@ -97,7 +97,7 @@ Rails.application.configure do
     authentication: :login,
     user_name: ENV['MAILER_USERNAME'],
     password: ENV['MAILER_PASSWORD'],
-    # domain: 'http://13.77.86.187',
+    domain: '13.77.86.187',
     enable_starttls_auto: true
   }
 end
