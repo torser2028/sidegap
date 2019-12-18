@@ -14,4 +14,4 @@ on_worker_boot do
   ActiveRecord::Base.establish_connection
 end
 
-# bind "unix:///home/Administrador/apps/SIDEGAP/shared/tmp/sockets/SIDEGAP-puma.sock"
+bind "unix:///home/Administrador/apps/SIDEGAP/shared/tmp/sockets/SIDEGAP-puma.sock"
