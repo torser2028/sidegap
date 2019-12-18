@@ -60,7 +60,12 @@ class Legislative < ActiveRecord::Base
       elsif self.attachments.any? { |a| a.changed? }
         "Archivos Adjuntos"
       end
-      UserMailer.set_recipients_project_notification(self, change_type)
+      # UserMailer.set_recipients_project_notification(self, change_type)
+
+      self.followers.each do |recipient|
+        UserMailer.project_notification(recipient, self, change_type).deliver_now
+      end
+
       self.update_attribute(:notify, false)
     end
 

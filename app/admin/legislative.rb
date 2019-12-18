@@ -290,8 +290,11 @@ ActiveAdmin.register Legislative do
             list_senate_speakers << stakeholder_id
           end
         end
-        UserMailer.set_recipients_stakeholder_notification(
-          resource, list_authors, list_chamber_speakers, list_senate_speakers)
+
+        # UserMailer.set_recipients_stakeholder_notification(resource, list_authors, list_chamber_speakers, list_senate_speakers)
+        resource.followers.each do |recipient|
+          UserMailer.stakeholder_notification(recipient, resource, list_authors, list_chamber_speakers, list_senate_speakers).deliver_now
+        end
       end
 
       resource.legislative_stakeholders.destroy_all
