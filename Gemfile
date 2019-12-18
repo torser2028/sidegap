@@ -84,3 +84,5 @@ group :development do
   gem 'capistrano-ssh-doctor'
   gem 'capistrano3-puma', '~> 3.0', '>= 3.0.2', require: false
 end
+
+gem "figaro"
