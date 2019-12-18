@@ -48,7 +48,7 @@ Rails.application.configure do
   # when problems arise.
   # config.log_level = :debug
 
-  config.log_level = :info
+  config.log_level = :debug
   # Basic log config, for calls to Rails.logger.<level> { <message> }
   config.logger = Logger.new('log/production.log')
   # Formats log entries into: LEVEL MESSAGE
