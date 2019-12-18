@@ -91,12 +91,14 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.smtp_settings = {
-    :address        => 'smtp.office365.com',
-    :port           => '587',
-    :authentication => :login,
-    :user_name      => ENV['MAILER_USERNAME'],
-    :password       => ENV['MAILER_PASSWORD'],
-    :domain         => 'app.sidegap.com',
-    :enable_starttls_auto => true
+    address: 'smtp.office365.com',
+    port: '587',
+    authentication: :login,
+    user_name: ENV['MAILER_USERNAME'],
+    password: ENV['MAILER_PASSWORD'],
+    domain: 'app.sidegap.com',
+    enable_starttls_auto: true,
+    ssl: true,
+    tls: true
   }
 end

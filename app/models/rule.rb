@@ -16,6 +16,8 @@ class Rule < ActiveRecord::Base
   private
 
   def new_rule_notification
+    logger.debug "mailer username: #{ENV['MAILER_USERNAME']}"
+    logger.debug "mailer username: #{ENV['MAILER_PASSWORD']}"
     institution_id = institution.id
     recipients = UserNotification.includes(:user, :institution).where(institution_id: institution_id).map(&:user).to_a
     logger.debug "Recipients: #{recipients.map(&:email)}"
