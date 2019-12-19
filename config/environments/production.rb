@@ -94,7 +94,7 @@ Rails.application.configure do
     authentication: :login,
     user_name: ENV['MAILER_USERNAME'],
     password: ENV['MAILER_PASSWORD'],
-    domain: '13.77.86.187',
+    domain: 'app.sidegap.com',
     enable_starttls_auto: true
   }
 end
