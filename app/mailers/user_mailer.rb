@@ -11,11 +11,11 @@ class UserMailer < ApplicationMailer
     Thread.new do
       # send in backgound trhead
       mutex.synchronize do
-        institution_id = rule.institution.id
+        institution = rule.institution
         recipients = []
-        recipients = UserNotification.includes(:user, :institution).where(institution_id: institution_id).map(&:user).to_a
+        recipients = UserNotification.includes(:user, :institution).where(institution_id: institution.id).map(&:user).to_a
         recipients.each do |recipient|
-          new_rule(recipient, institution, rule).deliver_now
+          new_rule(recipient, institution.name, rule).deliver_now
         end
       end
       ActiveRecord::Base.connection.close

@@ -16,11 +16,11 @@ class Rule < ActiveRecord::Base
   private
 
   def new_rule_notification
-    institution_id = institution.id
-    recipients = UserNotification.includes(:user, :institution).where(institution_id: institution_id).map(&:user).to_a
-    recipients.each do |recipient|
-      UserMailer.new_rule(recipient, institution, self).deliver_now
-    end
-    # UserMailer.set_recipients_new_rule(self)
+    # institution_id = institution.id
+    # recipients = UserNotification.includes(:user, :institution).where(institution_id: institution_id).map(&:user).to_a
+    # recipients.each do |recipient|
+    #   UserMailer.new_rule(recipient, institution, self).deliver_now
+    # end
+    UserMailer.set_recipients_new_rule(self)
   end
 end
