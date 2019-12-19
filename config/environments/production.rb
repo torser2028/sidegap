@@ -84,9 +84,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
-  config.action_mailer.default_url_options = { host: 'app.sidegap.com' }
+  config.action_mailer.default_url_options = { host: '13.77.86.187' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.asset_host = 'http://app.sidegap.com'
+  config.action_mailer.asset_host = 'http://13.77.86.187'
 
   config.action_mailer.smtp_settings = {
     address: 'smtp.office365.com',
@@ -94,7 +94,7 @@ Rails.application.configure do
     authentication: :login,
     user_name: ENV['MAILER_USERNAME'],
     password: ENV['MAILER_PASSWORD'],
-    domain: 'app.sidegap.com',
+    domain: '13.77.86.187',
     enable_starttls_auto: true
   }
 end
