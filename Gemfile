@@ -16,7 +16,6 @@ gem 'acts_as_votable', '~> 0.10.0'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary-edge', '~> 0.12.3.0'
 gem 'chartkick'
-gem 'puma', '~> 3.4'
 gem 'rubocop'
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
@@ -58,6 +57,7 @@ end
 group :production do
   gem 'wkhtmltopdf-heroku'
   gem 'rails_12factor', group: :production
+  gem 'puma', '~> 3.4'
 end
 
 gem 'rack-canonical-host', '0.2.2'
