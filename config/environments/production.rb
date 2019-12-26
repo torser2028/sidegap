@@ -50,7 +50,7 @@ Rails.application.configure do
 
   config.log_level = :debug
   # Basic log config, for calls to Rails.logger.<level> { <message> }
-  config.logger = Logger.new('log/production.log')
+  # config.logger = Logger.new('log/production.log')
   # Formats log entries into: LEVEL MESSAGE
   # Heroku adds to this timestamp and worker/dyno id, so datetime can be stripped
   config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
