@@ -32,7 +32,7 @@ gem 'chosen-rails'
 gem 'axlsx_rails'
 gem 'aws-sdk', '~> 2'
 gem 'carrierwave_direct', :git => "git://github.com/dwilkie/carrierwave_direct.git"
-
+gem 'puma', '~> 3.4'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -57,7 +57,6 @@ end
 group :production do
   gem 'wkhtmltopdf-heroku'
   gem 'rails_12factor', group: :production
-  gem 'puma', '~> 3.4'
 end
 
 gem 'rack-canonical-host', '0.2.2'
