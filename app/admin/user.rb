@@ -85,6 +85,10 @@ ActiveAdmin.register User do
   end
 
   controller do
+    def scoped_collection
+      User.unscoped
+    end
+    
     def new
       @page_title = "Agregar Usuario"
       super

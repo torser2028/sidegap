@@ -15,8 +15,8 @@ class User < ActiveRecord::Base
   has_many :notices
   has_many :user_followed_legislatives, dependent: :destroy
 
+  default_scope { where(active: true) }
   scope :clients, -> { includes(:roles).where(roles: { name: 'client' }) }
-  scope :active, -> { where(active: true) }
   validates :name, :email, :company, :area, :job, presence: true
 
   # after_create :send_welcome_email

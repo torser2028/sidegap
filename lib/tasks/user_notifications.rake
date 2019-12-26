@@ -2,7 +2,7 @@ namespace :user_notifications do
   desc 'Query all the Valure users to generate the user notifications'
   task create_valure_notifications: :environment do
     company = Company.find(48)
-    company.users.active.each do |user|
+    company.users.each do |user|
       puts "===================================================="
       Institution.all.each do |i|
         puts "Institucion #{i.name} para el usuario #{user.email}"

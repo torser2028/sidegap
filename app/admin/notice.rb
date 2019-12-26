@@ -32,7 +32,7 @@ ActiveAdmin.register Notice do
   form do |f|
     f.inputs do
       f.input :body, label: "Contenido", as: :text
-      f.input :user_id, as: :select, collection: User.active.clients.order(name: :asc).map{|c| ["#{c.name} - #{c.email}", c.id]}
+      f.input :user_id, as: :select, collection: User.clients.order(name: :asc).map{|c| ["#{c.name} - #{c.email}", c.id]}
       f.input :publish_date, label: "Fecha de publicacion", as: :datepicker
     end
     f.actions do
