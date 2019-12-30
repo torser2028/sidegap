@@ -13,7 +13,7 @@ class UserMailer < ApplicationMailer
       mutex.synchronize do
         institution = rule.institution
         recipients = []
-        recipients = UserNotification.includes(:user, :institution).where(institution_id: institution.id).map(&:user).to_a
+        recipients = UserNotification.includes(:user, :institution).where(institution_id: institution.id).map(&:user).to_a.compact
         recipients.each do |recipient|
           new_rule(recipient, institution.name, rule).deliver_now
         end
