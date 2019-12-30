@@ -50,10 +50,12 @@ Rails.application.configure do
 
   config.log_level = :debug
   # Basic log config, for calls to Rails.logger.<level> { <message> }
-  #### config.logger = Logger.new('log/production.log')
+  ## AZURE
+  config.logger = Logger.new('log/production.log')
   # Formats log entries into: LEVEL MESSAGE
   # Heroku adds to this timestamp and worker/dyno id, so datetime can be stripped
-  #### config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
+  ## AZURE
+  config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
@@ -84,6 +86,8 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 
+  ## HEROKU
+  # config.action_mailer.default_url_options = { host: 'app.sidegap.com' }
   config.action_mailer.default_url_options = { host: 'app.sidegap.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.asset_host = 'http://app.sidegap.com'
