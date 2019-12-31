@@ -15,4 +15,4 @@ on_worker_boot do
 end
 
 ## AZURE
-# bind "unix:///home/Administrador/apps/SIDEGAP/shared/tmp/sockets/SIDEGAP-puma.sock"
+bind "unix:///home/Administrador/apps/SIDEGAP/shared/tmp/sockets/SIDEGAP-puma.sock"
