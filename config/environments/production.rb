@@ -88,9 +88,11 @@ Rails.application.configure do
 
   ## HEROKU
   # config.action_mailer.default_url_options = { host: 'app.sidegap.com' }
-  config.action_mailer.default_url_options = { host: 'app.sidegap.com' }
+  config.action_mailer.default_url_options = { host: '13.77.86.187' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.asset_host = 'http://app.sidegap.com'
+  ## HEROKU
+  # config.action_mailer.asset_host = 'http://app.sidegap.com'
+  config.action_mailer.asset_host = 'http://13.77.86.187'
 
   config.action_mailer.smtp_settings = {
     address: 'smtp.office365.com',
