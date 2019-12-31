@@ -85,3 +85,6 @@ group :development do
 end
 
 gem "figaro"
+
+# To handle cron jobs
+gem 'whenever', require: false
