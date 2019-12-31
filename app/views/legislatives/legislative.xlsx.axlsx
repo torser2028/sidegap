@@ -20,7 +20,7 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
       'FECHA DE APROBACIÓN / INSTANCIAS', '', '', '',
       'FECHA DE APROBACIÓN / INSTANCIAS ACTOS LEGISLATIVOS', '', '', '',
       'FECHA DE APROBACIÓN / INSTANCIAS', '', '', '', '',
-      'AGENDA', '', '', '',
+      'AGENDA', '', '', '', '',
       'ESTADOS',
       'OBSERVACIONES USUARIO', '', '', ''
     ]
@@ -33,7 +33,7 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
       'Aprobación Comisión Cámara', 'Aprobación Plenaria Cámara', 'Aprobación Comisión Senado', 'Aprobación Plenaria Senado',
       'Aprobación Comisión Cámara Segunda Vuelta', 'Aprobación Plenaria Cámara Segunda Vuelta', 'Aprobación Comisión Senado Segunda Vuelta', 'Aprobación Plenaria Senado Segunda Vuelta',
       'Fecha Conciliación Cámara', 'Fecha Conciliación Senado', 'Aprobación en Comisiones Conjuntas', 'Proyecto aprobado', 'Sancionado',
-      'Fecha Evento', 'Hora Evento', 'Comisión Plenaria', 'Lugar en el orden del día',
+      'Tipo de Evento', 'Fecha Evento', 'Hora Evento', 'Comisión Plenaria', 'Lugar en el orden del día',
       '',
       'Impacto'.upcase, 'Probabilidad'.upcase, 'Riesgo'.upcase, 'Observaciones'.upcase
     ]
@@ -45,13 +45,13 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
     sheet.merge_cells('J1:M1')
     sheet.merge_cells('N1:Q1')
     sheet.merge_cells('R1:V1')
-    sheet.merge_cells('W1:Z1')
-    sheet.merge_cells('AA1:AA2')
-    sheet.merge_cells('AB1:AE1')
+    sheet.merge_cells('W1:AA1')
+    sheet.merge_cells('AB1:AB2')
+    sheet.merge_cells('AC1:AF1')
 
-    sheet.add_row main_header, style: [gray_cell, purple_cell, purple_cell, purple_cell, purple_cell, green_cell, pink_cell, pink_cell, pink_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, purple_cell, purple_cell, purple_cell, purple_cell, red_cell, orange_cell, orange_cell, orange_cell, orange_cell], height: 20
+    sheet.add_row main_header, style: [gray_cell, purple_cell, purple_cell, purple_cell, purple_cell, green_cell, pink_cell, pink_cell, pink_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, purple_cell, purple_cell, purple_cell, purple_cell, purple_cell, red_cell, orange_cell, orange_cell, orange_cell, orange_cell], height: 20
 
-    sheet.add_row header, style: [gray_cell, purple_cell, purple_cell, purple_cell, purple_cell, green_cell, pink_cell, pink_cell, pink_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, purple_cell, purple_cell, purple_cell, purple_cell, red_cell, orange_cell, orange_cell, orange_cell, orange_cell], height: 70
+    sheet.add_row header, style: [gray_cell, purple_cell, purple_cell, purple_cell, purple_cell, green_cell, pink_cell, pink_cell, pink_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, yellow_cell, purple_cell, purple_cell, purple_cell, purple_cell, purple_cell, red_cell, orange_cell, orange_cell, orange_cell, orange_cell], height: 70
 
     @legislatives.each do |legislative|
       normal_cell = s.add_style sz: 11, alignment: { horizontal: :center, vertical: :center, wrap_text: true }, border: Axlsx::STYLE_THIN_BORDER, font_name: 'Calibri'
@@ -64,14 +64,14 @@ wb.add_worksheet(name: "Legislatives") do |sheet|
         legislative[:chamber_commission_at], legislative[:chamber_plenary_at], legislative[:senate_commission_at], legislative[:senate_plenary_at],
         legislative[:second_chamber_commission_at], legislative[:second_chamber_plenary_at], legislative[:second_senate_commission_at], legislative[:second_senate_plenary_at],
         legislative[:chamber_settlement_at], legislative[:senate_settlement_at], '', '', '',
-        legislative[:event_at], legislative[:event_hour], legislative[:plenary_commission], legislative[:day_order],
+        legislative[:event_type], legislative[:event_at], legislative[:event_hour], legislative[:plenary_commission], legislative[:day_order],
         legislative[:status],
         legislative[:impact], legislative[:probability], legislative[:risk], legislative[:observations]
       ], style: normal_cell, height: 50
 
     end
 
-    sheet.column_widths 30, 12, 15, 15, 12, 50, 12, 30, 30, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 20, 30, 12, 12, 15, 12, 30
+    sheet.column_widths 30, 12, 15, 15, 12, 50, 12, 30, 30, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 20, 30, 12, 12, 15, 12, 30
 
     sheet.auto_filter = "A2:R#{@legislatives.size}"
 

@@ -51,11 +51,11 @@ Rails.application.configure do
   config.log_level = :debug
   # Basic log config, for calls to Rails.logger.<level> { <message> }
   ## AZURE
-  config.logger = Logger.new('log/production.log')
+  # config.logger = Logger.new('log/production.log')
   # Formats log entries into: LEVEL MESSAGE
   # Heroku adds to this timestamp and worker/dyno id, so datetime can be stripped
   ## AZURE
-  config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
+  # config.logger.formatter = ->(severity, datetime, progname, msg) { "#{severity} #{msg}\n" }
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]

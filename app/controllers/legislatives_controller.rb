@@ -520,11 +520,13 @@ class LegislativesController < ApplicationController
       event_hour = ''
       plenary_commission = ''
       day_order = ''
+      event_type = ''
       if legislative_agenda.present?
         event_at = legislative_agenda.event_at.strftime('%d/%m/%Y')
         event_hour = legislative_agenda.time.strftime('%H:%M %p')
         plenary_commission = legislative_agenda.plenary_commission
         day_order = legislative_agenda.body
+        event_type = legislative_agenda.event_type
       end
       # End
 
@@ -555,6 +557,7 @@ class LegislativesController < ApplicationController
         event_hour: event_hour,
         plenary_commission: plenary_commission,
         day_order: day_order,
+        event_type: event_type,
         impact: impact_avg,
         probability: probability,
         risk: risk,
