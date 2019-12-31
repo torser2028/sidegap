@@ -2,7 +2,7 @@ namespace :scheduler do
   desc 'Send Regulatory Report'
   task :regulatory_report => :environment do
     time = Time.now
-    if time.monday? || time.wednesday? || time.friday?
+    if time.tuesday? || time.wednesday? || time.friday?
       Thread.new do
         if UserMailer.set_recipients_regulatory_fg
           Story.not_sent.each { |story| story.update_attributes(sent: true, sent_at: Time.now) }
@@ -19,7 +19,7 @@ namespace :scheduler do
   desc 'Send Weekly Report'
   task :weekly_report => :environment do
     time = Time.now
-    if time.monday?
+    if time.tuesday?
       Thread.new do
         if UserMailer.set_recipients_weekly_fg
           ActiveRecord::Base.connection.close
