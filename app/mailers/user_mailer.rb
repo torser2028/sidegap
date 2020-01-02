@@ -154,7 +154,7 @@ class UserMailer < ApplicationMailer
     })
     mail_log.save!
 
-    mail(to: to, subject: 'Actualidad Regulatoria')
+    mail(to: to, subject: 'Actualidad Regulatoria desde pruebas')
   end
 
   def self.set_recipients_weekly
@@ -219,7 +219,7 @@ class UserMailer < ApplicationMailer
     mail_log = MailLog.new(email: recipient.email, subject: 'Estado semanal de su cuenta', options: {company_emails: @bcc})
     mail_log.save!
 
-    mail(to: to, subject: 'Estado semanal de su cuenta', bcc: @bcc)
+    mail(to: to, subject: 'Estado semanal de su cuenta desde pruebas', bcc: @bcc)
   end
 
   def send_mail_user_company(to, company)
