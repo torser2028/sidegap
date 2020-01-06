@@ -19,16 +19,17 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every :monday, at: '12pm' do
+# every :monday, at: '12pm' do
+every 5.minutes do
   rake "scheduler:weekly_report"
 end
 
-every :monday, at: '5pm' do
-  rake "scheduler:regulatory_report"
-end
-every :wednesday, at: '5pm' do
-  rake "scheduler:regulatory_report"
-end
-every :friday, at: '5pm' do
-  rake "scheduler:regulatory_report"
-end
+# every :monday, at: '5pm' do
+#   rake "scheduler:regulatory_report"
+# end
+# every :wednesday, at: '5pm' do
+#   rake "scheduler:regulatory_report"
+# end
+# every :friday, at: '5pm' do
+#   rake "scheduler:regulatory_report"
+# end
