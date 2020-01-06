@@ -80,9 +80,21 @@ namespace :deploy do
       invoke!("puma:restart")
     end
   end
+  
+  desc "Update crontab with whenever"
+  task :update_cron do
+    on roles(:app) do
+      within current_path do
+        execute :bundle, :exec, "whenever --clear-crontab #{fetch(:application)}"
+        execute :bundle, :exec, "whenever --update-crontab #{fetch(:application)}"
+      end
+    end
+  end
+
 
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
+  after  :finishing, 'deploy:update_cron'
   # after  :finishing,    :restart
 end
