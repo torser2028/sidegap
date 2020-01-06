@@ -7,6 +7,7 @@ require 'capistrano/bundler'
 require 'capistrano/rvm'
 require 'capistrano/puma'
 require 'capistrano/ssh_doctor'
+require "whenever/capistrano"
 install_plugin Capistrano::Puma
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
