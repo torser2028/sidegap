@@ -133,10 +133,10 @@ class UserMailer < ApplicationMailer
     rules_stories = Story.not_sent.rules
 
     if legislatives_stories.present? || councils_stories.present? || rules_stories.present?
-      # User.all.each do |recipient|
-      recipient = User.find_by_email('altose87@gmail.com')
-      regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories).deliver_now
-      # end
+      User.all.each do |recipient|
+        # recipient = User.find_by_email('altose87@gmail.com')
+        regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories).deliver_now
+      end
     end
   end
 
@@ -154,7 +154,7 @@ class UserMailer < ApplicationMailer
     })
     mail_log.save!
 
-    mail(to: to, subject: 'Actualidad Regulatoria desde pruebas')
+    mail(to: to, subject: 'Actualidad Regulatoria')
   end
 
   def self.set_recipients_weekly
@@ -166,10 +166,10 @@ class UserMailer < ApplicationMailer
   end
 
   def self.set_recipients_weekly_fg
-    # User.all.each do |recipient|
-    recipient = User.find_by_email('altose87@gmail.com')
-    weekly_report(recipient).deliver_now
-    # end
+    User.all.each do |recipient|
+      # recipient = User.find_by_email('altose87@gmail.com')
+      weekly_report(recipient).deliver_now
+    end
   end
 
   # def self.set_recipients_weekly_test
@@ -219,7 +219,7 @@ class UserMailer < ApplicationMailer
     mail_log = MailLog.new(email: recipient.email, subject: 'Estado semanal de su cuenta', options: {company_emails: @bcc})
     mail_log.save!
 
-    mail(to: to, subject: 'Estado semanal de su cuenta desde pruebas', bcc: @bcc)
+    mail(to: to, subject: 'Estado semanal de su cuenta', bcc: @bcc)
   end
 
   def send_mail_user_company(to, company)
