@@ -466,7 +466,9 @@ class LegislativesController < ApplicationController
       type = 'admin_general'
       legislatives_with_agendas = current_user.following_legislatives.with_agenda.order(created_at: :desc)
     else
-      legislatives = legislatives.where(id: current_user.following_legislatives.all.ids).where.not('legislatives.status': 'Aprobado').where.not('legislatives.final_status': 'Archivado')
+      # @q = current_user.following_legislatives.includes(:legislative, :comments).ransack params[:q]
+      # @legislatives = @q.result.to_a - current_user.find_disliked_items
+      legislatives = legislatives.where(id: current_user.following_legislatives.all.ids)
       type = 'client_' + current_user.name.parameterize.underscore
       legislatives_with_agendas = current_user.following_legislatives.with_agenda.order(created_at: :desc)
     end
