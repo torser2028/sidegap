@@ -134,7 +134,6 @@ class UserMailer < ApplicationMailer
 
     if legislatives_stories.present? || councils_stories.present? || rules_stories.present?
       User.all.each do |recipient|
-        # recipient = User.find_by_email('altose87@gmail.com')
         regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories).deliver_now
       end
     end
@@ -167,7 +166,6 @@ class UserMailer < ApplicationMailer
 
   def self.set_recipients_weekly_fg
     User.all.each do |recipient|
-      # recipient = User.find_by_email('altose87@gmail.com')
       weekly_report(recipient).deliver_now
     end
   end
