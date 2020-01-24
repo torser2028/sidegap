@@ -187,4 +187,14 @@ namespace :stakeholder do
     end
     puts '======================================================================================='
   end
+
+  task fix_region: :environment do
+    Stakeholder.all.each do |s|
+      if s.region.present? && s.region.include?('Vaup')
+        # puts "region: #{s.region}"
+        s.region = "Vaupés"
+        s.save!
+      end
+    end
+  end
 end
