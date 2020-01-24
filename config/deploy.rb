@@ -80,7 +80,7 @@ namespace :deploy do
       invoke!("puma:restart")
     end
   end
-  
+
   desc "Update crontab with whenever"
   task :update_cron do
     on roles(:app) do
@@ -91,10 +91,9 @@ namespace :deploy do
     end
   end
 
-
-  before :starting,     :check_revision
-  after  :finishing,    :compile_assets
-  after  :finishing,    :cleanup
+  before :starting,  :check_revision
+  after  :finishing, :compile_assets
+  after  :finishing, :cleanup
   after  :finishing, 'deploy:update_cron'
   # after  :finishing,    :restart
 end
