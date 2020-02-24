@@ -6,7 +6,7 @@ ActiveAdmin.register Notice do
   index title: "Noticias Cliente" do
     column "Contenido", :body
     column "Cliente" do |notice|
-      notice.user.name
+      notice.user.name if notice.user.present?
     end
     column 'Fecha de publicacion', :publish_date
     actions()
