@@ -129,14 +129,10 @@ class UserMailer < ApplicationMailer
 
   def self.set_recipients_regulatory_fg
     legislatives_stories = Story.not_sent.legislatives
-    puts "legislatives_stories: #{legislatives_stories.count}"
     councils_stories = Story.not_sent.councils
-    puts "councils_stories: #{councils_stories.count}"
     rules_stories = Story.not_sent.rules
-    puts "rules_stories: #{rules_stories.count}"
 
     if legislatives_stories.present? || councils_stories.present? || rules_stories.present?
-      puts "all the things are present"
       User.all.each do |recipient|
         regulatory_report(recipient, legislatives_stories, councils_stories, rules_stories).deliver_now
       end
@@ -148,10 +144,7 @@ class UserMailer < ApplicationMailer
     @councils_stories = councils_stories
     @rules_stories = rules_stories
     @name = recipient.name
-    puts "NAME IN regulatory_report: #{@name}"
-    # to = recipient.email
-    to = 'altose87@gmail.com'
-    puts "TO IN regulatory_report: #{to}"
+    to = recipient.email
 
     if mail(to: to, subject: 'Actualidad Regulatoria')
       mail_log = MailLog.new(email: recipient.email, subject: 'Actualidad Regulatoria', options: {
