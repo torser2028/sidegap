@@ -3,8 +3,11 @@ namespace :scheduler do
   task :regulatory_report => :environment do
     time = Time.now
     if time.monday? || time.wednesday? || time.friday?
+      puts "is monday, wednesday or friday"
       Thread.new do
+        puts "starts the thread"
         if UserMailer.set_recipients_regulatory_fg
+          puts "in the if"
           Story.not_sent.each { |story| story.update_attributes(sent: true, sent_at: Time.now) }
           ActiveRecord::Base.connection.close
           puts 'Regulatory report sent.'
