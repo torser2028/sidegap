@@ -149,7 +149,8 @@ class UserMailer < ApplicationMailer
     @rules_stories = rules_stories
     @name = recipient.name
     puts "NAME IN regulatory_report: #{@name}"
-    to = recipient.email
+    # to = recipient.email
+    to = 'altose87@gmail.com'
     puts "TO IN regulatory_report: #{to}"
 
     if mail(to: to, subject: 'Actualidad Regulatoria')
