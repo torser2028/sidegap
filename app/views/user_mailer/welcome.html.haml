@@ -5,12 +5,12 @@
       %td
         %h1
           %span{:style => "font-size:18.0pt;font-family:\"Arial Narrow\",sans-serif;color:#002060"}
-            Nombre de Usuario
+            = "Bienvenido #{@user.name}"
     %tr
       %td
         %p
           Le informamos sus datos de ingreso a
-          %a{:href => "http://www.sidegap.com.co"} www.sidegap.com.co
+          %a{:href => "http://www.sidegap.com"} www.sidegap.com
     %tr
       %td
         %table{:cellpadding => "5", :width => "100%"}
@@ -20,16 +20,16 @@
           %tbody
             %tr
               %td{:align => "right", :style => "font-size: 14pt;", :width => "20%"} Usuario:
-              %td{:width => "80%"} Nombre@deUsuario
+              %td{:width => "80%"}= @user.email
             %tr
               %td{:align => "right", :style => "font-size: 14pt;", :width => "20%"} Contraseña:
-              %td{:width => "80%"} xxxxx
+              %td{:width => "80%"}= @user.password
         %br/
     %tr
       %td{:style => "background: lightgray"}
         %p
           Si tiene alguna duda o inquietud, comuníquese con nosotros a
-          %a{:href => "sidegap@valure.com.co"} sidegap@valure.com.co
+          %a{:href => "sidegap@valure.com"} sidegap@valure.com
     %tr
       %td{:align => "right", :style => "background: lightgray"}
         Logo valure
