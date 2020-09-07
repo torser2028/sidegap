@@ -101,6 +101,9 @@ GEM
     bullet (5.6.1)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
+    business_time (0.9.3)
+      activesupport (>= 3.2.0)
+      tzinfo
     byebug (3.5.1)
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
@@ -315,6 +318,7 @@ GEM
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
     hike (1.2.3)
+    holidays (7.1.0)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -513,6 +517,7 @@ DEPENDENCIES
   better_errors
   breadcrumbs_on_rails
   bullet
+  business_time
   byebug
   capistrano
   capistrano-bundler
@@ -532,6 +537,7 @@ DEPENDENCIES
   foundation-rails
   geocoder
   haml-rails (~> 0.8)
+  holidays
   jbuilder (~> 2.0)
   jquery-rails
   letter_opener

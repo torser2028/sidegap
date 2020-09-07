@@ -6,10 +6,12 @@ class Rule < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   accepts_nested_attributes_for :attachments, allow_destroy: true
-  #accepts_nested_attributes_for :tags, :attachments, allow_destroy: true
+  # accepts_nested_attributes_for :tags, :attachments, allow_destroy: true
 
-  scope :inactive, -> { where("deadline_comments < ?", Date.today).includes(:institution) }
-  scope :active, -> { where("deadline_comments >= ? OR deadline_comments IS NULL", Date.today) }
+  scope :inactive, -> { where('deadline_comments < ? OR status IS FALSE', Date.today).includes(:institution) }
+  scope :active, -> { where('deadline_comments >= ? OR deadline_comments IS NULL', Date.today) }
+  scope :status_active, -> { where(status: true) }
+  scope :status_inactive, -> { where(status: false) }
 
   after_create :new_rule_notification
 

@@ -233,4 +233,9 @@ class UserMailer < ApplicationMailer
     end
     bcc
   end
+
+  def disabling_rules(rule_ids)
+    @rule_ids = rule_ids
+    mail(to: 'altose87@gmail.com', subject: 'Norma deshabilitada')
+  end
 end

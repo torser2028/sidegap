@@ -55,6 +55,28 @@ namespace :scheduler do
     end
   end
 
+  desc 'Disable rules after 15 days with not deadline comments date'
+  task disable_rules: :environment do
+    rules_without_deadline_date = Rule.where(deadline_comments: nil).all
+    disabled_rules = []
+    rules_without_deadline_date.each do |rule|
+      time = Time.now
+      rule_date = rule.created_at.to_date
+      business_days = rule_date.business_dates_until(time).count
+      holidays = Holidays.between(rule_date, time, :co).count
+      total_business_days = business_days - holidays
+      puts "Business days between #{rule_date} and #{time}: #{business_days}"
+      puts "Holidays days between #{rule_date} and #{time}: #{holidays}"
+      puts "Total business days: #{total_business_days}"
+      if total_business_days > 15
+        disabled_rules.push(rule.id)
+        # rule.status = false
+        # rule.save!
+      end
+    end
+    UserMailer.disabling_rules(disabled_rules)
+  end
+
   # desc 'Test Regulatory Report'
   # task :test_regulatory => :environment do
   #   Thread.new do
