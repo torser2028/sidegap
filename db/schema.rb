@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20200907161008) do
+ActiveRecord::Schema.define(version: 20200907202819) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -416,10 +416,11 @@ ActiveRecord::Schema.define(version: 20200907161008) do
     t.string   "kind"
     t.date     "filing_at"
     t.integer  "institution_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.date     "deadline_comments"
     t.string   "for_comments"
+    t.boolean  "status",            default: true
   end
 
   add_index "rules", ["institution_id"], name: "index_rules_on_institution_id", using: :btree

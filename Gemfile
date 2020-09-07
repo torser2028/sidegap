@@ -88,3 +88,8 @@ gem "figaro"
 
 # To handle cron jobs
 gem 'whenever', require: false
+
+# holidays gem
+gem 'holidays'
+# business_time gem
+gem 'business_time'
