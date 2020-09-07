@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180930174545) do
+ActiveRecord::Schema.define(version: 20200907161008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -36,11 +37,12 @@ ActiveRecord::Schema.define(version: 20180930174545) do
     t.date     "event_at"
     t.time     "time"
     t.integer  "legislative_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.string   "plenary_commission"
     t.string   "event_type"
     t.text     "observation"
+    t.boolean  "status",             default: true
   end
 
   add_index "agendas", ["legislative_id"], name: "index_agendas_on_legislative_id", using: :btree
@@ -169,12 +171,13 @@ ActiveRecord::Schema.define(version: 20180930174545) do
     t.date     "event_at"
     t.time     "time"
     t.string   "event_type"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.string   "commission"
     t.string   "plenary"
     t.string   "place"
     t.text     "observation"
+    t.boolean  "status",      default: true
   end
 
   create_table "executives", force: :cascade do |t|
@@ -263,6 +266,17 @@ ActiveRecord::Schema.define(version: 20180930174545) do
 
   add_index "legislative_attachment_changes", ["attachment_id"], name: "index_legislative_attachment_changes_on_attachment_id", using: :btree
   add_index "legislative_attachment_changes", ["legislative_id"], name: "index_legislative_attachment_changes_on_legislative_id", using: :btree
+
+  create_table "legislative_attachments", force: :cascade do |t|
+    t.string   "attachment"
+    t.integer  "legislative_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "title"
+    t.date     "published_at"
+  end
+
+  add_index "legislative_attachments", ["legislative_id"], name: "index_legislative_attachments_on_legislative_id", using: :btree
 
   create_table "legislative_stakeholders", force: :cascade do |t|
     t.integer  "legislative_id"
@@ -559,9 +573,6 @@ ActiveRecord::Schema.define(version: 20180930174545) do
   add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
   add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
-  add_foreign_key "agendas", "legislatives"
-  add_foreign_key "assignments", "roles"
-  add_foreign_key "assignments", "users"
   add_foreign_key "attachments", "councils"
   add_foreign_key "attachments", "executives"
   add_foreign_key "attachments", "judicials"
