@@ -33,3 +33,6 @@ end
 every :friday, at: '5pm' do
   rake "scheduler:regulatory_report"
 end
+every :tuesday, at: '5am' do
+  rake "scheduler:disable_events_agends"
+end

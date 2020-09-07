@@ -1,13 +1,13 @@
 namespace :scheduler do
   desc 'Send Regulatory Report'
-  task :regulatory_report => :environment do
+  task regulatory_report: :environment do
     time = Time.now
     if time.monday? || time.wednesday? || time.friday?
-      puts "is monday, wednesday or friday"
+      puts 'is monday, wednesday or friday'
       Thread.new do
-        puts "starts the thread"
+        puts 'starts the thread'
         if UserMailer.set_recipients_regulatory_fg
-          puts "in the if"
+          puts 'in the if'
           Story.not_sent.each { |story| story.update_attributes(sent: true, sent_at: Time.now) }
           ActiveRecord::Base.connection.close
           puts 'Regulatory report sent.'
@@ -20,7 +20,7 @@ namespace :scheduler do
   end
 
   desc 'Send Weekly Report'
-  task :weekly_report => :environment do
+  task weekly_report: :environment do
     time = Time.now
     if time.monday?
       Thread.new do
@@ -32,6 +32,26 @@ namespace :scheduler do
           ActiveRecord::Base.connection.close
         end
       end.join
+    end
+  end
+
+  desc 'Disable past events and agends'
+  task disable_events_agends: :environment do
+    time = Time.now
+    if time.tuesday?
+      puts 'Is Tuesday'
+      Event.status_active.each do |event|
+        next unless event.event_at < time
+        puts "Changing status for event #{event.id}"
+        event.status = false
+        event.save!
+      end
+      Agenda.status_active.each do |agenda|
+        next unless agenda.event_at < time
+        puts "Changing status for agenda #{agenda.id}"
+        agenda.status = false
+        agenda.save!
+      end
     end
   end
 
