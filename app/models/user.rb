@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   scope :clients, -> { includes(:roles).where(roles: { name: 'client' }) }
   validates :name, :email, :company, :area, :job, presence: true
 
-  # after_create :send_welcome_email
+  after_create :send_welcome_email
   before_save :save_password
 
   def has_role?(role_sym)
@@ -43,11 +43,12 @@ class User < ActiveRecord::Base
   end
 
   private
-    def send_welcome_email
-      UserMailer.welcome(self).deliver_now
-    end
 
-    def save_password
-      self.passwd = self.password if self.encrypted_password_changed?
-    end
+  def send_welcome_email
+    UserMailer.welcome(self).deliver_now
+  end
+
+  def save_password
+    self.passwd = self.password if self.encrypted_password_changed?
+  end
 end
