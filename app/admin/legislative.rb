@@ -230,7 +230,7 @@ ActiveAdmin.register Legislative do
       end
     end
     f.inputs "Agenda" do
-      f.has_many :agendas, heading: "", allow_destroy: true, new_record: "Agregar Agenda" do |a|
+      f.has_many :agendas, for: [:agendas, f.object.agendas.status_active], heading: "", allow_destroy: true, new_record: "Agregar Agenda" do |a|
         a.input :event_at, as: :datepicker, label: "Fecha"
         a.input :time, label: "Hora", minute_step: 30, ampm: true
         a.input :body, label: "Descripción", input_html: { rows: 6 }
