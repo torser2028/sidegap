@@ -38,16 +38,17 @@ namespace :scheduler do
   desc 'Disable past events and agends'
   task disable_events_agends: :environment do
     time = Time.now
+    sunday = (time.event_at - 7.days).end_of_week
     if time.tuesday?
       puts 'Is Tuesday'
       Event.status_active.each do |event|
-        next unless event.event_at < time
+        next unless event.event_at < sunday
         puts "Changing status for event #{event.id}"
         event.status = false
         event.save!
       end
       Agenda.status_active.each do |agenda|
-        next unless agenda.event_at < time
+        next unless agenda.event_at < sunday
         puts "Changing status for agenda #{agenda.id}"
         agenda.status = false
         agenda.save!
@@ -68,11 +69,11 @@ namespace :scheduler do
       puts "Business days between #{rule_date} and #{time}: #{business_days}"
       puts "Holidays days between #{rule_date} and #{time}: #{holidays}"
       puts "Total business days: #{total_business_days}"
-      if total_business_days > 15
-        disabled_rules.push(rule.id)
-        # rule.status = false
-        # rule.save!
-      end
+      next unless total_business_days > 15
+      puts "the rule #{rule.id} is going to be disabled"
+      disabled_rules.push(rule.id)
+      rule.status = false
+      rule.save!
     end
     UserMailer.disabling_rules(disabled_rules)
   end
