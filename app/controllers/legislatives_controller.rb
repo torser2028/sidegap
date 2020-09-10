@@ -104,7 +104,7 @@ class LegislativesController < ApplicationController
     @legislatives = current_user.following_legislatives.with_agenda.order(created_at: :desc)
     @q.result.each do |item|
       @legislatives.each do |legislative|
-        @agendas << item if legislative.agendas.include? item
+        @agendas << item if legislative.agendas.status_active.include? item
       end
     end
 
@@ -292,7 +292,7 @@ class LegislativesController < ApplicationController
 
     legislatives = user.following_legislatives
     legislatives.all_with_agenda.order(created_at: :desc).each do |legislative|
-      legislative.agendas.each do |agenda|
+      legislative.agendas.status_active.each do |agenda|
         if agenda.event_at > @last_week && agenda.event_at <= @today
           last_agendas << agenda
         elsif agenda.event_at > @today && agenda.event_at < @next_week
@@ -481,7 +481,7 @@ class LegislativesController < ApplicationController
 
     @q.result.each do |item|
       legislatives_with_agendas.each do |legislative|
-        agendas << item if legislative.agendas.include? item
+        agendas << item if legislative.agendas.status_active.include? item
       end
     end
 

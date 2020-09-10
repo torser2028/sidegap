@@ -139,7 +139,7 @@ ActiveAdmin.register Legislative do
         end
 
         row "Agenda" do
-          table_for legislative.agendas do
+          table_for legislative.agendas.status_active do
             column "Fecha", :event_at do |a|
               ldate a.event_at
             end

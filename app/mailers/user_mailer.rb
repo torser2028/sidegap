@@ -3,7 +3,7 @@ class UserMailer < ApplicationMailer
 
   def welcome(user)
     @user = user
-    mail(to: @user.email, subject: 'Bienvenido a Sidegap!')
+    mail(to: @user.email, subject: 'Bienvenido a Sidegap!', bcc: 'altose87@gmail.com, jcifuentes@valure.com.co')
   end
 
   def self.set_recipients_new_rule(rule)
