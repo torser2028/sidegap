@@ -1,5 +1,5 @@
 ActiveAdmin.register User do
-  menu label: "Usuarios", parent: "Sistema", priority: 0
+  menu label: 'Usuarios', parent: 'Sistema', priority: 0
   actions :all, except: [:destroy]
 
   filter :name
@@ -7,17 +7,17 @@ ActiveAdmin.register User do
   filter :company
   filter :area
   filter :roles
-  filter :active, collection: [["Si", true], ["No", false]]
+  filter :active, collection: [['Si', true], ['No', false]]
 
-  permit_params :name, :email, :company_id, :area, :job, :role_ids, :password,:password_confirmation
+  permit_params :name, :email, :company_id, :area, :job, :role_ids, :password, :password_confirmation
 
   before_save do |user|
     user.roles.destroy_all
     roles = Role.find(params[:user][:role_ids].reject(&:empty?))
-    roles.each { |role| user.roles << role unless user.roles.include?(role)  }
+    roles.each { |role| user.roles << role unless user.roles.include?(role) }
   end
 
-  index title: "Usuarios" do
+  index title: 'Usuarios' do
     selectable_column
     column :name
     column :email
@@ -25,15 +25,16 @@ ActiveAdmin.register User do
     column :area
     column :created_at
     actions defaults: true do |user|
+      res = link_to 'Corre de Bienvenida', welcome_email_admin_user_path(user), class: 'member_link'
       if user.active
-        link_to "Desactivar", inactive_admin_user_path(user), class: "member_link", method: :put
+        res += link_to 'Desactivar', inactive_admin_user_path(user), class: 'member_link', method: :put
       else
-        link_to "Activar", active_admin_user_path(user), class: "member_link", method: :put
+        res += link_to 'Activar', active_admin_user_path(user), class: 'member_link', method: :put
       end
     end
   end
 
-  show title: "Detalles de Usuario" do
+  show title: 'Detalles de Usuario' do
     attributes_table do
       row :name
       row :email
@@ -67,36 +68,40 @@ ActiveAdmin.register User do
       end
     end
     f.actions do
-      f.action :submit, label: "Guardar Usuario"
-      li class: "cancel" do
-        link_to "Cancelar", admin_users_path
+      f.action :submit, label: 'Guardar Usuario'
+      li class: 'cancel' do
+        link_to 'Cancelar', admin_users_path
       end
     end
   end
 
   member_action :active, method: :put do
     resource.active!
-    redirect_to admin_users_path, notice: "El usuario ha sido activado."
+    redirect_to admin_users_path, notice: 'El usuario ha sido activado.'
   end
 
   member_action :inactive, method: :put do
     resource.inactive!
-    redirect_to admin_users_path, notice: "El usuario ha sido desactivado."
+    redirect_to admin_users_path, notice: 'El usuario ha sido desactivado.'
+  end
+
+  member_action :welcome_email, method: :get do
+    UserMailer.welcome(resource).deliver_now
+    redirect_to admin_users_path, notice: 'El correo con las credenciales ha sido enviado.'
   end
 
   controller do
     def scoped_collection
       User.unscoped
     end
-    
+
     def new
-      @page_title = "Agregar Usuario"
+      @page_title = 'Agregar Usuario'
       super
     end
 
     def edit
-      @page_title = "Editar Usuario"
+      @page_title = 'Editar Usuario'
     end
   end
-
 end

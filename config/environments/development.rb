@@ -40,20 +40,20 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'app.sidegap.com' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.asset_host = 'http://localhost:3000'
+  config.action_mailer.asset_host = 'http://app.sidegap.com'
 
   config.action_mailer.smtp_settings = {
-    :address        => 'smtp.office365.com',
-    :port           => '587',
-    :authentication => :login,
-    :user_name      => ENV['MAILER_USERNAME'],
-    :password       => ENV['MAILER_PASSWORD'],
-    :domain         => 'localhost:3000',
-    :enable_starttls_auto => true
+    address: 'smtp.office365.com',
+    port: '587',
+    authentication: :login,
+    user_name: ENV['MAILER_USERNAME'],
+    password: ENV['MAILER_PASSWORD'],
+    domain: 'app.sidegap.com',
+    enable_starttls_auto: true
   }
-  
+
   # config.action_mailer.smtp_settings = {
   #   :address        => 'smtp.sendgrid.net',
   #   :port           => '587',
