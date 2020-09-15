@@ -38,9 +38,16 @@ namespace :scheduler do
   desc 'Disable past events and agends'
   task disable_events_agends: :environment do
     time = Time.now
-    sunday = (time.event_at - 7.days).end_of_week
-    if time.tuesday?
-      puts 'Is Tuesday'
+    monday = time.beginning_of_week
+    puts "Monday: #{monday}"
+    sunday = (time - 7.days).end_of_week
+    puts "sunday: #{sunday}"
+    holiday = Holidays.on(monday, :co)
+    puts "holiday: #{holiday}"
+    day_string = holiday.count === 0 ? 'Tuesday' : 'Wednesday'
+    puts "Day: #{day_string}"
+    if time.strftime('%A') === day_string
+      puts "Is #{day_string}"
       Event.status_active.each do |event|
         next unless event.event_at < sunday
         puts "Changing status for event #{event.id}"

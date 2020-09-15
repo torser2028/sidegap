@@ -8,8 +8,8 @@ class Rule < ActiveRecord::Base
   accepts_nested_attributes_for :attachments, allow_destroy: true
   # accepts_nested_attributes_for :tags, :attachments, allow_destroy: true
 
-  scope :inactive, -> { where('deadline_comments < ? OR status IS FALSE', Date.today).includes(:institution) }
-  scope :active, -> { where('deadline_comments >= ? OR deadline_comments IS NULL', Date.today) }
+  scope :inactive, -> { status_inactive.where('deadline_comments < ? OR status IS FALSE', Date.today).includes(:institution) }
+  scope :active, -> { status_active.where('deadline_comments >= ? OR deadline_comments IS NULL', Date.today) }
   scope :status_active, -> { where(status: true) }
   scope :status_inactive, -> { where(status: false) }
 

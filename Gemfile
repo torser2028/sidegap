@@ -93,3 +93,6 @@ gem 'whenever', require: false
 gem 'holidays'
 # business_time gem
 gem 'business_time'
+
+# Workaround if nokogiri fails
+# gem install nokogiri -v '1.6.6.2' -- --with-xml2-include=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/usr/include/libxml2 --use-system-libraries
