@@ -36,6 +36,9 @@ end
 every :tuesday, at: '5am' do
   rake "scheduler:disable_events_agends"
 end
+every :wednesday, at: '5am' do
+  rake "scheduler:disable_events_agends"
+end
 every :day, at: '5am' do
   rake "scheduler:disable_rules"
 end
