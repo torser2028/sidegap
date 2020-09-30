@@ -11,9 +11,9 @@ ActiveAdmin.register Agenda do
 
   scope 'Todo', :status_active, default: true
   scope 'Próxima Agenda', :active
-  scope 'Agenda Pasada', :inactive
+  # scope 'Agenda Pasada', :inactive
   scope 'Agendas Activas', :status_active
-  scope 'Agendas Inactivas', :status_inactive
+  # scope 'Agendas Inactivas', :status_inactive
 
   index title: 'Proyectos Agendados' do
     column 'Proyecto' do |agenda|

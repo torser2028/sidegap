@@ -37,30 +37,45 @@ namespace :scheduler do
 
   desc 'Disable past events and agends'
   task disable_events_agends: :environment do
+    validate_day = ARGV[1] || true
+    puts "validate day? #{validate_day}"
     time = Time.now
     monday = time.beginning_of_week
     puts "Monday: #{monday}"
-    sunday = (time - 7.days).end_of_week
-    puts "sunday: #{sunday}"
+    last_saturday = (time - 7.days).end_of_week - 1.day
+    puts "last_saturday: #{last_saturday}"
     holiday = Holidays.on(monday, :co)
     puts "holiday: #{holiday}"
-    day_string = holiday.count === 0 ? 'Tuesday' : 'Wednesday'
+    day_string = holiday.count.zero? ? 'Tuesday' : 'Wednesday'
     puts "Day: #{day_string}"
-    if time.strftime('%A') === day_string
+    agendas_ids = []
+    events_ids = []
+    if time.strftime('%A') == day_string || validate_day == 'false'
       puts "Is #{day_string}"
       Event.status_active.each do |event|
-        next unless event.event_at < sunday
+        next unless event.event_at < last_saturday
         puts "Changing status for event #{event.id}"
         event.status = false
-        event.save!
+        if event.save
+          events_ids.push(event.id)
+        else
+          events_ids.push(event.errors.full_messages)
+        end
       end
       Agenda.status_active.each do |agenda|
-        next unless agenda.event_at < sunday
+        next unless agenda.event_at < last_saturday
         puts "Changing status for agenda #{agenda.id}"
         agenda.status = false
-        agenda.save!
+        if agenda.save
+          agendas_ids.push(agenda.id)
+        else
+          agendas_ids.push(agenda.errors.full_messages)
+        end
       end
     end
+    RemovedAgenda.create(agendas_ids: agendas_ids, day: day_string)
+    RemovedEvent.create(events_ids: events_ids, day: day_string)
+    exit
   end
 
   desc 'Disable rules after 15 days with not deadline comments date'
