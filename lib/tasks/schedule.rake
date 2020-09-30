@@ -53,6 +53,7 @@ namespace :scheduler do
     if time.strftime('%A') == day_string || validate_day == 'false'
       puts "Is #{day_string}"
       Event.status_active.each do |event|
+        puts "Event #{event.id} fecha #{event.event_at}"
         next unless event.event_at < last_saturday
         puts "Changing status for event #{event.id}"
         event.status = false
@@ -63,6 +64,7 @@ namespace :scheduler do
         end
       end
       Agenda.status_active.each do |agenda|
+        puts "Agenda #{agenda.id} fecha #{agenda.event_at}"
         next unless agenda.event_at < last_saturday
         puts "Changing status for agenda #{agenda.id}"
         agenda.status = false
