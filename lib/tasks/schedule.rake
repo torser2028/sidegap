@@ -54,7 +54,7 @@ namespace :scheduler do
       puts "Is #{day_string}"
       Event.status_active.each do |event|
         puts "Event #{event.id} fecha #{event.event_at}"
-        next unless event.event_at < last_saturday
+        next unless event.event_at? && event.event_at < last_saturday
         puts "Changing status for event #{event.id}"
         event.status = false
         if event.save
@@ -65,7 +65,7 @@ namespace :scheduler do
       end
       Agenda.status_active.each do |agenda|
         puts "Agenda #{agenda.id} fecha #{agenda.event_at}"
-        next unless agenda.event_at < last_saturday
+        next unless agenda.event_at? && agenda.event_at < last_saturday
         puts "Changing status for agenda #{agenda.id}"
         agenda.status = false
         if agenda.save
