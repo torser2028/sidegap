@@ -2,6 +2,13 @@ Rails.application.routes.draw do
   resources :mail_logs
 
   ActiveAdmin.routes(self)
+
+  namespace :api do
+    namespace :v1 do
+      resources :stories, only: [:index]
+    end
+  end
+
   scope '(:locale)', locale: /es|en/ do
     # You can have the root of your site routed with "root"
     authenticated :user do |variable|
