@@ -30,7 +30,7 @@
             %span
               Seguir
     - unless @followed.include? council
-      - if @downvoted && @downvoted.include? council
+      - if @downvoted && @downvoted.include?(council)
         %a.return{href: like_council_path(council)}
           = fa_icon "reply"
           %span

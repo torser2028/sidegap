@@ -171,14 +171,14 @@ class CouncilsController < ApplicationController
   def get_disliked_items
     downvoted = current_user.find_disliked_items
     return [] if downvoted.nil?
-    logger.debug "downvoted: #{downvoted.to_json}"
+    
     downvoted
   end
 
   def get_following_councils
     followed = current_user.following_councils
     return [] if followed.nil?
-    logger.debug "followed: #{followed.to_json}"
+    
     followed
   end
 
