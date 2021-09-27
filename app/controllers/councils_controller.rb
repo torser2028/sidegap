@@ -12,16 +12,16 @@ class CouncilsController < ApplicationController
     add_breadcrumb "Proyectos - Aprobado", :projects_approved_councils_path
     @q = Council.approved.ransack params[:q]
     @councils = @q.result.order(created_at: :desc)
-    @followed = current_user.following_councils
-    @downvoted = current_user.find_disliked_items
+    @followed = current_user.following_councils || []
+    @downvoted = current_user.find_disliked_items || []
   end
 
   def projects_old
     add_breadcrumb "Proyectos - Archivado y Retirado", :projects_old_councils_path
     @q = Council.old.ransack params[:q]
     @councils = @q.result.order(created_at: :desc)
-    @followed = current_user.following_councils
-    @downvoted = current_user.find_disliked_items
+    @followed = current_user.following_councils || []
+    @downvoted = current_user.find_disliked_items || []
   end
 
   def favorites
