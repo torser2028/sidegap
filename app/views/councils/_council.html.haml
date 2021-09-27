@@ -13,23 +13,24 @@
   %td.desc
     = council.topic
   %td.actions
-    - unless @downvoted.include? council
-      %a.more{href: council_path(council)}
-        = fa_icon "arrow-circle-right"
-        %span
-          Ver
-      - if @followed.include? council
-        %a.follow{href: unfollow_council_path(council)}
-          = fa_icon "eye-slash"
+    - if @downvoted.present?
+      - unless @downvoted.include? council
+        %a.more{href: council_path(council)}
+          = fa_icon "arrow-circle-right"
           %span
-            Dejar de Seguir
-      - else
-        %a.follow{href: follow_council_path(council)}
-          = fa_icon "eye"
-          %span
-            Seguir
+            Ver
+        - if @followed.include? council
+          %a.follow{href: unfollow_council_path(council)}
+            = fa_icon "eye-slash"
+            %span
+              Dejar de Seguir
+        - else
+          %a.follow{href: follow_council_path(council)}
+            = fa_icon "eye"
+            %span
+              Seguir
     - unless @followed.include? council
-      - if @downvoted.include? council
+      - if @downvoted && @downvoted.include? council
         %a.return{href: like_council_path(council)}
           = fa_icon "reply"
           %span
