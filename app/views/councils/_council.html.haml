@@ -13,31 +13,29 @@
   %td.desc
     = council.topic
   %td.actions
-    - if @downvoted.present?
-      - unless @downvoted.include? council
-        %a.more{href: council_path(council)}
-          = fa_icon "arrow-circle-right"
+    - if @downvoted.present? && !@downvoted.include?(council)
+      %a.more{href: council_path(council)}
+        = fa_icon "arrow-circle-right"
+        %span
+          Ver
+      - if @followed.present? && @followed.include?(council)
+        %a.follow{href: unfollow_council_path(council)}
+          = fa_icon "eye-slash"
           %span
-            Ver
-        - if @followed.include? council
-          %a.follow{href: unfollow_council_path(council)}
-            = fa_icon "eye-slash"
-            %span
-              Dejar de Seguir
-        - else
-          %a.follow{href: follow_council_path(council)}
-            = fa_icon "eye"
-            %span
-              Seguir
-    - unless @followed.include? council
-      - if @downvoted.present?
-        - if @downvoted.include? council
-          %a.return{href: like_council_path(council)}
-            = fa_icon "reply"
-            %span
-              Reestablecer
-        - else
-          %a.archive{href: dislike_council_path(council)}
-            = fa_icon "trash"
-            %span
-              Papelera
+            Dejar de Seguir
+      - else
+        %a.follow{href: follow_council_path(council)}
+          = fa_icon "eye"
+          %span
+            Seguir
+    - if @followed.present? && !@followed.include?(council)
+      - if @downvoted.present? && @downvoted.include?(council)
+        %a.return{href: like_council_path(council)}
+          = fa_icon "reply"
+          %span
+            Reestablecer
+      - else
+        %a.archive{href: dislike_council_path(council)}
+          = fa_icon "trash"
+          %span
+            Papelera
