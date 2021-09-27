@@ -4,7 +4,7 @@ class CouncilsController < ApplicationController
   def index
     add_breadcrumb "Bandeja de Proyectos", :councils_path
     @q = Council.ransack params[:q]
-    not_available_councils = current_user.find_disliked_items + current_user.following_councils
+    not_available_councils = get_disliked_items + get_following_councils
     @councils = @q.result.order(created_at: :desc).to_a - not_available_councils
   end
 
@@ -12,22 +12,22 @@ class CouncilsController < ApplicationController
     add_breadcrumb "Proyectos - Aprobado", :projects_approved_councils_path
     @q = Council.approved.ransack params[:q]
     @councils = @q.result.order(created_at: :desc)
-    @followed = current_user.following_councils || []
-    @downvoted = current_user.find_disliked_items || []
+    @followed = get_following_councils
+    @downvoted = get_disliked_items
   end
 
   def projects_old
     add_breadcrumb "Proyectos - Archivado y Retirado", :projects_old_councils_path
     @q = Council.old.ransack params[:q]
     @councils = @q.result.order(created_at: :desc)
-    @followed = current_user.following_councils || []
-    @downvoted = current_user.find_disliked_items || []
+    @followed = get_following_councils
+    @downvoted = get_disliked_items
   end
 
   def favorites
     add_breadcrumb "Mis Favoritos", :favorites_councils_path
-    @q = current_user.following_councils.ransack params[:q]
-    @councils = @q.result.order(created_at: :desc).to_a - current_user.find_disliked_items
+    @q = get_following_councils.ransack params[:q]
+    @councils = @q.result.order(created_at: :desc).to_a - get_disliked_items
   end
 
   def trash
@@ -134,7 +134,7 @@ class CouncilsController < ApplicationController
     if current_user.has_role? :admin
       councils = Council.all
     else
-      councils = current_user.following_councils
+      councils = get_following_councils
     end
 
     councils.each do |council|
@@ -163,7 +163,23 @@ class CouncilsController < ApplicationController
   end
 
   private
-    def get_council(id)
-      Council.find id
-    end
+
+  def get_council(id)
+    Council.find id
+  end
+
+  def get_disliked_items
+    downvoted = current_user.find_disliked_items
+    return [] if downvoted.nil?
+
+    downvoted
+  end
+
+  def get_following_councils
+    followed = current_user.following_councils
+    return [] if followed.nil?
+
+    followed
+  end
+
 end
