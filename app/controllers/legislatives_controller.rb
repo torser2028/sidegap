@@ -286,6 +286,8 @@ class LegislativesController < ApplicationController
     @today = Date.today
     @last_week = @today - 1.week
     @next_week = @today + 1.week
+    holidays = Holidays.between(@last_week, @today, :co).count
+    @last_week = holidays > 0 ? (@last_week = @today - 1.week - holidays.days) : @last_week
 
     last_agendas = []
     next_agendas = []
