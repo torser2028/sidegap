@@ -56,6 +56,9 @@ class LegislativesController < ApplicationController
     elsif Date.today.strftime('%a') == "Tue"
       start_date = (Time.now.in_time_zone('Bogota') - 2.days).beginning_of_week.beginning_of_day
       end_date = Time.now.in_time_zone('Bogota').beginning_of_week.beginning_of_day + 12.hours
+    elsif Date.today.strftime('%a') == "Wed"
+      start_date = (Time.now.in_time_zone('Bogota') - 3.days).beginning_of_week.beginning_of_day
+      end_date = Time.now.in_time_zone('Bogota').beginning_of_week.beginning_of_day + 12.hours
     else
       start_date = Time.now.in_time_zone('Bogota').beginning_of_week.beginning_of_day
       end_date = Time.now.in_time_zone('Bogota').end_of_week.end_of_day + 12.hours
