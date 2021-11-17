@@ -50,8 +50,11 @@ class LegislativesController < ApplicationController
     q = current_user.following_legislatives.includes(:legislative, :comments).ransack params[:q]
     legislatives_ids = (q.result.to_a - current_user.find_disliked_items).map(&:id)
 
-    if Date.today.strftime('%a') == "Mon" || Date.today.strftime('%a') == "Tue"
+    if Date.today.strftime('%a') == "Mon"
       start_date = (Time.now.in_time_zone('Bogota') - 1.day).beginning_of_week.beginning_of_day
+      end_date = Time.now.in_time_zone('Bogota').beginning_of_week.beginning_of_day + 12.hours
+    elsif Date.today.strftime('%a') == "Tue"
+      start_date = (Time.now.in_time_zone('Bogota') - 2.days).beginning_of_week.beginning_of_day
       end_date = Time.now.in_time_zone('Bogota').beginning_of_week.beginning_of_day + 12.hours
     else
       start_date = Time.now.in_time_zone('Bogota').beginning_of_week.beginning_of_day
