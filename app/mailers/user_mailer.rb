@@ -7,26 +7,32 @@ class UserMailer < ApplicationMailer
   end
 
   def self.set_recipients_new_rule(rule)
-    mutex = Mutex.new
-    Thread.new do
-      # send in backgound trhead
-      mutex.synchronize do
-        institution = rule.institution
-        recipients = []
-        recipients = UserNotification.includes(:user, :institution).where(institution_id: institution.id).map(&:user).to_a.compact
-        recipients.each do |recipient|
-          new_rule(recipient, institution.name, rule).deliver_now
-        end
-      end
-      ActiveRecord::Base.connection.close
+    # mutex = Mutex.new
+    # Thread.new do
+    #   # send in backgound trhead
+    #   mutex.synchronize do
+    #     institution = rule.institution
+    #     recipients = []
+    #     recipients = UserNotification.includes(:user, :institution).where(institution_id: institution.id).map(&:user).to_a.compact
+    #     recipients.each do |recipient|
+    #       new_rule(recipient, institution.name, rule).deliver_now
+    #     end
+    #   end
+    #   ActiveRecord::Base.connection.close
+    # end
+    institution = rule.institution
+    recipients = []
+    recipients = UserNotification.includes(:user, :institution).where(institution_id: institution.id).map(&:user).to_a.compact
+    recipients.each do |recipient|
+      new_rule(recipient, institution.name, rule).deliver_now
     end
   end
 
   def new_rule(recipient, institution, rule)
     @rule = rule
     @institution = institution
-    @name = recipient[:name]
-    to = recipient[:email]
+    @name = recipient[:name] || recipient.name
+    to = recipient[:email] || recipient.email
 
     company = Company.find(recipient.company_id)
     @bcc = send_mail_user_company(to, company)
@@ -228,6 +234,7 @@ class UserMailer < ApplicationMailer
   end
 
   def send_mail_user_company(to, company)
+    bcc = ""
     if company.main_email == to
       bcc = company.extra_emails if company.extra_emails.present?
     end
